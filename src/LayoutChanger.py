@@ -58,6 +58,7 @@ layouts = {
 
 class LayoutChanger:
     def set_layout(self,layout_name:str):
+        self.set_theme_on_gsettings(layout_name)
         if layout_name not in layouts:
             return "There is layout named %s"%layout_name
         
@@ -85,6 +86,10 @@ class LayoutChanger:
         if type not in ["enable","disable"]:
             return "type must be enable or disable"
         cmd ="gnome-extensions %s %s"%(type,ext_id)
+        return GLib.spawn_command_line_sync(cmd)
+
+    def set_theme_on_gsettings(self,layout_name:str):
+        cmd = "gsettings set org.pardus.pardus-gnome-greeter layout-name %s"%layout_name
         return GLib.spawn_command_line_sync(cmd)
 
     def apply_config(self,config:str):
