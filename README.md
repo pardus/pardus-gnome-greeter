@@ -9,3 +9,9 @@ To test and use application run the following command <br/>
 ### Testing Stored Layout
 for testing we need to export gsettings schema directory <br>
 `export GSETTINGS_SCHEMA_DIR=<project_dir>/pardus-gnome-greeter/schema/`
+
+### Build deb package
+
+* `sudo apt install devscripts git-buildpackage`
+* `sudo mk-build-deps -ir`
+* `gbp buildpackage --git-export-dir=./build/ -us -uc`

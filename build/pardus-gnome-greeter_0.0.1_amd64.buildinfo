@@ -4,17 +4,17 @@ Binary: pardus-gnome-greeter
 Architecture: all source
 Version: 0.0.1
 Checksums-Md5:
- c75ffe55d402327085eb6ef9c3957e30 668 pardus-gnome-greeter_0.0.1.dsc
- a3329240ceff394d6218b345908b6e69 8756 pardus-gnome-greeter_0.0.1_all.deb
+ 24804c14af3ae34e9408db6ba76ee31a 668 pardus-gnome-greeter_0.0.1.dsc
+ c8e075622be81240f7a67af846c9c47a 8748 pardus-gnome-greeter_0.0.1_all.deb
 Checksums-Sha1:
- 3e0c256b31515847c07df1177f4f08c397afec20 668 pardus-gnome-greeter_0.0.1.dsc
- 2e1aa55b99bb22a5954aa9846c47e66a970cf090 8756 pardus-gnome-greeter_0.0.1_all.deb
+ 80c5bfba2a8e242adab63bb1b6cd8d35518e8b24 668 pardus-gnome-greeter_0.0.1.dsc
+ b469bdb0136180bebe222c2eed0909b6b2d5a135 8748 pardus-gnome-greeter_0.0.1_all.deb
 Checksums-Sha256:
- d1d22b7b27e8febe99912b1519e932a9608c8e1ddb44c5551257ae96a85893e7 668 pardus-gnome-greeter_0.0.1.dsc
- 6c70bc5e2a1f7ff0f89f4a35b43918ba2b9ee653128d2f9d1872248e701b8026 8756 pardus-gnome-greeter_0.0.1_all.deb
+ bc9b5c394219a61acad6dcc7ac8f7b562a0149306c9f8be61d8c671faaf0102c 668 pardus-gnome-greeter_0.0.1.dsc
+ 80cb29cb1135b14e100f2beb80f9f8cb2163e93b9c58207cce6fb603b2f741dd 8748 pardus-gnome-greeter_0.0.1_all.deb
 Build-Origin: Pardus
 Build-Architecture: amd64
-Build-Date: Fri, 20 Jan 2023 15:20:05 +0300
+Build-Date: Fri, 20 Jan 2023 15:21:23 +0300
 Installed-Build-Depends:
  autoconf (= 2.69-14),
  automake (= 1:1.16.3-2),
@@ -185,4 +185,4 @@ Environment:
  DEB_BUILD_OPTIONS="parallel=12"
  LANG="en_US.UTF-8"
  LC_CTYPE="en_US.UTF-8"
- SOURCE_DATE_EPOCH="1674217198"
+ SOURCE_DATE_EPOCH="1674217276"

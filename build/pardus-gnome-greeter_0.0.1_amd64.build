@@ -140,7 +140,6 @@ E: pardus-gnome-greeter: extended-description-is-empty
 E: pardus-gnome-greeter source: invalid-standards-version 0.0.1
 E: pardus-gnome-greeter source: missing-build-dependency-for-dh-addon python3 => dh-python
 E: pardus-gnome-greeter: no-copyright-file
-E: pardus-gnome-greeter: shell-script-fails-syntax-check usr/bin/pardus-gnome-greeter
 W: pardus-gnome-greeter source: debian-rules-sets-DH_COMPAT line 2
 W: pardus-gnome-greeter source: missing-debian-source-format
 W: pardus-gnome-greeter source: no-debian-copyright-in-source
