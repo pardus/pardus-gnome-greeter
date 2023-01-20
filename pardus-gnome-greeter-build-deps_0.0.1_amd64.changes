@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Fri, 20 Jan 2023 13:40:25 +0300
+Source: pardus-gnome-greeter-build-deps
+Binary: pardus-gnome-greeter-build-deps
+Architecture: all
+Version: 0.0.1
+Distribution: unstable
+Urgency: low
+Maintainer: Equivs Dummy Package Generator <root@osman-coskun>
+Changed-By: Equivs Dummy Package Generator <root@osman-coskun>
+Description:
+ pardus-gnome-greeter-build-deps - build-dependencies for pardus-gnome-greeter
+Changes:
+ pardus-gnome-greeter-build-deps (0.0.1) unstable; urgency=low
+ .
+   * First version
+Checksums-Sha1:
+ 5e499d87e36d2dc74ba6d7ccc1a9a444c2dc9bbc 2148 pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 5ec6a5e7a4bd2bf01557b603ddd62e2e5a671f16 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+Checksums-Sha256:
+ de3662fc59ae3b3f1a9b2caed72b2ffb31731969fe26d65af6e3095a998ceb8a 2148 pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 971688d816c392511bbb9857c10f4f9e5d7613e81ea4924aac70cad4096b71a1 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+Files:
+ cd9828809c5240b053956fbadc1ca661 2148 devel optional pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 9653fcef905e96721f5a5ef768c9851f 4763 devel optional pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
