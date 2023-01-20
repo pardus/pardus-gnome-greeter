@@ -1,4 +1,3 @@
-#!/usr/bin/python3
-import sys
-sys.path.insert(0, '/usr/share/pardus/pardus-gnome-greeter/src/')
-import Main
+#!/bin/sh
+exit()
+python3 /usr/share/pardus/pardus-gnome-greeter/src/Main.py
