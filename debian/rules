@@ -1,4 +1,4 @@
 #!/usr/bin/make -f
 
 override_dh_clean:
-        dh clean --with python3 --buildsystem=pybuild
+    dh clean --with python3 --buildsystem=pybuild
