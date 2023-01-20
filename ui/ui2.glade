@@ -4,22 +4,26 @@
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkApplicationWindow" id="window">
     <property name="can-focus">False</property>
-    <property name="default-width">500</property>
-    <property name="default-height">500</property>
     <child>
       <!-- n-columns=2 n-rows=3 -->
-      <object class="GtkGrid" id="grid1">
+      <object class="GtkGrid">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="row-homogeneous">True</property>
-        <property name="column-homogeneous">True</property>
+        <property name="resize-mode">queue</property>
+        <property name="row-spacing">10</property>
+        <property name="column-spacing">10</property>
         <child>
-          <object class="GtkLabel" id="label">
+          <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="ypad">28</property>
             <property name="label" translatable="yes">Choose Layout</property>
+            <property name="justify">center</property>
+            <property name="ellipsize">middle</property>
             <attributes>
-              <attribute name="absolute-size" value="43008"/>
+              <attribute name="style" value="normal"/>
+              <attribute name="weight" value="heavy"/>
+              <attribute name="size" value="17408"/>
             </attributes>
           </object>
           <packing>
@@ -29,14 +33,36 @@
           </packing>
         </child>
         <child>
-          <object class="GtkRadioButton" id="set_2">
+          <object class="GtkButton" id="set_1">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="receives-default">False</property>
-            <property name="draw-indicator">True</property>
-            <property name="group">set_1</property>
+            <property name="receives-default">True</property>
+            <property name="double-buffered">False</property>
+            <property name="margin-left">10</property>
+            <property name="relief">none</property>
             <child>
-              <object class="GtkImage" id="ubuntu_img">
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="pixbuf">../assets/traditionalpreview.svg</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="set_2">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="double-buffered">False</property>
+            <property name="margin-right">10</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="pixbuf">../assets/material_shellpreview.svg</property>
@@ -49,34 +75,16 @@
           </packing>
         </child>
         <child>
-          <object class="GtkRadioButton" id="set_4">
+          <object class="GtkButton" id="set_3">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="receives-default">False</property>
-            <property name="draw-indicator">True</property>
-            <property name="group">set_1</property>
+            <property name="receives-default">True</property>
+            <property name="double-buffered">False</property>
+            <property name="margin-left">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="relief">none</property>
             <child>
-              <object class="GtkImage" id="gnome_img">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="pixbuf">../assets/gnomepreview.svg</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="left-attach">1</property>
-            <property name="top-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="set_3">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">False</property>
-            <property name="draw-indicator">True</property>
-            <property name="group">set_1</property>
-            <child>
-              <object class="GtkImage" id="macos_img">
+              <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="pixbuf">../assets/manjaropreview.svg</property>
@@ -89,23 +97,25 @@
           </packing>
         </child>
         <child>
-          <object class="GtkRadioButton" id="set_1">
+          <object class="GtkButton" id="set_4">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="receives-default">False</property>
-            <property name="active">True</property>
-            <property name="draw-indicator">True</property>
+            <property name="receives-default">True</property>
+            <property name="double-buffered">False</property>
+            <property name="margin-right">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="relief">none</property>
             <child>
-              <object class="GtkImage" id="windows_img">
+              <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../assets/traditionalpreview.svg</property>
+                <property name="pixbuf">../assets/gnomepreview.svg</property>
               </object>
             </child>
           </object>
           <packing>
-            <property name="left-attach">0</property>
-            <property name="top-attach">1</property>
+            <property name="left-attach">1</property>
+            <property name="top-attach">2</property>
           </packing>
         </child>
       </object>

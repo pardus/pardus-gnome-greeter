@@ -1,0 +1,6 @@
+pardus-gnome-greeter (0.0.1) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * Added gsettings key to store previously selected layout.
+
+ -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 11:40:22 AM +03W
