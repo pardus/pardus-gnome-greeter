@@ -29,6 +29,13 @@ data_files = [
         "src/LayoutChanger.py"
     ]),
     ("/usr/share/pardus/pardus-gnome-greeter/ui", ["ui/ui2.glade"]),
+        ("/usr/share/pardus/pardus-gnome-greeter/assets", [
+            "assets/set1.svg",
+            "assets/set2.svg",
+            "assets/set3.svg",
+            "assets/set4.svg",
+    ]),
+
     ("/usr/share/pardus/pardus-gnome-greeter/css/", ["css/style.css"]),
     ("/usr/bin/", ["pardus-gnome-greeter"]),
     ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-gnome-greeter.svg"])
