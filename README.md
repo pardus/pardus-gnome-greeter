@@ -15,3 +15,9 @@ for testing we need to export gsettings schema directory <br>
 * `sudo apt install devscripts git-buildpackage`
 * `sudo mk-build-deps -ir`
 * `gbp buildpackage --git-export-dir=./build/ -us -uc`
+
+### Install deb package
+After building deb package, it will be under your `<current_dir>/build/`.
+<br/>
+You can install deb package with the following command: <br>
+* ```sudo dpkg -i ./build/pardus-gnome-greeter_0.0.1_all.deb```
