@@ -58,6 +58,9 @@ running build_scripts
 running install_data
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share
+creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/glib-2.0
+creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/glib-2.0/schemas
+copying schema/tr.org.pardus.pardus-gnome-greeter.gschema.xml -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/glib-2.0/schemas/
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/applications
 copying tr.org.pardus.pardus-gnome-greeter.desktop -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/applications/
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus
@@ -106,6 +109,7 @@ dh_installchangelogs: warning:     debian/changelog(l5): found end of file where
 E: dh_python3 dh_python3:176: no package to act on (python3-foo or one with ${python3:Depends} in Depends)
    dh_installinit -O--buildsystem=pybuild
    dh_systemd_start -O--buildsystem=pybuild
+   dh_installgsettings -O--buildsystem=pybuild
    dh_icons -O--buildsystem=pybuild
    dh_perl -O--buildsystem=pybuild
    dh_link -O--buildsystem=pybuild
@@ -136,6 +140,7 @@ E: pardus-gnome-greeter: extended-description-is-empty
 E: pardus-gnome-greeter source: invalid-standards-version 0.0.1
 E: pardus-gnome-greeter source: missing-build-dependency-for-dh-addon python3 => dh-python
 E: pardus-gnome-greeter: no-copyright-file
+E: pardus-gnome-greeter: shell-script-fails-syntax-check usr/bin/pardus-gnome-greeter
 W: pardus-gnome-greeter source: debian-rules-sets-DH_COMPAT line 2
 W: pardus-gnome-greeter source: missing-debian-source-format
 W: pardus-gnome-greeter source: no-debian-copyright-in-source
