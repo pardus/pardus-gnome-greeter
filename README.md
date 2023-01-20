@@ -1,14 +1,17 @@
 ## PARDUS GNOME GREETER
 With this application users are able to change the looking of their desktop layout
 
+### Testing Stored Layout
+First we need to compile schema xml file. <br/>
+* `glib-compile-schemas ./schema` <br/>
+for testing we need to export gsettings schema directory <br>
+* `export GSETTINGS_SCHEMA_DIR=<project_dir>/pardus-gnome-greeter/schema/`
+
 
 ### Running Application
 To test and use application run the following command <br/>
 `python3 <project_dir>/pardus-gnome-greeter/src/Main.py`
 
-### Testing Stored Layout
-for testing we need to export gsettings schema directory <br>
-`export GSETTINGS_SCHEMA_DIR=<project_dir>/pardus-gnome-greeter/schema/`
 
 ### Build deb package
 
