@@ -1,5 +1,5 @@
 Format: 1.8
-Date: Fri, 20 Jan 2023 13:40:25 +0300
+Date: Fri, 20 Jan 2023 14:10:26 +0300
 Source: pardus-gnome-greeter-build-deps
 Binary: pardus-gnome-greeter-build-deps
 Architecture: all
@@ -15,11 +15,11 @@ Changes:
  .
    * First version
 Checksums-Sha1:
- 5e499d87e36d2dc74ba6d7ccc1a9a444c2dc9bbc 2148 pardus-gnome-greeter-build-deps_0.0.1_all.deb
- 5ec6a5e7a4bd2bf01557b603ddd62e2e5a671f16 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+ 5d0c8ee442f02212393c95a4b375d7d2fae15146 2156 pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 28775c1f5a2653b42b3d35b9dfa3e0ab78956ae8 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
 Checksums-Sha256:
- de3662fc59ae3b3f1a9b2caed72b2ffb31731969fe26d65af6e3095a998ceb8a 2148 pardus-gnome-greeter-build-deps_0.0.1_all.deb
- 971688d816c392511bbb9857c10f4f9e5d7613e81ea4924aac70cad4096b71a1 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+ 5490bff1e6c5c3d6e00f29316080c00b7c2b69d47552c04f08086ee41e641cd8 2156 pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 9b5f3060d7ce5c11d94e803a35b28ec679086107351dc5e98651f59913d88440 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
 Files:
- cd9828809c5240b053956fbadc1ca661 2148 devel optional pardus-gnome-greeter-build-deps_0.0.1_all.deb
- 9653fcef905e96721f5a5ef768c9851f 4763 devel optional pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+ 635e9dc8f7e2c8f7b284e98a8b24de00 2156 devel optional pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 4e83bb32c92eb8f310c152d46e603f89 4763 devel optional pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
