@@ -21,6 +21,7 @@ if os.path.exists(changelog):
 
 
 data_files = [
+    ("/usr/share/glib-2.0/schemas/", ["schema/tr.org.pardus.pardus-gnome-greeter.gschema.xml"]),
     ("/usr/share/applications/", ["tr.org.pardus.pardus-gnome-greeter.desktop"]),
     ("/usr/share/pardus/pardus-gnome-greeter/", ["pardus-gnome-greeter.svg"]),
     ("/usr/share/pardus/pardus-gnome-greeter/src", [
