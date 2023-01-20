@@ -36,7 +36,7 @@ running build
 running build_scripts
 creating build
 creating build/scripts-3.9
-copying and adjusting pardus-gnome-greeter -> build/scripts-3.9
+copying pardus-gnome-greeter -> build/scripts-3.9
 changing mode of build/scripts-3.9/pardus-gnome-greeter from 644 to 755
    dh_auto_test -O--buildsystem=pybuild
 I: pybuild base:232: cd /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/.pybuild/cpython3_3.9/build; python3.9 -m unittest discover -v 
@@ -136,6 +136,7 @@ E: pardus-gnome-greeter: extended-description-is-empty
 E: pardus-gnome-greeter source: invalid-standards-version 0.0.1
 E: pardus-gnome-greeter source: missing-build-dependency-for-dh-addon python3 => dh-python
 E: pardus-gnome-greeter: no-copyright-file
+E: pardus-gnome-greeter: shell-script-fails-syntax-check usr/bin/pardus-gnome-greeter
 W: pardus-gnome-greeter source: debian-rules-sets-DH_COMPAT line 2
 W: pardus-gnome-greeter source: missing-debian-source-format
 W: pardus-gnome-greeter source: no-debian-copyright-in-source
