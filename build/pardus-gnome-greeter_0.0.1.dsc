@@ -10,8 +10,8 @@ Build-Depends: debhelper (>= 12), python3, python3-setuptools
 Package-List:
  pardus-gnome-greeter deb utils optional arch=all
 Checksums-Sha1:
- 01653c619b478d028d5b5ea7016b7b6448769401 24800 pardus-gnome-greeter_0.0.1.tar.gz
+ d9092736c9617b4382d3228c99a2149c697a2500 24805 pardus-gnome-greeter_0.0.1.tar.gz
 Checksums-Sha256:
- a5fa0d3ec6623527739c8cc38872ec422ae93b77f9fcd1cbaa1645897900bc1b 24800 pardus-gnome-greeter_0.0.1.tar.gz
+ 4232f074c0e46f3ae581ec29c863fee0390f5fdd09e3a67942c518d8e1413a50 24805 pardus-gnome-greeter_0.0.1.tar.gz
 Files:
- d0b807116f13087a90969b5b440dc372 24800 pardus-gnome-greeter_0.0.1.tar.gz
+ 1d23ae3027b3d6b05061a40940b3b927 24805 pardus-gnome-greeter_0.0.1.tar.gz

@@ -69,6 +69,11 @@ copying src/MainWindow.py -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build
 copying src/LayoutChanger.py -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/src
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/ui
 copying ui/ui2.glade -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/ui
+creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
+copying assets/set1.svg -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
+copying assets/set2.svg -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
+copying assets/set3.svg -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
+copying assets/set4.svg -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/css
 copying css/style.css -> /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/css/
 creating /home/osmancoskun/Pardus/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/bin

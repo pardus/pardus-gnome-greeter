@@ -44,7 +44,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../assets/set1.svg</property>
+                <property name="pixbuf">../assets/traditionalpreview.svg</property>
               </object>
             </child>
           </object>
@@ -65,7 +65,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../assets/set2.svg</property>
+                <property name="pixbuf">../assets/material_shellpreview.svg</property>
               </object>
             </child>
           </object>
@@ -87,7 +87,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../assets/set3.svg</property>
+                <property name="pixbuf">../assets/manjaropreview.svg</property>
               </object>
             </child>
           </object>
@@ -109,7 +109,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../assets/set4.svg</property>
+                <property name="pixbuf">../assets/gnomepreview.svg</property>
               </object>
             </child>
           </object>
