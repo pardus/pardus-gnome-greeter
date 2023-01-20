@@ -1,16 +1,4 @@
 #!/usr/bin/make -f
-
+export DH_COMPAT=5
 %:
-        dh $@
-
-override_dh_auto_configure:
-    python setup.py configure
-
-override_dh_auto_build:
-    python setup.py build
-
-override_dh_auto_install:
-    python setup.py install --root=debian/package-name --install-layout=deb
-
-override_dh_clean:
-    dh clean --with python3 --buildsystem=pybuild
+	dh $@ --with python3 --buildsystem=pybuild
