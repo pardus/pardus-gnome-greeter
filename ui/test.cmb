@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.10.3" target_tk="gtk-4.0">
+  <ui>
+	(1,None,"test.ui","test.ui",None,None,None,None,None,None)
+  </ui>
+  <object>
+	(1,1,"GtkApplicationWindow","window",None,None,None,None,None),
+	(1,2,"GtkGrid",None,1,None,None,None,-1),
+	(1,3,"GtkLabel",None,2,None,None,None,None),
+	(1,4,"GtkButton","set_2",2,None,None,None,None),
+	(1,5,"GtkButton","set_3",2,None,None,None,1),
+	(1,6,"GtkButton","set_4",2,None,None,None,2),
+	(1,7,"GtkButton","set_1",2,None,None,None,None),
+	(1,8,"GtkImage",None,4,None,None,None,None),
+	(1,9,"GtkImage",None,5,None,None,None,None),
+	(1,10,"GtkImage",None,7,None,None,None,None),
+	(1,11,"GtkImage",None,6,None,None,None,None)
+  </object>
+  <object_property>
+	(1,3,"GtkLabel","label","Choose Layout",None,None,None,None,None),
+	(1,4,"GtkButton","child",None,None,None,None,None,8),
+	(1,4,"GtkWidget","hexpand","True",None,None,None,None,None),
+	(1,4,"GtkWidget","vexpand","True",None,None,None,None,None),
+	(1,5,"GtkButton","child",None,None,None,None,None,9),
+	(1,5,"GtkWidget","hexpand","True",None,None,None,None,None),
+	(1,5,"GtkWidget","vexpand","True",None,None,None,None,None),
+	(1,6,"GtkButton","child",None,None,None,None,None,11),
+	(1,6,"GtkWidget","hexpand","True",None,None,None,None,None),
+	(1,6,"GtkWidget","vexpand","True",None,None,None,None,None),
+	(1,7,"GtkButton","child",None,None,None,None,None,10),
+	(1,7,"GtkWidget","hexpand","True",None,None,None,None,None),
+	(1,7,"GtkWidget","vexpand","True",None,None,None,None,None),
+	(1,8,"GtkImage","file","set1.svg",None,None,None,None,None),
+	(1,9,"GtkImage","file","set2.svg",None,None,None,None,None),
+	(1,10,"GtkImage","file","set3.svg",None,None,None,None,None),
+	(1,11,"GtkImage","file","set4.svg",None,None,None,None,None)
+  </object_property>
+  <object_layout_property>
+	(1,2,3,"GtkGridLayoutChild","column-span","2",None,None,None,None),
+	(1,2,3,"GtkGridLayoutChild","row-span","1",None,None,None,None),
+	(1,2,4,"GtkGridLayoutChild","column","0",None,None,None,None),
+	(1,2,4,"GtkGridLayoutChild","column-span","1",None,None,None,None),
+	(1,2,4,"GtkGridLayoutChild","row","1",None,None,None,None),
+	(1,2,4,"GtkGridLayoutChild","row-span","1",None,None,None,None),
+	(1,2,5,"GtkGridLayoutChild","column","1",None,None,None,None),
+	(1,2,5,"GtkGridLayoutChild","column-span","1",None,None,None,None),
+	(1,2,5,"GtkGridLayoutChild","row","1",None,None,None,None),
+	(1,2,5,"GtkGridLayoutChild","row-span","1",None,None,None,None),
+	(1,2,6,"GtkGridLayoutChild","column","1",None,None,None,None),
+	(1,2,6,"GtkGridLayoutChild","column-span","1",None,None,None,None),
+	(1,2,6,"GtkGridLayoutChild","row","2",None,None,None,None),
+	(1,2,6,"GtkGridLayoutChild","row-span","1",None,None,None,None),
+	(1,2,7,"GtkGridLayoutChild","column","0",None,None,None,None),
+	(1,2,7,"GtkGridLayoutChild","column-span","1",None,None,None,None),
+	(1,2,7,"GtkGridLayoutChild","row","2",None,None,None,None),
+	(1,2,7,"GtkGridLayoutChild","row-span","1",None,None,None,None)
+  </object_layout_property>
+</cambalache-project>

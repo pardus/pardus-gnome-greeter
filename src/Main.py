@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 
-import sys
 import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gio, Gtk
 
-from MainWindow import MainWindow
+gi.require_version('Gtk', '4.0')
+from gi.repository import Gtk
 
 class Application(Gtk.Application):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="tr.org.pardus.layout-switcher", flags=Gio.ApplicationFlags.NON_UNIQUE, **kwargs)
-        self.window = None
-    
-    def do_activate(self):
-        self.window = MainWindow(self)
-        
-if __name__ == "__main__":
-    app = Application()
-    app.run(sys.argv)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs, application_id="tr.org.pardus.pardus-gnome-greeter")
+        self.connect('activate', self.on_activate)
+        self.main_window = None
+
+    def on_activate(self, app):
+        if not self.main_window:
+            from MainWindow import MainWindow
+            self.main_window = MainWindow().main_window
+            self.main_window.set_application(self)
+            self.main_window.present()
+
+
+app = Application()
+app.run(None)

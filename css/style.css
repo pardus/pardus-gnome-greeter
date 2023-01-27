@@ -1,6 +1,6 @@
 button {
+    margin: 10px;
     background: none;
-    border: 2px solid lightgray;
 }
 
 button:hover {
@@ -14,4 +14,10 @@ button:hover {
 
 .btn-inactive {
     background-color: unset;
+}
+
+label {
+    font-size: xx-large;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

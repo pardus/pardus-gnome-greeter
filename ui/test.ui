@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.10.3 -->
+<interface>
+  <!-- interface-name test.ui -->
+  <requires lib="gtk" version="4.6"/>
+  <object class="GtkApplicationWindow" id="window">
+    <child>
+      <object class="GtkGrid">
+        <child>
+          <object class="GtkLabel">
+            <property name="label">Choose Layout</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="column-span">2</property>
+              <property name="row">0</property>
+              <property name="row-span">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="set_2">
+            <property name="child">
+              <object class="GtkImage">
+                <property name="file">set1.svg</property>
+              </object>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="column-span">1</property>
+              <property name="row">1</property>
+              <property name="row-span">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="set_1">
+            <property name="child">
+              <object class="GtkImage">
+                <property name="file">set3.svg</property>
+              </object>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="column-span">1</property>
+              <property name="row">2</property>
+              <property name="row-span">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="set_3">
+            <property name="child">
+              <object class="GtkImage">
+                <property name="file">set2.svg</property>
+              </object>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="column-span">1</property>
+              <property name="row">1</property>
+              <property name="row-span">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="set_4">
+            <property name="child">
+              <object class="GtkImage">
+                <property name="file">set4.svg</property>
+              </object>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="column-span">1</property>
+              <property name="row">2</property>
+              <property name="row-span">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
