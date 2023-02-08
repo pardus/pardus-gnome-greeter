@@ -9,122 +9,129 @@ from gi.repository import Gtk,Gdk,Gio,GObject
 
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
+
+        # INITIALIZE
         super().__init__(*args, **kwargs)
+
+        # IMPORT CSS
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(os.path.dirname(os.path.abspath(__file__))+"/../test/test.css")
         Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+        # GETTING UI FROM UI FILE
         self.builder = Gtk.Builder()
         self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/ui.ui")
+
+        # MAIN WINDOW OF APPLICATION
         self.main_window = self.builder.get_object("window")
+        self.init_ui()
 
-        self.listbox = self.get_ui("listbox")
-        self.listbox.set_show_separators(True)
-        self.listbox.connect("row_activated",self.on_click)
-        self.welcome1 = self.get_ui("row1")
-        
-        # RIGHT SIDE OF THE WINDOW
-        self.right_window = self.get_ui("right_window")
-        
-        # CURRENT PAGE INDEX
+
+    def init_ui(self):
+           # CURRENT PAGE INDEX
         self.current_page = 0
+          # LISTBOX NAVIGATION
+        self.lb_navigation = self.get_ui("lb_navigation")
+        self.lb_navigation.set_show_separators(True)
+        self.lb_navigation.connect("row_activated",self.change_page)
+        
+     
         
 
-        # STACKED PAGES FOR NEXT NEXT INSTALL LOGIC
-        self.stack = self.get_ui("pages")
+        # stack_pagesED PAGES
+        self.stack_pages = self.get_ui("gs_pages")
+             
 
-        
+        # RIGHT SIDE OF APPLICATION
+        self.bx_content = self.get_ui("bx_content")
+        self.bx_content.prepend(self.stack_pages)
 
-        # PAGE ARRAY
-        self.pages = [
-            self.get_ui("page1"),
-            self.get_ui("page2"),
-            self.get_ui("page3"),
-            self.get_ui("page4"),
-            self.get_ui("page5"),
+        self.left_rows=[
+            self.get_ui("lbr_welcome"),
+            self.get_ui("lbr_wallpaper"),
+            self.get_ui("lbr_theme"),
+            self.get_ui("lbr_display"),
+            self.get_ui("lbr_shortcut")
         ]
 
-        # BOTTOM NAVIGATION BUTTONS
-        self.nav_buttons = {
-            self.get_ui("nav_btn_1"):{
-                "on":self.get_ui("nav_img_on_1"),
-                "off":self.get_ui("nav_img_off_1"),
+        self.pages = [
+            self.get_ui("gb_welcome"),            
+            self.get_ui("gb_wallpaper"),        
+            self.get_ui("gb_theme"),        
+            self.get_ui("gb_display"),        
+            self.get_ui("gb_shortcut"),            
+        ]
+
+        self.nav_images = {
+            self.get_ui("gs_nav_img_0"):{
+                "on": self.get_ui("gi_nav_img_on_0"),
+                "off": self.get_ui("gi_nav_img_off_0"),
             },
-            self.get_ui("nav_btn_2"):{
-                "on":self.get_ui("nav_img_on_2"),
-                "off":self.get_ui("nav_img_off_2"),
+            self.get_ui("gs_nav_img_1"):{
+                "on": self.get_ui("gi_nav_img_on_1"),
+                "off": self.get_ui("gi_nav_img_off_1"),
             },
-            self.get_ui("nav_btn_3"):{
-                "on":self.get_ui("nav_img_on_3"),
-                "off":self.get_ui("nav_img_off_3"),
+            self.get_ui("gs_nav_img_2"):{
+                "on": self.get_ui("gi_nav_img_on_2"),
+                "off": self.get_ui("gi_nav_img_off_2"),
             },
-            self.get_ui("nav_btn_4"):{
-                "on":self.get_ui("nav_img_on_4"),
-                "off":self.get_ui("nav_img_off_4"),
+            self.get_ui("gs_nav_img_3"):{
+                "on": self.get_ui("gi_nav_img_on_3"),
+                "off": self.get_ui("gi_nav_img_off_3"),
             },
-            self.get_ui("nav_btn_5"):{
-                "on":self.get_ui("nav_img_on_5"),
-                "off":self.get_ui("nav_img_off_5"),
+            self.get_ui("gs_nav_img_4"):{
+                "on": self.get_ui("gi_nav_img_on_4"),
+                "off": self.get_ui("gi_nav_img_off_4"),
             },
         }
+       
+
+        self.page1_pardus_label = self.get_ui("page1_pardus23_label")
+        self.page1_pardus_label_content = self.page1_pardus_label.get_label()
+        self.page1_pardus_label.set_markup("<span size=\"36000\">%s</span>"%self.page1_pardus_label_content)
 
 
-
-        # LEFT NAVIGATIONS
-        self.left_rows=[
-            self.get_ui("row1"),
-            self.get_ui("row2"),
-            self.get_ui("row3"),
-            self.get_ui("row4"),
-            self.get_ui("row5"),
-        ]
+            
         # BOTTOM PREV NEXT BUTTONS
         self.prev_page_btn = self.get_ui("prev_page")
         self.prev_page_btn.connect("clicked",self.prev_page)
         
         self.next_page_btn = self.get_ui("next_page")
         self.next_page_btn.connect("clicked",self.next_page)
-        self.right_window.prepend(self.stack)
-
-        self.check_states()
-
-    def check_states(self):
-        self.left_rows[self.current_page].activate()
-        for nav_index,nav in enumerate(self.nav_buttons):
-            print(self.nav_buttons[nav])
-            if(nav_index <= self.current_page):
-                on_img = self.nav_buttons[nav]["on"]
-                nav.set_visible_child(on_img)
-            else:
-                off_img = self.nav_buttons[nav]["off"]
-                nav.set_visible_child(off_img)
-
-    def prev_page(self,name):
-        if(self.current_page > 0):
-            self.current_page -= 1
-            self.stack.set_visible_child(self.pages[self.current_page])
-            self.check_states()
-        else:
-            print("daha geri gidemezsin",self.current_page)
-    def next_page(self,name):
-        if(self.current_page < 4):
-            self.current_page += 1
-            self.stack.set_visible_child(self.pages[self.current_page])
-            self.check_states()
-
-        else:
-            print("daha ileri gidemezsin",self.current_page)
-
-
-    def change_page(self):   
-        self.stack.set_visible_child(self.pages[self.current_page])
+        self.check_bottom_img_states()
+        
+ 
 
     def get_ui(self,ui_name:str):
         return self.builder.get_object(ui_name)
 
-    def on_click(self,action,name):
+
+    def change_page(self,action,name):
         self.row_index = name.get_index()
-        self.listbox.select_row(self.left_rows[self.row_index])
         self.current_page = self.row_index
-        self.change_page()
-        self.check_states()
-  
+        self.lb_navigation.select_row(self.left_rows[self.current_page])
+        self.stack_pages.set_visible_child(self.pages[self.current_page])
+        self.check_bottom_img_states()
+
+    def prev_page(self,name):
+        if(self.current_page > 0):
+            self.current_page -= 1
+            self.stack_pages.set_visible_child(self.pages[self.current_page])
+            self.lb_navigation.select_row(self.left_rows[self.current_page])
+            self.check_bottom_img_states()
+            
+    def next_page(self,name):
+        if self.current_page < 4:
+            self.current_page += 1
+            self.stack_pages.set_visible_child(self.pages[self.current_page])
+            self.lb_navigation.select_row(self.left_rows[self.current_page])
+            self.check_bottom_img_states()
+
+    
+    def check_bottom_img_states(self):
+        for index,image in enumerate(self.nav_images):
+            if index <= self.current_page:
+                image.set_visible_child(self.nav_images[image]["on"])
+            else:
+                image.set_visible_child(self.nav_images[image]["off"])
+                

@@ -11,11 +11,11 @@
     <child>
       <object class="GtkBox">
         <child>
-          <object class="GtkListBox" id="listbox">
+          <object class="GtkListBox" id="lb_navigation">
             <property name="halign">center</property>
             <property name="valign">baseline</property>
             <child>
-              <object class="GtkListBoxRow" id="row1">
+              <object class="GtkListBoxRow" id="lbr_welcome">
                 <property name="child">
                   <object class="GtkLabel">
                     <property name="css-classes">left-menu-label</property>
@@ -29,7 +29,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow" id="row2">
+              <object class="GtkListBoxRow" id="lbr_wallpaper">
                 <property name="child">
                   <object class="GtkLabel">
                     <property name="css-classes">left-menu-label</property>
@@ -42,7 +42,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow" id="row3">
+              <object class="GtkListBoxRow" id="lbr_theme">
                 <property name="child">
                   <object class="GtkLabel">
                     <property name="css-classes">left-menu-label</property>
@@ -55,7 +55,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow" id="row4">
+              <object class="GtkListBoxRow" id="lbr_display">
                 <property name="child">
                   <object class="GtkLabel">
                     <property name="css-classes">left-menu-label</property>
@@ -70,7 +70,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow" id="row5">
+              <object class="GtkListBoxRow" id="lbr_shortcut">
                 <property name="child">
                   <object class="GtkLabel">
                     <property name="halign">center</property>
@@ -86,16 +86,16 @@
           </object>
         </child>
         <child>
-          <object class="GtkBox" id="right_window">
+          <object class="GtkBox" id="bx_content">
             <property name="hexpand">True</property>
             <property name="orientation">vertical</property>
             <property name="vexpand">True</property>
             <child>
-              <object class="GtkStack" id="pages">
+              <object class="GtkStack" id="gs_pages">
                 <property name="overflow">hidden</property>
                 <property name="transition-type">slide-left-right</property>
                 <child>
-                  <object class="GtkBox" id="page1">
+                  <object class="GtkBox" id="gb_welcome">
                     <property name="halign">center</property>
                     <property name="hexpand">True</property>
                     <property name="valign">center</property>
@@ -116,7 +116,8 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="page1_pardus23_label">
+                                    <property name="justify">fill</property>
                                     <property name="label">Pardus 23</property>
                                   </object>
                                 </child>
@@ -139,7 +140,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="page2">
+                  <object class="GtkBox" id="gb_wallpaper">
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <child>
@@ -157,18 +158,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="page5">
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label">PAGE5</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="page3">
+                  <object class="GtkBox" id="gb_theme">
                     <property name="halign">center</property>
                     <property name="hexpand">True</property>
                     <property name="valign">center</property>
@@ -235,7 +225,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="page4">
+                  <object class="GtkBox" id="gb_display">
                     <property name="halign">center</property>
                     <property name="hexpand">True</property>
                     <property name="valign">center</property>
@@ -274,6 +264,17 @@
                     </child>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkBox" id="gb_shortcut">
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">PAGE5</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
@@ -286,84 +287,74 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="gb_nav_images">
                     <property name="halign">center</property>
                     <child>
-                      <object class="GtkStack" id="nav_btn_1">
+                      <object class="GtkStack" id="gs_nav_img_0">
                         <child>
-                          <object class="GtkImage" id="nav_img_on_1">
+                          <object class="GtkImage" id="gi_nav_img_on_0">
                             <property name="file">on.svg</property>
-                            <property name="name">on</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkImage" id="nav_img_off_1">
+                          <object class="GtkImage" id="gi_nav_img_off_0">
                             <property name="file">off.svg</property>
-                            <property name="name">off</property>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkStack" id="nav_btn_2">
+                      <object class="GtkStack" id="gs_nav_img_1">
                         <child>
-                          <object class="GtkImage" id="nav_img_on_2">
+                          <object class="GtkImage" id="gi_nav_img_on_1">
                             <property name="file">on.svg</property>
-                            <property name="name">on</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkImage" id="nav_img_off_2">
+                          <object class="GtkImage" id="gi_nav_img_off_1">
                             <property name="file">off.svg</property>
-                            <property name="name">off</property>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkStack" id="nav_btn_3">
+                      <object class="GtkStack" id="gs_nav_img_2">
                         <child>
-                          <object class="GtkImage" id="nav_img_on_3">
+                          <object class="GtkImage" id="gi_nav_img_on_2">
                             <property name="file">on.svg</property>
-                            <property name="name">on</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkImage" id="nav_img_off_3">
+                          <object class="GtkImage" id="gi_nav_img_off_2">
                             <property name="file">off.svg</property>
-                            <property name="name">off</property>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkStack" id="nav_btn_4">
+                      <object class="GtkStack" id="gs_nav_img_3">
                         <child>
-                          <object class="GtkImage" id="nav_img_on_4">
+                          <object class="GtkImage" id="gi_nav_img_on_3">
                             <property name="file">on.svg</property>
-                            <property name="name">on</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkImage" id="nav_img_off_4">
+                          <object class="GtkImage" id="gi_nav_img_off_3">
                             <property name="file">off.svg</property>
-                            <property name="name">off</property>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkStack" id="nav_btn_5">
+                      <object class="GtkStack" id="gs_nav_img_4">
                         <child>
-                          <object class="GtkImage" id="nav_img_on_5">
+                          <object class="GtkImage" id="gi_nav_img_on_4">
                             <property name="file">on.svg</property>
-                            <property name="name">on</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkImage" id="nav_img_off_5">
+                          <object class="GtkImage" id="gi_nav_img_off_4">
                             <property name="file">off.svg</property>
-                            <property name="name">off</property>
                           </object>
                         </child>
                       </object>
