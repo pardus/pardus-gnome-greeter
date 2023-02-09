@@ -1,12 +1,13 @@
 import gi
-import os
+import os,threading
 import subprocess
 import time
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
-from gi.repository import Gtk,Gdk,Gio,GObject
+from gi.repository import Gtk,Gdk,Gio,GObject,GdkPixbuf,GLib
+from WallpaperManager import WallpaperManager
 
-
+wallpaper_manager = WallpaperManager()
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
 
@@ -25,7 +26,13 @@ class MainWindow(Gtk.ApplicationWindow):
         # MAIN WINDOW OF APPLICATION
         self.main_window = self.builder.get_object("window")
         self.init_ui()
+        
+        
 
+
+        thread = threading.Thread(target=self.init_wallpapers,args=(wallpaper_manager.get_wallpapers(),))
+        thread.daemon = True
+        thread.start()
 
     def init_ui(self):
            # CURRENT PAGE INDEX
@@ -35,7 +42,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.lb_navigation.set_show_separators(True)
         self.lb_navigation.connect("row_activated",self.change_page)
         
-     
+
         
 
         # stack_pagesED PAGES
@@ -46,6 +53,10 @@ class MainWindow(Gtk.ApplicationWindow):
         self.bx_content = self.get_ui("bx_content")
         self.bx_content.prepend(self.stack_pages)
 
+        self.flow_wallpapers = self.get_ui("flow_wallpapers")
+        self.flow_wallpapers.connect("child-activated",self.change_wallpaper)
+
+        
         self.left_rows=[
             self.get_ui("lbr_welcome"),
             self.get_ui("lbr_wallpaper"),
@@ -105,6 +116,19 @@ class MainWindow(Gtk.ApplicationWindow):
     def get_ui(self,ui_name:str):
         return self.builder.get_object(ui_name)
 
+    def init_wallpapers(self,wallpapers):
+        for wallpaper in wallpapers:
+            bitmap = GdkPixbuf.Pixbuf.new_from_file_at_scale(wallpaper,480,360,True)
+            #bitmap = bitmap.scale_simple(800,600,GdkPixbuf.InterpType.BILINEAR)
+            wallpaper_img = Gtk.Image.new_from_pixbuf(bitmap)
+            wallpaper_img.img_path = wallpaper
+            GLib.idle_add(self.flow_wallpapers.insert, wallpaper_img, -1)
+            #GLib.idle_add(self.flow_wallpapers.show_all)
+ 
+
+    def change_wallpaper(self,flowbox,flowbox_child):
+        filename = flowbox_child.get_child().img_path
+        wallpaper_manager.change_wallpaper(filename)
 
     def change_page(self,action,name):
         self.row_index = name.get_index()

@@ -148,11 +148,15 @@
                         <property name="child">
                           <object class="GtkViewport">
                             <property name="child">
-                              <object class="GtkFlowBox" id="flow_wallpapers"/>
+                              <object class="GtkFlowBox" id="flow_wallpapers">
+                                <property name="max-children-per-line">4</property>
+                              </object>
                             </property>
                           </object>
                         </property>
                         <property name="hexpand">True</property>
+                        <property name="hscrollbar-policy">never</property>
+                        <property name="vexpand">True</property>
                       </object>
                     </child>
                   </object>
