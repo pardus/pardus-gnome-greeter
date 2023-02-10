@@ -8,7 +8,7 @@ from gi.repository import GLib
 
 
 layouts = {
-    "set_1":{
+    "layout_1":{
         "enable":[
             "dash-to-panel@jderose9.github.com"
         ],
@@ -18,7 +18,7 @@ layouts = {
         ]
 
     },
-    "set_2":{
+    "layout_2":{
         "enable":[
             "dash-to-dock@micxgx.gmail.com"
         ],
@@ -35,7 +35,7 @@ layouts = {
             "dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed true"
         ]
     },
-     "set_3":{
+     "layout_3":{
          "enable":[
             "dash-to-dock@micxgx.gmail.com",
         ],
@@ -53,7 +53,7 @@ layouts = {
         ]
         
     },
-    "set_4":{
+    "layout_4":{
        "disable":[
             "dash-to-panel@jderose9.github.com",
             "dash-to-dock@micxgx.gmail.com",
@@ -65,6 +65,7 @@ layouts = {
 class LayoutChanger:
     def set_layout(self,layout_name:str):
         self.set_theme_on_gsettings(layout_name)
+        print(layout_name)
         all_extensions = self.get_extensions("all")
         enabled_extensions = self.get_extensions("enabled")
         disabled_extensions = self.get_extensions("disabled")
