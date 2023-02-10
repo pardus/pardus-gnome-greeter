@@ -52,9 +52,6 @@
 	(1,61,"GtkBox",None,60,None,None,None,None),
 	(1,62,"GtkImage",None,61,None,None,None,None),
 	(1,63,"GtkScale",None,61,None,None,None,2),
-	(1,64,"GtkScrolledWindow",None,25,None,None,None,None),
-	(1,65,"GtkViewport",None,64,None,None,None,None),
-	(1,66,"GtkFlowBox","flow_wallpapers",65,None,None,None,None),
 	(1,67,"GtkBox","gb_nav_images",19,None,None,None,1),
 	(1,68,"GtkStack","gs_nav_img_0",67,None,None,None,None),
 	(1,87,"GtkImage","gi_nav_img_on_0",68,None,None,None,1),
@@ -70,13 +67,16 @@
 	(1,105,"GtkImage","gi_nav_img_off_3",103,None,None,None,1),
 	(1,106,"GtkStack","gs_nav_img_4",67,None,None,None,4),
 	(1,107,"GtkImage","gi_nav_img_on_4",106,None,None,None,None),
-	(1,108,"GtkImage","gi_nav_img_off_4",106,None,None,None,1)
+	(1,108,"GtkImage","gi_nav_img_off_4",106,None,None,None,1),
+	(1,109,"GtkScrolledWindow",None,25,None,None,None,None),
+	(1,110,"GtkFlowBox","flow_wallpapers",109,None,None,None,None)
   </object>
   <object_property>
 	(1,1,"GtkApplicationWindow","show-menubar","True",None,None,None,None,None),
 	(1,1,"GtkWindow","default-height","600",None,None,None,None,None),
 	(1,1,"GtkWindow","default-width","800",None,None,None,None,None),
 	(1,1,"GtkWindow","resizable","False",None,None,None,None,None),
+	(1,1,"GtkWindow","title","Pardus Gnome Greeter",None,None,None,None,None),
 	(1,3,"GtkWidget","halign","center",None,None,None,None,None),
 	(1,3,"GtkWidget","valign","baseline",None,None,None,None,None),
 	(1,4,"GtkListBoxRow","child",None,None,None,None,None,9),
@@ -177,12 +177,6 @@
 	(1,63,"GtkScale","draw-value","True",None,None,None,None,None),
 	(1,63,"GtkWidget","halign","start",None,None,None,None,None),
 	(1,63,"GtkWidget","width-request","300",None,None,None,None,None),
-	(1,64,"GtkScrolledWindow","child",None,None,None,None,None,65),
-	(1,64,"GtkScrolledWindow","hscrollbar-policy","never",None,None,None,None,None),
-	(1,64,"GtkWidget","hexpand","True",None,None,None,None,None),
-	(1,64,"GtkWidget","vexpand","True",None,None,None,None,None),
-	(1,65,"GtkViewport","child",None,None,None,None,None,66),
-	(1,66,"GtkFlowBox","max-children-per-line","4",None,None,None,None,None),
 	(1,67,"GtkWidget","halign","center",None,None,None,None,None),
 	(1,87,"GtkImage","file","on.svg",None,None,None,None,None),
 	(1,96,"GtkImage","file","off.svg",None,None,None,None,None),
@@ -193,6 +187,17 @@
 	(1,104,"GtkImage","file","on.svg",None,None,None,None,None),
 	(1,105,"GtkImage","file","off.svg",None,None,None,None,None),
 	(1,107,"GtkImage","file","on.svg",None,None,None,None,None),
-	(1,108,"GtkImage","file","off.svg",None,None,None,None,None)
+	(1,108,"GtkImage","file","off.svg",None,None,None,None,None),
+	(1,109,"GtkScrolledWindow","child",None,None,None,None,None,110),
+	(1,109,"GtkWidget","hexpand","True",None,None,None,None,None),
+	(1,109,"GtkWidget","vexpand","True",None,None,None,None,None),
+	(1,110,"GtkFlowBox","column-spacing","20",None,None,None,None,None),
+	(1,110,"GtkFlowBox","homogeneous","True",None,None,None,None,None),
+	(1,110,"GtkFlowBox","max-children-per-line","4",None,None,None,None,None),
+	(1,110,"GtkFlowBox","row-spacing","20",None,None,None,None,None),
+	(1,110,"GtkWidget","halign","center",None,None,None,None,None),
+	(1,110,"GtkWidget","hexpand","True",None,None,None,None,None),
+	(1,110,"GtkWidget","valign","center",None,None,None,None,None),
+	(1,110,"GtkWidget","vexpand","True",None,None,None,None,None)
   </object_property>
 </cambalache-project>
