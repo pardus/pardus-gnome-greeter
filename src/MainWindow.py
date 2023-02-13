@@ -32,7 +32,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.main_window = self.builder.get_object("window")
         
         self.init_ui()
-        
+        self.init_layout()
         self.init_themes()
      
         
@@ -132,7 +132,7 @@ class MainWindow(Gtk.ApplicationWindow):
             "layout_4":self.get_ui("btn_layout_4"),
         }
         
-        
+        print(self.layout_buttons)        
 
 
 ################################# WALLPAPER UI INITIALITIONS ######
@@ -172,15 +172,21 @@ class MainWindow(Gtk.ApplicationWindow):
     def get_ui(self,ui_name:str):
         return self.builder.get_object(ui_name)
 
+
     # INIT WALLPAPERS
     def init_wallpapers(self,wallpapers):
         for wallpaper in wallpapers:
             wallpaper_img = Gtk.Image.new_from_file(wallpaper)
             wallpaper_img.set_size_request(280,280)
             GLib.idle_add(self.flow_wallpapers.insert, wallpaper_img, -1)
+
+
+    # INIT LAYOUTS
+
     def init_layout(self):
         for btn in self.layout_buttons:
-            self.layout_buttons[btn].connect("clicked",layout_manager.set_layout)
+            print("buttons",btn)
+            self.layout_buttons[btn].connect("clicked",layoutChanger.set_layout,btn)
 
 
     # INIT THEMES

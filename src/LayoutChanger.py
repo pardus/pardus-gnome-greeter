@@ -63,9 +63,8 @@ layouts = {
 }
 
 class LayoutChanger:
-    def set_layout(self,layout_name:str):
+    def set_layout(self,action,layout_name:str):
         self.set_theme_on_gsettings(layout_name)
-        print(layout_name)
         all_extensions = self.get_extensions("all")
         enabled_extensions = self.get_extensions("enabled")
         disabled_extensions = self.get_extensions("disabled")
@@ -115,3 +114,6 @@ class LayoutChanger:
     def apply_config(self,config:str):
         return GLib.spawn_command_line_sync(config)
         #return subprocess.run(config)
+    def get_layout_name(self):
+        cmd = "gsettings get org.pardus.pardus-gnome-greeter layout-name"
+        return subprocess.getoutput(cmd)

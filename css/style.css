@@ -1,23 +1,17 @@
 button {
-    margin: 10px;
-    background: none;
-}
-
-button:hover {
-    background: skyblue;
-}
-
-.btn-active {
-    background-color: lightblue;
-}
-
-
-.btn-inactive {
-    background-color: unset;
+    color: #FFA500;
 }
 
 label {
-    font-size: xx-large;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    font: bolder;
+}
+
+.selected-theme {
+    background-color: green;
+    border: 2px solid #FFA500;
+}
+
+.selected-layout {
+    background-color: green;
+    border: 2px solid #FFA500;
 }

@@ -30,6 +30,20 @@
               </object>
             </child>
             <child>
+              <object class="GtkListBoxRow" id="lbr_layout">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="css-classes">left-menu-label</property>
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="justify">center</property>
+                    <property name="label">Choose Layout</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
               <object class="GtkListBoxRow" id="lbr_wallpaper">
                 <property name="child">
                   <object class="GtkLabel">
@@ -111,7 +125,7 @@
                                 <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkImage">
-                                    <property name="file">logo.svg</property>
+                                    <property name="file">../assets/logo.svg</property>
                                     <property name="height-request">128</property>
                                     <property name="width-request">128</property>
                                   </object>
@@ -130,6 +144,115 @@
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="label">This Application Helps You To Configure Pardus</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="gb_layout">
+                    <property name="homogeneous">True</property>
+                    <property name="margin-bottom">20</property>
+                    <property name="margin-end">20</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-top">20</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">20</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="spacing">20</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="btn_layout_1">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../assets/set1.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 2</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="btn_layout_2">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../assets/set2.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="spacing">20</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 3</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="btn_layout_3">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../assets/set3.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 4</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="btn_layout_4">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../assets/set4.svg</property>
                                   </object>
                                 </child>
                               </object>
@@ -183,10 +306,10 @@
                                   <object class="GtkBox">
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <object class="GtkButton">
+                                      <object class="GtkButton" id="btn_dark_theme">
                                         <property name="child">
                                           <object class="GtkImage">
-                                            <property name="file">theme-dark.png</property>
+                                            <property name="file">../assets/theme-dark.png</property>
                                             <property name="height-request">225</property>
                                             <property name="width-request">225</property>
                                           </object>
@@ -205,10 +328,10 @@
                                   <object class="GtkBox">
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <object class="GtkButton">
+                                      <object class="GtkButton" id="btn_light_theme">
                                         <property name="child">
                                           <object class="GtkImage">
-                                            <property name="file">theme-light.png</property>
+                                            <property name="file">../assets/theme-light.png</property>
                                             <property name="height-request">225</property>
                                             <property name="width-request">225</property>
                                           </object>
@@ -300,12 +423,12 @@
                       <object class="GtkStack" id="gs_nav_img_0">
                         <child>
                           <object class="GtkImage" id="gi_nav_img_on_0">
-                            <property name="file">on.svg</property>
+                            <property name="file">../assets/on.svg</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage" id="gi_nav_img_off_0">
-                            <property name="file">off.svg</property>
+                            <property name="file">../assets/off.svg</property>
                           </object>
                         </child>
                       </object>
@@ -314,12 +437,12 @@
                       <object class="GtkStack" id="gs_nav_img_1">
                         <child>
                           <object class="GtkImage" id="gi_nav_img_on_1">
-                            <property name="file">on.svg</property>
+                            <property name="file">../assets/on.svg</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage" id="gi_nav_img_off_1">
-                            <property name="file">off.svg</property>
+                            <property name="file">../assets/off.svg</property>
                           </object>
                         </child>
                       </object>
@@ -328,12 +451,12 @@
                       <object class="GtkStack" id="gs_nav_img_2">
                         <child>
                           <object class="GtkImage" id="gi_nav_img_on_2">
-                            <property name="file">on.svg</property>
+                            <property name="file">../assets/on.svg</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage" id="gi_nav_img_off_2">
-                            <property name="file">off.svg</property>
+                            <property name="file">../assets/off.svg</property>
                           </object>
                         </child>
                       </object>
@@ -342,12 +465,12 @@
                       <object class="GtkStack" id="gs_nav_img_3">
                         <child>
                           <object class="GtkImage" id="gi_nav_img_on_3">
-                            <property name="file">on.svg</property>
+                            <property name="file">../assets/on.svg</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage" id="gi_nav_img_off_3">
-                            <property name="file">off.svg</property>
+                            <property name="file">../assets/off.svg</property>
                           </object>
                         </child>
                       </object>
@@ -356,12 +479,26 @@
                       <object class="GtkStack" id="gs_nav_img_4">
                         <child>
                           <object class="GtkImage" id="gi_nav_img_on_4">
-                            <property name="file">on.svg</property>
+                            <property name="file">../assets/on.svg</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage" id="gi_nav_img_off_4">
-                            <property name="file">off.svg</property>
+                            <property name="file">../assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="gs_nav_img_5">
+                        <child>
+                          <object class="GtkImage" id="gi_nav_img_on_5">
+                            <property name="file">../assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="gi_nav_img_off_5">
+                            <property name="file">../assets/off.svg</property>
                           </object>
                         </child>
                       </object>
