@@ -1,12 +1,8 @@
 import subprocess
-import gi
-import time
+from ExtensionManager import ExtensionManager
+from utils import get_current_theme,get_layout_name,set_layout_name,apply_layout_config
 
-gi.require_version("Gtk", "4.0")
-from gi.repository import GLib
-
-
-
+ExtensionManager = ExtensionManager()
 layouts = {
     "layout_1":{
         "enable":[
@@ -62,58 +58,30 @@ layouts = {
     }
 }
 
-class LayoutChanger:
-    def set_layout(self,action,layout_name:str):
-        self.set_theme_on_gsettings(layout_name)
-        all_extensions = self.get_extensions("all")
-        enabled_extensions = self.get_extensions("enabled")
-        disabled_extensions = self.get_extensions("disabled")
+class LayoutManager:
+    def set_layout(layout_name:str):
+        set_layout_name(layout_name)
+        enabled_extensions = ExtensionManager.get_extensions("enabled")
+        disabled_extensions = ExtensionManager.get_extensions("disabled")
+
         if layout_name not in layouts:
             return "There is layout named %s"%layout_name
         
         if 'enable' in layouts[layout_name]:
             for extension in layouts[layout_name]["enable"]:
                 if extension not in enabled_extensions:
-                    self.extension_operations("enable",extension)
+                    ExtensionManager.extension_operations("enable",extension)
+                    #extension_manager.extension_operations("enable",extension)
         
         if 'disable' in layouts[layout_name]:
             for extension in layouts[layout_name]["disable"]:
                 if extension not in disabled_extensions:
-                    self.extension_operations("disable",extension)
+                    ExtensionManager.extension_operations("disable", extension)
+                    #extension_manager.extension_operations("disable",extension)
         
         if 'config' in layouts[layout_name]:
             for conf in layouts[layout_name]["config"]:
                 escape_conf = conf
                 # dont directly give conf as parameter to apply_config function.
                 # otherwise escape characters wont be rendered correctly
-                self.apply_config(escape_conf)
-
-    def get_extensions(self,type: str): 
-        if type not in ["enabled","disabled","all"]:
-            return "type must be enabled, disabled or all"
-        cmd = "gnome-extensions list"
-        if type != "all":
-            cmd += " --%s"%type
-        return subprocess.getoutput(cmd)
-
-    def extension_operations(self,type:str,ext_id:str):
-        if type not in ["enable","disable"]:
-            return "type must be enable or disable"
-        
-        cmd ="gnome-extensions %s %s"%(type,ext_id)
-        return GLib.spawn_command_line_sync(cmd)
-        #return subprocess.run(cmd)
-
-
-    def set_theme_on_gsettings(self,layout_name:str):
-        cmd = "dconf write /org/pardus/pardus-gnome-greeter/layout-name \"'%s'\""%layout_name
-        return GLib.spawn_command_line_sync(cmd)
-        #return subprocess.run(escape_cmd)
-
-
-    def apply_config(self,config:str):
-        return GLib.spawn_command_line_sync(config)
-        #return subprocess.run(config)
-    def get_layout_name(self):
-        cmd = "gsettings get org.pardus.pardus-gnome-greeter layout-name"
-        return subprocess.getoutput(cmd)
+                apply_layout_config(escape_conf)

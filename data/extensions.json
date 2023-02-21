@@ -1,0 +1,9 @@
+[
+    {
+        "name":"Places Status Indicator",
+        "id":"places-menu@gnome-shell-extensions.gcampax.github.com",
+        "description":"Add a menu for quickly navigating places in the system",
+        "icon":"../assets/ext1_logo.png",
+        "image":"../assets/ext1_image.png"
+    }
+]
