@@ -407,170 +407,6 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="ui_box_shortcut">
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label">&lt;</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkStack">
-                        <child>
-                          <object class="GtkBox">
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="hexpand">True</property>
-                                <property name="label">&lt;b&gt;Change Workspace:&lt;/b&gt;
-Ctrl + Alt + ←  → ↑ ↓
-
-&lt;b&gt;Add/Remove Workspace:&lt;/b&gt;
-Alt + Insert/Delete
-
-&lt;b&gt;Go to Workspace:&lt;/b&gt;
-Ctrl + F1...F12
-
-&lt;b&gt;Change Program:&lt;/b&gt;
-Alt + Tab
-
-&lt;b&gt;Change Window:&lt;/b&gt;
-Super + Tab
-
-&lt;b&gt;View Split:&lt;/b&gt;
-Super + ←  →</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="hexpand">True</property>
-                                <property name="label">&lt;b&gt;Change Workspace:&lt;/b&gt;
-Ctrl + Alt + ←  → ↑ ↓
-
-&lt;b&gt;Add/Remove Workspace:&lt;/b&gt;
-Alt + Insert/Delete
-
-&lt;b&gt;Go to Workspace:&lt;/b&gt;
-Ctrl + F1...F12
-
-&lt;b&gt;Change Program:&lt;/b&gt;
-Alt + Tab
-
-&lt;b&gt;Change Window:&lt;/b&gt;
-Super + Tab
-
-&lt;b&gt;View Split:&lt;/b&gt;
-Super + ←  →</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="hexpand">True</property>
-                                <property name="label">&lt;b&gt;Change Workspace:&lt;/b&gt;
-Ctrl + Alt + ←  → ↑ ↓
-
-&lt;b&gt;Add/Remove Workspace:&lt;/b&gt;
-Alt + Insert/Delete
-
-&lt;b&gt;Go to Workspace:&lt;/b&gt;
-Ctrl + F1...F12
-
-&lt;b&gt;Change Program:&lt;/b&gt;
-Alt + Tab
-
-&lt;b&gt;Change Window:&lt;/b&gt;
-Super + Tab
-
-&lt;b&gt;View Split:&lt;/b&gt;
-Super + ←  →</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="hexpand">True</property>
-                                <property name="label">&lt;b&gt;Change Workspace:&lt;/b&gt;
-Ctrl + Alt + ←  → ↑ ↓
-
-&lt;b&gt;Add/Remove Workspace:&lt;/b&gt;
-Alt + Insert/Delete
-
-&lt;b&gt;Go to Workspace:&lt;/b&gt;
-Ctrl + F1...F12
-
-&lt;b&gt;Change Program:&lt;/b&gt;
-Alt + Tab
-
-&lt;b&gt;Change Window:&lt;/b&gt;
-Super + Tab
-
-&lt;b&gt;View Split:&lt;/b&gt;
-Super + ←  →</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="hexpand">True</property>
-                                <property name="label">&lt;b&gt;Change Workspace:&lt;/b&gt;
-Ctrl + Alt + ←  → ↑ ↓
-
-&lt;b&gt;Add/Remove Workspace:&lt;/b&gt;
-Alt + Insert/Delete
-
-&lt;b&gt;Go to Workspace:&lt;/b&gt;
-Ctrl + F1...F12
-
-&lt;b&gt;Change Program:&lt;/b&gt;
-Alt + Tab
-
-&lt;b&gt;Change Window:&lt;/b&gt;
-Super + Tab
-
-&lt;b&gt;View Split:&lt;/b&gt;
-Super + ←  →</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="hexpand">True</property>
-                                <property name="label">&lt;b&gt;Change Workspace:&lt;/b&gt;
-Ctrl + Alt + ←  → ↑ ↓
-
-&lt;b&gt;Add/Remove Workspace:&lt;/b&gt;
-Alt + Insert/Delete
-
-&lt;b&gt;Go to Workspace:&lt;/b&gt;
-Ctrl + F1...F12
-
-&lt;b&gt;Change Program:&lt;/b&gt;
-Alt + Tab
-
-&lt;b&gt;Change Window:&lt;/b&gt;
-Super + Tab
-
-&lt;b&gt;View Split:&lt;/b&gt;
-Super + ←  →</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label">&gt;</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkBox" id="ui_box_extensions">
                     <property name="hexpand">True</property>
                     <property name="orientation">vertical</property>
@@ -586,8 +422,8 @@ Super + ←  →</property>
                           <object class="GtkFlowBox" id="ui_flowbox_extensions">
                             <property name="activate-on-single-click">False</property>
                             <property name="can-focus">False</property>
-                            <property name="can-target">False</property>
                             <property name="column-spacing">13</property>
+                            <property name="focus-on-click">False</property>
                             <property name="margin-bottom">13</property>
                             <property name="margin-end">13</property>
                             <property name="margin-start">13</property>
@@ -595,6 +431,107 @@ Super + ←  →</property>
                             <property name="max-children-per-line">15</property>
                             <property name="min-children-per-line">2</property>
                             <property name="row-spacing">13</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_box_shortcut">
+                    <property name="hexpand">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">5</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkToggleButton" id="ui_toggle_general_2">
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="homogeneous">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="file">../assets/logo.svg</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label">General</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToggleButton">
+                                <property name="group">ui_toggle_general_2</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="homogeneous">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="file">../assets/logo.svg</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label">Screenshot</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToggleButton">
+                                <property name="group">ui_toggle_general_2</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="homogeneous">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="file">../assets/logo.svg</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label">Gnome</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToggleButton">
+                                <property name="group">ui_toggle_general_2</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="homogeneous">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="file">../assets/logo.svg</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label">System</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
