@@ -2,21 +2,23 @@ import gi
 import os, threading
 import subprocess
 import time
+import json
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
-from gi.repository import Gtk, Gdk, Gio, GObject, GdkPixbuf, GLib
+from gi.repository import Gtk, Gdk, Gio, GObject, GdkPixbuf, GLib,Pango
 
 
 from WallpaperManager import WallpaperManager
 from LayoutManager import LayoutManager
 from ScaleManager import ScaleManager
+from ExtensionManager import ExtensionManager
 from utils import get_current_theme,get_layout_name
 
 wallpaper_manager = WallpaperManager()
 LayoutManager = LayoutManager()
 scaleManager = ScaleManager()
-
+extensionManager = ExtensionManager()
 
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
@@ -157,14 +159,7 @@ class MainWindow(Gtk.ApplicationWindow):
         # ABOUT DIALOG AND BUTTON
         self.ui_button_about_dialog = self.fun_get_ui("ui_button_about_dialog")
         self.ui_button_about_dialog.connect("clicked",self.init_about_dialog)
-
-        # NIGHT LIGHT BUTTONS
-        #self.ui_button_night_light_on = self.fun_get_ui("ui_button_night_light_on")
-        #self.ui_button_night_light_on.connect("clicked",self.fun_toggle_night_light,True)
-        #self.ui_button_night_light_off = self.fun_get_ui("ui_button_night_light_off")
-        #self.ui_button_night_light_off.connect("clicked",self.fun_toggle_night_light,False)
-
-        
+    
 
         thread = threading.Thread(
             target=self.init_wallpapers, args=(wallpaper_manager.get_wallpapers(),)
@@ -180,46 +175,118 @@ class MainWindow(Gtk.ApplicationWindow):
         # self.init_night_light()
         self.init_themes()
 
+        self.enabled_extensions = extensionManager.get_extensions("enabled")
+        print(self.enabled_extensions)
         self.ui_flowbox_extensions = self.fun_get_ui("ui_flowbox_extensions")
-        self.ui_flowbox_extensions.insert(self.fun_box(),-1)
-      
+
+        self.extension_datas = None
+        with open("../data/extensions.json") as file_content:
+            self.extension_datas = json.loads(file_content.read())
+
+        for item in self.extension_datas:
+            extension = self.fun_create_extension_box(item)
+            self.ui_flowbox_extensions.insert(extension,-1)
+           
+
+    def fun_create_extension_box(self,extension_props):
         
+        # RETURNING EXTENSION BOX
+        # _______(Container)______________________________
+        #|                                               |
+        #|     _____(Header)_________________________    |
+        #|    |   logo | extension name    | switch |    | 
+        #|    ---------------------------------------    |
+        #|                                               |
+        #|     _____(description)___________________| 
+        #|    | extension long description          |    |
+        #|    |_____________________________________|    |
+        #|    |                                     |    |
+        #|    |    ___(Image)_________________      |    |
+        #|    |   |                          |      |    |
+        #|    |   |                          |      |    |
+        #|    |   |                          |      |    |
+        #|    |   |                          |      |    |
+        #|    |   |__________________________|      |    |
+        #|    |_____________________________________|    |
+        #|                                               |
+        #|_______________________________________________|
 
-        
-
-#    def init_night_light(self):
-#        self.get_night_light_state_cmd = "gsettings get org.gnome.settings-daemon.plugins.color night-light-enabled"
-#        self.night_light_status = subprocess.getoutput(self.get_night_light_state_cmd) == "true"
-#
-#        if self.night_light_status:
-#            self.ui_button_night_light_on.set_sensitive(False)
-#            self.ui_button_night_light_off.set_sensitive(True)
-#        else:
-#            self.ui_button_night_light_on.set_sensitive(True)
-#            self.ui_button_night_light_off.set_sensitive(False)
-
-    
-
-    def fun_box(self):
+        # GTK SETTINGS
+        ellipsize = Pango.EllipsizeMode(2)
         horizontal = Gtk.Orientation.HORIZONTAL
-        container = Gtk.Box.new(horizontal,13)
-        container.set_size_request(180,250)
-        container.get_style_context().add_class("bordered-box")
-        container.set_valign(Gtk.Align(1))
-        container.set_halign(Gtk.Align(1))
+        vertical = Gtk.Orientation.VERTICAL
+        align_start = Gtk.Align(1)
+        align_fill = Gtk.Align(0)
 
-
-        header = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,5)
-        container.append(header)
-        for i in range(10):
-
-            logo = Gtk.Image.new_from_file("../assets/ext1_logo.png")
-
-            header.append(logo)
-        
-        return container
+        # MAIN CONTAINER
+        ui_box_container = Gtk.Box.new(vertical,13)
+        ui_box_container.set_size_request(200,200)
+        ui_box_container.get_style_context().add_class("bordered-box")
+        ui_box_container.set_valign(align_start)
+        ui_box_container.set_halign(align_start)
         
 
+        # HEADER THAT GOT LOGO EXTENSION NAME AND SWITCH
+        ui_box_header = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,5)
+        ui_box_header.set_valign(align_start)
+        ui_box_header.set_halign(align_fill)
+        ui_box_header.get_style_context().add_class("bordered-box")
+
+        # EXTENSION LOGO
+        ui_image_logo = Gtk.Image.new_from_file(extension_props["logo"])
+        ui_image_logo.set_halign(align_start)
+
+        # EXTENSION IMAGE
+        ui_image_extension_image = Gtk.Image.new_from_file(extension_props["image"])
+        ui_image_extension_image.set_size_request(130,160)
+
+        # EXTENSION NAME
+        ui_label_name = Gtk.Label(label=extension_props["name"])
+        ui_label_name.set_hexpand(True)
+        ui_label_name.set_halign(align_start)
+
+        # SWITCH TO CONTROL STATE OF EXTENSION
+
+        
+        
+        ui_switch_toggle = Gtk.Switch()
+        ui_switch_toggle.connect("notify::active",self.switch_fun,extension_props["id"])
+        ui_switch_toggle.set_sensitive(True)
+        if extension_props["id"] in self.enabled_extensions:
+            ui_switch_toggle.set_active(True)
+        else:
+            ui_switch_toggle.set_active(False)
+        
+        
+        
+
+        # ADDING ELEMENTS TO HEADER
+        ui_box_header.append(ui_image_logo)
+        ui_box_header.append(ui_label_name)
+        ui_box_header.append(ui_switch_toggle)
+
+        # EXTENSION DESCRIPTION
+        ui_label_description = Gtk.Label(label=extension_props["description"])
+        ui_label_description.set_halign(align_start)
+        ui_label_description.set_valign(align_start)
+        ui_label_description.set_ellipsize(ellipsize)
+        ui_label_description.set_lines(5)
+
+        # ADDING HEADER AND OTHER ELEMENTS TO CONTAINER
+        ui_box_container.append(ui_box_header)
+        ui_box_container.append(ui_label_description)
+        ui_box_container.append(ui_image_extension_image)
+
+        # RETURN CONTAINER
+        return ui_box_container
+        
+    def switch_fun(self,switch,param,extension_id):
+        if switch.get_active():
+            status = "enable"
+        else:
+            status = "disable"
+        extensionManager.extension_operations(status, extension_id)
+        print("switch = ",status)
     # INIT WALLPAPERS
     def init_wallpapers(self, wallpapers:str):
         for wallpaper in wallpapers:
