@@ -1,0 +1,48 @@
+{
+    "general": [
+        {
+            "shortcut": "Change Application",
+            "keys": [
+                "CTRL",
+                "ALT",
+                "DEL"
+            ]
+        },
+        {
+            "shortcut": "Change Workspace",
+            "keys": [
+                "SHIFT",
+                ">",
+                "<"
+            ]
+        }
+    ],
+    "window": [
+        {
+            "shortcut": "Change Window",
+            "keys": [
+                "CTRL",
+                "ALT",
+                "DEL"
+            ]
+        },
+        {
+            "shortcut": "Change Workspace",
+            "keys": [
+                "SHIFT",
+                ">",
+                "<"
+            ]
+        }
+    ],
+    "system": [
+        {
+            "shortcut": "Shutdown PC",
+            "keys": [
+                "CTRL",
+                "ALT",
+                "DEL"
+            ]
+        }
+    ]
+}

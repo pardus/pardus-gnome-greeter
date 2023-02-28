@@ -13,7 +13,7 @@ from WallpaperManager import WallpaperManager
 from LayoutManager import LayoutManager
 from ScaleManager import ScaleManager
 from ExtensionManager import ExtensionManager
-from utils import get_current_theme,get_layout_name
+from utils import get_current_theme, get_layout_name, get_recommended_scale
 
 wallpaper_manager = WallpaperManager()
 LayoutManager = LayoutManager()
@@ -39,13 +39,20 @@ class MainWindow(Gtk.ApplicationWindow):
         self.init_ui()
 
     def init_ui(self):
-        
+        # GTK SETTINGS
+        self.ellipsize = Pango.EllipsizeMode(2)
+        self.horizontal = Gtk.Orientation.HORIZONTAL
+        self.vertical = Gtk.Orientation.VERTICAL
+        self.align_start = Gtk.Align(1)
+        self.align_fill = Gtk.Align(0)
+        self.align_center = Gtk.Align(3)
+
         # GETTING UI FROM UI FILE
         self.gtk_builder = Gtk.Builder()
         self.gtk_builder.add_from_file(
             os.path.dirname(os.path.abspath(__file__)) + "/../ui/ui.ui"
         )
-
+        
         # MAIN WINDOW OF APPLICATION
         self.main_window = self.fun_get_ui("window")
 
@@ -64,11 +71,6 @@ class MainWindow(Gtk.ApplicationWindow):
         self.ui_box_content = self.fun_get_ui("ui_box_content")
         self.ui_box_content.prepend(self.ui_stack_pages)
         
-    
-    
-
-
-
         # LISTBOXROWS
         self.ui_listbox_sidemenu = [
             self.fun_get_ui("ui_listboxrow_welcome"),
@@ -90,7 +92,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self.fun_get_ui("ui_box_extensions"),
             self.fun_get_ui("ui_box_shortcut"),
         ]
-
 
         # BOTTOM NAVIGATION INDICATORS
         self.ui_image_indicators = {
@@ -169,24 +170,129 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.fun_check_bottom_img_states()
 
-        # INIT FUNCTIONS
-        self.init_layout()
-        self.init_scale()
-        # self.init_night_light()
-        self.init_themes()
+        
 
         self.enabled_extensions = extensionManager.get_extensions("enabled")
-        print(self.enabled_extensions)
         self.ui_flowbox_extensions = self.fun_get_ui("ui_flowbox_extensions")
 
-        self.extension_datas = None
         with open("../data/extensions.json") as file_content:
             self.extension_datas = json.loads(file_content.read())
+
+        with open("../data/shortcuts.json") as file_content:
+            self.shortcut_datas = json.loads(file_content.read())
+        
 
         for item in self.extension_datas:
             extension = self.fun_create_extension_box(item)
             self.ui_flowbox_extensions.insert(extension,-1)
-           
+        
+        self.shortcuts = self.fun_get_ui("shortcuts")
+
+        self.toggle_buttons = []
+        self.shortcut_pages = []
+
+
+        #self.toggles = [
+        #    self.fun_get_ui("toggle1"),
+        #    self.fun_get_ui("toggle2"),
+        #    self.fun_get_ui("toggle3"),
+        #    self.fun_get_ui("toggle4"),
+        #]
+#
+        #for toggle in self.toggles:
+        #    toggle.connect("toggled",self.test_toggle)
+        
+        # INIT FUNCTIONS
+        self.init_layout()
+        self.init_scale()
+        self.init_themes()
+        self.init_shortcut()
+
+    def test_toggle(self,widget):
+        if widget.get_active():
+            for index,active_toggle in enumerate(self.toggle_buttons):
+                if active_toggle.get_active() == True:
+                    self.ui_shortcut_stack.set_visible_child(self.shortcut_pages[index])
+
+    def init_shortcut(self):
+        # SHORTCUT OUTER BOX
+        self.ui_box_shortcut = self.fun_get_ui("ui_box_shortcut")
+        self.ui_box_shortcut.set_hexpand(True)
+        self.ui_box_shortcut.set_vexpand(True)
+
+        # SHORTCUT TOGGLE NAVIGATION BOX
+        self.ui_toggle_nav_box = Gtk.Box()
+        self.ui_toggle_nav_box.set_hexpand(True)
+        self.ui_toggle_nav_box.set_homogeneous(True)
+
+        self.toggle_group = None
+        
+        self.ui_shortcut_stack = Gtk.Stack()
+        self.ui_shortcut_stack.set_hexpand(True)
+        self.ui_shortcut_stack.set_vexpand(True)
+
+
+
+        # ADDING TOGGLE BUTTONS TO SHORTCUT
+        for index,toggle in enumerate(self.shortcut_datas):
+            toggle_button = self.fun_create_shortcut_nav_button(toggle,index)
+            shortcut_page = self.fun_create_shortcut_page(self.shortcut_datas[toggle], toggle)
+
+            self.ui_shortcut_stack.add_child(shortcut_page)
+
+            self.shortcut_pages.append(shortcut_page)
+            self.toggle_buttons.append(toggle_button)
+            self.ui_toggle_nav_box.append(toggle_button)
+        
+        self.ui_box_shortcut.append(self.ui_toggle_nav_box)
+        self.ui_box_shortcut.append(self.ui_shortcut_stack)
+
+    def fun_create_shortcut_page(self,content,id):
+
+        page = Gtk.Box.new(self.vertical,5)
+
+
+        page.set_hexpand(True)
+        page.set_vexpand(True)
+        page.set_halign(self.align_center)
+        page.set_valign(self.align_start)
+        
+        
+        for item in content:
+            shortcut_box = Gtk.Box.new(self.vertical,5)
+            shortcut_box.get_style_context().add_class("bordered-box")
+            shortcut_box.set_halign(self.align_center)
+            label_content = item['shortcut']
+            label = Gtk.Label(label=label_content)
+            shortcut_box.append(label)
+
+            shortcut_buttons_box = Gtk.Box.new(self.horizontal,13)
+            shortcut_buttons_box.get_style_context().add_class("bordered-box")
+            shortcut_buttons_box.set_halign(self.align_center)
+            shortcut_buttons_box.set_valign(self.align_fill)
+
+            shortcut_box.append(shortcut_buttons_box)
+            for shortcut_key in item['keys']:
+                shortcut_buttons_box.append(Gtk.Button(label=shortcut_key))
+            page.append(shortcut_box)
+        return page
+
+    def fun_create_shortcut_nav_button(self,label,index):
+        toggle_button = Gtk.ToggleButton(label=label)
+        toggle_button.set_css_classes(["togglebutton"])
+        toggle_button.set_name(label)
+        toggle_button.connect("toggled",self.test_toggle)
+
+        if index == 0:
+            toggle_button.set_group(None)
+            self.toggle_group = toggle_button
+        else:
+            toggle_button.set_group(self.toggle_group)
+        
+        return toggle_button
+
+    
+
 
     def fun_create_extension_box(self,extension_props):
         
@@ -211,30 +317,25 @@ class MainWindow(Gtk.ApplicationWindow):
         #|                                               |
         #|_______________________________________________|
 
-        # GTK SETTINGS
-        ellipsize = Pango.EllipsizeMode(2)
-        horizontal = Gtk.Orientation.HORIZONTAL
-        vertical = Gtk.Orientation.VERTICAL
-        align_start = Gtk.Align(1)
-        align_fill = Gtk.Align(0)
+        
 
         # MAIN CONTAINER
-        ui_box_container = Gtk.Box.new(vertical,13)
+        ui_box_container = Gtk.Box.new(self.vertical,13)
         ui_box_container.set_size_request(200,200)
         ui_box_container.get_style_context().add_class("bordered-box")
-        ui_box_container.set_valign(align_start)
-        ui_box_container.set_halign(align_start)
+        ui_box_container.set_valign(self.align_start)
+        ui_box_container.set_halign(self.align_start)
         
 
         # HEADER THAT GOT LOGO EXTENSION NAME AND SWITCH
-        ui_box_header = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,5)
-        ui_box_header.set_valign(align_start)
-        ui_box_header.set_halign(align_fill)
+        ui_box_header = Gtk.Box.new(self.horizontal,5)
+        ui_box_header.set_valign(self.align_start)
+        ui_box_header.set_halign(self.align_fill)
         ui_box_header.get_style_context().add_class("bordered-box")
 
         # EXTENSION LOGO
         ui_image_logo = Gtk.Image.new_from_file(extension_props["logo"])
-        ui_image_logo.set_halign(align_start)
+        ui_image_logo.set_halign(self.align_start)
 
         # EXTENSION IMAGE
         ui_image_extension_image = Gtk.Image.new_from_file(extension_props["image"])
@@ -243,23 +344,20 @@ class MainWindow(Gtk.ApplicationWindow):
         # EXTENSION NAME
         ui_label_name = Gtk.Label(label=extension_props["name"])
         ui_label_name.set_hexpand(True)
-        ui_label_name.set_halign(align_start)
+        ui_label_name.set_halign(self.align_start)
 
         # SWITCH TO CONTROL STATE OF EXTENSION
 
         
         
         ui_switch_toggle = Gtk.Switch()
-        ui_switch_toggle.connect("notify::active",self.switch_fun,extension_props["id"])
+        ui_switch_toggle.connect("notify::active",self.fun_extension_toggle,extension_props["id"])
         ui_switch_toggle.set_sensitive(True)
         if extension_props["id"] in self.enabled_extensions:
             ui_switch_toggle.set_active(True)
         else:
             ui_switch_toggle.set_active(False)
         
-        
-        
-
         # ADDING ELEMENTS TO HEADER
         ui_box_header.append(ui_image_logo)
         ui_box_header.append(ui_label_name)
@@ -267,9 +365,9 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # EXTENSION DESCRIPTION
         ui_label_description = Gtk.Label(label=extension_props["description"])
-        ui_label_description.set_halign(align_start)
-        ui_label_description.set_valign(align_start)
-        ui_label_description.set_ellipsize(ellipsize)
+        ui_label_description.set_halign(self.align_start)
+        ui_label_description.set_valign(self.align_start)
+        ui_label_description.set_ellipsize(self.ellipsize)
         ui_label_description.set_lines(5)
 
         # ADDING HEADER AND OTHER ELEMENTS TO CONTAINER
@@ -280,13 +378,12 @@ class MainWindow(Gtk.ApplicationWindow):
         # RETURN CONTAINER
         return ui_box_container
         
-    def switch_fun(self,switch,param,extension_id):
+    def fun_extension_toggle(self,switch,param,extension_id):
         if switch.get_active():
             status = "enable"
         else:
             status = "disable"
         extensionManager.extension_operations(status, extension_id)
-        print("switch = ",status)
     # INIT WALLPAPERS
     def init_wallpapers(self, wallpapers:str):
         for wallpaper in wallpapers:
@@ -304,7 +401,6 @@ class MainWindow(Gtk.ApplicationWindow):
             "layout_4": self.fun_get_ui("ui_button_layout_4"),
         }
         self.layout_name = get_layout_name()
-        print(self.layout_name)
         for btn in self.layout_buttons:
             self.layout_buttons[btn].connect("clicked", self.fun_change_layout, btn)
         self.fun_check_layout_state()
@@ -312,6 +408,12 @@ class MainWindow(Gtk.ApplicationWindow):
     # INIT SCALE
     def init_scale(self):
         self.ui_scale_display = self.fun_get_ui("ui_scale_display")
+        self.ui_label_recommended_scale = self.fun_get_ui("ui_label_recommended_scale")
+        self.recommended_scale = get_recommended_scale()
+        self.ui_label_recommended_scale.set_markup(
+            "<b>Recommended scale option is %s%%</b>"%self.recommended_scale
+            ) 
+
         self.current_scale = (float(scaleManager.get_scale()) / 0.25) - 4
 
         self.ui_scale_display.set_value(self.current_scale)
@@ -335,21 +437,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self.ui_button_dark_theme.get_style_context().remove_class("selected-theme")
             self.ui_button_light_theme.get_style_context().add_class("selected-theme")
 
-#    def fun_toggle_night_light(self,action,param):
-#        self.night_light_status = param
-#        set_night_light_state_cmd = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled"
-#        cmd = set_night_light_state_cmd
-#        if param:
-#            self.ui_button_night_light_on.set_sensitive(False)
-#            self.ui_button_night_light_off.set_sensitive(True)
-#            cmd += " true"
-#        else:
-#            self.ui_button_night_light_on.set_sensitive(True)
-#            self.ui_button_night_light_off.set_sensitive(False)
-#            cmd +=  " false"
-#        subprocess.getoutput(cmd)
-
-
 
     # GETTING GTK OBJECTS WITH ID
     def fun_get_ui(self, ui_name: str):
@@ -365,7 +452,7 @@ class MainWindow(Gtk.ApplicationWindow):
     # CHANGE LAYOUT AND CHECK FOR LAYOUT STATE
     def fun_change_layout(self, action, layout_name):
         self.layout_name = layout_name
-        LayoutManager.set_layout(layout_name=self.layout_name)
+        LayoutManager.set_layout(self.layout_name)
         self.fun_check_layout_state()
 
     # CHECK LAYOUT STATE.
@@ -414,7 +501,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
 
     # PREVIOUS STACKED PAGE
-    def on_prev_page_button_clicked(self, name):
+    def on_prev_page_button_clicked(self, name): 
         if self.current_page > 0:
             self.current_page -= 1
             self.ui_stack_pages.set_visible_child(self.ui_pages[self.current_page])

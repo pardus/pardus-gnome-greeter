@@ -20,6 +20,7 @@ class WallpaperManager:
         full_path = "file://"+picture_uri
         cmd = "gsettings set org.gnome.desktop.background %s '%s'"%(theme_uri,full_path)
         return GLib.spawn_command_line_sync(cmd)
+        
     def get_wallpapers(self):
         path = "/usr/share/backgrounds/gnome/"
         paths = os.listdir(path)

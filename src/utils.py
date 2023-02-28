@@ -1,4 +1,8 @@
 import subprocess
+import gi
+gi.require_version("Gdk","4.0")
+from gi.repository import Gdk
+
 
 def get_layout_name():
         cmd = "gsettings get org.pardus.pardus-gnome-greeter layout-name"
@@ -16,3 +20,24 @@ def get_current_theme():
 
 def apply_layout_config(config:str):
     return subprocess.getoutput(config)
+
+def get_recommended_scale():
+    base_scale = 96
+    screen_const = 51
+    result = 0
+    display = Gdk.Display.get_default()
+    monitors = display.get_monitors()
+
+    for monitor in monitors:
+        width_mm = monitor.get_width_mm()
+        height_mm = monitor.get_height_mm()
+
+        width_px = monitor.get_geometry().width
+        height_px = monitor.get_geometry().height
+
+        wdpi = width_mm / width_px
+        hdpi = height_mm / height_px
+
+        result += screen_const / (wdpi + hdpi)
+    
+    return int(base_scale * 100 / result / len(monitors))
