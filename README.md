@@ -12,7 +12,6 @@ for testing we need to export gsettings schema directory <br>
 To test and use application run the following command <br/>
 `python3 <project_dir>/pardus-gnome-greeter/src/Main.py`
 
-
 ### Build deb package
 
 * `sudo apt install devscripts git-buildpackage`

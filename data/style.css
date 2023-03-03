@@ -1,0 +1,54 @@
+button:disabled {
+    background: gray;
+    color: white;
+    font-weight: bolder;
+
+}
+
+spinbutton button:disabled {
+    background: gray;
+    color: white;
+    font-weight: bolder;
+}
+
+.selected-theme {
+    background-color: green;
+    border: 2px solid #FFA500;
+}
+
+.selected-layout {
+    background-color: green;
+    border: 2px solid #FFA500;
+}
+
+.unselected-layout {
+    background-color: unset;
+    border: unset;
+}
+
+.bordered-box {
+    border: 1px solid lightgray;
+    border-radius: 13px;
+    padding: 13px;
+}
+
+.border-b-2 {
+    border-bottom: 2px solid lightgray;
+}
+
+.togglebutton {
+    border-radius: unset;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    border: 1px solid lightgray
+}
+
+
+.togglebutton:focus {
+    box-shadow: none;
+    background: #d2d2d2;
+}
+
+socialmedia {
+    color: green;
+}
