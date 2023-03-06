@@ -1,13 +1,14 @@
 Format: 1.8
-Date: Fri, 20 Jan 2023 15:50:44 +0300
+Date: Mon, 06 Mar 2023 09:18:42 +0300
 Source: pardus-gnome-greeter-build-deps
 Binary: pardus-gnome-greeter-build-deps
+Built-For-Profiles: noudeb
 Architecture: all
 Version: 0.0.1
 Distribution: unstable
 Urgency: low
-Maintainer: Equivs Dummy Package Generator <root@osman-coskun>
-Changed-By: Equivs Dummy Package Generator <root@osman-coskun>
+Maintainer: Equivs Dummy Package Generator <root@pop-os.localdomain>
+Changed-By: Equivs Dummy Package Generator <root@pop-os.localdomain>
 Description:
  pardus-gnome-greeter-build-deps - build-dependencies for pardus-gnome-greeter
 Changes:
@@ -15,11 +16,11 @@ Changes:
  .
    * First version
 Checksums-Sha1:
- 28b42a9e6e56260dc19d5ddd1543a394168f7dc5 2148 pardus-gnome-greeter-build-deps_0.0.1_all.deb
- bb604afd35584fe35c8308231f6235e18a7a091b 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+ b61d3527acd3fbc88beea984b55c63378196d49f 2008 pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ 89f5e023cb9cbf589117d8f34e2d2a08bb750ad6 43192 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
 Checksums-Sha256:
- a832750eef97d8985c544bf04e8231ffa133ebc8c6ca93628ac460cee709cbbb 2148 pardus-gnome-greeter-build-deps_0.0.1_all.deb
- d0fe4e5de06660b8e019307e3dc864a544e8c76941bbb05b1462305661627e7f 4763 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+ 1fc5390ddbef672337595f90e4f5a9cf1ff0de9dfe8e80bc85c69e643b5d314a 2008 pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ f84c9969744ab2b7ba01f7c5714a297d78a0dbca86e780c74d6b3af97b9e92ef 43192 pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
 Files:
- 165e75a529b8a6b6c2a33577f27ff298 2148 devel optional pardus-gnome-greeter-build-deps_0.0.1_all.deb
- ca12544dafb37b6797365174d7fd5ae8 4763 devel optional pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
+ d0a41a15c3d7c83d4a46a020def1c45a 2008 devel optional pardus-gnome-greeter-build-deps_0.0.1_all.deb
+ e280cdf39144541eab3ca9cab546c7b3 43192 devel optional pardus-gnome-greeter-build-deps_0.0.1_amd64.buildinfo
