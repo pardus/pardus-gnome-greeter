@@ -1,0 +1,13 @@
+Source: pardus-gnome-greeter
+Section: utils
+Priority: optional
+Maintainer: Osman Coskun <osman.coskun@pardus.org.tr>
+Build-Depends: debhelper (>= 12), python3, python3-setuptools
+Standards-Version: 0.0.1
+Homepage: https://github.com/pardus/pardus-gnome-greeter
+
+Package: pardus-gnome-greeter
+Architecture: all
+Depends: ${misc:Depends}, 
+         python3 (>= 3.6)
+Description: Pardus Gnome Greeter let user to pick what kind of layout they want to use with system. 

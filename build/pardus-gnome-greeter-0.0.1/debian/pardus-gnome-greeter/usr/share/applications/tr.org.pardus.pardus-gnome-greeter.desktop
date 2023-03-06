@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Pardus Gnome Greeter
+GenericName=Pardus Gnome Greeter
+Comment=Pardus Gnome Greeter, change the layout of the desktop.
+Exec=pardus-gnome-greeter
+Icon=pardus-gnome-greeter
+Terminal=false
+Type=Application
+Categories=Settings;
+StartupNotify=true
+Keywords=Pardus, Pardus Gnome Greeter, Pardus Gnome Tweak
