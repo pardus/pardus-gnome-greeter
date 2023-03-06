@@ -36,10 +36,10 @@ data_files = [
     ("/usr/share/pardus/pardus-gnome-greeter/src", [
     		"src/Main.py",
     		"src/MainWindow.py",
-		"src/LayoutManager.py",
+			"src/LayoutManager.py",
 	        "src/ExtensionManager.py",
 	        "src/utils.py",
-	        "src/ScaleManager",
+	        "src/ScaleManager.py",
 	        "src/WallpaperManager.py"
     	]
     ),
