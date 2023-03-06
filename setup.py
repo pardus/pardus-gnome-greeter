@@ -91,7 +91,10 @@ data_files = [
     		"pardus-gnome-greeter"
     	]
     ),
-    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-gnome-greeter.svg"])
+    ("/usr/share/icons/hicolor/scalable/apps/", [
+			"pardus-gnome-greeter.svg"
+		]
+	)
 ]
 
 setup(
