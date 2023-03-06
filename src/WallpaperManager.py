@@ -34,9 +34,5 @@ class WallpaperManager:
 
         print(wallpapers)
         return wallpapers
-        #paths = os.listdir(path)
-        #complete_paths = []
-        #for item in paths:
-        #    complete_paths.append(path + item)
-        #return complete_paths
+
     
