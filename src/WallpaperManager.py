@@ -22,9 +22,21 @@ class WallpaperManager:
         return GLib.spawn_command_line_sync(cmd)
         
     def get_wallpapers(self):
-        path = "/usr/share/backgrounds/gnome/"
-        paths = os.listdir(path)
-        complete_paths = []
-        for item in paths:
-            complete_paths.append(path + item)
-        return complete_paths
+        wallpaper_dir = "/usr/share/backgrounds"
+        wallpapers = []
+        for root, dirs, files in os.walk(wallpaper_dir):
+            if root == wallpaper_dir:
+                continue
+            dirs.clear()
+            for file_name in files:
+                path = os.path.join(root,file_name)
+                wallpapers.append(path)
+
+        print(wallpapers)
+        return wallpapers
+        #paths = os.listdir(path)
+        #complete_paths = []
+        #for item in paths:
+        #    complete_paths.append(path + item)
+        #return complete_paths
+    
