@@ -1,2 +1,0 @@
-#!/bin/bash
-exec python3 /usr/share/pardus/pardus-gnome-greeter/src/Main.py
