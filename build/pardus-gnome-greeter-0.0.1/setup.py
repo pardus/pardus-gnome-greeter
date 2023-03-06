@@ -64,20 +64,20 @@ data_files = [
             
             	"data/assets/logo.svg",
             
-            	"data/assets/ext_app_indicator_image.png",
-            	"data/assets/ext_app_indicator_logo.png",
+            	"data/assets/ext_app_indicator_image.svg",
+            	"data/assets/ext_app_indicator_logo.svg",
 
-            	"data/assets/ext_app_menu_image.png",
-            	"data/assets/ext_app_menu_logo.png",
+            	"data/assets/ext_app_menu_image.svg",
+            	"data/assets/ext_app_menu_logo.svg",
 
-            	"data/assets/ext_caffeine_image.png",
-            	"data/assets/ext_caffeine_logo.png",
+            	"data/assets/ext_caffeine_image.svg",
+            	"data/assets/ext_caffeine_logo.svg",
 
-            	"data/assets/ext_drive_menu_image.png",
-            	"data/assets/ext_drive_menu_logo.png",
+            	"data/assets/ext_drive_menu_image.svg",
+            	"data/assets/ext_drive_menu_logo.svg",
 
-            	"data/assets/ext_places_menu_image.png",
-            	"data/assets/ext_places_menu_logo.png",
+            	"data/assets/ext_places_menu_image.svg",
+            	"data/assets/ext_places_menu_logo.svg",
             
             	"data/assets/on.svg",
             	"data/assets/off.svg",            
