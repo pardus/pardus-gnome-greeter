@@ -22,13 +22,15 @@ def apply_layout_config(config:str):
     return subprocess.getoutput(config)
 
 def get_recommended_scale():
-    base_scale = 96
-    screen_const = 51
-    result = 0
+    base_scale = 100
+    screen_const = 50
+    approximate_result = 0
     display = Gdk.Display.get_default()
     monitors = display.get_monitors()
 
     for monitor in monitors:
+        print(monitor)
+
         width_mm = monitor.get_width_mm()
         height_mm = monitor.get_height_mm()
 
@@ -38,6 +40,11 @@ def get_recommended_scale():
         wdpi = width_mm / width_px
         hdpi = height_mm / height_px
 
-        result += screen_const / (wdpi + hdpi)
-    
-    return int(base_scale * 100 / result / len(monitors))
+        approximate_result += screen_const / (wdpi + hdpi)
+    result = base_scale * 100 / approximate_result * len(monitors)
+    if result % 25 > 12.5:
+        rounded_result = int(result + (25 - result % 25))
+    else:
+        rounded_result = int(result - (result % 25))
+    print(rounded_result)
+    return rounded_result

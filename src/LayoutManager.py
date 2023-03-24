@@ -60,7 +60,6 @@ layouts = {
 
 class LayoutManager:
     def set_layout(self,layout_name:str):
-        print(layout_name)
         set_layout_name(layout_name)
         enabled_extensions = ExtensionManager.get_extensions("enabled")
         disabled_extensions = ExtensionManager.get_extensions("disabled")

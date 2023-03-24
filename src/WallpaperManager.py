@@ -32,7 +32,6 @@ class WallpaperManager:
                 path = os.path.join(root,file_name)
                 wallpapers.append(path)
 
-        print(wallpapers)
         return wallpapers
 
     
