@@ -29,7 +29,6 @@ def get_recommended_scale():
     monitors = display.get_monitors()
 
     for monitor in monitors:
-        print(monitor)
 
         width_mm = monitor.get_width_mm()
         height_mm = monitor.get_height_mm()
@@ -46,5 +45,4 @@ def get_recommended_scale():
         rounded_result = int(result + (25 - result % 25))
     else:
         rounded_result = int(result - (result % 25))
-    print(rounded_result)
     return rounded_result
