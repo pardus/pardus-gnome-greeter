@@ -47,7 +47,7 @@ data_files = [
     		"ui/ui.ui"
     	]
     ),
-    ("/usr/share/pardus/pardus-gnome-greeter/assets", [
+    ("/usr/share/pardus/pardus-gnome-greeter/data/assets", [
         
             	"data/assets/set1.svg",
             	"data/assets/set2.svg",
@@ -84,7 +84,8 @@ data_files = [
     	]
     ),
     ("/usr/share/pardus/pardus-gnome-greeter/data/", [
-    		"data/style.css"
+    		"data/style.css",
+			"data/extensions.json"
     	]
     ),
     ("/usr/bin/", [
