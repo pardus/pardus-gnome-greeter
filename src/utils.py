@@ -22,6 +22,11 @@ def apply_layout_config(config:str):
     return subprocess.getoutput(config)
 
 def get_recommended_scale():
+    display_server_cmd = 'echo $XDG_SESSION_TYPE'
+    display_server = subprocess.getoutput(display_server_cmd)
+    print(display_server)
+    if display_server == 'wayland':
+        return 100
     base_scale = 100
     screen_const = 50
     approximate_result = 0
@@ -45,4 +50,5 @@ def get_recommended_scale():
         rounded_result = int(result + (25 - result % 25))
     else:
         rounded_result = int(result - (result % 25))
+
     return rounded_result
