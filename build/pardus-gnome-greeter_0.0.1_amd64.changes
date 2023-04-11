@@ -1,0 +1,32 @@
+Format: 1.8
+Date: Tue, 11 Apr 2023 03:10:40 -0400
+Source: pardus-gnome-greeter
+Binary: pardus-gnome-greeter
+Architecture: source all
+Version: 0.0.1
+Distribution: unstable
+Urgency: medium
+Maintainer: Osman Coskun <osman.coskun@pardus.org.tr>
+Description:
+ pardus-gnome-greeter - Pardus Gnome Greeter let user to pick what kind of layout they wa
+Changes:
+ pardus-gnome-greeter (0.0.1) unstable; urgency=medium
+ .
+   * Initial release
+ .
+   -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 PM +03
+Checksums-Sha1:
+ fa32f4eb596ca7621c1af7d6aea7c3d3ba452ee7 671 pardus-gnome-greeter_0.0.1.dsc
+ f4c2eebdf56b5895f52ae272a0d6963a2389e951 623241 pardus-gnome-greeter_0.0.1.tar.gz
+ 017e61b5af559b55b5b512911114fbdac46ba339 382308 pardus-gnome-greeter_0.0.1_all.deb
+ f3641218eaf18df054f3814467cb72622e5f07d3 5487 pardus-gnome-greeter_0.0.1_amd64.buildinfo
+Checksums-Sha256:
+ 8c004286ed850569fe5be9ecd732105691721ef5c193a624476c2e40ec1644aa 671 pardus-gnome-greeter_0.0.1.dsc
+ 4127c109ee9db679569163642a7f468126943e7611a039494cb79ffaa97e4f27 623241 pardus-gnome-greeter_0.0.1.tar.gz
+ 047dac4468c864cc1969cc498cbb82b500007800f8609a15eeee6504cf5f8802 382308 pardus-gnome-greeter_0.0.1_all.deb
+ 4c38e187c68ec29eb4ff773904f9b0a81cc9d1c13536686f9ba810b661de689c 5487 pardus-gnome-greeter_0.0.1_amd64.buildinfo
+Files:
+ 841eb33f4d9a23d8bf2b517a72321f80 671 utils optional pardus-gnome-greeter_0.0.1.dsc
+ f8f927110bdf5fa9283504e51964b366 623241 utils optional pardus-gnome-greeter_0.0.1.tar.gz
+ 63d3024265cd8ba9c152d9c33c9f8207 382308 utils optional pardus-gnome-greeter_0.0.1_all.deb
+ 560dce3ff59b53e04fe0bfbc4e2a1acd 5487 utils optional pardus-gnome-greeter_0.0.1_amd64.buildinfo
