@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import gi
+
+import gi,sys
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
@@ -19,4 +20,4 @@ class Application(Gtk.Application):
 
 
 app = Application()
-app.run(None)
+app.run(sys.argv)
