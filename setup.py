@@ -13,7 +13,7 @@ if os.path.exists(changelog):
     try:
         version = head.split("(")[1].split(")")[0]
     except:
-        print("debian/changelog format is wrong for get version")
+        print("debian/changelog format is wrong to get version")
         version = ""
     f = open("src/__version__", "w")
     f.write(version)
