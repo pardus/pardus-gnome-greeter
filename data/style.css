@@ -40,7 +40,7 @@ spinbutton button:disabled {
     border-radius: unset;
     padding-top: 13px;
     padding-bottom: 13px;
-    border: 1px solid lightgray
+    border: 1px solid lightgray;
 }
 
 

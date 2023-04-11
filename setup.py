@@ -61,6 +61,9 @@ data_files = [
             	"data/assets/medium.svg",
             	"data/assets/twitter.svg",
             	"data/assets/youtube.svg",
+
+				"data/assets/theme-dark.png",
+            	"data/assets/theme-light.png",
             
             	"data/assets/logo.svg",
             
