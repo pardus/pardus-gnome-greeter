@@ -169,7 +169,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.enabled_extensions = extensionManager.get_extensions("enabled")
         self.ui_extensions_flowbox = self.fun_get_ui("ui_extensions_flowbox")
 
-        with open("../data/extensions.json") as file_content:
+        with open(os.path.dirname(os.path.abspath(__file__)) + "../data/extensions.json") as file_content:
             self.extension_datas = json.loads(file_content.read())
 
         
