@@ -36,7 +36,7 @@ running build
 running build_scripts
 creating build
 creating build/scripts-3.11
-copying pardus-gnome-greeter -> build/scripts-3.11
+copying and adjusting pardus-gnome-greeter -> build/scripts-3.11
 changing mode of build/scripts-3.11/pardus-gnome-greeter from 644 to 755
    dh_auto_test -O--buildsystem=pybuild
 I: pybuild base:240: cd /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/.pybuild/cpython3_3.11/build; python3.11 -m unittest discover -v 
@@ -79,33 +79,36 @@ copying src/ScaleManager.py -> /home/osman/pardus-gnome-greeter/build/pardus-gno
 copying src/WallpaperManager.py -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/src
 creating /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/ui
 copying ui/ui.ui -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/ui
-creating /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/set1.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/set2.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/set3.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/set4.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/discord.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/facebook.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/github.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/linkedin.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/medium.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/twitter.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/youtube.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/logo.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_app_indicator_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_app_indicator_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_app_menu_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_app_menu_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_caffeine_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_caffeine_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_drive_menu_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_drive_menu_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_places_menu_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/ext_places_menu_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/on.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
-copying data/assets/off.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/assets
 creating /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data
+creating /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/set1.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/set2.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/set3.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/set4.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/discord.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/facebook.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/github.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/linkedin.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/medium.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/twitter.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/youtube.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/theme-dark.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/theme-light.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/logo.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_app_indicator_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_app_indicator_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_app_menu_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_app_menu_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_caffeine_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_caffeine_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_drive_menu_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_drive_menu_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_places_menu_image.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/ext_places_menu_logo.png -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/on.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
+copying data/assets/off.svg -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/assets
 copying data/style.css -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/
+copying data/extensions.json -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/pardus/pardus-gnome-greeter/data/
 creating /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/bin
 copying pardus-gnome-greeter -> /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/bin/
 creating /home/osman/pardus-gnome-greeter/build/pardus-gnome-greeter-0.0.1/debian/pardus-gnome-greeter/usr/share/icons
@@ -166,17 +169,13 @@ dpkg-genchanges: info: including full source code in upload
 dpkg-source: warning: pardus-gnome-greeter-0.0.1/debian/changelog(l5): found end of file where expected more change data or trailer
 dpkg-buildpackage: info: full upload; Debian-native package (full source is included)
 Now running lintian pardus-gnome-greeter_0.0.1_amd64.changes ...
-E: pardus-gnome-greeter source: declares-possibly-conflicting-debhelper-compat-versions 12 vs elsewhere 10 [debian/compat]
+E: pardus-gnome-greeter source: declares-possibly-conflicting-debhelper-compat-versions 10 vs elsewhere 10 [debian/compat]
 E: pardus-gnome-greeter: extended-description-is-empty
 E: pardus-gnome-greeter source: invalid-standards-version 0.0.1
-E: pardus-gnome-greeter source: missing-build-dependency-for-dh-addon python3 (does not satisfy dh-python:any | dh-sequence-python3:any | pybuild-plugin-pyproject:any) [debian/rules]
-E: pardus-gnome-greeter: no-copyright-file
 W: pardus-gnome-greeter source: debian-rules-sets-DH_COMPAT [debian/rules:2]
 W: pardus-gnome-greeter source: missing-debian-source-format
-W: pardus-gnome-greeter source: no-debian-copyright-in-source
 W: pardus-gnome-greeter: no-manual-page [usr/bin/pardus-gnome-greeter]
 W: pardus-gnome-greeter source: no-newline-at-end [debian/changelog]
-W: pardus-gnome-greeter source: no-newline-at-end [debian/rules]
 W: pardus-gnome-greeter: python-module-in-wrong-location usr/lib/python3.11/dist-packages/pardus_gnome_greeter-0.0.1.egg-info -> usr/lib/python3/dist-packages/pardus_gnome_greeter-0.0.1.egg-info
 W: pardus-gnome-greeter: synopsis-too-long
 W: pardus-gnome-greeter: syntax-error-in-debian-changelog "found eof where expected more change data or trailer" [usr/share/doc/pardus-gnome-greeter/changelog.gz:6]

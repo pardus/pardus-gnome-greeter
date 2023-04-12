@@ -1,20 +1,17 @@
 Format: 1.0
-Source: pardus-gnome-greeter
-Binary: pardus-gnome-greeter
-Architecture: all source
+Source: pardus-gnome-greeter-build-deps
+Binary: pardus-gnome-greeter-build-deps
+Architecture: all
 Version: 0.0.1
 Checksums-Md5:
- c4b804211f6579dbc82c81ced17d8410 682 pardus-gnome-greeter_0.0.1.dsc
- 3cabb6f478957a12e9db6ebd74fd56c6 402832 pardus-gnome-greeter_0.0.1_all.deb
+ 674394fd17b0282de5b9d7637377e4ba 2152 pardus-gnome-greeter-build-deps_0.0.1_all.deb
 Checksums-Sha1:
- 25b4ffc5264a043a02b7156ab28ebdc55d8da969 682 pardus-gnome-greeter_0.0.1.dsc
- edb002d76e3a2fcc2c4092adf660eed5b2948409 402832 pardus-gnome-greeter_0.0.1_all.deb
+ c113e21ff90b4fbe3bb9cd546760bdaee1fbd3fe 2152 pardus-gnome-greeter-build-deps_0.0.1_all.deb
 Checksums-Sha256:
- e824ad7e569422be0d88338bcef72d7a918c5a8d27e491fdf9fb902346a613fe 682 pardus-gnome-greeter_0.0.1.dsc
- ec948d38f49f28f51fe2166cfe7d8a6c93a8788a36b6ca10f15dd579e77ec88e 402832 pardus-gnome-greeter_0.0.1_all.deb
+ 9a491808a30eb17ea2d38c06f63095dde377792d81baa42ad3656c4c68c2e28f 2152 pardus-gnome-greeter-build-deps_0.0.1_all.deb
 Build-Origin: Debian
 Build-Architecture: amd64
-Build-Date: Wed, 12 Apr 2023 04:31:21 -0400
+Build-Date: Wed, 12 Apr 2023 04:30:57 -0400
 Build-Tainted-By:
  merged-usr-via-aliased-dirs
 Installed-Build-Depends:
@@ -40,7 +37,6 @@ Installed-Build-Depends:
  debhelper (= 13.11.4),
  debianutils (= 5.7-0.4),
  dh-autoreconf (= 20),
- dh-python (= 5.20230130),
  dh-strip-nondeterminism (= 1.13.1-1),
  diffutils (= 1:3.8-4),
  dpkg (= 1.21.21),
@@ -88,8 +84,6 @@ Installed-Build-Depends:
  libdebhelper-perl (= 13.11.4),
  libdpkg-perl (= 1.21.21),
  libelf1 (= 0.188-2.1),
- libexpat1 (= 2.5.0-1),
- libffi8 (= 3.4.4-1),
  libfile-stripnondeterminism-perl (= 1.13.1-1),
  libgcc-12-dev (= 12.2.0-14),
  libgcc-s1 (= 12.2.0-14),
@@ -118,7 +112,6 @@ Installed-Build-Depends:
  libmount1 (= 2.38.1-5+b1),
  libmpc3 (= 1.3.1-1),
  libmpfr6 (= 4.2.0-1),
- libncursesw6 (= 6.4-2),
  libnsl-dev (= 1.3.0-2),
  libnsl2 (= 1.3.0-2),
  libpam-modules (= 1.5.2-6),
@@ -128,15 +121,10 @@ Installed-Build-Depends:
  libpcre2-8-0 (= 10.42-1),
  libperl5.36 (= 5.36.0-7),
  libpipeline1 (= 1.5.7-1),
- libpython3-stdlib (= 3.11.2-1+b1),
- libpython3.11-minimal (= 3.11.2-6),
- libpython3.11-stdlib (= 3.11.2-6),
  libquadmath0 (= 12.2.0-14),
- libreadline8 (= 8.2-1.3),
  libseccomp2 (= 2.5.4-1+b3),
  libselinux1 (= 3.4-1+b5),
  libsmartcols1 (= 2.38.1-5+b1),
- libsqlite3-0 (= 3.40.1-2),
  libssl3 (= 3.0.8-1),
  libstdc++-12-dev (= 12.2.0-14),
  libstdc++6 (= 12.2.0-14),
@@ -158,12 +146,9 @@ Installed-Build-Depends:
  linux-libc-dev (= 6.1.20-1),
  login (= 1:4.13+dfsg1-1+b1),
  m4 (= 1.4.19-3),
- mailcap (= 3.70+nmu1),
  make (= 4.3-4.1),
  man-db (= 2.11.2-2),
  mawk (= 1.3.4.20200120-3.1),
- media-types (= 10.0.0),
- mime-support (= 3.66),
  ncurses-base (= 6.4-2),
  ncurses-bin (= 6.4-2),
  patch (= 2.7.6-7),
@@ -171,15 +156,6 @@ Installed-Build-Depends:
  perl-base (= 5.36.0-7),
  perl-modules-5.36 (= 5.36.0-7),
  po-debconf (= 1.0.21+nmu1),
- python3 (= 3.11.2-1+b1),
- python3-distutils (= 3.11.2-2),
- python3-lib2to3 (= 3.11.2-2),
- python3-minimal (= 3.11.2-1+b1),
- python3-pkg-resources (= 66.1.1-1),
- python3-setuptools (= 66.1.1-1),
- python3.11 (= 3.11.2-6),
- python3.11-minimal (= 3.11.2-6),
- readline-common (= 8.2-1.3),
  rpcsvc-proto (= 1.4.3-1),
  sed (= 4.9-1),
  sensible-utils (= 0.0.17+nmu1),
@@ -193,4 +169,4 @@ Installed-Build-Depends:
 Environment:
  DEB_BUILD_OPTIONS="parallel=4"
  LANG="en_US.UTF-8"
- SOURCE_DATE_EPOCH="1681288276"
+ SOURCE_DATE_EPOCH="1681288256"

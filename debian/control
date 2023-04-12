@@ -10,4 +10,5 @@ Package: pardus-gnome-greeter
 Architecture: all
 Depends: ${misc:Depends}, 
          python3 (>= 3.6)
-Description: Pardus Gnome Greeter let user to pick what kind of layout they want to use with system. 
+Description: Pardus Gnome Greeter let user to pick 
+  what kind of layout they want to use with system. 

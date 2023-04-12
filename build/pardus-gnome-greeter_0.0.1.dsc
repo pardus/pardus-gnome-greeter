@@ -6,12 +6,12 @@ Version: 0.0.1
 Maintainer: Osman Coskun <osman.coskun@pardus.org.tr>
 Homepage: https://github.com/pardus/pardus-gnome-greeter
 Standards-Version: 0.0.1
-Build-Depends: debhelper (>= 12), python3, python3-setuptools
+Build-Depends: debhelper (>= 10), python3, python3-setuptools, dh-python
 Package-List:
  pardus-gnome-greeter deb utils optional arch=all
 Checksums-Sha1:
- f4c2eebdf56b5895f52ae272a0d6963a2389e951 623241 pardus-gnome-greeter_0.0.1.tar.gz
+ 60db46e6d09917402989b706d4afcbcc720ff5b6 622694 pardus-gnome-greeter_0.0.1.tar.gz
 Checksums-Sha256:
- 4127c109ee9db679569163642a7f468126943e7611a039494cb79ffaa97e4f27 623241 pardus-gnome-greeter_0.0.1.tar.gz
+ 63c5c95f6ea29b17e9cb6f3ba7fdbd5657466fa840f268e626a5c2d42c585077 622694 pardus-gnome-greeter_0.0.1.tar.gz
 Files:
- f8f927110bdf5fa9283504e51964b366 623241 pardus-gnome-greeter_0.0.1.tar.gz
+ 416f8bccad01c95c057fe09217fd5a41 622694 pardus-gnome-greeter_0.0.1.tar.gz
