@@ -1,5 +1,5 @@
 Format: 1.8
-Date: Wed, 12 Apr 2023 04:31:21 -0400
+Date: Wed, 12 Apr 2023 04:46:08 -0400
 Source: pardus-gnome-greeter
 Binary: pardus-gnome-greeter
 Architecture: source all
@@ -8,25 +8,25 @@ Distribution: unstable
 Urgency: medium
 Maintainer: Osman Coskun <osman.coskun@pardus.org.tr>
 Description:
- pardus-gnome-greeter - Pardus Gnome Greeter let user to pick what kind of layout they wa
+ pardus-gnome-greeter - Pardus Gnome Greeter let user to pick
 Changes:
  pardus-gnome-greeter (0.0.1) unstable; urgency=medium
  .
    * Initial release
- .
+   * Created layout files and assets
    -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 PM +03
 Checksums-Sha1:
- 25b4ffc5264a043a02b7156ab28ebdc55d8da969 682 pardus-gnome-greeter_0.0.1.dsc
- 60db46e6d09917402989b706d4afcbcc720ff5b6 622694 pardus-gnome-greeter_0.0.1.tar.gz
- edb002d76e3a2fcc2c4092adf660eed5b2948409 402832 pardus-gnome-greeter_0.0.1_all.deb
- d16e12ab2fdbc65992fe11e2f0fd68cc7e0992b3 5514 pardus-gnome-greeter_0.0.1_amd64.buildinfo
+ 037c9eb55b88aae77b9370cb9f52ff839953ae38 682 pardus-gnome-greeter_0.0.1.dsc
+ c96050699e6d080d97fb85a24b8b9ba6e5d67aa5 624926 pardus-gnome-greeter_0.0.1.tar.gz
+ 0a025c00eaaf8ee7f3b6925323fe9e5f2cd3c605 402976 pardus-gnome-greeter_0.0.1_all.deb
+ 214eb2a6f124eccc7fc299c5c7d7bf3e52856cc7 5514 pardus-gnome-greeter_0.0.1_amd64.buildinfo
 Checksums-Sha256:
- e824ad7e569422be0d88338bcef72d7a918c5a8d27e491fdf9fb902346a613fe 682 pardus-gnome-greeter_0.0.1.dsc
- 63c5c95f6ea29b17e9cb6f3ba7fdbd5657466fa840f268e626a5c2d42c585077 622694 pardus-gnome-greeter_0.0.1.tar.gz
- ec948d38f49f28f51fe2166cfe7d8a6c93a8788a36b6ca10f15dd579e77ec88e 402832 pardus-gnome-greeter_0.0.1_all.deb
- baadab3e308ad93f44da266756e0ff37713e56c43b654cd49a7915c6031b6e1d 5514 pardus-gnome-greeter_0.0.1_amd64.buildinfo
+ 4a24ba4f9ae660a39542a0662469af7e578ba025775a8ce163912401fe6d29cd 682 pardus-gnome-greeter_0.0.1.dsc
+ 639518c16ec092f53e47f1a7fcb1e536397dd3a1e84e67bd730ac4f69025be03 624926 pardus-gnome-greeter_0.0.1.tar.gz
+ df18ac2772cb2f8321f70afc45e6d99edf1e161a13d425c3b53795ed4306abfc 402976 pardus-gnome-greeter_0.0.1_all.deb
+ 47fad1399b1d9a145797a9eb63937859cf51429eb67cc2e9d653105ed6168d46 5514 pardus-gnome-greeter_0.0.1_amd64.buildinfo
 Files:
- c4b804211f6579dbc82c81ced17d8410 682 utils optional pardus-gnome-greeter_0.0.1.dsc
- 416f8bccad01c95c057fe09217fd5a41 622694 utils optional pardus-gnome-greeter_0.0.1.tar.gz
- 3cabb6f478957a12e9db6ebd74fd56c6 402832 utils optional pardus-gnome-greeter_0.0.1_all.deb
- 035e592a5725b2607fcad31e60b31e56 5514 utils optional pardus-gnome-greeter_0.0.1_amd64.buildinfo
+ b6c4c45212f512aede37158dabb79adb 682 utils optional pardus-gnome-greeter_0.0.1.dsc
+ 81268b763cae21873017afa2dff32b7a 624926 utils optional pardus-gnome-greeter_0.0.1.tar.gz
+ 6f0813cf144643718c9f9643e43679d9 402976 utils optional pardus-gnome-greeter_0.0.1_all.deb
+ 70f3c33ec2e339a7d48cb693a69a0e0b 5514 utils optional pardus-gnome-greeter_0.0.1_amd64.buildinfo

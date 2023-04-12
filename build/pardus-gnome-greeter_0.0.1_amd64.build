@@ -170,13 +170,11 @@ dpkg-source: warning: pardus-gnome-greeter-0.0.1/debian/changelog(l5): found end
 dpkg-buildpackage: info: full upload; Debian-native package (full source is included)
 Now running lintian pardus-gnome-greeter_0.0.1_amd64.changes ...
 E: pardus-gnome-greeter source: declares-possibly-conflicting-debhelper-compat-versions 10 vs elsewhere 10 [debian/compat]
-E: pardus-gnome-greeter: extended-description-is-empty
 E: pardus-gnome-greeter source: invalid-standards-version 0.0.1
 W: pardus-gnome-greeter source: debian-rules-sets-DH_COMPAT [debian/rules:2]
+W: pardus-gnome-greeter: description-starts-with-leading-spaces line 1
 W: pardus-gnome-greeter source: missing-debian-source-format
 W: pardus-gnome-greeter: no-manual-page [usr/bin/pardus-gnome-greeter]
-W: pardus-gnome-greeter source: no-newline-at-end [debian/changelog]
 W: pardus-gnome-greeter: python-module-in-wrong-location usr/lib/python3.11/dist-packages/pardus_gnome_greeter-0.0.1.egg-info -> usr/lib/python3/dist-packages/pardus_gnome_greeter-0.0.1.egg-info
-W: pardus-gnome-greeter: synopsis-too-long
 W: pardus-gnome-greeter: syntax-error-in-debian-changelog "found eof where expected more change data or trailer" [usr/share/doc/pardus-gnome-greeter/changelog.gz:6]
 Finished running lintian.
