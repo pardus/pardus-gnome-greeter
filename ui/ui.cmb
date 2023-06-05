@@ -293,6 +293,7 @@
 	(1,318,"GtkWidget","height-request","36",None,None,None,None,None),
 	(1,318,"GtkWidget","valign","center",None,None,None,None,None),
 	(1,318,"GtkWidget","width-request","0",None,None,None,None,None),
+	(1,353,"GtkBox","spacing","21",None,None,None,None,None),
 	(1,353,"GtkOrientable","orientation","vertical",None,None,None,None,None),
 	(1,353,"GtkWidget","halign","center",None,None,None,None,None),
 	(1,353,"GtkWidget","valign","center",None,None,None,None,None),

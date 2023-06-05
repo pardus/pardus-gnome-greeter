@@ -120,6 +120,7 @@
                   <object class="GtkBox" id="ui_welcome_box">
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
+                    <property name="spacing">21</property>
                     <property name="valign">center</property>
                     <child>
                       <object class="GtkImage">
@@ -634,6 +635,7 @@
                 </child>
                 <child>
                   <object class="GtkBox" id="ui_nav_images_box">
+                    <property name="hexpand">True</property>
                     <child>
                       <object class="GtkStack" id="ui_indicator_stack_0">
                         <child>
