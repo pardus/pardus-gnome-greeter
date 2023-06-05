@@ -1,0 +1,799 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.10.3 -->
+<interface>
+  <!-- interface-name ui.ui -->
+  <requires lib="gtk" version="4.6"/>
+  <object class="GtkApplicationWindow" id="ui_window">
+    <property name="default-height">600</property>
+    <property name="default-width">800</property>
+    <property name="title">Pardus Gnome Greeter</property>
+    <property name="titlebar">ui_header</property>
+    <child>
+      <object class="GtkBox">
+        <child>
+          <object class="GtkListBox" id="ui_navigation_listbox">
+            <property name="halign">center</property>
+            <property name="valign">baseline</property>
+            <child>
+              <object class="GtkListBoxRow" id="ui_welcome_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="justify">center</property>
+                    <property name="label">Welcome</property>
+                  </object>
+                </property>
+                <property name="width-request">150</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow" id="ui_layout_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="justify">center</property>
+                    <property name="label">Choose Layout</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow" id="ui_wallpaper_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="label">Select Wallpaper</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow" id="ui_theme_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="label">Theme Settings</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow" id="ui_display_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="label">Display Settings</property>
+                    <property name="valign">baseline</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+                <property name="valign">center</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow" id="ui_extensions_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="label">Extensions</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow" id="ui_outro_listboxrow">
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="halign">center</property>
+                    <property name="height-request">36</property>
+                    <property name="label">Outro</property>
+                    <property name="valign">center</property>
+                    <property name="width-request">0</property>
+                    <property name="xalign">0.0</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="ui_content_box">
+            <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkStack" id="ui_pages_stack">
+                <property name="css-classes">border-bottom</property>
+                <property name="overflow">hidden</property>
+                <property name="transition-type">slide-left-right</property>
+                <child>
+                  <object class="GtkBox" id="ui_welcome_box">
+                    <property name="halign">center</property>
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="file">../data/assets/logo.svg</property>
+                        <property name="height-request">128</property>
+                        <property name="width-request">128</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="justify">fill</property>
+                        <property name="label">&lt;b&gt;&lt;span size="36000"&gt;Pardus 23&lt;/span&gt;&lt;/b&gt;</property>
+                        <property name="use-markup">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">&lt;span size="24000"&gt;Welcome&lt;/span&gt;</property>
+                        <property name="use-markup">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">This Application Helps You To Configure Pardus</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_layout_box">
+                    <property name="homogeneous">True</property>
+                    <property name="margin-bottom">20</property>
+                    <property name="margin-end">20</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-top">20</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">20</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="spacing">20</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ui_layout_1_button">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../data/assets/set1.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 2</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ui_layout_2_button">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../data/assets/set2.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="spacing">20</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 3</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ui_layout_3_button">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../data/assets/set3.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Layout 4</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ui_layout_4_button">
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="file">../data/assets/set4.svg</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_wallpaper_box">
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkFlowBox" id="ui_wallpapers_flowbox">
+                            <property name="column-spacing">20</property>
+                            <property name="halign">center</property>
+                            <property name="hexpand">True</property>
+                            <property name="homogeneous">True</property>
+                            <property name="max-children-per-line">4</property>
+                            <property name="row-spacing">20</property>
+                            <property name="valign">center</property>
+                            <property name="vexpand">True</property>
+                          </object>
+                        </property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_theme_box">
+                    <property name="homogeneous">True</property>
+                    <property name="spacing">15</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkButton" id="ui_dark_theme_button">
+                            <property name="child">
+                              <object class="GtkImage">
+                                <property name="file">../data/assets/theme-dark.png</property>
+                                <property name="height-request">225</property>
+                                <property name="width-request">225</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">Dark</property>
+                            <property name="margin-top">25</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkButton" id="ui_light_theme_button">
+                            <property name="child">
+                              <object class="GtkImage">
+                                <property name="file">../data/assets/theme-light.png</property>
+                                <property name="height-request">225</property>
+                                <property name="width-request">225</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">Light</property>
+                            <property name="margin-top">25</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_extensions_box">
+                    <property name="hexpand">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">5</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkScrolledWindow">
+                        <property name="hexpand">True</property>
+                        <property name="max-content-width">35</property>
+                        <property name="min-content-height">2</property>
+                        <property name="vexpand">True</property>
+                        <child>
+                          <object class="GtkFlowBox" id="ui_extensions_flowbox">
+                            <property name="accept-unpaired-release">True</property>
+                            <property name="activate-on-single-click">False</property>
+                            <property name="can-focus">False</property>
+                            <property name="column-spacing">13</property>
+                            <property name="focus-on-click">False</property>
+                            <property name="margin-bottom">13</property>
+                            <property name="margin-end">13</property>
+                            <property name="margin-start">13</property>
+                            <property name="margin-top">13</property>
+                            <property name="max-children-per-line">15</property>
+                            <property name="min-children-per-line">2</property>
+                            <property name="row-spacing">13</property>
+                            <property name="selection-mode">none</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_display_box">
+                    <property name="halign">center</property>
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="file">../data/assets/logo.svg</property>
+                        <property name="height-request">128</property>
+                        <property name="width-request">128</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkScaleButton"/>
+                    </child>
+                    <child>
+                      <object class="GtkScale" id="ui_display_scale">
+                        <property name="adjustment">ui_display_adj</property>
+                        <property name="digits">0</property>
+                        <property name="fill-level">1.7976931348623157e+308</property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="round-digits">0</property>
+                        <property name="show-fill-level">True</property>
+                        <property name="value-pos">bottom</property>
+                        <property name="vexpand">True</property>
+                        <property name="width-request">300</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="ui_recommended_scale_label">
+                        <property name="label">test</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_outro_box">
+                    <property name="hexpand">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin-top">55</property>
+                        <property name="orientation">vertical</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkLabel" id="ui_label_support_4">
+                            <property name="label">&lt;b&gt;&lt;span size="24000"&gt;Social Media Accounts&lt;/span&gt;&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://www.facebook.com/PardusKurumsal</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/facebook.svg</property>
+                                    <property name="height-request">34</property>
+                                    <property name="width-request">34</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://twitter.com/PardusKurumsal</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/twitter.svg</property>
+                                    <property name="height-request">34</property>
+                                    <property name="width-request">34</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://www.linkedin.com/company/pardus</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/linkedin.svg</property>
+                                    <property name="height-request">34</property>
+                                    <property name="width-request">34</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://medium.com/@pardus</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/medium.svg</property>
+                                    <property name="height-request">55</property>
+                                    <property name="width-request">55</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://www.youtube.com/channel/UC_e_SpvBKd3Us12jtZ1xrgg</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/youtube.svg</property>
+                                    <property name="height-request">55</property>
+                                    <property name="width-request">55</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://github.com/pardus</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/github.svg</property>
+                                    <property name="height-request">45</property>
+                                    <property name="width-request">45</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="uri">https://discord.com/invite/vF7mj53ZNV</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="css-name">socialmedia</property>
+                                    <property name="file">../data/assets/discord.svg</property>
+                                    <property name="height-request">45</property>
+                                    <property name="width-request">45</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="halign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="margin-top">55</property>
+                        <property name="spacing">21</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="hexpand">True</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel" id="ui_label_support_3">
+                                <property name="label">&lt;b&gt;&lt;span size="24000"&gt;Support&lt;/span&gt;&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="halign">center</property>
+                                <property name="margin-top">21</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label">+90</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="ui_label_phone">
+                                    <property name="label">&lt;b&gt;&lt;span size="16000"&gt;444 5 773&lt;/span&gt;&lt;/b&gt;</property>
+                                    <property name="margin-start">5</property>
+                                    <property name="use-markup">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="hexpand">True</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">&lt;b&gt;&lt;span size="24000"&gt;Shortcuts&lt;/span&gt;&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="halign">center</property>
+                                <property name="label">Open Shortcuts</property>
+                                <property name="margin-top">21</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin-top">55</property>
+                        <property name="orientation">vertical</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkLabel" id="ui_label_links">
+                            <property name="halign">center</property>
+                            <property name="label">&lt;b&gt;&lt;span size="24000"&gt;Links&lt;/span&gt;&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="label">Home Page</property>
+                                <property name="uri">https://www.pardus.org.tr/en/home/</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="label">Documentation</property>
+                                <property name="uri">https://belge.pardus.org.tr/</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="label">Community</property>
+                                <property name="uri">https://gonullu.pardus.org.tr/</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton">
+                                <property name="label">Forum</property>
+                                <property name="uri">https://forum.pardus.org.tr/</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="halign">center</property>
+                <property name="margin-end">10</property>
+                <property name="margin-start">10</property>
+                <child>
+                  <object class="GtkButton" id="ui_previous_page_button">
+                    <property name="has-frame">False</property>
+                    <property name="icon-name">go-previous-symbolic</property>
+                    <property name="label">&lt; Previous</property>
+                    <property name="margin-start">13</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="ui_nav_images_box">
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_0">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_0">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_0">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_1">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_1">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_1">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_2">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_2">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_2">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_3">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_3">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_3">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_4">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_4">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_4">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_5">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_5">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_5">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStack" id="ui_indicator_stack_6">
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_on_image_6">
+                            <property name="file">../data/assets/on.svg</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ui_indicator_off_image_6">
+                            <property name="file">../data/assets/off.svg</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="ui_next_page_button">
+                    <property name="has-frame">False</property>
+                    <property name="icon-name">go-next-symbolic</property>
+                    <property name="label">Next &gt;</property>
+                    <property name="margin-end">13</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAdjustment" id="ui_display_adj">
+    <property name="page-increment">1.0</property>
+    <property name="step-increment">1.0</property>
+    <property name="upper">4.0</property>
+  </object>
+  <object class="GtkHeaderBar" id="ui_header">
+    <child>
+      <object class="GtkBox">
+        <child>
+          <object class="GtkMenuButton">
+            <property name="always-show-arrow">True</property>
+            <property name="direction">none</property>
+            <property name="has-frame">False</property>
+            <property name="popover">ui_popover</property>
+            <property name="primary">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkPopover" id="ui_popover">
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkButton" id="ui_about_dialog_button">
+            <property name="has-frame">False</property>
+            <property name="label">About</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAboutDialog" id="ui_about_dialog">
+    <property name="artists">Osman Coskun</property>
+    <property name="authors">Osman Coskun
+</property>
+    <property name="comments">A tool to tweaking Pardus</property>
+    <property name="copyright">© 2023 Pardus</property>
+    <property name="default-width">300</property>
+    <property name="license-type">gpl-3-0</property>
+    <property name="program-name">Pardus Gnome Greeter</property>
+    <property name="version">0.0.1</property>
+    <property name="website">https://www.pardus.org.tr/</property>
+    <property name="website-label">Pardus Official Website</property>
+    <property name="width-request">400</property>
+  </object>
+</interface>
