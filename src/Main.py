@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 
-import gi,sys
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk,Gio,GLib
+import gi, sys
 
-class Application(Gtk.Application):
+gi.require_version("Gtk", "4.0")
+from gi.repository import Gtk, Gio, GLib, Adw
 
+
+class Application(Adw.Application):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args,  application_id="tr.org.pardus.pardus-gnome-greeter",
-            flags=Gio.ApplicationFlags(8), **kwargs)
-        self.connect('activate', self.on_activate)
+        super().__init__(
+            *args,
+            application_id="tr.org.pardus.pardus-gnome-greeter",
+            flags=Gio.ApplicationFlags(8),
+            **kwargs
+        )
+        self.connect("activate", self.on_activate)
         self.main_window = None
-
 
         self.add_main_option(
             "details",
@@ -30,9 +34,11 @@ class Application(Gtk.Application):
             "Remove page of application",
             None,
         )
+
     def on_activate(self, app):
         if not self.main_window:
             from MainWindow import MainWindow
+
             self.main_window = MainWindow().main_window
             self.main_window.set_application(self)
             self.main_window.present()
@@ -43,5 +49,7 @@ class Application(Gtk.Application):
         self.args = options
         self.activate()
         return 0
+
+
 app = Application()
 app.run(sys.argv)
