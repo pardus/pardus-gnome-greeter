@@ -129,6 +129,7 @@ class MainWindow(Gtk.ApplicationWindow):
         # PREVIOUS PAGE BUTTON
 
         self.ui_previous_page_button = self.fun_get_ui("ui_previous_page_button")
+        self.ui_previous_page_button.set_sensitive(False)
         self.ui_previous_page_button.connect(
             "clicked", self.on_prev_page_button_clicked
         )
@@ -404,6 +405,7 @@ class MainWindow(Gtk.ApplicationWindow):
                 self.ui_sidemenu_listbox[self.current_page]
             )
             self.fun_check_bottom_img_states()
+        self.check_label_states()
 
     # NEXT STACKED PAGE
     def on_next_page_button_clicked(self, name):
@@ -414,3 +416,15 @@ class MainWindow(Gtk.ApplicationWindow):
                 self.ui_sidemenu_listbox[self.current_page]
             )
             self.fun_check_bottom_img_states()
+        self.check_label_states()
+
+    def check_label_states(self):
+        if self.current_page >= len(self.ui_pages) - 1:
+            self.ui_next_page_button.set_label("Finish")
+        else:
+            self.ui_next_page_button.set_label("Next >")
+
+        if self.current_page == 0:
+            self.ui_previous_page_button.set_sensitive(False)
+        else:
+            self.ui_previous_page_button.set_sensitive(True)
