@@ -6,7 +6,7 @@ import json
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
-from gi.repository import Gtk, Gdk, Gio, GObject, GdkPixbuf, GLib,Pango
+from gi.repository import Gtk, Gdk, Gio, GObject, GdkPixbuf, GLib, Pango
 
 
 from WallpaperManager import WallpaperManager
@@ -19,6 +19,7 @@ wallpaper_manager = WallpaperManager()
 LayoutManager = LayoutManager()
 scaleManager = ScaleManager()
 extensionManager = ExtensionManager()
+
 
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
@@ -52,7 +53,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.gtk_builder.add_from_file(
             os.path.dirname(os.path.abspath(__file__)) + "/../ui/ui.ui"
         )
-        
+
         # MAIN WINDOW OF APPLICATION
         self.main_window = self.fun_get_ui("ui_window")
 
@@ -70,7 +71,7 @@ class MainWindow(Gtk.ApplicationWindow):
         # RIGHT SIDE OF APPLICATION
         self.ui_content_box = self.fun_get_ui("ui_content_box")
         self.ui_content_box.prepend(self.ui_pages_stack)
-        
+
         # LISTBOXROWS
         self.ui_sidemenu_listbox = [
             self.fun_get_ui("ui_welcome_listboxrow"),
@@ -80,7 +81,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self.fun_get_ui("ui_display_listboxrow"),
             self.fun_get_ui("ui_extensions_listboxrow"),
             self.fun_get_ui("ui_outro_listboxrow"),
-
         ]
 
         # STACK PAGES
@@ -92,7 +92,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self.fun_get_ui("ui_display_box"),
             self.fun_get_ui("ui_extensions_box"),
             self.fun_get_ui("ui_outro_box"),
-
         ]
 
         # BOTTOM NAVIGATION INDICATORS
@@ -127,35 +126,34 @@ class MainWindow(Gtk.ApplicationWindow):
             },
         }
 
-
         # PREVIOUS PAGE BUTTON
 
         self.ui_previous_page_button = self.fun_get_ui("ui_previous_page_button")
-        self.ui_previous_page_button.connect("clicked", self.on_prev_page_button_clicked)
+        self.ui_previous_page_button.connect(
+            "clicked", self.on_prev_page_button_clicked
+        )
 
         # NEXT PAGE BUTTON
-        self.ui_next_page_button= self.fun_get_ui("ui_next_page_button")
+        self.ui_next_page_button = self.fun_get_ui("ui_next_page_button")
         self.ui_next_page_button.connect("clicked", self.on_next_page_button_clicked)
-
 
         # FLOWBOX WITH FLOWED ITEMS
         self.ui_wallpapers_flowbox = self.fun_get_ui("ui_wallpapers_flowbox")
-        self.ui_wallpapers_flowbox.connect("child-activated", self.fun_change_wallpaper) 
-
+        self.ui_wallpapers_flowbox.connect("child-activated", self.fun_change_wallpaper)
 
         # BUTTONS ON THEME PAGE
-        # DARK THEME BUTTON ON THEME PAGE    
+        # DARK THEME BUTTON ON THEME PAGE
         self.ui_dark_theme_button = self.fun_get_ui("ui_dark_theme_button")
         self.ui_dark_theme_button.connect("clicked", self.fun_change_theme, "dark")
 
         # LIGHT THEME BUTTON ON THEME PAGE
         self.ui_light_theme_button = self.fun_get_ui("ui_light_theme_button")
         self.ui_light_theme_button.connect("clicked", self.fun_change_theme, "light")
-        
+
         # ABOUT DIALOG AND BUTTON
         self.ui_about_dialog_button = self.fun_get_ui("ui_about_dialog_button")
-        self.ui_about_dialog_button.connect("clicked",self.init_about_dialog)
-        
+        self.ui_about_dialog_button.connect("clicked", self.init_about_dialog)
+
         thread = threading.Thread(
             target=self.init_wallpapers, args=(wallpaper_manager.get_wallpapers(),)
         )
@@ -164,67 +162,56 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.fun_check_bottom_img_states()
 
-        
-
         self.enabled_extensions = extensionManager.get_extensions("enabled")
         self.ui_extensions_flowbox = self.fun_get_ui("ui_extensions_flowbox")
 
-        with open(os.path.dirname(os.path.abspath(__file__)) + "/../data/extensions.json") as file_content:
+        with open(
+            os.path.dirname(os.path.abspath(__file__)) + "/../data/extensions.json"
+        ) as file_content:
             self.extension_datas = json.loads(file_content.read())
-
-        
 
         for item in self.extension_datas:
             extension = self.fun_create_extension_box(item)
-            self.ui_extensions_flowbox.insert(extension,-1)
-        
+            self.ui_extensions_flowbox.insert(extension, -1)
 
         self.toggle_buttons = []
 
-
-       
         # INIT FUNCTIONS
         self.init_layout()
         self.init_scale()
         self.init_themes()
 
-
-
-    def fun_create_extension_box(self,extension_props):
-        
+    def fun_create_extension_box(self, extension_props):
         # RETURNING EXTENSION BOX
         # _______(Container)______________________________
-        #|                                               |
-        #|     _____(Header)_________________________    |
-        #|    |   logo | extension name    | switch |    | 
-        #|    ---------------------------------------    |
-        #|                                               |
-        #|     _____(description)___________________| 
-        #|    | extension long description          |    |
-        #|    |_____________________________________|    |
-        #|    |                                     |    |
-        #|    |    ___(Image)_________________      |    |
-        #|    |   |                          |      |    |
-        #|    |   |                          |      |    |
-        #|    |   |                          |      |    |
-        #|    |   |                          |      |    |
-        #|    |   |__________________________|      |    |
-        #|    |_____________________________________|    |
-        #|                                               |
-        #|_______________________________________________|
-
-        
+        # |                                               |
+        # |     _____(Header)_________________________    |
+        # |    |   logo | extension name    | switch |    |
+        # |    ---------------------------------------    |
+        # |                                               |
+        # |     _____(description)___________________|
+        # |    | extension long description          |    |
+        # |    |_____________________________________|    |
+        # |    |                                     |    |
+        # |    |    ___(Image)_________________      |    |
+        # |    |   |                          |      |    |
+        # |    |   |                          |      |    |
+        # |    |   |                          |      |    |
+        # |    |   |                          |      |    |
+        # |    |   |__________________________|      |    |
+        # |    |_____________________________________|    |
+        # |                                               |
+        # |_______________________________________________|
 
         # MAIN CONTAINER
-        ui_box_container = Gtk.Box.new(self.vertical,13)
-        ui_box_container.set_size_request(200,200)
+        ui_box_container = Gtk.Box.new(self.vertical, 13)
+        ui_box_container.set_size_request(200, 200)
         ui_box_container.get_style_context().add_class("bordered-box")
         ui_box_container.set_valign(self.align_start)
         ui_box_container.set_halign(self.align_start)
-        
 
         # HEADER THAT GOT LOGO EXTENSION NAME AND SWITCH
-        ui_box_header = Gtk.Box.new(self.horizontal,5)
+        ui_box_header = Gtk.Box.new(self.horizontal, 5)
         ui_box_header.set_valign(self.align_start)
         ui_box_header.set_halign(self.align_fill)
         ui_box_header.get_style_context().add_class("bordered-box")
@@ -235,7 +222,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # EXTENSION IMAGE
         ui_image_extension_image = Gtk.Image.new_from_file(extension_props["image"])
-        ui_image_extension_image.set_size_request(130,160)
+        ui_image_extension_image.set_size_request(130, 160)
 
         # EXTENSION NAME
         ui_label_name = Gtk.Label(label=extension_props["name"])
@@ -244,16 +231,16 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # SWITCH TO CONTROL STATE OF EXTENSION
 
-        
-        
         ui_switch_toggle = Gtk.Switch()
-        ui_switch_toggle.connect("notify::active",self.fun_extension_toggle,extension_props["id"])
+        ui_switch_toggle.connect(
+            "notify::active", self.fun_extension_toggle, extension_props["id"]
+        )
         ui_switch_toggle.set_sensitive(True)
         if extension_props["id"] in self.enabled_extensions:
             ui_switch_toggle.set_active(True)
         else:
             ui_switch_toggle.set_active(False)
-        
+
         # ADDING ELEMENTS TO HEADER
         ui_box_header.append(ui_image_logo)
         ui_box_header.append(ui_label_name)
@@ -273,15 +260,14 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # RETURN CONTAINER
         return ui_box_container
-        
 
     # INIT WALLPAPERS
-    def init_wallpapers(self, wallpapers:str):
+    def init_wallpapers(self, wallpapers: str):
         for wallpaper in wallpapers:
             wallpaper_img = Gtk.Image.new_from_file(wallpaper)
             wallpaper_img.set_size_request(280, 280)
-            self.ui_wallpapers_flowbox.insert(wallpaper_img,-1)
-            #GLib.idle_add(self.ui_wallpapers_flowbox.insert, wallpaper_img, -1)
+            self.ui_wallpapers_flowbox.insert(wallpaper_img, -1)
+            # GLib.idle_add(self.ui_wallpapers_flowbox.insert, wallpaper_img, -1)
 
     # INIT LAYOUTS
     def init_layout(self):
@@ -290,6 +276,8 @@ class MainWindow(Gtk.ApplicationWindow):
             "layout_2": self.fun_get_ui("ui_layout_2_button"),
             "layout_3": self.fun_get_ui("ui_layout_3_button"),
             "layout_4": self.fun_get_ui("ui_layout_4_button"),
+            # "layout_5": self.fun_get_ui("ui_layout_5_button"),
+            # "layout_6": self.fun_get_ui("ui_layout_6_button"),
         }
         self.layout_name = get_layout_name()
         for btn in self.layout_buttons:
@@ -302,8 +290,8 @@ class MainWindow(Gtk.ApplicationWindow):
         self.ui_recommended_scale_label = self.fun_get_ui("ui_recommended_scale_label")
         self.recommended_scale = get_recommended_scale()
         self.ui_recommended_scale_label.set_markup(
-            "<b>Recommended scale option is %s%%</b>"%self.recommended_scale
-            ) 
+            "<b>Recommended scale option is %s%%</b>" % self.recommended_scale
+        )
 
         self.current_scale = (float(scaleManager.get_scale()) / 0.25) - 4
 
@@ -315,7 +303,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.ui_display_scale.add_mark(3, Gtk.PositionType.TOP, "175%")
         self.ui_display_scale.add_mark(4, Gtk.PositionType.TOP, "200%")
 
-    def init_about_dialog(self,action):
+    def init_about_dialog(self, action):
         self.ui_about_dialog = self.fun_get_ui("ui_about_dialog")
         self.ui_about_dialog.show()
 
@@ -323,17 +311,17 @@ class MainWindow(Gtk.ApplicationWindow):
     def init_themes(self):
         if get_current_theme() == "'prefer-dark'":
             self.ui_dark_theme_button.get_style_context().add_class("selected-theme")
-            self.ui_light_theme_button.get_style_context().remove_class("selected-theme")
+            self.ui_light_theme_button.get_style_context().remove_class(
+                "selected-theme"
+            )
         else:
             self.ui_dark_theme_button.get_style_context().remove_class("selected-theme")
             self.ui_light_theme_button.get_style_context().add_class("selected-theme")
-
 
     # GETTING GTK OBJECTS WITH ID
     def fun_get_ui(self, ui_name: str):
         return self.gtk_builder.get_object(ui_name)
 
-    
     # CHANGE SCALING OF DISPLAY
     def fun_change_display_scale(self, action):
         value = action.get_value()
@@ -350,17 +338,25 @@ class MainWindow(Gtk.ApplicationWindow):
     def fun_check_layout_state(self):
         for btn in self.layout_buttons:
             if btn == self.layout_name:
-                self.layout_buttons[btn].get_style_context().add_class("selected-layout")
+                self.layout_buttons[btn].get_style_context().add_class(
+                    "selected-layout"
+                )
             else:
-                self.layout_buttons[btn].get_style_context().remove_class("selected-layout")
-
+                self.layout_buttons[btn].get_style_context().remove_class(
+                    "selected-layout"
+                )
 
     # CHANGE THEME
     def fun_change_theme(self, action, theme):
-        cmd = "dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-%s'\""%theme
+        cmd = (
+            "dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-%s'\""
+            % theme
+        )
         if theme == "dark":
             self.ui_dark_theme_button.get_style_context().add_class("selected-theme")
-            self.ui_light_theme_button.get_style_context().remove_class("selected-theme")
+            self.ui_light_theme_button.get_style_context().remove_class(
+                "selected-theme"
+            )
 
         else:
             self.ui_dark_theme_button.get_style_context().remove_class("selected-theme")
@@ -378,7 +374,9 @@ class MainWindow(Gtk.ApplicationWindow):
     def fun_change_page(self, action, name):
         self.row_index = name.get_index()
         self.current_page = self.row_index
-        self.ui_navigation_listbox.select_row(self.ui_sidemenu_listbox[self.current_page])
+        self.ui_navigation_listbox.select_row(
+            self.ui_sidemenu_listbox[self.current_page]
+        )
         self.ui_pages_stack.set_visible_child(self.ui_pages[self.current_page])
         self.fun_check_bottom_img_states()
 
@@ -390,7 +388,7 @@ class MainWindow(Gtk.ApplicationWindow):
             else:
                 image.set_visible_child(self.ui_indicators_image[image]["off"])
 
-    def fun_extension_toggle(self,switch,param,extension_id):
+    def fun_extension_toggle(self, switch, param, extension_id):
         if switch.get_active():
             status = "enable"
         else:
@@ -398,11 +396,13 @@ class MainWindow(Gtk.ApplicationWindow):
         extensionManager.extension_operations(status, extension_id)
 
     # PREVIOUS STACKED PAGE
-    def on_prev_page_button_clicked(self, name): 
+    def on_prev_page_button_clicked(self, name):
         if self.current_page > 0:
             self.current_page -= 1
             self.ui_pages_stack.set_visible_child(self.ui_pages[self.current_page])
-            self.ui_navigation_listbox.select_row(self.ui_sidemenu_listbox[self.current_page])
+            self.ui_navigation_listbox.select_row(
+                self.ui_sidemenu_listbox[self.current_page]
+            )
             self.fun_check_bottom_img_states()
 
     # NEXT STACKED PAGE
@@ -410,6 +410,7 @@ class MainWindow(Gtk.ApplicationWindow):
         if self.current_page < len(self.ui_indicators_image) - 1:
             self.current_page += 1
             self.ui_pages_stack.set_visible_child(self.ui_pages[self.current_page])
-            self.ui_navigation_listbox.select_row(self.ui_sidemenu_listbox[self.current_page])
+            self.ui_navigation_listbox.select_row(
+                self.ui_sidemenu_listbox[self.current_page]
+            )
             self.fun_check_bottom_img_states()
-

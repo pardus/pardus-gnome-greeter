@@ -113,6 +113,7 @@
             <property name="vexpand">True</property>
             <child>
               <object class="GtkStack" id="ui_pages_stack">
+                <property name="css-classes">border-bottom</property>
                 <property name="overflow">hidden</property>
                 <property name="transition-type">slide-left-right</property>
                 <child>
@@ -620,17 +621,19 @@
             </child>
             <child>
               <object class="GtkBox">
-                <property name="baseline-position">bottom</property>
-                <property name="homogeneous">True</property>
+                <property name="halign">center</property>
+                <property name="margin-end">10</property>
+                <property name="margin-start">10</property>
                 <child>
                   <object class="GtkButton" id="ui_previous_page_button">
+                    <property name="has-frame">False</property>
                     <property name="icon-name">go-previous-symbolic</property>
-                    <property name="label">Previous</property>
+                    <property name="label">&lt; Previous</property>
+                    <property name="margin-start">13</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkBox" id="ui_nav_images_box">
-                    <property name="halign">center</property>
                     <child>
                       <object class="GtkStack" id="ui_indicator_stack_0">
                         <child>
@@ -733,8 +736,10 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="ui_next_page_button">
+                    <property name="has-frame">False</property>
                     <property name="icon-name">go-next-symbolic</property>
-                    <property name="label">Next</property>
+                    <property name="label">Next &gt;</property>
+                    <property name="margin-end">13</property>
                   </object>
                 </child>
               </object>

@@ -52,3 +52,7 @@ spinbutton button:disabled {
 socialmedia {
     color: green;
 }
+
+.border-bottom {
+    border-bottom: 1px solid lightgray;
+}
