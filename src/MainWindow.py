@@ -203,4 +203,11 @@ class MainWindow(Ptk.ApplicationWindow):
         dialog.set_copyright("© 2023 Ulakbim / Pardus")
         dialog.set_developers([DEV])
         dialog.set_application_icon(ICON)
+
+        dialog.connect("close-request", self.on_about_dialog_response)
         dialog.show()
+        self.window.set_sensitive(False)
+
+    def on_about_dialog_response(self, dialog):
+        self.window.set_sensitive(True)
+        dialog.destroy()

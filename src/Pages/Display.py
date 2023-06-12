@@ -112,8 +112,7 @@ def fun_create():
         ],
     )
     ui_font_scale_label = Ptk.Label(
-        markup="<span size='12pt'>Cursor Size</span>",
-        hexpand=True,
+        markup="<span size='12pt'>Cursor Size</span>", hexpand=True, halign="center"
     )
 
     ui_display_box = Ptk.Box(
