@@ -3,6 +3,7 @@
 import gi, sys
 
 gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
 from gi.repository import Gtk, Gio, GLib, Adw
 
 
@@ -39,7 +40,7 @@ class Application(Adw.Application):
         if not self.main_window:
             from MainWindow import MainWindow
 
-            self.main_window = MainWindow().main_window
+            self.main_window = MainWindow().window
             self.main_window.set_application(self)
             self.main_window.present()
 

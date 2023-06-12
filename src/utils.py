@@ -1,31 +1,42 @@
-import subprocess
 import gi
-gi.require_version("Gdk","4.0")
+import os
+import sys
+import subprocess
+
+sys.path.append("../")
+
+
+gi.require_version("Gdk", "4.0")
 from gi.repository import Gdk
+from data.lib.pardus import Ptk
 
 
 def get_layout_name():
-        cmd = "gsettings get org.pardus.pardus-gnome-greeter layout-name"
-        result =  subprocess.getoutput(cmd)
-        return result[1:-1]
+    cmd = "gsettings get org.pardus.pardus-gnome-greeter layout-name"
+    result = subprocess.getoutput(cmd)
+    return result[1:-1]
 
 
-def set_layout_name(layout_name:str):
-    cmd = "dconf write /org/pardus/pardus-gnome-greeter/layout-name \"'%s'\""%layout_name
+def set_layout_name(layout_name: str):
+    cmd = (
+        "dconf write /org/pardus/pardus-gnome-greeter/layout-name \"'%s'\""
+        % layout_name
+    )
     return subprocess.getoutput(cmd)
-    #return subprocess.run(escape_cmd)
+    # return subprocess.run(escape_cmd)
+
 
 def get_current_theme():
-    return subprocess.getoutput("dconf read /org/gnome/desktop/interface/color-scheme")
+    return Ptk.utils.gsettings_get("org.gnome.desktop.interface", "color-scheme")
 
-def apply_layout_config(config:str):
+
+def apply_layout_config(config: str):
     return subprocess.getoutput(config)
 
+
 def get_recommended_scale():
-    display_server_cmd = 'echo $XDG_SESSION_TYPE'
-    display_server = subprocess.getoutput(display_server_cmd)
-    print(display_server)
-    if display_server == 'wayland':
+    display_server = Ptk.utils.get_session()
+    if display_server == "wayland":
         return 100
     base_scale = 100
     screen_const = 50
@@ -34,7 +45,6 @@ def get_recommended_scale():
     monitors = display.get_monitors()
 
     for monitor in monitors:
-
         width_mm = monitor.get_width_mm()
         height_mm = monitor.get_height_mm()
 
@@ -51,4 +61,10 @@ def get_recommended_scale():
     else:
         rounded_result = int(result - (result % 25))
 
+    if rounded_result < 75:
+        return 100
     return rounded_result
+
+
+def dconf_set(path, value):
+    return subprocess.run(["dconf", "write", path, value])
