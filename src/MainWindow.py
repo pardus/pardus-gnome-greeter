@@ -118,6 +118,10 @@ class MainWindow(Ptk.ApplicationWindow):
         self.ui_leaflet_main_window.set_visible_child(self.ui_pages_stack)
 
         self.ui_header_headerbar = Adw.HeaderBar()
+        self.ui_header_headerbar.set_centering_policy(Adw.CenteringPolicy.LOOSE)
+        self.ui_header_headerbar.set_hexpand(True)
+        self.ui_header_headerbar.set_overflow(Gtk.Overflow.VISIBLE)
+        self.ui_header_headerbar.set_accessible_role(Gtk.AccessibleRole.GROUP)
 
         self.ui_about_button = Ptk.Button(css=["rounded"], icon="open-menu-symbolic")
         self.ui_about_button.connect("clicked", self.fun_show_about)
@@ -135,7 +139,10 @@ class MainWindow(Ptk.ApplicationWindow):
     def fun_create_navigation_listbox(self, data):
         icon = Ptk.Image(icon=data["icon"])
         label = Ptk.Label(label=data["text"])
-        listboxrow_box = Ptk.Box(spacing=13, children=[icon, label])
+        listboxrow_box = Ptk.Box(
+            spacing=13,
+            children=[icon, label],
+        )
         listboxrow = Ptk.ListBoxRow(
             css=["listboxrow"], name=data["id"], child=listboxrow_box
         )
@@ -204,6 +211,8 @@ class MainWindow(Ptk.ApplicationWindow):
         dialog.set_developers([DEV])
         dialog.set_application_icon(ICON)
 
+        dialog.set_transient_for(self.window)
+        dialog.set_modal(True)
         dialog.connect("close-request", self.on_about_dialog_response)
         dialog.show()
         self.window.set_sensitive(False)

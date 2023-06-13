@@ -331,6 +331,7 @@
 	(1,368,"GtkWidget","width-request","128",None,None,None,None,None),
 	(1,370,"GtkRange","adjustment","141",None,None,None,None,None),
 	(1,370,"GtkRange","fill-level","1.7976931348623157e+308",None,None,None,None,None),
+	(1,370,"GtkRange","restrict-to-fill-level","False",None,None,None,None,None),
 	(1,370,"GtkRange","round-digits","0",None,None,None,None,None),
 	(1,370,"GtkRange","show-fill-level","True",None,None,None,None,None),
 	(1,370,"GtkScale","digits","0",None,None,None,None,None),

@@ -49,10 +49,39 @@ spinbutton button:disabled {
     background: #d2d2d2;
 }
 
-socialmedia {
-    color: green;
+
+/* NEW CSS RULES */
+.listboxrow {
+    font-size: large;
+    padding: 15px 20px;
 }
 
-.border-bottom {
-    border-bottom: 1px solid lightgray;
+.buttonbox {
+    border-radius: unset;
+}
+
+.firstbuttonbox {
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+}
+
+.lastbuttonbox {
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+}
+
+.border-green {
+    border: 1px solid green;
+}
+
+.p-23 {
+    padding: 23px;
+}
+
+.m-23 {
+    margin: 23px;
+}
+
+.rounded {
+    border-radius: 50%;
 }

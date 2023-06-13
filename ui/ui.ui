@@ -388,6 +388,7 @@
                         <property name="fill-level">1.7976931348623157e+308</property>
                         <property name="halign">start</property>
                         <property name="hexpand">True</property>
+                        <property name="restrict-to-fill-level">False</property>
                         <property name="round-digits">0</property>
                         <property name="show-fill-level">True</property>
                         <property name="value-pos">bottom</property>
