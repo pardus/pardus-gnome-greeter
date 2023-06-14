@@ -90,7 +90,9 @@ class MainWindow(Ptk.ApplicationWindow):
             hexpand=True, vexpand=True, width=900, height=700
         )
 
-        self.ui_listbox_pages = Ptk.ListBox(show_seperators=True)
+        self.ui_listbox_pages = Ptk.ListBox(
+            show_seperators=True, css=["navigation-sidebar"]
+        )
         self.ui_application_title = Ptk.Label(
             markup="<span size='x-large'><b>Pardus Gnome Greeter</b></span>",
             valign="center",
@@ -111,8 +113,9 @@ class MainWindow(Ptk.ApplicationWindow):
             data["togglebutton"] = togglebutton
 
             self.ui_header_toggles_box.append(togglebutton)
-
+        self.separator = Ptk.Separator("vertical")
         self.ui_leaflet_main_window.append(self.ui_listbox_pages)
+        self.ui_leaflet_main_window.append(self.separator)
         self.ui_leaflet_main_window.append(self.ui_pages_stack)
 
         self.ui_leaflet_main_window.set_visible_child(self.ui_pages_stack)
@@ -139,10 +142,7 @@ class MainWindow(Ptk.ApplicationWindow):
     def fun_create_navigation_listbox(self, data):
         icon = Ptk.Image(icon=data["icon"])
         label = Ptk.Label(label=data["text"])
-        listboxrow_box = Ptk.Box(
-            spacing=13,
-            children=[icon, label],
-        )
+        listboxrow_box = Ptk.Box(spacing=13, children=[icon, label], valign="center")
         listboxrow = Ptk.ListBoxRow(
             css=["listboxrow"], name=data["id"], child=listboxrow_box
         )
@@ -197,23 +197,22 @@ class MainWindow(Ptk.ApplicationWindow):
         )
 
     def fun_show_about(self, button):
-        dialog = Adw.AboutWindow()
-        dialog.set_application_name = APPNAME
-        dialog.set_version(VERSION)
-        dialog.set_developer_name(APPNAME)
-        dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
-        dialog.set_comments("Configure Pardus with few clicks")
-        dialog.set_website(WEBSITE)
-        dialog.set_issue_url(WEBSITE)
-        dialog.add_credit_section("Contributors", [DEV])
-        dialog.set_translator_credits(DEV)
-        dialog.set_copyright("© 2023 Ulakbim / Pardus")
-        dialog.set_developers([DEV])
-        dialog.set_application_icon(ICON)
-
-        dialog.set_transient_for(self.window)
-        dialog.set_modal(True)
-        dialog.connect("close-request", self.on_about_dialog_response)
+        dialog = Ptk.AboutWindow(
+            application_name=APPNAME,
+            version=VERSION,
+            developer_name=APPNAME,
+            license_type="GPL-3",
+            comments="Configure Pardus with few clicks",
+            website=WEBSITE,
+            issue_url=WEBSITE,
+            credit_section=["Contributors", [DEV]],
+            translator_credits=DEV,
+            copyright="© 2023 Ulakbim / Pardus",
+            developers=[DEV],
+            application_icon=ICON,
+            transient_for=self.window,
+            modal=True,
+        )
         dialog.show()
         self.window.set_sensitive(False)
 
