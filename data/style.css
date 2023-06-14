@@ -54,6 +54,7 @@ spinbutton button:disabled {
 .listboxrow {
     font-size: large;
     padding: 15px 20px;
+    margin: unset;
 }
 
 .buttonbox {
@@ -84,4 +85,16 @@ spinbutton button:disabled {
 
 .rounded {
     border-radius: 50%;
+}
+
+.listbox {
+    border-right: 1px solid;
+}
+
+.navigation-sidebar {
+    padding-top: unset;
+}
+
+.activatable {
+    border-radius: unset;
 }

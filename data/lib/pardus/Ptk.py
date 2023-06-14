@@ -1,3 +1,4 @@
+from .AboutWindow import AboutWindow
 from .App import App
 from .ApplicationWindow import ApplicationWindow
 from .Box import Box
@@ -9,11 +10,13 @@ from .ListBox import ListBox
 from .ListBoxRow import ListBoxRow
 from .Scale import Scale
 from .ScrolledWindow import ScrolledWindow
+from .Separator import Separator
 from .Stack import Stack
 from .ToggleButton import ToggleButton
 from .utils import utils
 
 __all__ = [
+    "AboutWindow",
     "App",
     "ApplicationWindow",
     "Box",
@@ -25,6 +28,7 @@ __all__ = [
     "ListBoxRow",
     "Scale",
     "ScrolledWindow",
+    "Separator",
     "Stack",
     "ToggleButton",
     "utils",

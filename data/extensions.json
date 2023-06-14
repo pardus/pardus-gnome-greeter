@@ -33,5 +33,26 @@
         "name": "AppIndicator Support",
         "description": "Adds AppIndicator, KStatusNotifierItem and legacy Tray icons support to the Shell",
         "image": "../data/assets/ext_app_indicator_image.png"
+    },
+    {
+        "logo": "../data/assets/ext_app_indicator_logo.png",
+        "id": "noannoyance@daase.net",
+        "name": "NoAnnoyance v2",
+        "description": "Removes the 'Windows is ready' notification and puts the window into focus.",
+        "image": "../data/assets/ext_app_indicator_image.png"
+    },
+    {
+        "logo": "../data/assets/ext_app_pano_logo.png",
+        "id": "pano@elhan.io",
+        "name": "Pano - Clipboard Manager",
+        "description": "Next-gen Clipboard manager for Gnome Shell",
+        "image": "../data/assets/ext_app_pano_image.png"
+    },
+    {
+        "logo": "../data/assets/ext_app_clipboard_logo.png",
+        "id": "clipboard-indicator@tudmotu.com",
+        "name": "Clipboard Indicator",
+        "description": "Clipboard Manager extension for Gnome-Shell - Adds a clipboard indicator to the top panel, and caches clipboard history.",
+        "image": "../data/assets/ext_app_clipboard_image.png"
     }
 ]
