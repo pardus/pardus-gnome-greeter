@@ -62,7 +62,7 @@ class Apps:
 
     def open_app(self, widget):
         app_name = widget.get_name()
-        cmd = f"pardus-software-center {app_name}"
+        cmd = f"pardus-software {app_name}"
         subprocess.run(cmd)
 
     def StreamGet(self, pixbuf, data):
