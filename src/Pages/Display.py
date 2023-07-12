@@ -52,7 +52,7 @@ def fun_create():
     # |   |______________________|               |
     # |                                          |
     # |__________________________________________|
-
+    cur_dir = os.path.dirname(__file__)
     ui_logo_image = Ptk.Image(
         file=os.getcwd() + "/../data/assets/logo.svg", pixel_size=200
     )
@@ -65,6 +65,7 @@ def fun_create():
         page_size=0.0,
         restrict_to_fill_level=True,
         round_digits=0.0,
+        css=["raised", "suggested-action"],
     )
     ui_display_scale.add(0, "TOP", "100%")
     ui_display_scale.add(1, "TOP", "125%")
@@ -75,36 +76,40 @@ def fun_create():
     ui_display_scale.connect("value-changed", fun_change_display_scale)
 
     ui_recommended_scale_label = Ptk.Label(
-        markup=f"<b>Recommended scale option is {get_recommended_scale()}%</b>"
+        markup=f"<b>Recommended scale option for main display is {get_recommended_scale()}%</b>"
     )
 
-    temporary_icon = Ptk.Image(icon="extensions-symbolic")
-    temporary_icon2 = Ptk.Image(icon="extensions-symbolic")
-    temporary_icon3 = Ptk.Image(icon="extensions-symbolic")
+    temporary_icon = Ptk.Image(
+        file=cur_dir + "/../../data/assets/cursor.svg", pixel_size=12
+    )
+    temporary_icon2 = Ptk.Image(
+        file=cur_dir + "/../../data/assets/cursor.svg", pixel_size=24
+    )
+    temporary_icon3 = Ptk.Image(
+        file=cur_dir + "/../../data/assets/cursor.svg", pixel_size=36
+    )
 
     ui_default_cursor_togglebutton = Ptk.ToggleButton(
-        group=None, name="24", css=["firstbuttonbox"], child=temporary_icon
+        group=None, name="24", child=temporary_icon
     )
     ui_default_cursor_togglebutton.connect("toggled", fun_change_cursor_scale)
 
     ui_2x_cursor_togglebutton = Ptk.ToggleButton(
         group=ui_default_cursor_togglebutton,
         name="48",
-        css=["buttonbox"],
         child=temporary_icon2,
     )
     ui_2x_cursor_togglebutton.connect("toggled", fun_change_cursor_scale)
     ui_3x_cursor_togglebutton = Ptk.ToggleButton(
         group=ui_default_cursor_togglebutton,
         name="72",
-        css=["lastbuttonbox"],
         child=temporary_icon3,
     )
     ui_3x_cursor_togglebutton.connect("toggled", fun_change_cursor_scale)
     ui_cursor_buttons_box = Ptk.Box(
-        margin_top=40,
         hexpand=True,
         halign="center",
+        css=["linked"],
         children=[
             ui_default_cursor_togglebutton,
             ui_2x_cursor_togglebutton,
@@ -112,9 +117,11 @@ def fun_create():
         ],
     )
     ui_font_scale_label = Ptk.Label(
-        markup="<span size='12pt'>Cursor Size</span>", hexpand=True, halign="center"
+        markup="<b>Cursor Size</b>",
+        hexpand=True,
+        halign="center",
+        margin_top=20,
     )
-
     ui_display_box = Ptk.Box(
         spacing=23,
         vexpand=True,
@@ -123,11 +130,10 @@ def fun_create():
         valign="center",
         halign="center",
         children=[
-            ui_logo_image,
-            ui_display_scale,
             ui_recommended_scale_label,
-            ui_cursor_buttons_box,
+            ui_display_scale,
             ui_font_scale_label,
+            ui_cursor_buttons_box,
         ],
     )
     return ui_display_box

@@ -43,6 +43,8 @@ def fun_create():
             name=layout["id"], group=layouts[0]["togglebutton"], child=image
         )
         toggle.connect("toggled", LayoutManager.set_layout)
+        current_layout = str(LayoutManager.get_layout())
+        toggle.set_active(current_layout == layout["id"])
         layout["togglebutton"] = toggle
 
     box1 = Ptk.Box(

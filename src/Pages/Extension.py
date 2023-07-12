@@ -36,17 +36,6 @@ def fun_create_extension_box(extension_props, extensions):
     # |                                               |
     # |_______________________________________________|
 
-    ui_box_container = Ptk.Box(
-        orientation="vertical",
-        spacing=13,
-        hexpand=True,
-        vexpand=True,
-        css=["bordered-box"],
-        valign="start",
-    )
-    # HEADER THAT GOT LOGO EXTENSION NAME AND SWITCH
-    ui_box_header = Ptk.Box(spacing=5, valign="start", css=["bordered-box"])
-
     # EXTENSION LOGO
     ui_image_logo = Ptk.Image(file=extension_props["logo"], halign="start")
 
@@ -71,10 +60,13 @@ def fun_create_extension_box(extension_props, extensions):
     else:
         ui_switch_toggle.set_active(False)
 
-    # ADDING ELEMENTS TO HEADER
-    ui_box_header.append(ui_image_logo)
-    ui_box_header.append(ui_label_name)
-    ui_box_header.append(ui_switch_toggle)
+    # HEADER THAT GOT LOGO EXTENSION NAME AND SWITCH
+    ui_box_header = Ptk.Box(
+        spacing=5,
+        valign="start",
+        css=["only-top-border"],
+        children=[ui_image_logo, ui_label_name, ui_switch_toggle],
+    )
 
     # EXTENSION DESCRIPTION
     ui_label_description = Ptk.Label(
@@ -83,12 +75,20 @@ def fun_create_extension_box(extension_props, extensions):
         valign="start",
         ellipsize="middle",
         lines=5,
+        margin_top=20,
+        margin_end=20,
+        margin_start=20,
     )
     # ADDING HEADER AND OTHER ELEMENTS TO CONTAINER
-    ui_box_container.append(ui_box_header)
-    ui_box_container.append(ui_label_description)
-    ui_box_container.append(ui_image_extension_image)
-
+    ui_box_container = Ptk.Box(
+        orientation="vertical",
+        spacing=13,
+        hexpand=True,
+        vexpand=True,
+        css=["bordered-box-nop"],
+        valign="start",
+        children=[ui_label_description, ui_image_extension_image, ui_box_header],
+    )
     # RETURN CONTAINER
     return ui_box_container
 

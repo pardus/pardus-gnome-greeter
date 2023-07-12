@@ -29,6 +29,11 @@ with open(
 
 
 class LayoutManager:
+    def get_layout():
+        schema = "org.pardus.pardus-gnome-greeter"
+        schema_key = "layout-name"
+        return str(Ptk.utils.gsettings_get(schema, schema_key))[1:-1]
+
     def set_layout(toggle_button):
         layout_name = toggle_button.get_name()
         extensions_schema = "org.gnome.shell"
@@ -83,4 +88,5 @@ class LayoutManager:
         layout_name = None
         if state:
             layout_name = toggle_button.get_name()
+            print(layout_name)
             set_layout_name(layout_name)

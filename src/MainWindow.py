@@ -7,8 +7,9 @@ gi.require_version("Gtk", "4.0")
 
 sys.path.append("../")
 from data.lib.pardus import Ptk
-from gi.repository import Adw, Gtk
-from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro
+from gi.repository import Adw, Gtk, GLib
+from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
+
 
 VERSION = "0.0.1"
 APPNAME = "Pardus Gnome Greeter"
@@ -24,9 +25,11 @@ class MainWindow(Ptk.ApplicationWindow):
             title="Pardus Gnome Greeter", width=1100, height=600
         )
         Ptk.utils.load_css("../data/style.css")
-
+        self.Apps = Apps.Apps()
+        self.result = None
         self.ui_leaflet_main_window = Adw.Leaflet()
         self.current_page = 0
+
         self.page_datas = [
             {
                 "id": "ui_welcome_listboxrow",
@@ -42,7 +45,8 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": "Layout",
-                "icon": "focus-windows-symbolic",
+                "icon": "edit-copy",
+                # org.gnome.Settings-multitasking-symbolic
             },
             {
                 "id": "ui_wallpaper_listboxrow",
@@ -50,7 +54,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": "Wallpaper",
-                "icon": "preferences-desktop-wallpaper-symbolic",
+                "icon": "emblem-photos-symbolic",
             },
             {
                 "id": "ui_theme_listboxrow",
@@ -58,7 +62,8 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": "Theme",
-                "icon": "palette-symbolic",
+                "icon": "org.gnome.Settings-appearance-symbolic",
+                # org.gnome.Settings-appearance-symbolic
             },
             {
                 "id": "ui_display_listboxrow",
@@ -66,7 +71,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": "Display",
-                "icon": "display-symbolic",
+                "icon": "video-display-symbolic",
             },
             {
                 "id": "ui_extensions_listboxrow",
@@ -74,7 +79,22 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": "Extension",
-                "icon": "extensions-symbolic",
+                "icon": "org.gnome.Shell.Extensions-symbolic",
+            },
+            # emblem-photos-symbolic
+            # org.gnome.BrowserConnector
+            # org.gnome.Settings-appearance-symbolic theme
+            # video-display-symbolic theme
+            # org.gnome.Shell.Extensios-symbolic extension
+            # view=grid=symbolic applications
+            # info-symbolic outro
+            {
+                "id": "ui_applications_listboxrow",
+                "page": self.Apps.fun_create(),
+                "listboxrow": None,
+                "togglebutton": None,
+                "text": "Applications",
+                "icon": "view-grid-symbolic",
             },
             {
                 "id": "ui_outro_listboxrow",
@@ -82,12 +102,32 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": "Outro",
-                "icon": "gtk-about-symbolic",
+                "icon": "info-symbolic",
             },
         ]
-
         self.ui_pages_stack = Ptk.Stack(
             hexpand=True, vexpand=True, width=900, height=700
+        )
+        self.ui_pages_stack.set_transition_type(
+            Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
+        )
+        self.ui_prev_button = Ptk.Button(name="prev", hexpand=True, label="Previous")
+        self.ui_prev_button.connect(
+            "clicked", self.fun_change_page_with_next_prev_buttons
+        )
+        self.ui_next_button = Ptk.Button(name="next", hexpand=True, label="Next")
+        self.ui_next_button.connect(
+            "clicked", self.fun_change_page_with_next_prev_buttons
+        )
+        self.ui_navigation_buttons_box = Ptk.Box(
+            spacing=23,
+            hexpand=True,
+            children=[self.ui_prev_button, self.ui_next_button],
+        )
+        self.ui_pages_box = Ptk.Box(
+            hexpand=True,
+            orientation="vertical",
+            children=[self.ui_pages_stack, self.ui_navigation_buttons_box],
         )
 
         self.ui_listbox_pages = Ptk.ListBox(
@@ -97,7 +137,7 @@ class MainWindow(Ptk.ApplicationWindow):
             markup="<span size='x-large'><b>Pardus Gnome Greeter</b></span>",
             valign="center",
         )
-        self.ui_header_toggles_box = Ptk.Box()
+        self.ui_header_toggles_box = Ptk.Box(css=["linked"])
 
         for index, data in enumerate(self.page_datas):
             if data["page"] != None:
@@ -116,9 +156,9 @@ class MainWindow(Ptk.ApplicationWindow):
         self.separator = Ptk.Separator("vertical")
         self.ui_leaflet_main_window.append(self.ui_listbox_pages)
         self.ui_leaflet_main_window.append(self.separator)
-        self.ui_leaflet_main_window.append(self.ui_pages_stack)
+        self.ui_leaflet_main_window.append(self.ui_pages_box)
 
-        self.ui_leaflet_main_window.set_visible_child(self.ui_pages_stack)
+        self.ui_leaflet_main_window.set_visible_child(self.ui_pages_box)
 
         self.ui_header_headerbar = Adw.HeaderBar()
         self.ui_header_headerbar.set_centering_policy(Adw.CenteringPolicy.LOOSE)
@@ -136,6 +176,8 @@ class MainWindow(Ptk.ApplicationWindow):
         self.ui_listbox_pages.connect("unmap", self.widget_hide)
         self.ui_listbox_pages.connect("row_activated", self.fun_change_page)
 
+        self.fun_check_navigation_buttons()
+        self.change_page()
         self.window.set_titlebar(self.ui_header_headerbar)
         self.window.set_child(self.ui_leaflet_main_window)
 
@@ -158,12 +200,12 @@ class MainWindow(Ptk.ApplicationWindow):
             toggle_button.set_active(True)
         toggle_button.connect("toggled", self.fun_change_page_with_toggle_button)
 
-        if index == 0:
-            toggle_button.set_css_classes(["firstbuttonbox"])
-        elif index == len(self.page_datas) - 1:
-            toggle_button.set_css_classes(["lastbuttonbox"])
-        else:
-            toggle_button.set_css_classes(["buttonbox"])
+        # if index == 0:
+        #    toggle_button.set_css_classes(["firstbuttonbox"])
+        # elif index == len(self.page_datas) - 1:
+        #    toggle_button.set_css_classes(["lastbuttonbox"])
+        # else:
+        #    toggle_button.set_css_classes(["buttonbox"])
 
         box = Ptk.Box(orientation="vertical", children=[avatar])
         toggle_button.set_child(box)
@@ -177,9 +219,30 @@ class MainWindow(Ptk.ApplicationWindow):
         self.ui_header_toggles_box.show()
         self.ui_header_headerbar.set_title_widget(self.ui_header_toggles_box)
 
+    def fun_change_page_with_next_prev_buttons(self, widget):
+        name = widget.get_name()
+        if name == "prev":
+            self.current_page -= 1
+        else:
+            self.current_page += 1
+
+        self.fun_check_navigation_buttons()
+        self.change_page()
+
     def fun_change_page(self, action, name):
         self.current_page = name.get_index()
         self.change_page()
+
+    def fun_check_navigation_buttons(self):
+        if self.current_page == 0:
+            self.ui_prev_button.set_sensitive(False)
+        else:
+            self.ui_prev_button.set_sensitive(True)
+
+        if self.current_page == len(self.page_datas) - 1:
+            self.ui_next_button.set_sensitive(False)
+        else:
+            self.ui_next_button.set_sensitive(True)
 
     def fun_change_page_with_toggle_button(self, toggle_button):
         state = toggle_button.get_active()
@@ -214,8 +277,3 @@ class MainWindow(Ptk.ApplicationWindow):
             modal=True,
         )
         dialog.show()
-        self.window.set_sensitive(False)
-
-    def on_about_dialog_response(self, dialog):
-        self.window.set_sensitive(True)
-        dialog.destroy()
