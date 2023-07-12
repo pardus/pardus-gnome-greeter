@@ -27,7 +27,7 @@ def fun_create(label=""):
     # |                                        |
     # |________________________________________|
 
-    ui_logo_image = Ptk.Image(file="../data/assets/logo.svg", pixel_size=250)
+    ui_logo_image = Ptk.Image(file="../data/assets/logo.svg", pixel_size=180)
     test = Gtk.Image()
     test.set_cursor(Gdk.Cursor.new_from_name("pointer"))
     test.set_css_classes = ["bordered-box"]

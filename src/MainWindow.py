@@ -22,7 +22,7 @@ class MainWindow(Ptk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.window = Ptk.ApplicationWindow(
-            title="Pardus Gnome Greeter", width=1100, height=600
+            title="Pardus Gnome Greeter", width=900, height=600
         )
         Ptk.utils.load_css("../data/style.css")
         self.Apps = Apps.Apps()
@@ -105,9 +105,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "icon": "info-symbolic",
             },
         ]
-        self.ui_pages_stack = Ptk.Stack(
-            hexpand=True, vexpand=True, width=900, height=700
-        )
+        self.ui_pages_stack = Ptk.Stack(hexpand=True, vexpand=True)
         self.ui_pages_stack.set_transition_type(
             Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
         )

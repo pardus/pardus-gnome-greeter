@@ -21,8 +21,7 @@ class Apps:
         cur_dir = os.path.dirname(__file__)
         ui_software_center_image = Ptk.Image(
             file=cur_dir + "/../../data/assets/pardus-software.svg",
-            height=100,
-            width=100,
+            pixel_size=100,
             margin_top=50,
         )
         ui_software_center_markup = (
@@ -36,7 +35,7 @@ class Apps:
             halign="center",
         )
         self.flowbox = Ptk.FlowBox(
-            min_children_per_line=3, row_spacing=23, column_spacing=23, halign="center"
+            min_children_per_line=2, row_spacing=23, column_spacing=23, halign="center"
         )
         self.ui_display_box = Ptk.Box(
             orientation="vertical",
@@ -45,6 +44,8 @@ class Apps:
             xalign="start",
             yalign="start",
             spacing=23,
+            margin_start=13,
+            margin_end=13,
             children=[
                 ui_software_center_image,
                 ui_software_center_label,
@@ -61,16 +62,16 @@ class Apps:
         self.server.get(url, "test")
 
     def open_app(self, widget):
-        app_name = widget.get_name()
-        cmd = f"pardus-software {app_name}"
-        subprocess.run(cmd)
+        subprocess.Popen(["pardus-software", "-d", widget.get_name()])
 
     def StreamGet(self, pixbuf, data):
         image = Ptk.Image.new_from_pixbuf(pixbuf)
         image.set_size_request(50, 50)
-        label = Ptk.Label(vexpand=True, label=data["pretty_en"], valign="center")
+        label = Ptk.Label(
+            vexpand=True, label=data["pretty_en"], valign="center", halign="center"
+        )
         box = Ptk.Box(
-            width=250,
+            width=150,
             spacing=13,
             children=[image, label],
         )

@@ -30,10 +30,10 @@ def fun_create():
     cur_dir = os.getcwd()
 
     ui_dark_image = Ptk.Image(
-        file=cur_dir + "/../data/assets/theme-dark.png", pixel_size=350
+        file=cur_dir + "/../data/assets/theme-dark.png", pixel_size=180
     )
     ui_light_image = Ptk.Image(
-        file=cur_dir + "/../data/assets/theme-light.png", pixel_size=350
+        file=cur_dir + "/../data/assets/theme-light.png", pixel_size=180
     )
 
     ui_dark_theme_button = Ptk.ToggleButton(

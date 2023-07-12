@@ -38,7 +38,7 @@ def fun_create():
     ]
 
     for index, layout in enumerate(layouts):
-        image = Ptk.Image(file=layout["img"])
+        image = Ptk.Image(file=layout["img"], pixel_size=60)
         toggle = Ptk.ToggleButton(
             name=layout["id"], group=layouts[0]["togglebutton"], child=image
         )

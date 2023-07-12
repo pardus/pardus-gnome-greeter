@@ -53,8 +53,8 @@ class WallpaperPage:
     def fun_create_images(self, wallpapers):
         for wp in wallpapers:
             pixbuff = GdkPixbuf.Pixbuf.new_from_file(wp)
-            pixbuff = pixbuff.scale_simple(360, 360, GdkPixbuf.InterpType.BILINEAR)
-            image = Ptk.Image(pixel_size=250)
+            pixbuff = pixbuff.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
+            image = Ptk.Image(pixel_size=180)
             image.set_from_pixbuf(pixbuff)
             GLib.idle_add(self.ui_wallpapers_flowbox.insert, image, -1)
 

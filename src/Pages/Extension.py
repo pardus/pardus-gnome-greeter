@@ -41,7 +41,7 @@ def fun_create_extension_box(extension_props, extensions):
 
     # EXTENSION IMAGE
     ui_image_extension_image = Ptk.Image(
-        file=extension_props["image"], height=260, width=320
+        file=extension_props["image"], height=150, width=180
     )
 
     # EXTENSION NAME
