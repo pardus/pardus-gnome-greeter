@@ -5,8 +5,7 @@ import threading
 gi.require_version("Adw", "1")
 gi.require_version("Gtk", "4.0")
 
-sys.path.append("../")
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 from gi.repository import Adw, Gtk, GLib
 from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
 
@@ -81,13 +80,6 @@ class MainWindow(Ptk.ApplicationWindow):
                 "text": "Extension",
                 "icon": "org.gnome.Shell.Extensions-symbolic",
             },
-            # emblem-photos-symbolic
-            # org.gnome.BrowserConnector
-            # org.gnome.Settings-appearance-symbolic theme
-            # video-display-symbolic theme
-            # org.gnome.Shell.Extensios-symbolic extension
-            # view=grid=symbolic applications
-            # info-symbolic outro
             {
                 "id": "ui_applications_listboxrow",
                 "page": self.Apps.fun_create(),

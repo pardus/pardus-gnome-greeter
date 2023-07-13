@@ -5,7 +5,7 @@ import subprocess
 
 
 from gi.repository import Gio, GLib
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 from utils import (
     get_current_theme,
     get_layout_name,
@@ -88,5 +88,4 @@ class LayoutManager:
         layout_name = None
         if state:
             layout_name = toggle_button.get_name()
-            print(layout_name)
             set_layout_name(layout_name)

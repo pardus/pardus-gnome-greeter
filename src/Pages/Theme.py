@@ -1,6 +1,6 @@
 import os
 import gi
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 from utils import get_current_theme
 from gi.repository import GLib
 

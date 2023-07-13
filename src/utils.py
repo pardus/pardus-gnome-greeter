@@ -8,7 +8,7 @@ sys.path.append("../")
 
 gi.require_version("Gdk", "4.0")
 from gi.repository import Gdk
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 
 
 def get_layout_name():

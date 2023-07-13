@@ -2,7 +2,7 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 from gi.repository import GLib
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 
 
 class ExtensionManager:

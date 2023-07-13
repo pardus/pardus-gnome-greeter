@@ -4,7 +4,7 @@ import os
 import json
 
 gi.require_version("Gtk", "4.0")
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 from gi.repository import GLib, Gtk
 
 

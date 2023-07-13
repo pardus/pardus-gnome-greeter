@@ -6,7 +6,7 @@ import random
 import subprocess
 
 gi.require_version("Gtk", "4.0")
-from data.lib.pardus import Ptk
+from libpardus import Ptk
 from utils import get_current_theme
 from gi.repository import GLib, Gtk, Gio, GdkPixbuf
 from utils import get_recommended_scale
@@ -84,7 +84,6 @@ class Apps:
     def ServerGet(self, response):
         datas = response["greeter"]["suggestions"]
         if len(datas) > 0:
-            print(datas)
             for data in datas:
                 label = Ptk.Label(label=data["pretty_en"])
                 self.stream.fetch(data)
