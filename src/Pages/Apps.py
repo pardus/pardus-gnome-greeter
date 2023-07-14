@@ -30,12 +30,21 @@ class Apps:
         ui_software_center_label = Ptk.Label(
             markup=ui_software_center_markup, halign="center"
         )
-        remove_this_label = Ptk.Label(
-            markup="<span font-size='12pt'>Kullanmayan bin pisman</span>",
-            halign="center",
-        )
+
+        self.liststore = Gtk.ListStore(GdkPixbuf.Pixbuf, str, str)
+        self.iconview = Gtk.IconView.new()
+        self.iconview.set_model(self.liststore)
+        self.iconview.set_pixbuf_column(0)
+        self.iconview.set_text_column(1)
+        self.iconview.set_item_orientation(Gtk.Orientation.HORIZONTAL)
+        self.iconview.connect("item-activated", self.open_app)
+        self.iconview.set_hexpand(True)
+        self.iconview.set_vexpand(True)
+        self.iconview.set_activate_on_single_click(True)
+        self.iconview.set_item_width(150)
+
         self.flowbox = Ptk.FlowBox(
-            min_children_per_line=2, row_spacing=23, column_spacing=23, halign="center"
+            min_children_per_line=2, row_spacing=21, column_spacing=21, halign="center"
         )
         self.ui_display_box = Ptk.Box(
             orientation="vertical",
@@ -43,14 +52,12 @@ class Apps:
             vexpand=True,
             xalign="start",
             yalign="start",
-            spacing=23,
+            spacing=21,
             margin_start=13,
             margin_end=13,
             children=[
                 ui_software_center_image,
                 ui_software_center_label,
-                remove_this_label,
-                self.flowbox,
             ],
         )
         self.stream = Stream()
@@ -61,32 +68,30 @@ class Apps:
         self.server.ServerGet = self.ServerGet
         self.server.get(url, "test")
 
-    def open_app(self, widget):
-        subprocess.Popen(["pardus-software", "-d", widget.get_name()])
+    def open_app(self, widget, path):
+        selected_item = widget.get_selected_items()
+        treeiter = self.liststore.get_iter(selected_item[0])
+        appname = self.liststore.get(treeiter, 2)[0]
+
+        subprocess.Popen(["pardus-software", "-d", appname])
 
     def StreamGet(self, pixbuf, data):
-        image = Ptk.Image.new_from_pixbuf(pixbuf)
-        image.set_size_request(50, 50)
-        label = Ptk.Label(
-            vexpand=True, label=data["pretty_en"], valign="center", halign="center"
-        )
-        box = Ptk.Box(
-            width=150,
-            spacing=13,
-            children=[image, label],
-        )
-        button = Ptk.Button(name=data["name"])
-        button.connect("clicked", self.open_app)
-        button.set_child(box)
-
-        self.flowbox.insert(button, -1)
+        label = data["pretty_en"]
+        name = data["name"]
+        self.liststore.append([pixbuf, label, name])
 
     def ServerGet(self, response):
-        datas = response["greeter"]["suggestions"]
-        if len(datas) > 0:
-            for data in datas:
-                label = Ptk.Label(label=data["pretty_en"])
-                self.stream.fetch(data)
+        if "error" not in response.keys():
+            datas = response["greeter"]["suggestions"]
+            if len(datas) > 0:
+                for data in datas:
+                    self.stream.fetch(data)
+                self.ui_display_box.append(self.iconview)
+        else:
+            print(response["message"])
+            error_message = response["message"]
+            error_label = Ptk.Label(label=error_message, hexpand=True, halign="center")
+            self.ui_display_box.append(error_label)
 
     def fun_create(self):
         return self.ui_display_box

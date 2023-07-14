@@ -34,7 +34,7 @@ def fun_create():
         vexpand=True,
         halign="center",
         valign="center",
-        spacing=25,
+        spacing=21,
         children=[
             ui_logo_image,
             ui_os_name_label,

@@ -156,7 +156,7 @@ class MainWindow(Ptk.ApplicationWindow):
         self.ui_header_headerbar.set_overflow(Gtk.Overflow.VISIBLE)
         self.ui_header_headerbar.set_accessible_role(Gtk.AccessibleRole.GROUP)
 
-        self.ui_about_button = Ptk.Button(css=["rounded"], icon="open-menu-symbolic")
+        self.ui_about_button = Ptk.Button(icon="open-menu-symbolic")
         self.ui_about_button.connect("clicked", self.fun_show_about)
 
         self.ui_header_headerbar.pack_start(self.ui_about_button)

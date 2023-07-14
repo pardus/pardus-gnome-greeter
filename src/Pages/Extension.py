@@ -75,9 +75,9 @@ def fun_create_extension_box(extension_props, extensions):
         valign="start",
         ellipsize="middle",
         lines=5,
-        margin_top=20,
-        margin_end=20,
-        margin_start=20,
+        margin_top=21,
+        margin_end=21,
+        margin_start=21,
     )
     # ADDING HEADER AND OTHER ELEMENTS TO CONTAINER
     ui_box_container = Ptk.Box(
@@ -101,8 +101,8 @@ def fun_create():
         vexpand=True,
         max_children_per_line=5,
         min_children_per_line=2,
-        row_spacing=23,
-        column_spacing=23,
+        row_spacing=21,
+        column_spacing=21,
     )
 
     with open(
@@ -113,9 +113,15 @@ def fun_create():
         extension = fun_create_extension_box(item, enabled_extensions)
         ui_extension_flowbox.insert(extension, -1)
     ui_extension_scrolledwindow = Ptk.ScrolledWindow(
-        vexpand=True, hexpand=True, child=ui_extension_flowbox
+        vexpand=True,
+        hexpand=True,
+        child=ui_extension_flowbox,
+        margin_bottom=21,
+        margin_end=21,
+        margin_start=21,
+        margin_top=21,
     )
     ui_extension_box = Ptk.Box(
-        vexpand=True, hexpand=True, css=["p-23"], children=[ui_extension_scrolledwindow]
+        vexpand=True, hexpand=True, children=[ui_extension_scrolledwindow]
     )
     return ui_extension_box

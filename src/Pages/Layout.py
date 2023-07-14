@@ -48,26 +48,31 @@ def fun_create():
         layout["togglebutton"] = toggle
 
     box1 = Ptk.Box(
-        spacing=23,
+        spacing=21,
         homogeneous=True,
         hexpand=True,
         vexpand=True,
+        margin_top=21,
+        margin_end=21,
+        margin_start=21,
         children=[layouts[0]["togglebutton"], layouts[1]["togglebutton"]],
     )
     box2 = Ptk.Box(
-        spacing=23,
+        spacing=21,
         homogeneous=True,
         hexpand=True,
         vexpand=True,
+        margin_bottom=21,
+        margin_end=21,
+        margin_start=21,
         children=[layouts[2]["togglebutton"], layouts[3]["togglebutton"]],
     )
 
     box = Ptk.Box(
-        spacing=23,
+        spacing=21,
         hexpand=True,
         vexpand=True,
         orientation="vertical",
         children=[box1, box2],
-        css=["p-23"],
     )
     return box

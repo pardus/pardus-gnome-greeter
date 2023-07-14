@@ -14,8 +14,8 @@ class WallpaperPage:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ui_wallpapers_flowbox = Ptk.FlowBox(
-            row_spacing=23,
-            column_spacing=7,
+            row_spacing=21,
+            column_spacing=8,
             vexpand=True,
             hexpand=True,
             max_children_per_line=5,
@@ -35,14 +35,16 @@ class WallpaperPage:
         self.scrolled_window = Ptk.ScrolledWindow(
             hexpand=True,
             vexpand=True,
-            css=["p-23"],
+            margin_bottom=21,
+            margin_end=21,
+            margin_start=21,
+            margin_top=21,
             child=self.ui_wallpapers_flowbox,
         )
         self.box = Ptk.Box(
-            spacing=23,
+            spacing=21,
             hexpand=True,
             vexpand=True,
-            css=["p-23"],
             children=[self.scrolled_window],
         )
 

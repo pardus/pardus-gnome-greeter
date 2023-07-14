@@ -37,8 +37,9 @@ class Server(object):
                     type, error.domain, error.message
                 )
             )
-            self.ServerGet(response=None)  # Send to MainWindow
-            return False
+            response = {"error": True, "message": error.message}
+            self.ServerGet(response=response)  # Send to MainWindow
+            return response
 
         if success:
             self.ServerGet(json.loads(data))

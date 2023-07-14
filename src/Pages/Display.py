@@ -65,7 +65,6 @@ def fun_create():
         page_size=0.0,
         restrict_to_fill_level=True,
         round_digits=0.0,
-        css=["raised", "suggested-action"],
     )
     ui_display_scale.add(0, "TOP", "100%")
     ui_display_scale.add(1, "TOP", "125%")
@@ -120,10 +119,10 @@ def fun_create():
         markup="<b>Cursor Size</b>",
         hexpand=True,
         halign="center",
-        margin_top=20,
+        margin_top=21,
     )
     ui_display_box = Ptk.Box(
-        spacing=23,
+        spacing=21,
         vexpand=True,
         hexpand=True,
         orientation="vertical",
