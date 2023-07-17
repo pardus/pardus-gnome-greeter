@@ -6,6 +6,13 @@ gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
 from gi.repository import Gtk
 from ExtensionManager import ExtensionManager
+import locale
+from locale import gettext as _
+
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
 
 
 def fun_extension_toggle(switch, param, extension_id):
@@ -70,7 +77,7 @@ def fun_create_extension_box(extension_props, extensions):
 
     # EXTENSION DESCRIPTION
     ui_label_description = Ptk.Label(
-        label=extension_props["description"],
+        label=_(extension_props["description"]),
         halign="start",
         valign="start",
         ellipsize="middle",

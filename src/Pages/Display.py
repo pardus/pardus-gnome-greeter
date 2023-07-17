@@ -6,6 +6,13 @@ from libpardus import Ptk
 from utils import get_current_theme
 from gi.repository import GLib, Gtk
 from utils import get_recommended_scale
+import locale
+from locale import gettext as _
+
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
 
 
 def fun_change_display_scale(widget):
@@ -73,10 +80,8 @@ def fun_create():
     ui_display_scale.add(4, "TOP", "200%")
 
     ui_display_scale.connect("value-changed", fun_change_display_scale)
-
-    ui_recommended_scale_label = Ptk.Label(
-        markup=f"<b>Recommended scale option for main display is {get_recommended_scale()}%</b>"
-    )
+    markup = f"<b>{_('Recommended scale option for main display is')} {get_recommended_scale()}%</b>"
+    ui_recommended_scale_label = Ptk.Label(markup=markup)
 
     temporary_icon = Ptk.Image(
         file=cur_dir + "/../../data/assets/cursor.svg", pixel_size=12
@@ -116,7 +121,7 @@ def fun_create():
         ],
     )
     ui_font_scale_label = Ptk.Label(
-        markup="<b>Cursor Size</b>",
+        markup=f"<b>{_('Cursor Size')}</b>",
         hexpand=True,
         halign="center",
         margin_top=21,

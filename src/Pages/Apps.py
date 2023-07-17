@@ -12,21 +12,31 @@ from gi.repository import GLib, Gtk, Gio, GdkPixbuf
 from utils import get_recommended_scale
 from Server import Server
 from Stream import Stream
+import locale
+from locale import gettext as _
+
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
 
 url = "https://apps.pardus.org.tr/api/greeter"
 
 
 class Apps:
     def __init__(self):
+        self.lang = os.getenv("LANG")[0:2]
         cur_dir = os.path.dirname(__file__)
         ui_software_center_image = Ptk.Image(
             file=cur_dir + "/../../data/assets/pardus-software.svg",
             pixel_size=100,
             margin_top=50,
         )
+
         ui_software_center_markup = (
-            "<span font-size='20pt'><b>Pardus Software Center</b></span>"
+            f"<span font-size='20pt'><b>{_('Pardus Software Center')}</b></span>"
         )
+
         ui_software_center_label = Ptk.Label(
             markup=ui_software_center_markup, halign="center"
         )
@@ -76,7 +86,8 @@ class Apps:
         subprocess.Popen(["pardus-software", "-d", appname])
 
     def StreamGet(self, pixbuf, data):
-        label = data["pretty_en"]
+        lang = f"pretty_{self.lang}"
+        label = data[lang]
         name = data["name"]
         self.liststore.append([pixbuf, label, name])
 

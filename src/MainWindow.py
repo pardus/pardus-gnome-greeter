@@ -1,5 +1,7 @@
 import gi
+import os
 import sys
+import locale
 import threading
 
 gi.require_version("Adw", "1")
@@ -7,6 +9,7 @@ gi.require_version("Gtk", "4.0")
 
 from libpardus import Ptk
 from gi.repository import Adw, Gtk, GLib
+from locale import gettext as _
 from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
 
 
@@ -16,12 +19,17 @@ DEV = "Osman Coskun"
 WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
 ICON = "tr.org.pardus.pardus-gnome-greeter.desktop"
 
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
+
 
 class MainWindow(Ptk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.window = Ptk.ApplicationWindow(
-            title="Pardus Gnome Greeter", width=900, height=600
+            title=_("Pardus Gnome Greeter"), width=900, height=600
         )
         Ptk.utils.load_css("../data/style.css")
         self.Apps = Apps.Apps()
@@ -35,7 +43,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": Welcome.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Welcome",
+                "text": _("Welcome"),
                 "icon": "go-home-symbolic",
             },
             {
@@ -43,16 +51,15 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": Layout.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Layout",
+                "text": _("Layout"),
                 "icon": "edit-copy",
-                # org.gnome.Settings-multitasking-symbolic
             },
             {
                 "id": "ui_wallpaper_listboxrow",
                 "page": Wallpaper.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Wallpaper",
+                "text": _("Wallpaper"),
                 "icon": "emblem-photos-symbolic",
             },
             {
@@ -60,16 +67,15 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": Theme.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Theme",
+                "text": _("Theme"),
                 "icon": "org.gnome.Settings-appearance-symbolic",
-                # org.gnome.Settings-appearance-symbolic
             },
             {
                 "id": "ui_display_listboxrow",
                 "page": Display.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Display",
+                "text": _("Display"),
                 "icon": "video-display-symbolic",
             },
             {
@@ -77,7 +83,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": Extension.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Extension",
+                "text": _("Extension"),
                 "icon": "org.gnome.Shell.Extensions-symbolic",
             },
             {
@@ -85,7 +91,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": self.Apps.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Applications",
+                "text": _("Applications"),
                 "icon": "view-grid-symbolic",
             },
             {
@@ -93,19 +99,20 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": Outro.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": "Outro",
+                "text": _("Outro"),
                 "icon": "info-symbolic",
             },
         ]
+
         self.ui_pages_stack = Ptk.Stack(hexpand=True, vexpand=True)
         self.ui_pages_stack.set_transition_type(
             Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
         )
-        self.ui_prev_button = Ptk.Button(name="prev", hexpand=True, label="Previous")
+        self.ui_prev_button = Ptk.Button(name="prev", hexpand=True, label=_("Previous"))
         self.ui_prev_button.connect(
             "clicked", self.fun_change_page_with_next_prev_buttons
         )
-        self.ui_next_button = Ptk.Button(name="next", hexpand=True, label="Next")
+        self.ui_next_button = Ptk.Button(name="next", hexpand=True, label=_("Next"))
         self.ui_next_button.connect(
             "clicked", self.fun_change_page_with_next_prev_buttons
         )
@@ -123,10 +130,10 @@ class MainWindow(Ptk.ApplicationWindow):
         self.ui_listbox_pages = Ptk.ListBox(
             show_seperators=True, css=["navigation-sidebar"]
         )
-        self.ui_application_title = Ptk.Label(
-            markup="<span size='x-large'><b>Pardus Gnome Greeter</b></span>",
-            valign="center",
+        self.ui_markup = (
+            f"<span size='x-large'><b>{_('Pardus Gnome Greeter')}</b></span>"
         )
+        self.ui_application_title = Ptk.Label(markup=self.ui_markup, valign="center")
         self.ui_header_toggles_box = Ptk.Box(css=["linked"])
 
         for index, data in enumerate(self.page_datas):
@@ -189,14 +196,6 @@ class MainWindow(Ptk.ApplicationWindow):
         if index == 0:
             toggle_button.set_active(True)
         toggle_button.connect("toggled", self.fun_change_page_with_toggle_button)
-
-        # if index == 0:
-        #    toggle_button.set_css_classes(["firstbuttonbox"])
-        # elif index == len(self.page_datas) - 1:
-        #    toggle_button.set_css_classes(["lastbuttonbox"])
-        # else:
-        #    toggle_button.set_css_classes(["buttonbox"])
-
         box = Ptk.Box(orientation="vertical", children=[avatar])
         toggle_button.set_child(box)
         return toggle_button
@@ -255,7 +254,7 @@ class MainWindow(Ptk.ApplicationWindow):
             version=VERSION,
             developer_name=APPNAME,
             license_type="GPL-3",
-            comments="Configure Pardus with few clicks",
+            comments=_("Configure Pardus with few clicks"),
             website=WEBSITE,
             issue_url=WEBSITE,
             credit_section=["Contributors", [DEV]],

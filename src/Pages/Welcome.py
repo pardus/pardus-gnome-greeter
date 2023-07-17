@@ -1,4 +1,11 @@
 from libpardus import Ptk
+import locale
+from locale import gettext as _
+
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
 
 
 def fun_create():
@@ -26,8 +33,9 @@ def fun_create():
     ui_os_name_label = Ptk.Label(
         markup="<span size='50pt'><b>Pardus 23</b></span>", halign="center"
     )
-    os_welcome = Ptk.Label(markup="<span size='25pt'>Welcome</span>", halign="center")
-    os_description = Ptk.Label(label="This Application Help To Configure Pardus")
+    markup = f"<span size='25pt'>{_('Welcome')}</span>"
+    os_welcome = Ptk.Label(markup=markup, halign="center")
+    os_description = Ptk.Label(label=_("This Application Helps Configure Pardus"))
     box = Ptk.Box(
         orientation="vertical",
         hexpand=True,
