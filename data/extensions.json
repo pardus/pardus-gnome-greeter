@@ -3,56 +3,56 @@
         "logo": "../data/assets/ext_places_menu_logo.png",
         "id": "places-menu@gnome-shell-extensions.gcampax.github.com",
         "name": "Places Status Indicator",
-        "description": "Add a menu for quickly navigating places in the system.",
+        "description": "Add a quick navigation menu for system places.",
         "image": "../data/assets/ext_places_menu_image.png"
     },
     {
         "logo": "../data/assets/ext_drive_menu_logo.png",
         "id": "drive-menu@gnome-shell-extensions.gcampax.github.com",
         "name": "Removable Drive Menu",
-        "description": "A status menu for accessing and unmounting removable devices.",
+        "description": "Status menu for removable device access and unmounting.",
         "image": "../data/assets/ext_drive_menu_image.png"
     },
     {
         "logo": "../data/assets/ext_caffeine_logo.png",
         "id": "caffeine@patapon.info",
         "name": "Caffeine",
-        "description": "Disable the screensaver and auto suspend",
+        "description": "Disable screensaver and auto-suspend.",
         "image": "../data/assets/ext_caffeine_image.png"
     },
     {
         "logo": "../data/assets/ext_app_menu_logo.png",
         "id": "apps-menu@gnome-shell-extensions.gcampax.github.com",
         "name": "Applications Menu",
-        "description": "Add a category-based menu for applications.",
+        "description": "Add a category-based application menu.",
         "image": "../data/assets/ext_app_menu_image.png"
     },
     {
         "logo": "../data/assets/ext_app_indicator_logo.png",
         "id": "appindicatorsupport@rgcjonas.gmail.com",
         "name": "AppIndicator Support",
-        "description": "Adds AppIndicator, KStatusNotifierItem and legacy Tray icons support to the Shell",
+        "description": "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell.",
         "image": "../data/assets/ext_app_indicator_image.png"
     },
     {
         "logo": "../data/assets/ext_app_indicator_logo.png",
         "id": "noannoyance@daase.net",
         "name": "NoAnnoyance v2",
-        "description": "Removes the 'Windows is ready' notification and puts the window into focus.",
+        "description": "Eliminates the 'Windows is ready' notification and brings the window into focus.",
         "image": "../data/assets/ext_app_indicator_image.png"
     },
     {
         "logo": "../data/assets/ext_app_pano_logo.png",
         "id": "pano@elhan.io",
         "name": "Pano - Clipboard Manager",
-        "description": "Next-gen Clipboard manager for Gnome Shell",
+        "description": "Cutting-edge clipboard manager for Gnome Shell.",
         "image": "../data/assets/ext_app_pano_image.png"
     },
     {
         "logo": "../data/assets/ext_app_clipboard_logo.png",
         "id": "clipboard-indicator@tudmotu.com",
         "name": "Clipboard Indicator",
-        "description": "Clipboard Manager extension for Gnome-Shell - Adds a clipboard indicator to the top panel, and caches clipboard history.",
+        "description": "Adds clipboard indicator to top panel, caches history.",
         "image": "../data/assets/ext_app_clipboard_image.png"
     }
 ]

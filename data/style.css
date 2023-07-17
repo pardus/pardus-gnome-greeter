@@ -1,10 +1,3 @@
-button:disabled {
-    background: gray;
-    color: white;
-    font-weight: bolder;
-
-}
-
 .bordered-box {
     border: 1px solid lightgray;
     border-radius: 13px;
@@ -24,18 +17,6 @@ button:disabled {
 }
 
 
-.togglebutton {
-    border-radius: unset;
-    padding-top: 13px;
-    padding-bottom: 13px;
-    border: 1px solid lightgray;
-}
-
-
-.togglebutton:focus {
-    box-shadow: none;
-    background: #d2d2d2;
-}
 
 
 /* NEW CSS RULES */
@@ -45,79 +26,10 @@ button:disabled {
     margin: unset;
 }
 
-.buttonbox {
-    border-radius: unset;
-}
-
-.firstbuttonbox {
-    border-top-right-radius: unset;
-    border-bottom-right-radius: unset;
-}
-
-.lastbuttonbox {
-    border-top-left-radius: unset;
-    border-bottom-left-radius: unset;
-}
-
-.border-green {
-    border: 1px solid green;
-}
-
-.p-23 {
-    padding: 23px;
-}
-
-
-.rounded {
-    border-radius: 50%;
-}
-
 .listbox {
     border-right: 1px solid;
 }
 
 .navigation-sidebar {
     padding-top: unset;
-}
-
-.activatable {
-    border-radius: unset;
-}
-
-.apps-flowbox {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
-
-}
-
-.display-scale-box {
-    background-color: alpha(@borders, 1.5);
-    border-radius: 10px;
-    padding: 20px 40px;
-}
-
-.blue-app {
-    background: #ADD8E6;
-    color: #0000AA;
-    padding: 5px;
-}
-
-.yellow-app {
-    background: #FFFFCC;
-    color: #DDBB00;
-    padding: 5px;
-}
-
-.green-app {
-    background: #BBF0BB;
-    color: #006600;
-    padding: 5px;
-}
-
-.red-app {
-    background: #FFB3B3;
-    color: #AA0000;
-    padding: 5px;
 }
