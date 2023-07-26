@@ -1,0 +1,3 @@
+ dpkg-buildpackage -us -uc -ui -i -I
+dpkg-buildpackage: warning:     debian/changelog(l5): found end of file where expected more change data or trailer
+dpkg-buildpackage: error: syntax error in debian/control at line 24: stanza lacks the 'Package' field

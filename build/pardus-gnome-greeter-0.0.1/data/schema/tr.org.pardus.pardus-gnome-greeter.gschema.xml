@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.pardus.pardus-gnome-greeter" path="/org/pardus/pardus-gnome-greeter/">
+      <key name="layout-name" type="s">
+          <default>"set_2"</default>
+          <summary>Gnome Layout</summary>
+          <description>Pardus Gnome Layout</description>
+      </key>
+      <key name="first-run" type="b">
+          <default>true</default>
+          <summary>First Run</summary>
+          <description>Did application run before or is this first run?</description>
+      </key>
+  </schema>
+</schemalist>

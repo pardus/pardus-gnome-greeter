@@ -1,0 +1,8 @@
+[
+    {
+        "id": "pardus-firefox-launcher",
+        "name": "Pardus Firefox Launcher",
+        "binding": "<Primary><Alt>f",
+        "command": "firefox"
+    }
+]

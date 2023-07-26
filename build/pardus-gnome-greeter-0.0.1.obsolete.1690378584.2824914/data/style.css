@@ -1,0 +1,35 @@
+.bordered-box {
+    border: 1px solid lightgray;
+    border-radius: 13px;
+    padding: 13px;
+}
+
+.only-top-border {
+    border-top: 1px solid lightgray;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    padding: 13px;
+}
+
+.bordered-box-nop {
+    border: 1px solid lightgray;
+    border-radius: 13px;
+}
+
+
+
+
+/* NEW CSS RULES */
+.listboxrow {
+    font-size: large;
+    padding: 15px 20px;
+    margin: unset;
+}
+
+.listbox {
+    border-right: 1px solid;
+}
+
+.navigation-sidebar {
+    padding-top: unset;
+}
