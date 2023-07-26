@@ -1,11 +1,5 @@
 [
-    {
-        "logo": "../data/assets/ext_places_menu_logo.png",
-        "id": "places-menu@gnome-shell-extensions.gcampax.github.com",
-        "name": "Places Status Indicator",
-        "description": "Add a quick navigation menu for system places.",
-        "image": "../data/assets/ext_places_menu_image.png"
-    },
+
     {
         "logo": "../data/assets/ext_drive_menu_logo.png",
         "id": "drive-menu@gnome-shell-extensions.gcampax.github.com",
@@ -19,13 +13,6 @@
         "name": "Caffeine",
         "description": "Disable screensaver and auto-suspend.",
         "image": "../data/assets/ext_caffeine_image.png"
-    },
-    {
-        "logo": "../data/assets/ext_app_menu_logo.png",
-        "id": "apps-menu@gnome-shell-extensions.gcampax.github.com",
-        "name": "Applications Menu",
-        "description": "Add a category-based application menu.",
-        "image": "../data/assets/ext_app_menu_image.png"
     },
     {
         "logo": "../data/assets/ext_app_indicator_logo.png",

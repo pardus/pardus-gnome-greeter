@@ -105,4 +105,17 @@ class Apps:
             self.ui_display_box.append(error_label)
 
     def fun_create(self):
+        # +-------------------------------------------------------+
+        # |                  Pardus Software Center               |
+        # +--------------------------+----------------------------+
+        # |                          |                            |
+        # |         [Icon 1]         |         [Icon 2]           |
+        # |       App Name 1        |       App Name 2          |
+        # |                          |                            |
+        # |                          |                            |
+        # |         [Icon 3]         |         [Icon 4]           |
+        # |       App Name 3        |       App Name 4          |
+        # |                          |                            |
+        # +--------------------------+----------------------------+
+
         return self.ui_display_box

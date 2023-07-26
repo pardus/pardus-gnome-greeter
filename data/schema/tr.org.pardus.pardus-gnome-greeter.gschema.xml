@@ -6,5 +6,10 @@
           <summary>Gnome Layout</summary>
           <description>Pardus Gnome Layout</description>
       </key>
+      <key name="first-run" type="b">
+          <default>true</default>
+          <summary>First Run</summary>
+          <description>Did application run before or is this first run?</description>
+      </key>
   </schema>
 </schemalist>

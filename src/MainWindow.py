@@ -29,7 +29,7 @@ class MainWindow(Ptk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.window = Ptk.ApplicationWindow(
-            title=_("Pardus Gnome Greeter"), width=900, height=600
+            title=_("Pardus Gnome Greeter"), width=1000, height=600
         )
         Ptk.utils.load_css("../data/style.css")
         self.Apps = Apps.Apps()

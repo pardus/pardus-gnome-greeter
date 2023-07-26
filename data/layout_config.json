@@ -1,43 +1,12 @@
 {
-    "layout_1": {
-        "enable": [
-            "dash-to-panel@jderose9.github.com",
-            "arcmenu@arcmenu.com"
-        ],
-        "disable": [
-            "dash-to-dock@micxgx.gmail.com"
-        ],
-        "config": [
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/group-apps",
-                "value": "true"
-            }
-        ]
-    },
-    "layout_2": {
-        "enable": [
-            "dash-to-dock@micxgx.gmail.com"
-        ],
+    "gnome": {
         "disable": [
             "dash-to-panel@jderose9.github.com",
+            "dash-to-dock@micxgx.gmail.com",
             "arcmenu@arcmenu.com"
-        ],
-        "config": [
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
-                "value": "'LEFT'"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/extend-height",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
-                "value": "true"
-            }
         ]
     },
-    "layout_3": {
+    "mac": {
         "enable": [
             "dash-to-dock@micxgx.gmail.com"
         ],
@@ -60,14 +29,45 @@
             }
         ]
     },
-    "layout_4": {
+    "ubuntu": {
+        "enable": [
+            "dash-to-dock@micxgx.gmail.com"
+        ],
         "disable": [
             "dash-to-panel@jderose9.github.com",
-            "dash-to-dock@micxgx.gmail.com",
             "arcmenu@arcmenu.com"
+        ],
+        "config": [
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
+                "value": "'LEFT'"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/extend-height",
+                "value": "true"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
+                "value": "true"
+            }
         ]
     },
-    "layout_5": {
+    "10": {
+        "enable": [
+            "dash-to-panel@jderose9.github.com",
+            "arcmenu@arcmenu.com"
+        ],
+        "disable": [
+            "dash-to-dock@micxgx.gmail.com"
+        ],
+        "config": [
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-panel/group-apps",
+                "value": "true"
+            }
+        ]
+    },
+    "xp": {
         "enable": [
             "dash-to-panel@jderose9.github.com",
             "arcmenu@arcmenu.com"
