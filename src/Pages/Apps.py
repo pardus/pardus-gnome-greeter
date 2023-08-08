@@ -97,7 +97,7 @@ class Apps:
             if len(datas) > 0:
                 for data in datas:
                     self.stream.fetch(data)
-                self.ui_display_box.append(self.iconview)
+            # self.ui_display_box.append(self.iconview)
         else:
             print(response["message"])
             error_message = response["message"]

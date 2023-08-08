@@ -56,6 +56,9 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
 
 
 # Apps.py

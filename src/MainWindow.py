@@ -1,6 +1,7 @@
 import gi
 import os
 import sys
+import json
 import locale
 import threading
 
@@ -8,6 +9,7 @@ gi.require_version("Adw", "1")
 gi.require_version("Gtk", "4.0")
 
 from libpardus import Ptk
+from Keybindings import Keybindings
 from gi.repository import Adw, Gtk, GLib
 from locale import gettext as _
 from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
@@ -32,6 +34,12 @@ class MainWindow(Ptk.ApplicationWindow):
             title=_("Pardus Gnome Greeter"), width=1000, height=600
         )
         Ptk.utils.load_css("../data/style.css")
+        with open("../data/shortcuts.json") as shortcut_json_file:
+            self.shortcuts = json.loads(shortcut_json_file.read())
+
+        with open("../data/custom_shortcuts.json") as custom_shortcuts_json_file:
+            self.custom_shortcuts = json.loads(custom_shortcuts_json_file.read())
+
         self.Apps = Apps.Apps()
         self.result = None
         self.ui_leaflet_main_window = Adw.Leaflet()
@@ -178,6 +186,16 @@ class MainWindow(Ptk.ApplicationWindow):
         self.window.set_titlebar(self.ui_header_headerbar)
         self.window.set_child(self.ui_leaflet_main_window)
 
+    def fun_set_custom_shortcuts(self):
+        for custom_short in self.custom_shortcuts:
+            id, name, binding, command = custom_short.values()
+            Keybindings.set_custom_keybinding(id, name, binding, command)
+
+    def fun_set_shortcuts(self):
+        for shortcut in self.shortcuts:
+            schema, key, binding = shortcut.values()
+            Keybindings.set_keybinding(schema, key, binding)
+
     def fun_create_navigation_listbox(self, data):
         icon = Ptk.Image(icon=data["icon"])
         label = Ptk.Label(label=data["text"])
@@ -210,6 +228,9 @@ class MainWindow(Ptk.ApplicationWindow):
 
     def fun_change_page_with_next_prev_buttons(self, widget):
         name = widget.get_name()
+        label = widget.get_label()
+        if label == _("Close"):
+            self.window.get_application().quit()
         if name == "prev":
             self.current_page -= 1
         else:
@@ -227,16 +248,15 @@ class MainWindow(Ptk.ApplicationWindow):
             self.ui_prev_button.set_sensitive(False)
         else:
             self.ui_prev_button.set_sensitive(True)
-
         if self.current_page == len(self.page_datas) - 1:
-            self.ui_next_button.set_sensitive(False)
-        else:
-            self.ui_next_button.set_sensitive(True)
+            self.ui_next_button.set_label(_("Close"))
 
     def fun_change_page_with_toggle_button(self, toggle_button):
         state = toggle_button.get_active()
         self.current_page = int(toggle_button.get_name())
+
         if state:
+            self.fun_check_navigation_buttons()
             self.change_page()
 
     def change_page(self):
@@ -266,3 +286,6 @@ class MainWindow(Ptk.ApplicationWindow):
             modal=True,
         )
         dialog.show()
+
+    def fun_quit_application(self):
+        self.quit()

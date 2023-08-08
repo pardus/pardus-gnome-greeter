@@ -54,6 +54,9 @@ msgstr "Önceki"
 msgid "Next"
 msgstr "Sonraki"
 
+msgid "Close"
+msgstr "Kapat"
+
 
 
 # Apps.py

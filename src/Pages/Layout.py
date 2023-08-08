@@ -7,6 +7,44 @@ from gi.repository import Gtk, GdkPixbuf, Gdk, Gio, GLib, GObject
 from libpardus import Ptk
 from LayoutManager import LayoutManager
 
+layouts = [
+    {
+        "id": "gnome",
+        "label": "Classic",
+        "gif": "../data/assets/layout_gif_gnome.gif",
+        "img": "../data/assets/layout_img_gnome.svg",
+        "togglebutton": None,
+    },
+    {
+        "id": "mac",
+        "label": "Mac",
+        "gif": "../data/assets/layout_gif_mac.gif",
+        "img": "../data/assets/layout_img_mac.svg",
+        "togglebutton": None,
+    },
+    {
+        "id": "ubuntu",
+        "label": "Ubuntu",
+        "gif": "../data/assets/layout_gif_ubuntu.gif",
+        "img": "../data/assets/layout_img_ubuntu.svg",
+        "togglebutton": None,
+    },
+    {
+        "id": "10",
+        "label": "10",
+        "gif": "../data/assets/layout_gif_10.gif",
+        "img": "../data/assets/layout_img_10_1.svg",
+        "togglebutton": None,
+    },
+    {
+        "id": "xp",
+        "label": "XP",
+        "gif": "../data/assets/layout_gif_xp.gif",
+        "img": "../data/assets/layout_img_xp.svg",
+        "togglebutton": None,
+    },
+]
+
 
 class GifPaintable(GObject.Object, Gdk.Paintable):
     def __init__(self, path):
@@ -44,6 +82,52 @@ class GifPaintable(GObject.Object, Gdk.Paintable):
         texture.snapshot(snapshot, width, height)
 
 
+def fun_create_togglebutton_img(index):
+    img = layouts[index]["img"]
+    label = layouts[index]["label"] + " Style"
+    # image = Ptk.Image(file=img, height=231, width=351)
+    image = Gtk.Picture.new_for_filename(img)
+    Label = Ptk.Label(label=label, halign="center")
+
+    toggle_box = Ptk.Box(
+        spacing=13,
+        orientation="vertical",
+        children=[image, Label],
+        halign="center",
+        valign="center",
+    )
+    return toggle_box
+
+
+def fun_create_togglebutton_gif(index):
+    gif = layouts[index]["gif"]
+    label = layouts[index]["label"] + " Style"
+
+    Label = Ptk.Label(label=label, halign="center")
+    paintable = GifPaintable(gif)
+    picture = Gtk.Picture()
+
+    picture.set_paintable(paintable)
+    toggle_box = Ptk.Box(
+        spacing=13,
+        orientation="vertical",
+        children=[picture, Label],
+        halign="center",
+        valign="center",
+    )
+    return toggle_box
+
+
+def on_motion_enter(controller, x, y, index, toggle):
+    gif = fun_create_togglebutton_gif(index)
+    toggle.set_child(gif)
+
+
+def on_motion_leave(controller, index, toggle):
+    img = fun_create_togglebutton_img(index)
+    toggle.set_child(img)
+
+
 def fun_create():
     # RETURNING EXTENSION BOX
     # _______(Box)_____________________________________
@@ -66,39 +150,6 @@ def fun_create():
     # |                                                 |
     # |_________________________________________________|
 
-    layouts = [
-        {
-            "id": "gnome",
-            "label": "Classic",
-            "img": "../data/assets/set5.gif",
-            "togglebutton": None,
-        },
-        {
-            "id": "mac",
-            "label": "Mac",
-            "img": "../data/assets/set1.gif",
-            "togglebutton": None,
-        },
-        {
-            "id": "ubuntu",
-            "label": "Ubuntu",
-            "img": "../data/assets/set4.gif",
-            "togglebutton": None,
-        },
-        {
-            "id": "10",
-            "label": "10",
-            "img": "../data/assets/set2.gif",
-            "togglebutton": None,
-        },
-        {
-            "id": "xp",
-            "label": "XP",
-            "img": "../data/assets/set3.gif",
-            "togglebutton": None,
-        },
-    ]
-
     flowbox = Ptk.FlowBox(
         min_children_per_line=3,
         row_spacing=21,
@@ -111,59 +162,25 @@ def fun_create():
         margin_end=21,
         margin_start=21,
         margin_top=21,
+        selection_mode="none",
     )
     flowbox.set_homogeneous(True)
 
     for index, layout in enumerate(layouts):
-        image = Ptk.Image(file=layout["img"])
-        label = Ptk.Label(label=layout["label"] + " Style", halign="center")
-        paintable = GifPaintable(layout["img"])
-
-        picture = Gtk.Picture()
-        picture.set_paintable(paintable)
-        toggle_box = Ptk.Box(
-            orientation="vertical",
-            children=[picture, label],
-            halign="center",
-            valign="center",
-            spacing=13,
-            width=220,
-            height=100,
-        )
-
+        toggle_box = fun_create_togglebutton_img(index)
         toggle = Ptk.ToggleButton(
-            name=layout["id"],
-            group=layouts[0]["togglebutton"],
-            child=toggle_box,
+            name=layout["id"], group=layouts[0]["togglebutton"], child=toggle_box
         )
         toggle.connect("toggled", LayoutManager.set_layout)
         current_layout = str(LayoutManager.get_layout())
         toggle.set_active(current_layout == layout["id"])
-        layout["togglebutton"] = toggle
 
-    box1 = Ptk.Box(
-        spacing=21,
-        homogeneous=True,
-        hexpand=True,
-        vexpand=True,
-        margin_top=21,
-        margin_end=21,
-        margin_start=21,
-        children=[
-            layouts[0]["togglebutton"],
-            layouts[1]["togglebutton"],
-            layouts[2]["togglebutton"],
-        ],
-    )
-    box2 = Ptk.Box(
-        spacing=21,
-        homogeneous=True,
-        hexpand=True,
-        vexpand=True,
-        halign="center",
-        margin_bottom=21,
-        children=[layouts[3]["togglebutton"], layouts[4]["togglebutton"]],
-    )
+        motion_controller = Gtk.EventControllerMotion()
+        toggle.add_controller(motion_controller)
+        motion_controller.connect("enter", on_motion_enter, index, toggle)
+        motion_controller.connect("leave", on_motion_leave, index, toggle)
+        layout["togglebutton"] = toggle
+        flowbox.insert(toggle, -1)
 
     box = Ptk.Box(
         spacing=21,
@@ -171,6 +188,7 @@ def fun_create():
         vexpand=True,
         homogeneous=True,
         orientation="vertical",
-        children=[box1, box2],
+        # children=[box1, box2],
+        children={flowbox},
     )
     return box
