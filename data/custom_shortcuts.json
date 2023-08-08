@@ -1,8 +1,14 @@
 [
     {
+        "id": "pardus-terminal-launcher",
+        "name": "Pardus Terminal Launcher",
+        "binding": "<Primary><Alt>t",
+        "command": "gnome-terminal"
+    },
+    {
         "id": "pardus-firefox-launcher",
-        "name": "Pardus Firefox Launcher",
-        "binding": "<Primary><Alt>f",
-        "command": "firefox"
+        "name": "Pardus Software Launcher",
+        "binding": "<Primary><Alt>s",
+        "command": "pardus-software"
     }
 ]

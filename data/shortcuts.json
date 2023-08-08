@@ -12,6 +12,11 @@
     {
         "schema": "org.gnome.settings-daemon.plugins.media-keys",
         "key": "www",
-        "binding": "<Super>b"
+        "binding": "<Super>w"
+    },
+    {
+        "schema": "org.gnome.settings-daemon.plugins.media-keys",
+        "key": "home",
+        "binding": "<Super>f"
     }
 ]

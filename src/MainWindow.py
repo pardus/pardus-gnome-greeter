@@ -39,6 +39,13 @@ class MainWindow(Ptk.ApplicationWindow):
 
         with open("../data/custom_shortcuts.json") as custom_shortcuts_json_file:
             self.custom_shortcuts = json.loads(custom_shortcuts_json_file.read())
+        self.schema = "org.pardus.pardus-gnome-greeter"
+        self.first_run = bool(Ptk.utils.gsettings_get(self.schema,"first-run"))
+        if self.first_run:
+            self.fun_set_shortcuts()
+            self.fun_set_custom_shortcuts()
+            Ptk.utils.gsettings_set(self.schema,"first-run",False)
+
 
         self.Apps = Apps.Apps()
         self.result = None
@@ -189,12 +196,12 @@ class MainWindow(Ptk.ApplicationWindow):
     def fun_set_custom_shortcuts(self):
         for custom_short in self.custom_shortcuts:
             id, name, binding, command = custom_short.values()
-            Keybindings.set_custom_keybinding(id, name, binding, command)
+            Keybindings.set_custom_keybinding(self,id, name, binding, command)
 
     def fun_set_shortcuts(self):
         for shortcut in self.shortcuts:
             schema, key, binding = shortcut.values()
-            Keybindings.set_keybinding(schema, key, binding)
+            Keybindings.set_keybinding(self,schema, key, binding)
 
     def fun_create_navigation_listbox(self, data):
         icon = Ptk.Image(icon=data["icon"])
