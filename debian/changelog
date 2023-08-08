@@ -3,3 +3,8 @@ pardus-gnome-greeter (0.0.1) unstable; urgency=medium
   * Initial release
   * Created layout files and assets
   -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 PM +03
+
+pardus-gnome-greeter (0.0.2) unstable; urgency=medium
+
+  * Added keybindings
+  -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 08 Aug 2023 01:19:20 PM +03
