@@ -14,12 +14,10 @@ class WallpaperPage:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ui_wallpapers_flowbox = Ptk.FlowBox(
-            row_spacing=21,
             column_spacing=8,
-            vexpand=True,
             hexpand=True,
             max_children_per_line=5,
-            min_children_per_line=0,
+            min_children_per_line=3,
             selection_mode="single",
         )
         self.ui_wallpapers_flowbox.connect(
@@ -42,7 +40,6 @@ class WallpaperPage:
             child=self.ui_wallpapers_flowbox,
         )
         self.box = Ptk.Box(
-            spacing=21,
             hexpand=True,
             vexpand=True,
             children=[self.scrolled_window],
@@ -55,8 +52,8 @@ class WallpaperPage:
     def fun_create_images(self, wallpapers):
         for wp in wallpapers:
             pixbuff = GdkPixbuf.Pixbuf.new_from_file(wp)
-            pixbuff = pixbuff.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
-            image = Ptk.Image(pixel_size=180)
+            pixbuff = pixbuff.scale_simple(260, 180, GdkPixbuf.InterpType.BILINEAR)
+            image = Ptk.Image(height=260,width=180)
             image.set_from_pixbuf(pixbuff)
             GLib.idle_add(self.ui_wallpapers_flowbox.insert, image, -1)
 

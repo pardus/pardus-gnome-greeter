@@ -44,7 +44,7 @@ class MainWindow(Ptk.ApplicationWindow):
         if self.first_run:
             self.fun_set_shortcuts()
             self.fun_set_custom_shortcuts()
-            Ptk.utils.gsettings_set(self.schema,"first-run",False)
+            Ptk.utils.gsettings_set(self.schema,"first-run",GLib.Variant.new_boolean(False))
 
 
         self.Apps = Apps.Apps()
