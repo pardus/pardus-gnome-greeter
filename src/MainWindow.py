@@ -257,6 +257,8 @@ class MainWindow(Ptk.ApplicationWindow):
             self.ui_prev_button.set_sensitive(True)
         if self.current_page == len(self.page_datas) - 1:
             self.ui_next_button.set_label(_("Close"))
+        else:
+            self.ui_next_button.set_label(_("Next"))
 
     def fun_change_page_with_toggle_button(self, toggle_button):
         state = toggle_button.get_active()
