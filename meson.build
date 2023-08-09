@@ -23,6 +23,6 @@ subdir('data/schema')
 
 
 # locale settings
-subdir('data/po')`
+subdir('data/po')
 
 
