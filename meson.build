@@ -20,3 +20,9 @@ install_subdir('src',install_dir : source_dir)
 
 install_data(['pardus-gnome-greeter'], install_dir : prefix / 'bin')
 subdir('data/schema')
+
+
+# locale settings
+subdir('data/po')`
+
+
