@@ -22,7 +22,7 @@ WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
 ICON = "tr.org.pardus.pardus-gnome-greeter.desktop"
 
 APPNAME_CODE = "pardus-gnome-greeter"
-TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 

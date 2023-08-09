@@ -7,6 +7,16 @@ from gi.repository import Gtk, GdkPixbuf, Gdk, Gio, GLib, GObject
 from libpardus import Ptk
 from LayoutManager import LayoutManager
 
+import locale
+from locale import gettext as _
+
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/usr/share/locale"
+
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
+
+
 layouts = [
     {
         "id": "gnome",
@@ -84,7 +94,7 @@ class GifPaintable(GObject.Object, Gdk.Paintable):
 
 def fun_create_togglebutton_img(index):
     img = layouts[index]["img"]
-    label = layouts[index]["label"] + " Style"
+    label = _(layouts[index]["label"]) + " "+ _("Style")
     # image = Ptk.Image(file=img, height=231, width=351)
     image = Gtk.Picture.new_for_filename(img)
     Label = Ptk.Label(label=label, halign="center")

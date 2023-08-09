@@ -26,7 +26,7 @@
         "id": "noannoyance@daase.net",
         "name": "NoAnnoyance v2",
         "description": "Eliminates the 'Windows is ready' notification and brings the window into focus.",
-        "image": "../data/assets/ext_app_indicator_image.png"
+        "image": "../data/assets/ext_app_annoyance_image.png"
     },
     {
         "logo": "../data/assets/ext_app_pano_logo.png",

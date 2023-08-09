@@ -3,7 +3,14 @@ import gi
 from libpardus import Ptk
 from utils import get_current_theme
 from gi.repository import GLib
+import locale
+from locale import gettext as _
 
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/usr/share/locale"
+
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
 
 def fun_change_theme(toggle_button):
     schema = "org.gnome.desktop.interface"
@@ -29,30 +36,45 @@ def fun_create():
 
     cur_dir = os.getcwd()
 
-    ui_dark_image = Ptk.Image(
+    ui_dark_theme_image = Ptk.Image(
         file=cur_dir + "/../data/assets/theme-dark.png", pixel_size=300
     )
-    ui_light_image = Ptk.Image(
+    ui_light_theme_image = Ptk.Image(
         file=cur_dir + "/../data/assets/theme-light.png", pixel_size=300
     )
 
+    
+    ui_dark_theme_label_markup = f"<b>{_('Dark Theme')}</b>"
+    ui_light_theme_label_markup = f"<b>{_('Light Theme')}</b>"
+    
+    ui_dark_theme_label = Ptk.Label(markup=ui_dark_theme_label_markup,hexpand=True,halign="center")
+    
     ui_dark_theme_button = Ptk.ToggleButton(
         valign="center",
         halign="center",
         name="prefer-dark",
         group=None,
-        child=ui_dark_image,
+        child=ui_dark_theme_image,
     )
     ui_dark_theme_button.connect("toggled", fun_change_theme)
+    ui_dark_theme_box = Ptk.Box(orientation="vertical",spacing=8,halign="center",children=[ui_dark_theme_button,ui_dark_theme_label])
+    
+    
+    ui_light_theme_label = Ptk.Label(markup=ui_light_theme_label_markup,hexpand=True,halign="center")
     ui_light_theme_button = Ptk.ToggleButton(
         valign="center",
         halign="center",
         name="default",
         group=ui_dark_theme_button,
-        child=ui_light_image,
+        child=ui_light_theme_image,
     )
     ui_light_theme_button.connect("toggled", fun_change_theme)
+    ui_light_theme_box = Ptk.Box(orientation="vertical",spacing=8, halign="center",children=[ui_light_theme_button,ui_light_theme_label])
+    
+
+
     theme = get_current_theme()
+    
     if str(theme) == "'prefer-dark'":
         ui_dark_theme_button.set_active(True)
     else:
@@ -62,6 +84,6 @@ def fun_create():
         valign="center",
         homogeneous=True,
         spacing=23,
-        children=[ui_dark_theme_button, ui_light_theme_button],
+        children=[ui_light_theme_box,ui_dark_theme_box],
     )
     return ui_theme_box

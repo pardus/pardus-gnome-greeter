@@ -10,7 +10,8 @@ import locale
 from locale import gettext as _
 
 APPNAME_CODE = "pardus-gnome-greeter"
-TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+TRANSLATIONS_PATH = "/usr/share/locale"
+
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
@@ -127,7 +128,7 @@ def fun_create():
         halign="center",
     )
     for data in link_datas:
-        btn = Gtk.LinkButton(uri=data["url"], label=data["text"])
+        btn = Gtk.LinkButton(uri=data["url"], label=_(data["text"]))
         ui_link_box.append(btn)
 
     ui_outro_box = Ptk.Box(
