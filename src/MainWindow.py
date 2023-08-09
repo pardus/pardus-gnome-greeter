@@ -284,7 +284,7 @@ class MainWindow(Ptk.ApplicationWindow):
             comments=_("Configure Pardus with few clicks"),
             website=WEBSITE,
             issue_url=WEBSITE,
-            credit_section=["Contributors", [DEV]],
+            credit_section=[_("Contributors"), [DEV]],
             translator_credits=DEV,
             copyright="© 2023 Ulakbim / Pardus",
             developers=[DEV],

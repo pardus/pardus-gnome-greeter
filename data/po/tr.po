@@ -57,6 +57,8 @@ msgstr "Sonraki"
 msgid "Close"
 msgstr "Kapat"
 
+msgid "Contributors"
+msgstr "Katkı Sağlayanlar"
 
 
 # Apps.py

@@ -118,14 +118,17 @@ def fun_create_togglebutton_gif(index):
     return toggle_box
 
 
+
 def on_motion_enter(controller, x, y, index, toggle):
     gif = fun_create_togglebutton_gif(index)
-    toggle.set_child(gif)
+    GLib.idle_add(toggle.set_child,gif)
+    #toggle.set_child(gif)
 
 
 def on_motion_leave(controller, index, toggle):
     img = fun_create_togglebutton_img(index)
-    toggle.set_child(img)
+    GLib.idle_add(toggle.set_child,img)
+    #toggle.set_child(img)
 
 
 def fun_create():

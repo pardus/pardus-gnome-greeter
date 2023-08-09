@@ -6,7 +6,13 @@ import json
 gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
 from gi.repository import GLib, Gtk
+import locale
+from locale import gettext as _
 
+APPNAME_CODE = "pardus-gnome-greeter"
+TRANSLATIONS_PATH = "/home/osman/Pardus/pardus-gnome-greeter/data/po"
+locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME_CODE)
 
 def fun_create():
     # RETURNING OUTRO BOX
@@ -56,7 +62,7 @@ def fun_create():
     with open(cur_dir + "/../data/links.json") as links:
         link_datas = json.loads(links.read())
     ui_bold_markup = """<span size='27pt'><b>{text}</b></span>"""
-    ui_social_media_label_markup = ui_bold_markup.format(text="Social Media Accounts")
+    ui_social_media_label_markup = ui_bold_markup.format(text=_("Social Media Accounts"))
     ui_social_media_label = Ptk.Label(
         markup=ui_social_media_label_markup, halign="center"
     )
@@ -75,8 +81,8 @@ def fun_create():
         children=[ui_social_media_label, ui_social_media_link_box],
     )
 
-    ui_support_label = Ptk.Label(markup=ui_bold_markup.format(text="Support"))
-    ui_shortcuts_label = Ptk.Label(markup=ui_bold_markup.format(text="Shortcuts"))
+    ui_support_label = Ptk.Label(markup=ui_bold_markup.format(text=_("Support")))
+    ui_shortcuts_label = Ptk.Label(markup=ui_bold_markup.format(text=_("Shortcuts")))
     ui_support_labels_box = Ptk.Box(
         spacing=23,
         hexpand=True,
@@ -88,7 +94,7 @@ def fun_create():
     ui_support_phone_markup = "+90  <span size='18pt'><b>444 5 773</b></span>"
 
     ui_support_phone_label = Ptk.Label(markup=ui_support_phone_markup)
-    ui_shortcut_trigger_button = Ptk.Button(label="Open Shortcuts", valign="start")
+    ui_shortcut_trigger_button = Ptk.Button(label=_("Open Shortcuts"), valign="start")
 
     ui_support_content_box = Ptk.Box(
         spacing=23,
