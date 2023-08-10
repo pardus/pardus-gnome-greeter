@@ -80,9 +80,14 @@ class LayoutManager:
         if "config" in layouts[layout_name]:
             for conf in layouts[layout_name]["config"]:
                 escape_conf = conf
+                if "type" in conf.keys() and conf["type"] == "string":
+                    lc_value = f"'{conf['value']}'"
+                    dconf_set(conf["path"], lc_value)
+                else:
+                    dconf_set(conf["path"], conf["value"])
+
                 # dont directly give conf as parameter to apply_config function.
                 # otherwise escape characters wont be rendered correctly
-                dconf_set(conf["path"], conf["value"])
 
         state = toggle_button.get_active()
         layout_name = None

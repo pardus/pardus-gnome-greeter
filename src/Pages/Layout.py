@@ -53,6 +53,13 @@ layouts = [
         "img": "../data/assets/layout_img_xp.svg",
         "togglebutton": None,
     },
+    {
+        "id": "pardus",
+        "label": "Pardus",
+        "gif": "../data/assets/layout_gif_xp.gif",
+        "img": "../data/assets/layout_img_xp.svg",
+        "togglebutton": None,
+    },
 ]
 
 
@@ -94,7 +101,7 @@ class GifPaintable(GObject.Object, Gdk.Paintable):
 
 def fun_create_togglebutton_img(index):
     img = layouts[index]["img"]
-    label = _(layouts[index]["label"]) + " "+ _("Style")
+    label = _(layouts[index]["label"]) + " " + _("Style")
     # image = Ptk.Image(file=img, height=231, width=351)
     image = Gtk.Picture.new_for_filename(img)
     Label = Ptk.Label(label=label, halign="center")
@@ -128,17 +135,16 @@ def fun_create_togglebutton_gif(index):
     return toggle_box
 
 
-
 def on_motion_enter(controller, x, y, index, toggle):
     gif = fun_create_togglebutton_gif(index)
-    GLib.idle_add(toggle.set_child,gif)
-    #toggle.set_child(gif)
+    GLib.idle_add(toggle.set_child, gif)
+    # toggle.set_child(gif)
 
 
 def on_motion_leave(controller, index, toggle):
     img = fun_create_togglebutton_img(index)
-    GLib.idle_add(toggle.set_child,img)
-    #toggle.set_child(img)
+    GLib.idle_add(toggle.set_child, img)
+    # toggle.set_child(img)
 
 
 def fun_create():
