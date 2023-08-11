@@ -8,16 +8,17 @@ Homepage: https://github.com/pardus/pardus-gnome-greeter
 
 Package: pardus-gnome-greeter
 Architecture: all
-Depends: ${misc:Depends}, 
-         python3 (>= 3.6),
-         gnome-shell (>=40),
-         libpardus,
-         gnome-shell-extension-clipboard-indicator,
-         gnome-shell-extension-pano,
-         gnome-shell-extension-caffeine,
-         gnome-shell-extension-desktop-icons-ng,
-         gnome-shell-extension-appindicator,
-         gnome-shell-extension-dashtodock,
-         gnome-shell-extension-arc-menu,
-         gnome-shell-extension-dash-to-panel
+Depends: ${misc:Depends},
+  python3 (>= 3.6),
+  gnome-shell (>=40),
+  libpardus,
+  gnome-shell-extension-clipboard-indicator,
+  gnome-shell-extension-pano,
+  gnome-shell-extension-caffeine,
+  gnome-shell-extension-desktop-icons-ng,
+  gnome-shell-extension-appindicator,
+  gnome-shell-extension-dashtodock,
+  gnome-shell-extension-arc-menu,
+  gnome-shell-extension-dash-to-panel,
+  gnome-shell-extension-start-overlay-in-application-view
 Description: Personalize your Pardus desktop with Pardus Gnome Greeter! This application offers easy customization of wallpapers, themes, layouts, and display settings. Discover top applications handpicked by our editor and find quick support whenever you need it. Elevate your desktop experience with Pardus Gnome Greeter!

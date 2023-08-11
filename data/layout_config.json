@@ -3,7 +3,8 @@
         "disable": [
             "dash-to-panel@jderose9.github.com",
             "dash-to-dock@micxgx.gmail.com",
-            "arcmenu@arcmenu.com"
+            "arcmenu@arcmenu.com",
+            "start-overlay-in-application-view@Hex_cz"
         ]
     },
     "mac": {
@@ -12,7 +13,8 @@
         ],
         "disable": [
             "dash-to-panel@jderose9.github.com",
-            "arcmenu@arcmenu.com"
+            "arcmenu@arcmenu.com",
+            "start-overlay-in-application-view@Hex_cz"
         ],
         "config": [
             {
@@ -35,7 +37,8 @@
         ],
         "disable": [
             "dash-to-panel@jderose9.github.com",
-            "arcmenu@arcmenu.com"
+            "arcmenu@arcmenu.com",
+            "start-overlay-in-application-view@Hex_cz"
         ],
         "config": [
             {
@@ -58,7 +61,8 @@
             "arcmenu@arcmenu.com"
         ],
         "disable": [
-            "dash-to-dock@micxgx.gmail.com"
+            "dash-to-dock@micxgx.gmail.com",
+            "start-overlay-in-application-view@Hex_cz"
         ],
         "config": [
             {
@@ -78,7 +82,8 @@
             "arcmenu@arcmenu.com"
         ],
         "disable": [
-            "dash-to-dock@micxgx.gmail.com"
+            "dash-to-dock@micxgx.gmail.com",
+            "start-overlay-in-application-view@Hex_cz"
         ],
         "config": [
             {
@@ -94,7 +99,8 @@
     },
     "pardus": {
         "enable": [
-            "dash-to-panel@jderose9.github.com"
+            "dash-to-panel@jderose9.github.com",
+            "start-overlay-in-application-view@Hex_cz"
         ],
         "disable": [
             "dash-to-dock@micxgx.gmail.com",
