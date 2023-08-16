@@ -20,7 +20,10 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
-url = "https://apps.pardus.org.tr/api/greeter"
+# url = "https://apps.pardus.org.tr/api/greeter"
+
+url = "http://161.9.194.187/api/greeter"
+# this one is for test
 
 
 class Apps:
@@ -43,7 +46,10 @@ class Apps:
         )
 
         self.liststore = Gtk.ListStore(GdkPixbuf.Pixbuf, str, str)
+        # self.liststore.get_style_context().add_css_class("apps-list-store")
+        # self.liststore.set_css_classes(["apps-list-store"])
         self.iconview = Gtk.IconView.new()
+        # self.iconview.set_css_classes(["apps-list-store"])
         self.iconview.set_model(self.liststore)
         self.iconview.set_pixbuf_column(0)
         self.iconview.set_text_column(1)
@@ -52,11 +58,8 @@ class Apps:
         self.iconview.set_hexpand(True)
         self.iconview.set_vexpand(True)
         self.iconview.set_activate_on_single_click(True)
-        self.iconview.set_item_width(150)
+        self.iconview.set_item_width(155)
 
-        self.flowbox = Ptk.FlowBox(
-            min_children_per_line=2, row_spacing=21, column_spacing=21, halign="center"
-        )
         self.ui_display_box = Ptk.Box(
             orientation="vertical",
             hexpand=True,
@@ -83,12 +86,11 @@ class Apps:
         selected_item = widget.get_selected_items()
         treeiter = self.liststore.get_iter(selected_item[0])
         appname = self.liststore.get(treeiter, 2)[0]
-
         subprocess.Popen(["pardus-software", "-d", appname])
 
     def StreamGet(self, pixbuf, data):
         lang = f"pretty_{self.lang}"
-        
+
         label = data[lang]
         name = data["name"]
         self.liststore.append([pixbuf, label, name])

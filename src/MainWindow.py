@@ -31,7 +31,7 @@ class MainWindow(Ptk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.window = Ptk.ApplicationWindow(
-            title=_("Pardus Gnome Greeter"), width=1000, height=600
+            title=_("Pardus Gnome Greeter"), width=850, height=580
         )
         Ptk.utils.load_css("../data/style.css")
         with open("../data/shortcuts.json") as shortcut_json_file:

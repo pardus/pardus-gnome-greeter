@@ -56,7 +56,7 @@ layouts = [
     {
         "id": "pardus",
         "label": "Pardus",
-        "gif": "../data/assets/layout_gif_xp.gif",
+        "gif": "../data/assets/layout_gif_pardus.gif",
         "img": "../data/assets/layout_img_xp.svg",
         "togglebutton": None,
     },
