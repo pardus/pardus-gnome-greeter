@@ -24,6 +24,7 @@
     font-size: large;
     padding: 15px 20px;
     margin: unset;
+    border-radius: unset;
 }
 
 .listbox {
@@ -32,4 +33,65 @@
 
 .navigation-sidebar {
     padding-top: unset;
+}
+
+
+
+/* iconview */
+
+iconview.view {
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+iconview.view:selected {
+    border-radius: 5px;
+    background-color: @theme_selected_bg_color;
+}
+
+iconview.view:selected:focus {
+    border-radius: 5px;
+    background-color: @theme_selected_bg_color;
+}
+
+iconview.view:backdrop {
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+iconview.view:selected:backdrop {
+    border-radius: 5px;
+    background-color: @theme_unfocused_selected_bg_color;
+}
+
+iconview.view:selected:backdrop:hover {
+    border-radius: 5px;
+    background-color: @theme_unfocused_selected_bg_color;
+}
+
+
+.view>iconview {
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid alpha(@unfocused_borders, 0.9);
+
+}
+
+.view>iconview:hover {
+    background-color: alpha(@unfocused_borders, 0.5);
+}
+
+.view>iconview:hover:selected {
+    border-radius: 5px;
+    background-color: @theme_selected_bg_color;
+}
+
+.view>iconview:backdrop {
+    border-radius: 5px;
+    background-color: transparent;
+    color: @theme_unfocused_fg_color;
+}
+
+.view>iconview:backdrop:hover {
+    background-color: alpha(@unfocused_borders, 0.3);
 }
