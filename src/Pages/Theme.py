@@ -12,13 +12,15 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
-def fun_change_theme(toggle_button):
+def fun_change_theme(toggle_button,theme_name):
     schema = "org.gnome.desktop.interface"
     key = "color-scheme"
+    theme_key = "gtk-theme"
     name = toggle_button.get_name()
     state = toggle_button.get_active()
     if state:
         Ptk.utils.gsettings_set(schema, key, name)
+        Ptk.utils.gsettings_set(schema, theme_key, theme_name)
 
 
 def fun_create():
@@ -56,7 +58,7 @@ def fun_create():
         group=None,
         child=ui_dark_theme_image,
     )
-    ui_dark_theme_button.connect("toggled", fun_change_theme)
+    ui_dark_theme_button.connect("toggled", fun_change_theme, 'Adwaita-dark')
     ui_dark_theme_box = Ptk.Box(orientation="vertical",spacing=8,halign="center",children=[ui_dark_theme_button,ui_dark_theme_label])
     
     
@@ -68,7 +70,7 @@ def fun_create():
         group=ui_dark_theme_button,
         child=ui_light_theme_image,
     )
-    ui_light_theme_button.connect("toggled", fun_change_theme)
+    ui_light_theme_button.connect("toggled", fun_change_theme, 'Adwaita')
     ui_light_theme_box = Ptk.Box(orientation="vertical",spacing=8, halign="center",children=[ui_light_theme_button,ui_light_theme_label])
     
 
