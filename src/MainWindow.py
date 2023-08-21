@@ -2,6 +2,7 @@ import gi
 import os
 import sys
 import json
+from pathlib import Path
 import locale
 import threading
 
@@ -25,6 +26,13 @@ APPNAME_CODE = "pardus-gnome-greeter"
 TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
+
+
+autostart_file = str(Path.home()) + "/.config/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
+try:
+    os.remove(autostart_file)
+except OSError:
+    pass
 
 
 class MainWindow(Ptk.ApplicationWindow):

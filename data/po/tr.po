@@ -22,7 +22,7 @@ msgid "Pardus Gnome Greeter"
 msgstr "Pardus Gnome Karşılayıcı"
 
 msgid "Welcome"
-msgstr "Hoşgeldiniz"
+msgstr "Hoş Geldiniz"
 
 msgid "Layout"
 msgstr "Tasarım"
