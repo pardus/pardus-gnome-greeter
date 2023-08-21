@@ -20,7 +20,7 @@ VERSION = "0.0.1"
 APPNAME = "Pardus Gnome Greeter"
 DEV = "Osman Coskun"
 WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
-ICON = "tr.org.pardus.pardus-gnome-greeter.desktop"
+ICON = "pardus-gnome-greeter"
 
 APPNAME_CODE = "pardus-gnome-greeter"
 TRANSLATIONS_PATH = "/usr/share/locale"
