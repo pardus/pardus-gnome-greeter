@@ -3,7 +3,7 @@
         "id": "pardus-terminal-launcher",
         "name": "Pardus Terminal Launcher",
         "binding": "<Primary><Alt>t",
-        "command": "gnome-terminal"
+        "command": "x-terminal-emulator"
     },
     {
         "id": "pardus-firefox-launcher",
