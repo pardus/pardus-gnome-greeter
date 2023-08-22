@@ -171,6 +171,7 @@ def fun_create():
 
     flowbox = Ptk.FlowBox(
         min_children_per_line=3,
+        max_children_per_line=3,
         row_spacing=21,
         column_spacing=21,
         halign="center",
