@@ -1,6 +1,7 @@
 import gi
 import os
 import sys
+import time
 import subprocess
 
 sys.path.append("../")
@@ -67,4 +68,11 @@ def get_recommended_scale():
 
 
 def dconf_set(path, value):
-    return subprocess.run(["dconf", "write", path, value])
+    cmd = ["dconf", "write", path, value]
+#    cmd = f"dconf write {path} {value}"
+    return subprocess.run(cmd)
+
+
+def dconf_reset(path):
+    response = subprocess.run(["dconf", "reset", "-f", path])
+    return response

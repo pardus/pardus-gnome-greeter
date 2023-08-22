@@ -29,7 +29,6 @@ url = "http://161.9.194.187/api/greeter"
 class Apps:
     def __init__(self):
         self.lang = os.getenv("LANG")[0:2]
-        print(self.lang)
         cur_dir = os.path.dirname(__file__)
         ui_software_center_image = Ptk.Image(
             file=cur_dir + "/../../data/assets/pardus-software.svg",
@@ -103,7 +102,6 @@ class Apps:
                     self.stream.fetch(data)
             self.ui_display_box.append(self.iconview)
         else:
-            print(response["message"])
             error_message = response["message"]
             error_label = Ptk.Label(label=error_message, hexpand=True, halign="center")
             self.ui_display_box.append(error_label)
