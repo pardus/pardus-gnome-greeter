@@ -6,7 +6,7 @@
         "command": "x-terminal-emulator"
     },
     {
-        "id": "pardus-firefox-launcher",
+        "id": "pardus-software-launcher",
         "name": "Pardus Software Launcher",
         "binding": "<Primary><Alt>s",
         "command": "pardus-software"
