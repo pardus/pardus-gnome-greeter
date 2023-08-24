@@ -1,11 +1,11 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pardus-gnome-greeter
-Source: https://www.pardus.org.tr
-
+Upstream-Contact: Osman Coskun <osman.coskun@pardus.org.tr>
+Source: https://github.com/pardus/pardus-gnome-greeter
 
 
 Files: *
-Copyright: 2023 Osman Coskun <osman.coskun@pardus.org.tr>
+Copyright: 2023, Pardus <dev@pardus.org.tr>
 License: GPL-3.0+
 
 License: GPL-3.0+
