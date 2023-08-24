@@ -28,7 +28,20 @@ locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
 
+def check_live():
+    f = open("/proc/cmdline", "r").read()
+    return "boot=live" in f
+
 autostart_file = str(Path.home()) + "/.config/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
+
+# In live mode, the application should not welcome the user
+if check_live() and os.path.isfile(autostart_file):
+    try:
+        os.remove(autostart_file)
+    except OSError:
+        pass
+    exit(0)
+
 try:
     os.remove(autostart_file)
 except OSError:
