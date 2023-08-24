@@ -191,9 +191,9 @@ def fun_create():
         toggle = Ptk.ToggleButton(
             name=layout["id"], group=layouts[0]["togglebutton"], child=toggle_box
         )
-        toggle.connect("toggled", LayoutManager.set_layout)
         current_layout = str(LayoutManager.get_layout())
         toggle.set_active(current_layout == layout["id"])
+        toggle.connect("toggled", LayoutManager.set_layout)
 
         motion_controller = Gtk.EventControllerMotion()
         toggle.add_controller(motion_controller)
