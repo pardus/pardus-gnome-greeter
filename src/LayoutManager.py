@@ -42,6 +42,14 @@ class LayoutManager:
         return str(Ptk.utils.gsettings_get(schema, schema_key))[1:-1]
 
     def set_layout(toggle_button):
+        enable_extensions_schema = "org.gnome.shell"
+        enable_extensions_key = "disable-user-extensions"
+        Ptk.utils.gsettings_set(
+            enable_extensions_schema,
+            enable_extensions_key,
+            GLib.Variant.new_boolean(False),
+        )
+
         state = toggle_button.get_active()
         layout_name = None
         layout_name = toggle_button.get_name()

@@ -43,7 +43,7 @@ layouts = [
         "id": "10",
         "label": "10",
         "gif": "../data/assets/layout_gif_10.gif",
-        "img": "../data/assets/layout_img_10_1.svg",
+        "img": "../data/assets/layout_img_10.svg",
         "togglebutton": None,
     },
     {
@@ -57,7 +57,7 @@ layouts = [
         "id": "pardus",
         "label": "Pardus",
         "gif": "../data/assets/layout_gif_pardus.gif",
-        "img": "../data/assets/layout_img_xp.svg",
+        "img": "../data/assets/layout_img_pardus.svg",
         "togglebutton": None,
     },
 ]
@@ -118,7 +118,7 @@ def fun_create_togglebutton_img(index):
 
 def fun_create_togglebutton_gif(index):
     gif = layouts[index]["gif"]
-    label = layouts[index]["label"] + _(" Style")
+    label = layouts[index]["label"] + " " + _("Style")
 
     Label = Ptk.Label(label=label, halign="center")
     paintable = GifPaintable(gif)
