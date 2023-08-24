@@ -162,7 +162,7 @@
             },
             {
                 "path": "/org/gnome/shell/extensions/arcmenu/pinned-app-list",
-                "value": "['', '', 'firefox.desktop', '', '', 'org.gnome.Terminal.desktop', 'Firefox ESR Web Browser', '', 'firefox-esr.desktop', 'Evolution Mail and Calendar', '', 'org.gnome.Evolution.desktop', 'Files', '', 'org.gnome.Nautilus.desktop', 'Pardus Software Center', '', 'tr.org.pardus.software.desktop', 'Console', '', 'org.gnome.Console.desktop']"
+                "value": "['', '', 'firefox-esr.desktop', '', '', 'org.gnome.Evolution.desktop', '', '', 'org.gnome.Nautilus.desktop', '', '', 'tr.org.pardus.software.desktop', '', '', 'org.gnome.Console.desktop']"
             }
         ]
     },
