@@ -1,10 +1,56 @@
+pardus-gnome-greeter (0.0.3) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * translation fixed. GLib idle added
+  * translation fixed. images changed
+  * close button bug fixed
+  * next / close button bug fixed
+  * Update 'meson.build'
+  * Add 'data/po/meson.build'
+  * Add 'data/po/LINGUAS'
+  * Add 'data/po/POTFILES'
+  * fixed typo in meson
+  * Pardus layout added. typos fixed
+  * pardus layout added
+  * css added. minor fixes applied
+  * iconview css added. pardus layout gif added
+  * legacy applications dark / light theme support added
+  * pardus icon added for layout
+  * typo fixed. app removed after first run
+  * system conf changed
+  * about dialog icon fixed
+  * fix: terminal changed
+  * feat: layout configs added.
+  * fix: layouts are only 3 item per row
+  * locale: application Turkish name added
+  * Update 'data/custom_shortcuts.json'
+  * fix: translation fixed in layout
+  * update: application icon updated
+  * fix: Turkish keywords added
+  * feat: favourite apps added
+  * fix: layout issue
+  * update: keywords updated
+  * fix: pinned apps
+  * fix: pardus layout image. feat: user extensions enabled
+  * fix: gnome default wallpapers and subfolders are removed
+
+  [ Fatih Altun ]
+  * Update copyright
+  * Update debian standards
+  * Update caffeine image
+  * Add live control for welcome
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 24 Aug 2023 22:02:18 +0300
+
 pardus-gnome-greeter (0.0.2) unstable; urgency=medium
 
   * Keybinding added.
-  -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 PM +03
+
+ -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri, 20 Jan 2023 13:19:20 +0300
 
 pardus-gnome-greeter (0.0.1) unstable; urgency=medium
 
   * Initial release
   * Created layout files and assets
-  -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 PM +03
+
+ -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 +0300
