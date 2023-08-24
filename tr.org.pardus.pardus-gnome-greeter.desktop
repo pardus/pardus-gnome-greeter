@@ -1,13 +1,14 @@
 [Desktop Entry]
-Name=Pardus Gnome Greeter
-Name[tr]=Pardus Gnome Karşılayıcı
-GenericName=Pardus Gnome Greeter
-Comment=Pardus Gnome Greeter, Customize desktop with few clicks.
-Comment[tr]=Pardus Gnome Karşılayıcı. Birkaç tıkla masaüstünüzü özelleştirin.
+Name=Pardus Greeter
+Name[tr]=Pardus Karşılayıcı
+GenericName=Pardus Greeter
+Comment=Pardus Greeter, Customize desktop with a few clicks.
+Comment[tr]=Pardus Karşılayıcı. Birkaç tıkla masaüstünüzü özelleştirin.
 Exec=pardus-gnome-greeter
 Icon=pardus-gnome-greeter
 Terminal=false
 Type=Application
 Categories=Settings;X-Pardus-Apps;
 StartupNotify=true
-Keywords=Pardus, Pardus Gnome Greeter, Pardus Gnome Tweak
+Keywords=welcome;configure;tweaks;settings;
+Keywords[tr]=hoşgeldin;yapılandırıcı;inceayarlar;ayarlar;
