@@ -29,8 +29,6 @@ class WallpaperManager:
         wallpaper_dir = "/usr/share/backgrounds"
         wallpapers = []
         for root, dirs, files in os.walk(wallpaper_dir):
-            if root == wallpaper_dir:
-                continue
             dirs.clear()
             for file_name in files:
                 path = os.path.join(root, file_name)
