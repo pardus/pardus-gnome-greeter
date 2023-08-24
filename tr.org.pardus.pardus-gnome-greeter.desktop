@@ -10,5 +10,5 @@ Terminal=false
 Type=Application
 Categories=Settings;X-Pardus-Apps;
 StartupNotify=true
-Keywords=welcome;configure;tweaks;settings;
-Keywords[tr]=hoşgeldin;yapılandırıcı;inceayarlar;ayarlar;
+Keywords=welcome;configure;tweaks;settings;layout;
+Keywords[tr]=hoşgeldin;yapılandırıcı;inceayarlar;ayarlar;tasarım;
