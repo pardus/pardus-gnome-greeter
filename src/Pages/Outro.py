@@ -2,6 +2,7 @@ import os
 import gi
 import os
 import json
+import subprocess
 
 gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
@@ -57,6 +58,10 @@ def fun_create():
     # |                                                       |
     # |_______________________________________________________|
 
+
+    def ui_shortcut_trigger_button_clicked(button):
+        subprocess.Popen(["gtk-launch", "tr.org.pardus.pardus-gnome-shortcuts"])
+
     cur_dir = os.getcwd()
     with open(cur_dir + "/../data/social_media.json") as file:
         social_media_datas = json.loads(file.read())
@@ -96,6 +101,7 @@ def fun_create():
 
     ui_support_phone_label = Ptk.Label(markup=ui_support_phone_markup)
     ui_shortcut_trigger_button = Ptk.Button(label=_("Open Shortcuts"), valign="start")
+    ui_shortcut_trigger_button.connect("clicked", ui_shortcut_trigger_button_clicked)
 
     ui_support_content_box = Ptk.Box(
         spacing=23,
