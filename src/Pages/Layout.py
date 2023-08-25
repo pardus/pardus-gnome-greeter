@@ -118,7 +118,7 @@ def fun_create_togglebutton_img(index):
 
 def fun_create_togglebutton_gif(index):
     gif = layouts[index]["gif"]
-    label = layouts[index]["label"] + " " + _("Style")
+    label = _(layouts[index]["label"]) + " " + _("Style")
 
     Label = Ptk.Label(label=label, halign="center")
     paintable = GifPaintable(gif)
