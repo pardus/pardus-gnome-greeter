@@ -81,6 +81,7 @@ class Apps:
         selected_item = widget.get_selected_items()
         treeiter = self.liststore.get_iter(selected_item[0])
         appname = self.liststore.get(treeiter, 2)[0]
+        widget.unselect_all()
         subprocess.Popen(["pardus-software", "-d", appname])
 
     def StreamGet(self, pixbuf, data):
