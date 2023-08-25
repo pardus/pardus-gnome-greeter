@@ -20,11 +20,7 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
-# url = "https://apps.pardus.org.tr/api/greeter"
-
-url = "http://161.9.194.187/api/greeter"
-# this one is for test
-
+url = "https://apps.pardus.org.tr/api/greeter"
 
 class Apps:
     def __init__(self):
