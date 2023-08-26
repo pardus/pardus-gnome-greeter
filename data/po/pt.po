@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-04 16:36+0300\n"
+"PO-Revision-Date: 2023-08-26 16:36+0100\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+# MainWindow.py
+msgid "Pardus Gnome Greeter"
+msgstr "Gestor de sessões GNOME Pardus"
+
+msgid "Welcome"
+msgstr "Bem-vindo(a)"
+
+msgid "Layout"
+msgstr "Disposição"
+
+msgid "Wallpaper"
+msgstr "Papel de parede"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Extension"
+msgstr "Extensão"
+
+msgid "Display"
+msgstr "Ecrã"
+
+msgid "Applications"
+msgstr "Aplicações"
+
+msgid "Outro"
+msgstr "Outro"
+
+msgid "Configure Pardus with just a few clicks."
+msgstr "Configure o Pardus com apenas alguns cliques."
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Seguinte"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Contributors"
+msgstr "Contribuidores"
+
+# Apps.py
+msgid "Pardus Software Center"
+msgstr "Centro de Software Pardus"
+
+# Theme.py
+msgid "Dark Theme"
+msgstr "Tema escuro"
+
+msgid "Light Theme"
+msgstr "Tema claro"
+
+# Layout.py
+msgid "Style"
+msgstr "Estilo"
+
+msgid "Classic"
+msgstr "Clássico"
+
+# Display.py
+msgid "Recommended scale option for main display is"
+msgstr "A opção de escala recomendada para o ecrã principal é"
+
+msgid "Cursor Size"
+msgstr "Tamanho do cursor"
+
+# Outro.py
+msgid "Social Media Accounts"
+msgstr "Contas de redes sociais"
+
+msgid "Support"
+msgstr "Suporte"
+
+msgid "Shortcuts"
+msgstr "Atalhos"
+
+msgid "Open Shortcuts"
+msgstr "Abrir atalhos"
+
+msgid "Home Page"
+msgstr "Página inicial"
+
+msgid "Documentetation"
+msgstr "Documentação"
+
+msgid "Community"
+msgstr "Comunidade"
+
+msgid "Forum"
+msgstr "Fórum"
+
+# Welcome.py
+msgid "This Application Helps Configure Pardus"
+msgstr "Esta aplicação ajuda a configurar o Pardus"
+
+# Extension
+msgid "Add a quick navigation menu for system places."
+msgstr "Adicionar um menu de navegação rápida para locais do sistema."
+
+msgid "Status menu for removable device access and unmounting."
+msgstr ""
+"Adicionar um menu de estado para aceder e desmontar dispositivos removíveis."
+
+msgid "Disable screensaver and auto-suspend."
+msgstr "Desativar a proteção de ecrã e a suspensão automática."
+
+msgid "Add a category-based application menu."
+msgstr "Adicionar um menu de aplicações baseado em categorias."
+
+msgid ""
+"Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons "
+"in the Shell."
+msgstr ""
+"Ativa o suporte para AppIndicator, KStatusNotifierItem e ícones legados da "
+"área de notificação do sistema na interface(Shell)."
+
+msgid ""
+"Eliminates the 'Windows is ready' notification and brings the window into "
+"focus."
+msgstr ""
+"Elimina a notificação \"As janelas estão prontas\" e coloca a janela em foco."
+
+msgid "Cutting-edge clipboard manager for Gnome Shell."
+msgstr "Gestor inovador da área de transferência para o GNOME Shell."
+
+msgid "Adds clipboard indicator to top panel, caches history."
+msgstr ""
+"Adiciona o indicador da área de transferência ao painel superior, coloca o "
+"histórico em cache."
