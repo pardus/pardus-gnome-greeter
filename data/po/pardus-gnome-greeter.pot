@@ -39,6 +39,9 @@ msgstr ""
 msgid "Extension"
 msgstr ""
 
+msgid "Extensions"
+msgstr ""
+
 msgid "Display"
 msgstr ""
 
