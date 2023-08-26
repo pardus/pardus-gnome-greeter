@@ -36,6 +36,9 @@ msgstr "Tema"
 msgid "Extension"
 msgstr "Uzantı"
 
+msgid "Extensions"
+msgstr "Uzantılar"
+
 msgid "Display"
 msgstr "Ekran"
 
