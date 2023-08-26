@@ -19,7 +19,7 @@ msgstr ""
 
 
 # MainWindow.py
-msgid "Pardus Gnome Greeter"
+msgid "Pardus GNOME Greeter"
 msgstr ""
 
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Home Page"
 msgstr ""
 
-msgid "Documentetation"
+msgid "Documentation"
 msgstr ""
 
 msgid "Community"
@@ -125,7 +125,7 @@ msgstr ""
 
 
 # Welcome.py
-msgid "This Application Helps Configure Pardus"
+msgid "This application helps configure Pardus"
 msgstr ""
 
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Add a quick navigation menu for system places."
 msgstr ""
 
-msgid "Status menu for removable device access and unmounting."
+msgid "Add a status menu for accessing and unmounting removable devices."
 msgstr ""
 
 msgid "Disable screensaver and auto-suspend."
@@ -148,7 +148,7 @@ msgstr ""
 msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
 msgstr ""
 
-msgid "Cutting-edge clipboard manager for Gnome Shell."
+msgid "Cutting-edge clipboard manager for GNOME Shell."
 msgstr ""
 
 msgid "Adds clipboard indicator to top panel, caches history."

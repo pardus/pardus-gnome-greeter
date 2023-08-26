@@ -3,8 +3,8 @@
   <schema id="org.pardus.pardus-gnome-greeter" path="/org/pardus/pardus-gnome-greeter/">
       <key name="layout-name" type="s">
           <default>"set_2"</default>
-          <summary>Gnome Layout</summary>
-          <description>Pardus Gnome Layout</description>
+          <summary>GNOME Layout</summary>
+          <description>Pardus GNOME Layout</description>
       </key>
       <key name="first-run" type="b">
           <default>true</default>

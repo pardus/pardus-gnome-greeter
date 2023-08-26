@@ -36,7 +36,7 @@ def fun_create():
     )
     markup = f"<span size='25pt'>{_('Welcome')}</span>"
     os_welcome = Ptk.Label(markup=markup, halign="center")
-    os_description = Ptk.Label(label=_("This Application Helps Configure Pardus"))
+    os_description = Ptk.Label(label=_("This application helps configure Pardus"))
     box = Ptk.Box(
         orientation="vertical",
         hexpand=True,

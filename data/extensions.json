@@ -4,7 +4,7 @@
         "logo": "../data/assets/ext_app_drive_menu_logo.png",
         "id": "drive-menu@gnome-shell-extensions.gcampax.github.com",
         "name": "Removable Drive Menu",
-        "description": "Status menu for removable device access and unmounting.",
+        "description": "Add a status menu for accessing and unmounting removable devices.",
         "image": "../data/assets/ext_app_drive_menu_image.png"
     },
     {
@@ -32,7 +32,7 @@
         "logo": "../data/assets/ext_app_pano_logo.png",
         "id": "pano@elhan.io",
         "name": "Pano - Clipboard Manager",
-        "description": "Cutting-edge clipboard manager for Gnome Shell.",
+        "description": "Cutting-edge clipboard manager for GNOME Shell.",
         "image": "../data/assets/ext_app_pano_image.png"
     },
     {

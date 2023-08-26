@@ -17,7 +17,7 @@ from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, 
 
 
 VERSION = "0.0.1"
-APPNAME = "Pardus Gnome Greeter"
+APPNAME = "Pardus GNOME Greeter"
 DEV = "Osman Coskun"
 WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
 ICON = "pardus-gnome-greeter"
@@ -52,7 +52,7 @@ class MainWindow(Ptk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.window = Ptk.ApplicationWindow(
-            title=_("Pardus Gnome Greeter"), width=850, height=580
+            title=_("Pardus GNOME Greeter"), width=850, height=580
         )
         Ptk.utils.load_css("../data/style.css")
         with open("../data/shortcuts.json") as shortcut_json_file:
@@ -168,7 +168,7 @@ class MainWindow(Ptk.ApplicationWindow):
             show_seperators=True, css=["navigation-sidebar"]
         )
         self.ui_markup = (
-            f"<span size='x-large'><b>{_('Pardus Gnome Greeter')}</b></span>"
+            f"<span size='x-large'><b>{_('Pardus GNOME Greeter')}</b></span>"
         )
         self.ui_application_title = Ptk.Label(markup=self.ui_markup, valign="center")
         self.ui_header_toggles_box = Ptk.Box(css=["linked"])
@@ -310,7 +310,7 @@ class MainWindow(Ptk.ApplicationWindow):
             issue_url=WEBSITE,
             credit_section=[_("Contributors"), [DEV]],
             translator_credits=DEV,
-            copyright="© 2023 Ulakbim / Pardus",
+            copyright="© 2023 TÜBİTAK ULAKBİM / Pardus",
             developers=[DEV],
             application_icon=ICON,
             transient_for=self.window,

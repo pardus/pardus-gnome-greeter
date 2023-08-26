@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 
 # MainWindow.py
-msgid "Pardus Gnome Greeter"
-msgstr "Pardus Gnome Karşılayıcı"
+msgid "Pardus GNOME Greeter"
+msgstr "Pardus GNOME Karşılayıcı"
 
 msgid "Welcome"
 msgstr "Hoş Geldiniz"
@@ -34,7 +34,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Extension"
-msgstr "Eklentiler"
+msgstr "Uzantı"
 
 msgid "Display"
 msgstr "Ekran"
@@ -46,7 +46,7 @@ msgid "Outro"
 msgstr "Kapanış"
 
 msgid "Configure Pardus with just a few clicks."
-msgstr "Birkaç tıkla Pardus'u özelleştir."
+msgstr "Birkaç tıkla Pardusʼu yapılandırın."
 
 msgid "Previous"
 msgstr "Önceki"
@@ -60,7 +60,6 @@ msgstr "Kapat"
 msgid "Contributors"
 msgstr "Katkı Sağlayanlar"
 
-
 # Apps.py
 msgid "Pardus Software Center"
 msgstr "Pardus Uygulama Merkezi"
@@ -72,7 +71,6 @@ msgstr "Koyu Tema"
 msgid "Light Theme"
 msgstr "Açık Tema"
 
-
 # Layout.py
 msgid "Style"
 msgstr "Tarzı"
@@ -80,14 +78,12 @@ msgstr "Tarzı"
 msgid "Classic"
 msgstr "Klasik"
 
-
 # Display.py
 msgid "Recommended scale option for main display is"
 msgstr "Ana ekran için önerilen ölçeklendirme"
 
 msgid "Cursor Size"
 msgstr "İmleç Boyutu"
-
 
 # Outro.py
 msgid "Social Media Accounts"
@@ -102,12 +98,11 @@ msgstr "Kısayollar"
 msgid "Open Shortcuts"
 msgstr "Kısayolları Aç"
 
-
 msgid "Home Page"
-msgstr "Websitesi"
+msgstr "Web Sitesi"
 
-msgid "Documentetation"
-msgstr "Dökümanlar"
+msgid "Documentation"
+msgstr "Belgeler"
 
 msgid "Community"
 msgstr "Topluluk"
@@ -115,25 +110,22 @@ msgstr "Topluluk"
 msgid "Forum"
 msgstr "Forum"
 
-
-
-
 # Welcome.py
-msgid "This Application Helps Configure Pardus"
-msgstr "Bu uygulama Pardus'u özelleştirmenize yardımcı olur"
+msgid "This application helps configure Pardus"
+msgstr "Bu uygulama Pardusʼu özelleştirmenize yardımcı olur"
 
 # Extension
 msgid "Add a quick navigation menu for system places."
 msgstr "Sistem yerleri için hızlı gezinme menüsü ekleyin."
 
-msgid "Status menu for removable device access and unmounting."
-msgstr "Taşınabilir cihazlara erişim ve çıkartma için durum menüsü ekleyin."
+msgid "Add a status menu for accessing and unmounting removable devices."
+msgstr "Taşınabilir cihazlara erişim ve çıkartma için durum menüsü ekle."
 
 msgid "Disable screensaver and auto-suspend."
-msgstr "Ekran koruyucu ve otomatik uyku modunu devre dışı bırakın."
+msgstr "Ekran koruyucu ve otomatik uyku kipini devre dışı bırak."
 
 msgid "Add a category-based application menu."
-msgstr "Kategori tabanlı uygulama menüsü ekleyin."
+msgstr "Kategori tabanlı uygulama menüsü ekle."
 
 msgid "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."
 msgstr "AppIndicator, KStatusNotifierItem ve eski Tepsi simgelerini Shell'de desteklemeyi etkinleştirir."
@@ -141,8 +133,8 @@ msgstr "AppIndicator, KStatusNotifierItem ve eski Tepsi simgelerini Shell'de des
 msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
 msgstr "'Pencere hazır' bildirimini kaldırır ve pencereyi odaklar."
 
-msgid "Cutting-edge clipboard manager for Gnome Shell."
-msgstr "Gnome Shell için son teknoloji panoyöneticisi."
+msgid "Cutting-edge clipboard manager for GNOME Shell."
+msgstr "GNOME Shell için son teknoloji pano yöneticisi."
 
 msgid "Adds clipboard indicator to top panel, caches history."
-msgstr "Üst panelde panoyu gösterge ekler, geçmişi önbelleğe alır."
+msgstr "Üst panele pano göstergesi ekler, geçmişi önbelleğe alır."
