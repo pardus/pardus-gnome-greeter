@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-04 16:36+0300\n"
-"PO-Revision-Date: 2023-08-26 16:36+0100\n"
+"PO-Revision-Date: 2023-08-27 14:30+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 # MainWindow.py
-msgid "Pardus Gnome Greeter"
+msgid "Pardus GNOME Greeter"
 msgstr "Gestor de sessões GNOME Pardus"
 
 msgid "Welcome"
@@ -36,6 +36,9 @@ msgstr "Tema"
 
 msgid "Extension"
 msgstr "Extensão"
+
+msgid "Extensions"
+msgstr "Extensões"
 
 msgid "Display"
 msgstr "Ecrã"
@@ -102,7 +105,7 @@ msgstr "Abrir atalhos"
 msgid "Home Page"
 msgstr "Página inicial"
 
-msgid "Documentetation"
+msgid "Documentation"
 msgstr "Documentação"
 
 msgid "Community"
@@ -112,14 +115,14 @@ msgid "Forum"
 msgstr "Fórum"
 
 # Welcome.py
-msgid "This Application Helps Configure Pardus"
+msgid "This application helps configure Pardus"
 msgstr "Esta aplicação ajuda a configurar o Pardus"
 
 # Extension
 msgid "Add a quick navigation menu for system places."
 msgstr "Adicionar um menu de navegação rápida para locais do sistema."
 
-msgid "Status menu for removable device access and unmounting."
+msgid "Add a status menu for accessing and unmounting removable devices."
 msgstr ""
 "Adicionar um menu de estado para aceder e desmontar dispositivos removíveis."
 
@@ -142,7 +145,7 @@ msgid ""
 msgstr ""
 "Elimina a notificação \"As janelas estão prontas\" e coloca a janela em foco."
 
-msgid "Cutting-edge clipboard manager for Gnome Shell."
+msgid "Cutting-edge clipboard manager for GNOME Shell."
 msgstr "Gestor inovador da área de transferência para o GNOME Shell."
 
 msgid "Adds clipboard indicator to top panel, caches history."
