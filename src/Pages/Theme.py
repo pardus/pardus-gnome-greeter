@@ -79,8 +79,8 @@ def fun_create():
     else:
         ui_light_theme_button.set_active(True)
 
-    ui_light_theme_button.connect("toggled", fun_change_theme, 'Adwaita')
-    ui_dark_theme_button.connect("toggled", fun_change_theme, 'Adwaita-dark')
+    ui_light_theme_button.connect("toggled", fun_change_theme, 'adw-gtk3')
+    ui_dark_theme_button.connect("toggled", fun_change_theme, 'adw-gtk3-dark')
 
     ui_theme_box = Ptk.Box(
         valign="center",
