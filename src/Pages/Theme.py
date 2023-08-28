@@ -58,9 +58,8 @@ def fun_create():
         group=None,
         child=ui_dark_theme_image,
     )
-    ui_dark_theme_button.connect("toggled", fun_change_theme, 'Adwaita-dark')
     ui_dark_theme_box = Ptk.Box(orientation="vertical",spacing=8,halign="center",children=[ui_dark_theme_button,ui_dark_theme_label])
-    
+
     
     ui_light_theme_label = Ptk.Label(markup=ui_light_theme_label_markup,hexpand=True,halign="center")
     ui_light_theme_button = Ptk.ToggleButton(
@@ -70,9 +69,7 @@ def fun_create():
         group=ui_dark_theme_button,
         child=ui_light_theme_image,
     )
-    ui_light_theme_button.connect("toggled", fun_change_theme, 'Adwaita')
     ui_light_theme_box = Ptk.Box(orientation="vertical",spacing=8, halign="center",children=[ui_light_theme_button,ui_light_theme_label])
-    
 
 
     theme = get_current_theme()
@@ -81,6 +78,9 @@ def fun_create():
         ui_dark_theme_button.set_active(True)
     else:
         ui_light_theme_button.set_active(True)
+
+    ui_light_theme_button.connect("toggled", fun_change_theme, 'Adwaita')
+    ui_dark_theme_button.connect("toggled", fun_change_theme, 'Adwaita-dark')
 
     ui_theme_box = Ptk.Box(
         valign="center",
