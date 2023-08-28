@@ -1,3 +1,34 @@
+pardus-gnome-greeter (0.0.5) unstable; urgency=medium
+
+  [ Sabri Ünal ]
+  * data: Correct some translation errors
+
+  [ Hugo Carvalho ]
+  * Add portuguese translation
+  * Create pardus-gnome-greeter
+  * Add pt
+
+  [ Fatih Altun ]
+  * Fix typo
+  * Update pot file
+  * Update Turkish translations
+  * Update version for next release
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+  * Delete pardus-gnome-greeter
+  * Update Portuguese translation
+  * Update Portuguese translation
+  * Update Portuguese translation
+
+  [ Fatih Altun ]
+  * Fix initial theme set problem
+  * Update gtk theme names
+  * Add rounded-window-corners to depends
+  * Add gtk3-theme-switcher to depends
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 28 Aug 2023 19:21:58 +0300
+
 pardus-gnome-greeter (0.0.4) unstable; urgency=medium
 
   * Add missing clicked signal to shortcut button
