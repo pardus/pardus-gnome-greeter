@@ -20,7 +20,8 @@ Depends: ${misc:Depends},
   gnome-shell-extension-dashtodock,
   gnome-shell-extension-arc-menu,
   gnome-shell-extension-dash-to-panel,
-  gnome-shell-extension-start-overlay-in-application-view
+  gnome-shell-extension-start-overlay-in-application-view,
+  gnome-shell-extension-rounded-window-corners
 Description: Personalize your Pardus desktop with Pardus GNOME Greeter.
  This application offers easy customization of wallpapers,
  themes, layouts, and display settings.
