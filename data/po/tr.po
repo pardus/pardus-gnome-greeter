@@ -91,7 +91,7 @@ msgid "Cursor Size"
 msgstr "İmleç Boyutu"
 
 msgid "Tiny"
-msgstr "Çok küçük"
+msgstr "Minik"
 
 msgid "Small"
 msgstr "Küçük"
