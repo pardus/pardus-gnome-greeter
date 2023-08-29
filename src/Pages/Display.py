@@ -79,12 +79,8 @@ def fun_set_values_to_scale(desktop, nautilus):
         Ptk.utils.gsettings_get(desktop_icons_schema, desktop_icons_key)
     )
     nautilus_icon_size = str(Ptk.utils.gsettings_get(nautilus_schema, nautilus_key))
-    print(desktop_icon_size, nautilus_icon_size)
-    print(type(desktop_icon_size), type(nautilus_icon_size))
     di_value = di_options[desktop_icon_size]
-    print(di_value)
     ni_value = ni_options[nautilus_icon_size]
-    print(ni_value)
     desktop.set_value(di_value)
     nautilus.set_value(ni_value)
 
