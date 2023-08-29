@@ -109,7 +109,7 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-msgid "Extra Large"
+msgid "Huge"
 msgstr ""
 
 msgid "File manager icon size"

@@ -174,7 +174,7 @@ def fun_create():
     ui_nautilus_icons_scale.add(1, "TOP", _("Small"))
     ui_nautilus_icons_scale.add(2, "TOP", _("Standart"))
     ui_nautilus_icons_scale.add(3, "TOP", _("Large"))
-    ui_nautilus_icons_scale.add(4, "TOP", _("Extra Large"))
+    ui_nautilus_icons_scale.add(4, "TOP", _("Huge"))
 
     ui_nautilus_icons_scale.connect("value-changed", fun_change_nautilus_icons_scale)
 
