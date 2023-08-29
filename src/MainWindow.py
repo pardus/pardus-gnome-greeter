@@ -89,7 +89,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": _("Layout"),
-                "icon": "edit-copy",
+                "icon": "view-paged-symbolic",
             },
             {
                 "id": "ui_wallpaper_listboxrow",
@@ -168,7 +168,7 @@ class MainWindow(Ptk.ApplicationWindow):
             show_seperators=True, css=["navigation-sidebar"]
         )
         self.ui_markup = (
-            f"<span size='x-large'><b>{_('Pardus GNOME Greeter')}</b></span>"
+            f"<span><b>{_('Pardus GNOME Greeter')}</b></span>"
         )
         self.ui_application_title = Ptk.Label(markup=self.ui_markup, valign="center")
         self.ui_header_toggles_box = Ptk.Box(css=["linked"])
