@@ -81,12 +81,37 @@ msgstr "Tarzı"
 msgid "Classic"
 msgstr "Klasik"
 
+
+
 # Display.py
 msgid "Recommended scale option for main display is"
 msgstr "Ana ekran için önerilen ölçeklendirme"
 
 msgid "Cursor Size"
 msgstr "İmleç Boyutu"
+
+msgid "Tiny"
+msgstr "Çok küçük"
+
+msgid "Small"
+msgstr "Küçük"
+
+msgid "Standart"
+msgstr "Standart"
+
+msgid "Large"
+msgstr "Büyük"
+
+msgid "Extra Large"
+msgstr "Çok Büyük"
+
+msgid "File manager icon size"
+msgstr "Dosya yöneticisi simge boyutu"
+
+msgid "Desktop icon size"
+msgstr "Masaüstü simge boyutu"
+
+
 
 # Outro.py
 msgid "Social Media Accounts"

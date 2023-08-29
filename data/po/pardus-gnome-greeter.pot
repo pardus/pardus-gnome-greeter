@@ -97,6 +97,27 @@ msgstr ""
 msgid "Cursor Size"
 msgstr ""
 
+msgid "Tiny"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Standart"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Extra Large"
+msgstr ""
+
+msgid "File manager icon size"
+msgstr ""
+
+msgid "Desktop icon size"
+msgstr ""
+
 
 # Outro.py
 msgid "Social Media Accounts"
