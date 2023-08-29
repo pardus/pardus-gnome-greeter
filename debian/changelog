@@ -1,3 +1,27 @@
+pardus-gnome-greeter (0.0.6) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+  * Update Portuguese translation
+
+  [ Osman Coskun ]
+  * fix: pardus icon size
+  * fix: Application title fixed
+  * feat: desktop icons added
+  * feat: nautilus and desktop icon scaling added
+  * fix: EN/TR translation files are updated
+  * fix: typo
+  * fix: removed unnecessary prints
+  * fix: display page layout fixed
+  * fix: extra large changed to huge
+
+  [ Fatih Altun ]
+  * Fix translation typo
+  * Update version for next release
+  * Update xp config menu button size
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 29 Aug 2023 19:40:23 +0300
+
 pardus-gnome-greeter (0.0.5) unstable; urgency=medium
 
   [ Sabri Ünal ]
