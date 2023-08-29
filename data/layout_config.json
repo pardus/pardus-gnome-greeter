@@ -163,7 +163,11 @@
             {
                 "path": "/org/gnome/shell/extensions/arcmenu/pinned-app-list",
                 "value": "['', '', 'firefox-esr.desktop', '', '', 'org.gnome.Evolution.desktop', '', '', 'org.gnome.Nautilus.desktop', '', '', 'tr.org.pardus.software.desktop', '', '', 'org.gnome.Console.desktop']"
-            }
+            },
+	    {
+	    	"path":"/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
+		"value":"30.0"
+	    }
         ]
     },
     "xp": {
@@ -250,10 +254,6 @@
                 "type": "string"
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
-                "value": "26.0"
-            },
-            {
                 "path": "/org/gnome/shell/extensions/arcmenu/menu-button-border-radius",
                 "value": "(true, 0)"
             },
@@ -269,7 +269,11 @@
                 "path": "/org/gnome/shell/extensions/arcmenu/menu-item-icon-size",
                 "value": "Medium",
                 "type": "string"
-            }
+            },
+	    {
+	    	"path":"/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
+		"value":"30.0"
+	    }
         ]
     },
     "pardus": {
