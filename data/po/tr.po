@@ -103,7 +103,7 @@ msgid "Large"
 msgstr "Büyük"
 
 msgid "Huge"
-msgstr "Çok Büyük"
+msgstr "Kocaman"
 
 msgid "File manager icon size"
 msgstr "Dosya yöneticisi simge boyutu"
