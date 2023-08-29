@@ -155,7 +155,9 @@ def fun_create():
     ui_desktop_icons_scale.connect("value-changed", fun_change_desktop_icons_scale)
 
     ui_desktop_icons_label_markup = f"<b>{_('Desktop icon size')}</b>"
-    ui_desktop_icons_label = Ptk.Label(markup=ui_desktop_icons_label_markup)
+    ui_desktop_icons_label = Ptk.Label(
+        markup=ui_desktop_icons_label_markup, margin_top=21
+    )
 
     # dosya yoneticisi simge boyutu
     ui_nautilus_icons_scale = Ptk.Scale(
@@ -177,7 +179,9 @@ def fun_create():
     ui_nautilus_icons_scale.connect("value-changed", fun_change_nautilus_icons_scale)
 
     ui_nautilus_icons_label_markup = f"<b>{_('File manager icon size')}</b>"
-    ui_nautilus_icons_label = Ptk.Label(markup=ui_nautilus_icons_label_markup)
+    ui_nautilus_icons_label = Ptk.Label(
+        markup=ui_nautilus_icons_label_markup, margin_top=21
+    )
 
     fun_set_values_to_scale(ui_desktop_icons_scale, ui_nautilus_icons_scale)
 
