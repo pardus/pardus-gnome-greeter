@@ -272,7 +272,7 @@
             },
 	    {
 	    	"path":"/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
-		"value":"30.0"
+		"value":"26.0"
 	    }
         ]
     },
