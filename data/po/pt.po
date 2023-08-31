@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-04 16:36+0300\n"
-"PO-Revision-Date: 2023-08-28 17:58+0100\n"
+"PO-Revision-Date: 2023-08-31 14:02+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -88,6 +88,27 @@ msgstr "A opção de escala recomendada para o ecrã principal é"
 
 msgid "Cursor Size"
 msgstr "Tamanho do cursor"
+
+msgid "Tiny"
+msgstr "Minúsculo"
+
+msgid "Small"
+msgstr "Pequeno"
+
+msgid "Standart"
+msgstr "Padrão"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Huge"
+msgstr "Enorme"
+
+msgid "File manager icon size"
+msgstr "Tamanho dos ícones do gestor de ficheiros"
+
+msgid "Desktop icon size"
+msgstr "Tamanho dos ícones da área de trabalho"
 
 # Outro.py
 msgid "Social Media Accounts"
