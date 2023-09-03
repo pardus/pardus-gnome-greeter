@@ -3,7 +3,7 @@ Name=Pardus Greeter
 Name[pt]=Bem-vindo ao Pardus
 Name[tr]=Pardus Karşılayıcı
 GenericName=Pardus Greeter
-GenericName=[pt]=Aplicação de Boas-vindas
+GenericName[pt]=Aplicação de Boas-vindas
 Comment=Pardus Greeter, Customize desktop with a few clicks.
 Comment[pt]=Bem-vindo ao Pardus. Personalize o ambiente de trabalho com apenas alguns cliques.
 Comment[tr]=Pardus Karşılayıcı. Birkaç tıkla masaüstünüzü özelleştirin.
