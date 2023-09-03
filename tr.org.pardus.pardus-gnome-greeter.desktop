@@ -1,8 +1,11 @@
 [Desktop Entry]
 Name=Pardus Greeter
+Name[pt]=Bem-vindo ao Pardus
 Name[tr]=Pardus Karşılayıcı
 GenericName=Pardus Greeter
+GenericName=[pt]=Aplicação de Boas-vindas
 Comment=Pardus Greeter, Customize desktop with a few clicks.
+Comment[pt]=Bem-vindo ao Pardus. Personalize o ambiente de trabalho com apenas alguns cliques.
 Comment[tr]=Pardus Karşılayıcı. Birkaç tıkla masaüstünüzü özelleştirin.
 Exec=pardus-gnome-greeter
 Icon=pardus-gnome-greeter
@@ -11,4 +14,5 @@ Type=Application
 Categories=Settings;X-Pardus-Apps;
 StartupNotify=true
 Keywords=welcome;configure;tweaks;settings;layout;style;
+Keywords[pt]=bem-vindo;configurar;ajustes;definições;disposição;esquema;estilo;
 Keywords[tr]=hoşgeldin;yapılandırıcı;inceayarlar;ayarlar;tasarım;tarz;
