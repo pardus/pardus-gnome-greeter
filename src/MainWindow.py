@@ -16,7 +16,7 @@ from locale import gettext as _
 from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
 
 
-VERSION = "0.0.6"
+VERSION = "0.0.7"
 APPNAME = "Pardus GNOME Greeter"
 DEV = "Osman Coskun"
 WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
