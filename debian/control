@@ -24,6 +24,7 @@ Depends: ${misc:Depends},
   gnome-shell-extension-rounded-window-corners,
   gnome-shell-extension-gtk3-theme-switcher,
   gnome-shell-extension-no-annoyance
+Breaks: pardus-welcome
 Description: Personalize your Pardus desktop with Pardus GNOME Greeter.
  This application offers easy customization of wallpapers,
  themes, layouts, and display settings.
