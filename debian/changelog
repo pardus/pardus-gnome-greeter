@@ -1,3 +1,23 @@
+pardus-gnome-greeter (0.0.7) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Add Portuguese translations
+  * Update Portuguese translations
+  * Update tr.org.pardus.pardus-gnome-greeter.desktop
+
+  [ Fatih Altun ]
+  * Add missing no-annoyance extension depends
+
+  [ Osman Coskun ]
+  * fix: wallpaper setting on both dark/light modes
+
+  [ Fatih Altun ]
+  * Add breaks for pardus-welcome
+  * Update version
+  * Update about menu icon
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 24 Oct 2023 17:08:16 +0300
+
 pardus-gnome-greeter (0.0.6) unstable; urgency=medium
 
   [ Hugo Carvalho ]
