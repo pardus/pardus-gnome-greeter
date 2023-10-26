@@ -3,7 +3,7 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
-from utils import get_current_theme
+
 from gi.repository import GLib, Gtk
 from utils import get_recommended_scale
 import locale

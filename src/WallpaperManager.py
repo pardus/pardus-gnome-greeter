@@ -1,5 +1,6 @@
 import os
 import sys
+import utils
 
 sys.path.append("../")
 from libpardus import Ptk
@@ -23,3 +24,9 @@ class WallpaperManager:
                 wallpapers.append(path)
 
         return wallpapers
+
+    def get_wallpaper():
+        color_scheme = str(utils.get_color_scheme())
+        wp_keys = {"'default'": "picture-uri", "'prefer-dark'": "picture-uri-dark"}
+        wp_schema = "org.gnome.desktop.background"
+        return Ptk.utils.gsettings_get(wp_schema, wp_keys[color_scheme])

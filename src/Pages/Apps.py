@@ -7,7 +7,6 @@ import subprocess
 
 gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
-from utils import get_current_theme
 from gi.repository import GLib, Gtk, Gio, GdkPixbuf
 from utils import get_recommended_scale
 from Server import Server
@@ -21,6 +20,7 @@ locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
 url = "https://apps.pardus.org.tr/api/greeter"
+
 
 class Apps:
     def __init__(self):

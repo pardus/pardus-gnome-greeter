@@ -31,7 +31,10 @@ def check_live():
     f = open("/proc/cmdline", "r").read()
     return "boot=live" in f
 
-autostart_file = str(Path.home()) + "/.config/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
+
+autostart_file = (
+    str(Path.home()) + "/.config/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
+)
 
 # In live mode, the application should not welcome the user
 if check_live() and os.path.isfile(autostart_file):
@@ -48,13 +51,13 @@ except OSError:
 
 
 class MainWindow(Ptk.ApplicationWindow):
-    def __init__(self, *args,app, **kwargs):
+    def __init__(self, *args, app, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_application(app)
         self.window = Ptk.ApplicationWindow(
             title=_("Pardus GNOME Greeter"), width=850, height=580
         )
-        
+
         Ptk.utils.load_css("../data/style.css")
         with open("../data/shortcuts.json") as shortcut_json_file:
             self.shortcuts = json.loads(shortcut_json_file.read())
@@ -74,7 +77,6 @@ class MainWindow(Ptk.ApplicationWindow):
         self.result = None
         self.ui_leaflet_main_window = Adw.Leaflet()
 
-
         self.page_datas = [
             {
                 "id": "ui_welcome_listboxrow",
@@ -92,7 +94,6 @@ class MainWindow(Ptk.ApplicationWindow):
                 "text": _("Layout"),
                 "icon": "view-paged-symbolic",
             },
-            
             {
                 "id": "ui_theme_listboxrow",
                 "page": Theme.fun_create(),
@@ -148,7 +149,6 @@ class MainWindow(Ptk.ApplicationWindow):
         else:
             self.current_page = 0
 
-            
         self.ui_pages_stack = Ptk.Stack(hexpand=True, vexpand=True)
         self.ui_pages_stack.set_transition_type(
             Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
@@ -175,9 +175,7 @@ class MainWindow(Ptk.ApplicationWindow):
         self.ui_listbox_pages = Ptk.ListBox(
             show_seperators=True, css=["navigation-sidebar"]
         )
-        self.ui_markup = (
-            f"<span><b>{_('Pardus GNOME Greeter')}</b></span>"
-        )
+        self.ui_markup = f"<span><b>{_('Pardus GNOME Greeter')}</b></span>"
         self.ui_application_title = Ptk.Label(markup=self.ui_markup, valign="center")
         self.ui_header_toggles_box = Ptk.Box(css=["linked"])
 

@@ -8,10 +8,7 @@ import subprocess
 from gi.repository import Gio, GLib
 from libpardus import Ptk
 from utils import (
-    get_current_theme,
-    get_layout_name,
     set_layout_name,
-    apply_layout_config,
     dconf_set,
     dconf_reset,
 )

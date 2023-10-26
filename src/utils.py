@@ -2,6 +2,8 @@ import gi
 import os
 import sys
 import time
+import json
+
 import subprocess
 
 sys.path.append("../")
@@ -27,8 +29,16 @@ def set_layout_name(layout_name: str):
     # return subprocess.run(escape_cmd)
 
 
-def get_current_theme():
+def get_color_scheme():
     return Ptk.utils.gsettings_get("org.gnome.desktop.interface", "color-scheme")
+
+
+def get_gtk_theme():
+    return Ptk.utils.gsettings_get("org.gnome.desktop.interface", "gtk-theme")
+
+
+def get_icon_theme():
+    return Ptk.utils.gsettings_get("org.gnome.desktop.interface", "icon-theme")
 
 
 def apply_layout_config(config: str):
@@ -69,10 +79,14 @@ def get_recommended_scale():
 
 def dconf_set(path, value):
     cmd = ["dconf", "write", path, value]
-#    cmd = f"dconf write {path} {value}"
+    #    cmd = f"dconf write {path} {value}"
     return subprocess.run(cmd)
 
 
 def dconf_reset(path):
     response = subprocess.run(["dconf", "reset", "-f", path])
     return response
+
+
+def desktop_env():
+    return os.environ["XDG_CURRENT_DESKTOP"].lower()
