@@ -1,10 +1,9 @@
 import gi
 import os
-import sys
 import json
 from pathlib import Path
 import locale
-import threading
+
 
 gi.require_version("Adw", "1")
 gi.require_version("Gtk", "4.0")
@@ -49,11 +48,13 @@ except OSError:
 
 
 class MainWindow(Ptk.ApplicationWindow):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args,app, **kwargs):
         super().__init__(*args, **kwargs)
+        self.set_application(app)
         self.window = Ptk.ApplicationWindow(
             title=_("Pardus GNOME Greeter"), width=850, height=580
         )
+        
         Ptk.utils.load_css("../data/style.css")
         with open("../data/shortcuts.json") as shortcut_json_file:
             self.shortcuts = json.loads(shortcut_json_file.read())
@@ -72,7 +73,7 @@ class MainWindow(Ptk.ApplicationWindow):
         self.Apps = Apps.Apps()
         self.result = None
         self.ui_leaflet_main_window = Adw.Leaflet()
-        self.current_page = 0
+
 
         self.page_datas = [
             {
@@ -142,6 +143,12 @@ class MainWindow(Ptk.ApplicationWindow):
             },
         ]
 
+        if "page" in app.args.keys():
+            self.current_page = int(app.args["page"])
+        else:
+            self.current_page = 0
+
+            
         self.ui_pages_stack = Ptk.Stack(hexpand=True, vexpand=True)
         self.ui_pages_stack.set_transition_type(
             Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
