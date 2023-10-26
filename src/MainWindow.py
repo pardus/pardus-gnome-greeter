@@ -91,14 +91,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "text": _("Layout"),
                 "icon": "view-paged-symbolic",
             },
-            {
-                "id": "ui_wallpaper_listboxrow",
-                "page": Wallpaper.fun_create(),
-                "listboxrow": None,
-                "togglebutton": None,
-                "text": _("Wallpaper"),
-                "icon": "emblem-photos-symbolic",
-            },
+            
             {
                 "id": "ui_theme_listboxrow",
                 "page": Theme.fun_create(),
@@ -106,6 +99,14 @@ class MainWindow(Ptk.ApplicationWindow):
                 "togglebutton": None,
                 "text": _("Theme"),
                 "icon": "org.gnome.Settings-appearance-symbolic",
+            },
+            {
+                "id": "ui_wallpaper_listboxrow",
+                "page": Wallpaper.fun_create(),
+                "listboxrow": None,
+                "togglebutton": None,
+                "text": _("Wallpaper"),
+                "icon": "emblem-photos-symbolic",
             },
             {
                 "id": "ui_display_listboxrow",
