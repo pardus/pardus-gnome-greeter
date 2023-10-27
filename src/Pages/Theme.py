@@ -42,6 +42,7 @@ def fun_create():
 
     themes = [
         {
+            "type": "standart",
             "name": "default",
             "icon": "Adwaita",
             "theme": "adw-gtk3",
@@ -52,6 +53,7 @@ def fun_create():
             "wallpaper": "/usr/share/backgrounds/pardus23-0_default-light.svg",
         },
         {
+            "type": "standart",
             "icon": "Adwaita",
             "name": "prefer-dark",
             "toggle_button": None,
@@ -83,8 +85,8 @@ def fun_create():
     for index, theme in enumerate(themes):
         in_use = is_theme_in_use(theme)
         button = fun_create_theme_button(themes, theme, special_theme_options)
-        button.connect("toggled", fun_change_theme, theme, is_special_ok)
         button.set_active(in_use)
+        button.connect("toggled", fun_change_theme, theme, is_special_ok)
         theme["toggle_button"] = button
         ui_standart_theme_box.append(button)
 
@@ -96,8 +98,8 @@ def fun_create():
                 spec_theme,
                 special_theme_options,
             )
-            spec_btn.connect("toggled", fun_change_theme, spec_theme, is_special_ok)
             spec_btn.set_active(spec_in_use)
+            spec_btn.connect("toggled", fun_change_theme, spec_theme, is_special_ok)
             special_theme_options[index]["toggle_button"] = spec_btn
             ui_special_theme_box.append(spec_btn)
 
@@ -116,6 +118,12 @@ def fun_change_theme(toggle_button, theme, is_special=False):
     theme_key = "gtk-theme"
     icon_theme_key = "icon-theme"
     panel_icon_path = "/org/gnome/shell/extensions/dash-to-panel/show-apps-icon-file"
+    arcmenu_schema = "org.gnome.shell.extensions.arcmenu"
+    arcmenu_custom_icon_key = "custom-menu-button-icon"
+    arcmenu_menu_key = "menu-button-icon"
+    arcmenu_distro_key = "distro-icon"
+    arcmenu_custom_menu_value = "Custom_Icon"
+    arcmenu_distro_menu_value = "Distro_Icon"
 
     name = toggle_button.get_name()
     state = toggle_button.get_active()
@@ -123,8 +131,24 @@ def fun_change_theme(toggle_button, theme, is_special=False):
         Ptk.utils.gsettings_set(schema, key, name)
         Ptk.utils.gsettings_set(schema, theme_key, theme["theme"])
         Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
+
+        panel = f'\'{theme["panel"]}\''
+        utils.dconf_set(panel_icon_path, panel)
+        if "type" in theme.keys():
+            Ptk.utils.gsettings_set(
+                arcmenu_schema, arcmenu_menu_key, arcmenu_distro_menu_value
+            )
+            Ptk.utils.gsettings_set(arcmenu_schema, arcmenu_distro_key, 20)
+        else:
+            print(theme["panel"])
+            Ptk.utils.gsettings_set(
+                arcmenu_schema, arcmenu_custom_icon_key, theme["panel"]
+            )
+            Ptk.utils.gsettings_set(
+                arcmenu_schema, arcmenu_menu_key, arcmenu_custom_menu_value
+            )
+
         if is_special:
-            utils.dconf_set(panel_icon_path, theme["panel"])
             WallpaperManager.change_wallpaper(theme["wallpaper"])
 
 
@@ -167,7 +191,7 @@ def fun_check_special_themes():
 
             bg = special_theme_json[var]["background"]
             img = special_theme_json[var]["image"]
-            panel = "'{}'".format(special_theme_json[var]["panel"])
+            panel = special_theme_json[var]["panel"]
 
             new_theme = {
                 "label": _(label[lang]),
