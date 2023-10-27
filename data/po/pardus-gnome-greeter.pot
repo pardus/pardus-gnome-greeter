@@ -48,7 +48,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-msgid "Outro"
+msgid "Support"
 msgstr ""
 
 msgid "Configure Pardus with just a few clicks."

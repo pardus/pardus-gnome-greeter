@@ -139,7 +139,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "page": Outro.fun_create(),
                 "listboxrow": None,
                 "togglebutton": None,
-                "text": _("Outro"),
+                "text": _("Support"),
                 "icon": "info-symbolic",
             },
         ]

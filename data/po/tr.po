@@ -45,8 +45,8 @@ msgstr "Ekran"
 msgid "Applications"
 msgstr "Uygulamalar"
 
-msgid "Outro"
-msgstr "Kapanış"
+msgid "Support"
+msgstr "Destek"
 
 msgid "Configure Pardus with just a few clicks."
 msgstr "Birkaç tıkla Pardusʼu yapılandırın."
