@@ -148,7 +148,7 @@ def fun_check_special_themes():
             if cache[theme].is_installed:
                 if user_theme_json_ok:
                     special_theme_json = json.load(open(user_theme_json))
-                elif not user_theme_json and sys_theme_json_ok:
+                elif not user_theme_json_ok and sys_theme_json_ok:
                     special_theme_json = json.load(open(sys_theme_json))
                 else:
                     print("There is no json files")
