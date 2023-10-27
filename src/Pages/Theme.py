@@ -42,22 +42,28 @@ def fun_create():
 
     themes = [
         {
+            "icon": "Adwaita",
+            "name": "prefer-dark",
+            "toggle_button": None,
             "label": _("Dark Theme"),
             "theme": "adw-gtk3-dark",
-            "name": "prefer-dark",
             "image": cur_dir + "/../data/assets/theme-dark.png",
-            "toggle_button": None,
+            "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
+            "wallpaper": "/usr/share/backgrounds/pardus23-0_default-dark.svg",
         },
         {
-            "label": _("Light Theme"),
-            "theme": "adw-gtk3",
             "name": "default",
-            "image": cur_dir + "/../data/assets/theme-light.png",
+            "icon": "Adwaita",
+            "theme": "adw-gtk3",
             "toggle_button": None,
+            "label": _("Light Theme"),
+            "image": cur_dir + "/../data/assets/theme-light.png",
+            "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
+            "wallpaper": "/usr/share/backgrounds/pardus23-0_default-light.svg",
         },
     ]
     special_theme_options = fun_check_special_themes()
-
+    is_special_ok = special_theme_options != None
     ui_standart_theme_box = Ptk.Box(
         valign="center",
         homogeneous=True,
@@ -73,12 +79,11 @@ def fun_create():
         valign="center",
         homogeneous=True,
         spacing=23,
-        children=[ui_special_theme_box, ui_standart_theme_box],
     )
     for index, theme in enumerate(themes):
         in_use = is_theme_in_use(theme)
         button = fun_create_theme_button(themes, theme, special_theme_options)
-        button.connect("toggled", fun_change_theme, theme["theme"])
+        button.connect("toggled", fun_change_theme, theme, is_special_ok)
         button.set_active(in_use)
         theme["toggle_button"] = button
         ui_standart_theme_box.append(button)
@@ -91,48 +96,41 @@ def fun_create():
                 spec_theme,
                 special_theme_options,
             )
-            spec_btn.connect(
-                "toggled",
-                fun_change_theme,
-                spec_theme["theme"],
-                spec_theme["wallpaper"],
-                spec_theme["icon"],
-            )
+            spec_btn.connect("toggled", fun_change_theme, spec_theme, is_special_ok)
             spec_btn.set_active(spec_in_use)
             special_theme_options[index]["toggle_button"] = spec_btn
             ui_special_theme_box.append(spec_btn)
 
-    return ui_theme_box
+    if is_special_ok:
+        ui_theme_box.append(ui_special_theme_box)
+        ui_theme_box.append(ui_standart_theme_box)
+        return ui_theme_box
+    else:
+        ui_theme_box.append(ui_standart_theme_box)
+        return ui_theme_box
 
 
-def fun_change_theme(toggle_button, theme_name, wallpaper=None, icon_theme=None):
-    def_wp_light = "/usr/share/backgrounds/pardus23-0_default-light.svg"
-    def_wp_dark = "/usr/share/backgrounds/pardus23-0_default-dark.svg"
-    schema = "org.gnome.desktop.interface"
+def fun_change_theme(toggle_button, theme, is_special=False):
     key = "color-scheme"
+    schema = "org.gnome.desktop.interface"
     theme_key = "gtk-theme"
     icon_theme_key = "icon-theme"
+    panel_icon_path = "/org/gnome/shell/extensions/dash-to-panel/show-apps-icon-file"
 
     name = toggle_button.get_name()
     state = toggle_button.get_active()
     if state:
         Ptk.utils.gsettings_set(schema, key, name)
-        Ptk.utils.gsettings_set(schema, theme_key, theme_name)
-    if wallpaper:
-        WallpaperManager.change_wallpaper(wallpaper)
-    else:
-        if name == "default":
-            WallpaperManager.change_wallpaper(def_wp_light)
-        elif name == "prefer-dark":
-            WallpaperManager.change_wallpaper(def_wp_dark)
-    if icon_theme:
-        Ptk.utils.gsettings_set(schema, icon_theme_key, icon_theme)
+        Ptk.utils.gsettings_set(schema, theme_key, theme["theme"])
+
+        if is_special:
+            utils.dconf_set(panel_icon_path, theme["panel"])
+            WallpaperManager.change_wallpaper(theme["wallpaper"])
+            Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
 
 
 def fun_check_special_themes():
     themes = ["pardus-yuzyil"]
-    pkg_found = False
-
     home_path = Path.home()
     lang = os.getenv("LANG")[0:2]
     desktop_env = utils.desktop_env()
@@ -169,11 +167,12 @@ def fun_check_special_themes():
 
         bg = special_theme_json[var]["background"]
         img = special_theme_json[var]["image"]
+        panel = "'{}'".format(special_theme_json[var]["panel"])
 
         new_theme = {
             "label": _(label[lang]),
             "icon": name,
-            "name": None,
+            "panel": panel,
             "image": img,
             "toggle_button": None,
             "wallpaper": bg,

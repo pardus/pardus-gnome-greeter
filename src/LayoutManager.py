@@ -4,11 +4,8 @@ import json
 
 from gi.repository import GLib
 from libpardus import Ptk
-from utils import (
-    set_layout_name,
-    dconf_set,
-    dconf_reset,
-)
+from utils import set_layout_name, dconf_set, dconf_reset
+
 
 arcmenu = "/org/gnome/shell/extensions/arcmenu/"
 dashtopanel = "/org/gnome/shell/extensions/dash-to-panel/"
