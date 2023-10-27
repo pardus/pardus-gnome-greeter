@@ -52,10 +52,11 @@ except OSError:
 class MainWindow(Ptk.ApplicationWindow):
     def __init__(self, *args, app, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_application(app)
+
         self.window = Ptk.ApplicationWindow(
             title=_("Pardus GNOME Greeter"), width=850, height=580
         )
+        self.window.set_application(app)
 
         Ptk.utils.load_css("../data/style.css")
         with open("../data/shortcuts.json") as shortcut_json_file:
