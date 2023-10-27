@@ -158,34 +158,37 @@ def fun_check_special_themes():
 
     variants = ["light", "dark"]
     special_theme_options = []
-    for var in variants:
-        name = special_theme_json[var]["name"].replace("@@desktop@@", desktop_env)
-        label = {
-            "tr": special_theme_json[var]["pretty_tr"],
-            "en": special_theme_json[var]["pretty_en"],
-        }
+    if special_theme_json:
+        for var in variants:
+            name = special_theme_json[var]["name"].replace("@@desktop@@", desktop_env)
+            label = {
+                "tr": special_theme_json[var]["pretty_tr"],
+                "en": special_theme_json[var]["pretty_en"],
+            }
 
-        bg = special_theme_json[var]["background"]
-        img = special_theme_json[var]["image"]
-        panel = "'{}'".format(special_theme_json[var]["panel"])
+            bg = special_theme_json[var]["background"]
+            img = special_theme_json[var]["image"]
+            panel = "'{}'".format(special_theme_json[var]["panel"])
 
-        new_theme = {
-            "label": _(label[lang]),
-            "icon": name,
-            "panel": panel,
-            "image": img,
-            "toggle_button": None,
-            "wallpaper": bg,
-        }
-        if var == "dark":
-            new_theme["name"] = "prefer-dark"
-            new_theme["theme"] = "adw-gtk3-dark"
+            new_theme = {
+                "label": _(label[lang]),
+                "icon": name,
+                "panel": panel,
+                "image": img,
+                "toggle_button": None,
+                "wallpaper": bg,
+            }
+            if var == "dark":
+                new_theme["name"] = "prefer-dark"
+                new_theme["theme"] = "adw-gtk3-dark"
 
-        else:
-            new_theme["name"] = "default"
-            new_theme["theme"] = "adw-gtk3"
-        special_theme_options.append(new_theme)
-    return special_theme_options
+            else:
+                new_theme["name"] = "default"
+                new_theme["theme"] = "adw-gtk3"
+            special_theme_options.append(new_theme)
+        return special_theme_options
+    else:
+        return None
 
 
 def fun_create_theme_button(themes, theme, special=None):
