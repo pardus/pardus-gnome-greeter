@@ -117,9 +117,6 @@ msgstr "Masaüstü simge boyutu"
 msgid "Social Media Accounts"
 msgstr "Sosyal Medya Hesapları"
 
-msgid "Support"
-msgstr "Destek"
-
 msgid "Shortcuts"
 msgstr "Kısayollar"
 

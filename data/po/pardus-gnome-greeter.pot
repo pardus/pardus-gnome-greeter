@@ -123,9 +123,6 @@ msgstr ""
 msgid "Social Media Accounts"
 msgstr ""
 
-msgid "Support"
-msgstr ""
-
 msgid "Shortcuts"
 msgstr ""
 
