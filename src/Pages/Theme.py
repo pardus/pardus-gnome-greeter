@@ -122,11 +122,10 @@ def fun_change_theme(toggle_button, theme, is_special=False):
     if state:
         Ptk.utils.gsettings_set(schema, key, name)
         Ptk.utils.gsettings_set(schema, theme_key, theme["theme"])
-
+        Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
         if is_special:
             utils.dconf_set(panel_icon_path, theme["panel"])
             WallpaperManager.change_wallpaper(theme["wallpaper"])
-            Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
 
 
 def fun_check_special_themes():
