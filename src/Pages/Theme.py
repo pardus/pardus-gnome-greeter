@@ -42,16 +42,6 @@ def fun_create():
 
     themes = [
         {
-            "icon": "Adwaita",
-            "name": "prefer-dark",
-            "toggle_button": None,
-            "label": _("Dark Theme"),
-            "theme": "adw-gtk3-dark",
-            "image": cur_dir + "/../data/assets/theme-dark.png",
-            "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
-            "wallpaper": "/usr/share/backgrounds/pardus23-0_default-dark.svg",
-        },
-        {
             "name": "default",
             "icon": "Adwaita",
             "theme": "adw-gtk3",
@@ -60,6 +50,16 @@ def fun_create():
             "image": cur_dir + "/../data/assets/theme-light.png",
             "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
             "wallpaper": "/usr/share/backgrounds/pardus23-0_default-light.svg",
+        },
+        {
+            "icon": "Adwaita",
+            "name": "prefer-dark",
+            "toggle_button": None,
+            "label": _("Dark Theme"),
+            "theme": "adw-gtk3-dark",
+            "image": cur_dir + "/../data/assets/theme-dark.png",
+            "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
+            "wallpaper": "/usr/share/backgrounds/pardus23-0_default-dark.svg",
         },
     ]
     special_theme_options = fun_check_special_themes()
@@ -156,7 +156,7 @@ def fun_check_special_themes():
         except Exception as e:
             print(e)
 
-    variants = ["dark", "light"]
+    variants = ["light", "dark"]
     special_theme_options = []
     for var in variants:
         name = special_theme_json[var]["name"].replace("@@desktop@@", desktop_env)
