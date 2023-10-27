@@ -1,3 +1,29 @@
+pardus-gnome-greeter (0.0.8) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * fix: page order changed
+  * feat: option flag added
+  * feat: special theme added
+  * fix: removed unused imports, classes. functions
+  * fix: icon and wallpaper added for default theme
+  * fix: theme order changed
+  * fix: application wasnt closed on quit button
+  * fix: app doesnt start without pardus-yuzyil package
+
+  [ Fatih Altun ]
+  * Fix typo on special theme control
+
+  [ Osman Coskun ]
+  * fix: icon check removed from standart themes
+
+  [ Fatih Altun ]
+  * Update outro as support
+  * Clear unnecessary files
+  * Update version for new release
+  * Fix duplicate
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 27 Oct 2023 16:48:58 +0300
+
 pardus-gnome-greeter (0.0.7) unstable; urgency=medium
 
   [ Hugo Carvalho ]
