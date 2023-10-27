@@ -1,8 +1,9 @@
 import gi
 
-gi.require_version("Gtk", "4.0")
-from gi.repository import GLib
 from libpardus import Ptk
+from gi.repository import GLib
+
+gi.require_version("Gtk", "4.0")
 
 
 class ExtensionManager:

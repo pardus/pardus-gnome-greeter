@@ -1,5 +1,4 @@
 import gi
-import urllib
 
 gi.require_version("GLib", "2.0")
 gi.require_version("GdkPixbuf", "2.0")

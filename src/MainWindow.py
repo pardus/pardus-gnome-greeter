@@ -1,17 +1,16 @@
 import gi
 import os
 import json
-from pathlib import Path
 import locale
-
 
 gi.require_version("Adw", "1")
 gi.require_version("Gtk", "4.0")
 
+from pathlib import Path
 from libpardus import Ptk
+from locale import gettext as _
 from Keybindings import Keybindings
 from gi.repository import Adw, Gtk, GLib
-from locale import gettext as _
 from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
 
 

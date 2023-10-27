@@ -1,5 +1,5 @@
-from libpardus import Ptk
 import locale
+from libpardus import Ptk
 from locale import gettext as _
 
 APPNAME_CODE = "pardus-gnome-greeter"

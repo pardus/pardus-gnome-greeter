@@ -1,14 +1,15 @@
 import gi
 import sys
+import locale
 
 sys.path.append("../")
-gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk, GdkPixbuf, Gdk, Gio, GLib, GObject
-from libpardus import Ptk
-from LayoutManager import LayoutManager
 
-import locale
+from libpardus import Ptk
 from locale import gettext as _
+
+gi.require_version("Gtk", "4.0")
+from LayoutManager import LayoutManager
+from gi.repository import Gtk, GdkPixbuf, Gdk, GLib, GObject
 
 APPNAME_CODE = "pardus-gnome-greeter"
 TRANSLATIONS_PATH = "/usr/share/locale"
@@ -61,90 +62,6 @@ layouts = [
         "togglebutton": None,
     },
 ]
-
-
-class GifPaintable(GObject.Object, Gdk.Paintable):
-    def __init__(self, path):
-        super().__init__()
-        self.animation = GdkPixbuf.PixbufAnimation.new_from_file(path)
-        self.iterator = self.animation.get_iter()
-        self.delay = self.iterator.get_delay_time()
-        self.timeout = GLib.timeout_add(self.delay, self.on_delay)
-
-        self.invalidate_contents()
-
-    def on_delay(self):
-        delay = self.iterator.get_delay_time()
-        self.timeout = GLib.timeout_add(delay, self.on_delay)
-        self.invalidate_contents()
-
-        return GLib.SOURCE_REMOVE
-
-    def do_get_intrinsic_height(self):
-        return self.animation.get_height()
-
-    def do_get_intrinsic_width(self):
-        return self.animation.get_width()
-
-    def invalidate_contents(self):
-        self.emit("invalidate-contents")
-
-    def do_snapshot(self, snapshot, width, height):
-        timeval = GLib.TimeVal()
-        timeval.tv_usec = GLib.get_real_time()
-        self.iterator.advance(timeval)
-        pixbuf = self.iterator.get_pixbuf()
-        texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-
-        texture.snapshot(snapshot, width, height)
-
-
-def fun_create_togglebutton_img(index):
-    img = layouts[index]["img"]
-    label = _(layouts[index]["label"]) + " " + _("Style")
-    # image = Ptk.Image(file=img, height=231, width=351)
-    image = Gtk.Picture.new_for_filename(img)
-    Label = Ptk.Label(label=label, halign="center")
-
-    toggle_box = Ptk.Box(
-        spacing=13,
-        orientation="vertical",
-        children=[image, Label],
-        halign="center",
-        valign="center",
-    )
-    return toggle_box
-
-
-def fun_create_togglebutton_gif(index):
-    gif = layouts[index]["gif"]
-    label = _(layouts[index]["label"]) + " " + _("Style")
-
-    Label = Ptk.Label(label=label, halign="center")
-    paintable = GifPaintable(gif)
-    picture = Gtk.Picture()
-
-    picture.set_paintable(paintable)
-    toggle_box = Ptk.Box(
-        spacing=13,
-        orientation="vertical",
-        children=[picture, Label],
-        halign="center",
-        valign="center",
-    )
-    return toggle_box
-
-
-def on_motion_enter(controller, x, y, index, toggle):
-    gif = fun_create_togglebutton_gif(index)
-    GLib.idle_add(toggle.set_child, gif)
-    # toggle.set_child(gif)
-
-
-def on_motion_leave(controller, index, toggle):
-    img = fun_create_togglebutton_img(index)
-    GLib.idle_add(toggle.set_child, img)
-    # toggle.set_child(img)
 
 
 def fun_create():
@@ -208,7 +125,87 @@ def fun_create():
         vexpand=True,
         homogeneous=True,
         orientation="vertical",
-        # children=[box1, box2],
         children={flowbox},
     )
     return box
+
+
+class GifPaintable(GObject.Object, Gdk.Paintable):
+    def __init__(self, path):
+        super().__init__()
+        self.animation = GdkPixbuf.PixbufAnimation.new_from_file(path)
+        self.iterator = self.animation.get_iter()
+        self.delay = self.iterator.get_delay_time()
+        self.timeout = GLib.timeout_add(self.delay, self.on_delay)
+
+        self.invalidate_contents()
+
+    def on_delay(self):
+        delay = self.iterator.get_delay_time()
+        self.timeout = GLib.timeout_add(delay, self.on_delay)
+        self.invalidate_contents()
+
+        return GLib.SOURCE_REMOVE
+
+    def do_get_intrinsic_height(self):
+        return self.animation.get_height()
+
+    def do_get_intrinsic_width(self):
+        return self.animation.get_width()
+
+    def invalidate_contents(self):
+        self.emit("invalidate-contents")
+
+    def do_snapshot(self, snapshot, width, height):
+        timeval = GLib.TimeVal()
+        timeval.tv_usec = GLib.get_real_time()
+        self.iterator.advance(timeval)
+        pixbuf = self.iterator.get_pixbuf()
+        texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+
+        texture.snapshot(snapshot, width, height)
+
+
+def fun_create_togglebutton_img(index):
+    img = layouts[index]["img"]
+    label = _(layouts[index]["label"]) + " " + _("Style")
+    image = Gtk.Picture.new_for_filename(img)
+    Label = Ptk.Label(label=label, halign="center")
+
+    toggle_box = Ptk.Box(
+        spacing=13,
+        orientation="vertical",
+        children=[image, Label],
+        halign="center",
+        valign="center",
+    )
+    return toggle_box
+
+
+def fun_create_togglebutton_gif(index):
+    gif = layouts[index]["gif"]
+    label = _(layouts[index]["label"]) + " " + _("Style")
+
+    Label = Ptk.Label(label=label, halign="center")
+    paintable = GifPaintable(gif)
+    picture = Gtk.Picture()
+
+    picture.set_paintable(paintable)
+    toggle_box = Ptk.Box(
+        spacing=13,
+        orientation="vertical",
+        children=[picture, Label],
+        halign="center",
+        valign="center",
+    )
+    return toggle_box
+
+
+def on_motion_enter(controller, x, y, index, toggle):
+    gif = fun_create_togglebutton_gif(index)
+    GLib.idle_add(toggle.set_child, gif)
+
+
+def on_motion_leave(controller, index, toggle):
+    img = fun_create_togglebutton_img(index)
+    GLib.idle_add(toggle.set_child, img)

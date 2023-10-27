@@ -1,14 +1,10 @@
 import os
 import gi
-import urllib
-import requests
-import random
 import subprocess
 
 gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
-from gi.repository import GLib, Gtk, Gio, GdkPixbuf
-from utils import get_recommended_scale
+from gi.repository import Gtk, GdkPixbuf
 from Server import Server
 from Stream import Stream
 import locale
@@ -24,6 +20,19 @@ url = "https://apps.pardus.org.tr/api/greeter"
 
 class Apps:
     def __init__(self):
+        # +-------------------------------------------------------+
+        # |                  Pardus Software Center               |
+        # +--------------------------+----------------------------+
+        # |                          |                            |
+        # |         [Icon 1]         |         [Icon 2]           |
+        # |        App Name 1        |        App Name 2          |
+        # |                          |                            |
+        # |                          |                            |
+        # |         [Icon 3]         |         [Icon 4]           |
+        # |        App Name 3        |        App Name 4          |
+        # |                          |                            |
+        # +--------------------------+----------------------------+
+
         self.lang = os.getenv("LANG")[0:2]
         cur_dir = os.path.dirname(__file__)
         ui_software_center_image = Ptk.Image(
@@ -41,10 +50,8 @@ class Apps:
         )
 
         self.liststore = Gtk.ListStore(GdkPixbuf.Pixbuf, str, str)
-        # self.liststore.get_style_context().add_css_class("apps-list-store")
-        # self.liststore.set_css_classes(["apps-list-store"])
         self.iconview = Gtk.IconView.new()
-        # self.iconview.set_css_classes(["apps-list-store"])
+
         self.iconview.set_model(self.liststore)
         self.iconview.set_pixbuf_column(0)
         self.iconview.set_text_column(1)
@@ -104,17 +111,4 @@ class Apps:
             self.ui_display_box.append(error_label)
 
     def fun_create(self):
-        # +-------------------------------------------------------+
-        # |                  Pardus Software Center               |
-        # +--------------------------+----------------------------+
-        # |                          |                            |
-        # |         [Icon 1]         |         [Icon 2]           |
-        # |       App Name 1        |       App Name 2          |
-        # |                          |                            |
-        # |                          |                            |
-        # |         [Icon 3]         |         [Icon 4]           |
-        # |       App Name 3        |       App Name 4          |
-        # |                          |                            |
-        # +--------------------------+----------------------------+
-
         return self.ui_display_box

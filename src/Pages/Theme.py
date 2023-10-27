@@ -10,8 +10,8 @@ import utils
 from pathlib import Path
 from libpardus import Ptk
 from utils import get_color_scheme, get_gtk_theme, get_icon_theme
-from gi.repository import GLib
-from WallpaperManager import WallpaperManager
+
+import WallpaperManager
 
 from locale import gettext as _
 
@@ -22,8 +22,87 @@ locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
 color_scheme = str(get_color_scheme())[1:-1]
-gtk_theme = str(get_gtk_theme())
-icon_theme = str(get_icon_theme())
+gtk_theme = str(get_gtk_theme())[1:-1]
+icon_theme = str(get_icon_theme())[1:-1]
+
+
+def fun_create():
+    # RETURNING EXTENSION BOX
+    # _________________________________________________________________
+    # |                                                                 |
+    # |  ________(ToggleButton)______  ________(ToggleButton)______     |
+    # | |                            ||                            |    |
+    # | |        (Prefer Dark)       ||         (Default)          |    |
+    # | |                            ||                            |    |
+    # | |         [Dark Theme]       ||         [Light Theme]      |    |
+    # | |____________________________||____________________________|    |
+    # |                                                                 |
+    # |_________________________________________________________________|
+    cur_dir = os.getcwd()
+
+    themes = [
+        {
+            "label": _("Dark Theme"),
+            "theme": "adw-gtk3-dark",
+            "name": "prefer-dark",
+            "image": cur_dir + "/../data/assets/theme-dark.png",
+            "toggle_button": None,
+        },
+        {
+            "label": _("Light Theme"),
+            "theme": "adw-gtk3",
+            "name": "default",
+            "image": cur_dir + "/../data/assets/theme-light.png",
+            "toggle_button": None,
+        },
+    ]
+    special_theme_options = fun_check_special_themes()
+
+    ui_standart_theme_box = Ptk.Box(
+        valign="center",
+        homogeneous=True,
+        spacing=23,
+    )
+    ui_special_theme_box = Ptk.Box(
+        valign="center",
+        homogeneous=True,
+        spacing=23,
+    )
+    ui_theme_box = Ptk.Box(
+        orientation="vertical",
+        valign="center",
+        homogeneous=True,
+        spacing=23,
+        children=[ui_special_theme_box, ui_standart_theme_box],
+    )
+    for index, theme in enumerate(themes):
+        in_use = is_theme_in_use(theme)
+        button = fun_create_theme_button(themes, theme, special_theme_options)
+        button.connect("toggled", fun_change_theme, theme["theme"])
+        button.set_active(in_use)
+        theme["toggle_button"] = button
+        ui_standart_theme_box.append(button)
+
+        if special_theme_options:
+            spec_theme = special_theme_options[index]
+            spec_in_use = is_theme_in_use(spec_theme)
+            spec_btn = fun_create_theme_button(
+                themes,
+                spec_theme,
+                special_theme_options,
+            )
+            spec_btn.connect(
+                "toggled",
+                fun_change_theme,
+                spec_theme["theme"],
+                spec_theme["wallpaper"],
+                spec_theme["icon"],
+            )
+            spec_btn.set_active(spec_in_use)
+            special_theme_options[index]["toggle_button"] = spec_btn
+            ui_special_theme_box.append(spec_btn)
+
+    return ui_theme_box
 
 
 def fun_change_theme(toggle_button, theme_name, wallpaper=None, icon_theme=None):
@@ -40,12 +119,12 @@ def fun_change_theme(toggle_button, theme_name, wallpaper=None, icon_theme=None)
         Ptk.utils.gsettings_set(schema, key, name)
         Ptk.utils.gsettings_set(schema, theme_key, theme_name)
     if wallpaper:
-        WallpaperManager.change_wallpaper(None, wallpaper)
+        WallpaperManager.change_wallpaper(wallpaper)
     else:
         if name == "default":
-            WallpaperManager.change_wallpaper(None, def_wp_light)
+            WallpaperManager.change_wallpaper(def_wp_light)
         elif name == "prefer-dark":
-            WallpaperManager.change_wallpaper(None, def_wp_dark)
+            WallpaperManager.change_wallpaper(def_wp_dark)
     if icon_theme:
         Ptk.utils.gsettings_set(schema, icon_theme_key, icon_theme)
 
@@ -132,102 +211,9 @@ def fun_create_theme_button(themes, theme, special=None):
 
 
 def is_theme_in_use(theme):
-    stat = color_scheme == theme["name"] and gtk_theme[1:-1] == theme["theme"]
+    stat = color_scheme == theme["name"] and gtk_theme == theme["theme"]
 
     if "icon" in theme.keys():
-        print("######")
-        print(stat)
-        print(color_scheme)
-        print(theme["name"])
-        print("---------")
-        print(icon_theme[1:-1])
-        print(theme["icon"])
-        # print(icon_theme == theme["icon"])
-        print("######")
-        return stat and icon_theme[1:-1] == theme["icon"]
+        return stat and icon_theme == theme["icon"]
     else:
-        print(stat)
         return stat
-
-
-def fun_create():
-    # RETURNING EXTENSION BOX
-    # _________________________________________________________________
-    # |                                                                 |
-    # |  ________(ToggleButton)______  ________(ToggleButton)______     |
-    # | |                            ||                            |    |
-    # | |        (Prefer Dark)       ||         (Default)          |    |
-    # | |                            ||                            |    |
-    # | |         [Dark Theme]       ||         [Light Theme]      |    |
-    # | |____________________________||____________________________|    |
-    # |                                                                 |
-    # |_________________________________________________________________|
-    cur_dir = os.getcwd()
-
-    themes = [
-        {
-            "label": _("Dark Theme"),
-            "theme": "adw-gtk3-dark",
-            "name": "prefer-dark",
-            "image": cur_dir + "/../data/assets/theme-dark.png",
-            "toggle_button": None,
-        },
-        {
-            "label": _("Light Theme"),
-            "theme": "adw-gtk3",
-            "name": "default",
-            "image": cur_dir + "/../data/assets/theme-light.png",
-            "toggle_button": None,
-        },
-    ]
-    special_theme_options = fun_check_special_themes()
-    print(special_theme_options)
-    #    if special_theme_options:
-    #        themes.extend(special_theme_options)
-    #
-
-    ui_standart_theme_box = Ptk.Box(
-        valign="center",
-        homogeneous=True,
-        spacing=23,
-    )
-    ui_special_theme_box = Ptk.Box(
-        valign="center",
-        homogeneous=True,
-        spacing=23,
-    )
-    ui_theme_box = Ptk.Box(
-        orientation="vertical",
-        valign="center",
-        homogeneous=True,
-        spacing=23,
-        children=[ui_special_theme_box, ui_standart_theme_box],
-    )
-    for index, theme in enumerate(themes):
-        in_use = is_theme_in_use(theme)
-        button = fun_create_theme_button(themes, theme, special_theme_options)
-        button.connect("toggled", fun_change_theme, theme["theme"])
-        button.set_active(in_use)
-        theme["toggle_button"] = button
-        ui_standart_theme_box.append(button)
-
-        if special_theme_options:
-            spec_theme = special_theme_options[index]
-            spec_in_use = is_theme_in_use(spec_theme)
-            spec_btn = fun_create_theme_button(
-                themes,
-                spec_theme,
-                special_theme_options,
-            )
-            spec_btn.connect(
-                "toggled",
-                fun_change_theme,
-                spec_theme["theme"],
-                spec_theme["wallpaper"],
-                spec_theme["icon"],
-            )
-            spec_btn.set_active(spec_in_use)
-            special_theme_options[index]["toggle_button"] = spec_btn
-            ui_special_theme_box.append(spec_btn)
-
-    return ui_theme_box

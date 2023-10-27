@@ -1,12 +1,9 @@
 import os
-import gi
 
-gi.require_version("Gtk", "4.0")
-from libpardus import Ptk
-
-from gi.repository import GLib, Gtk
-from utils import get_recommended_scale
 import locale
+
+from libpardus import Ptk
+from utils import get_recommended_scale
 from locale import gettext as _
 
 APPNAME_CODE = "pardus-gnome-greeter"
@@ -48,43 +45,6 @@ nautilus_schema = "org.gnome.nautilus.icon-view"
 nautilus_key = "default-zoom-level"
 
 
-def fun_change_display_scale(widget):
-    value = widget.get_value()
-    scale = float(1 + (0.25 * value))
-    key = "text-scaling-factor"
-    Ptk.utils.gsettings_set(desktop_schema, key, scale)
-
-
-def fun_change_cursor_scale(widget):
-    key = "cursor-size"
-    value = int(widget.get_name())
-    if widget.get_active():
-        Ptk.utils.gsettings_set(desktop_schema, key, value)
-
-
-def fun_change_desktop_icons_scale(widget):
-    widget_value = widget.get_value()
-    value = di_options[widget_value]
-    Ptk.utils.gsettings_set(desktop_icons_schema, desktop_icons_key, value)
-
-
-def fun_change_nautilus_icons_scale(widget):
-    widget_value = widget.get_value()
-    value = ni_options[widget_value]
-    Ptk.utils.gsettings_set(nautilus_schema, nautilus_key, value)
-
-
-def fun_set_values_to_scale(desktop, nautilus):
-    desktop_icon_size = str(
-        Ptk.utils.gsettings_get(desktop_icons_schema, desktop_icons_key)
-    )
-    nautilus_icon_size = str(Ptk.utils.gsettings_get(nautilus_schema, nautilus_key))
-    di_value = di_options[desktop_icon_size]
-    ni_value = ni_options[nautilus_icon_size]
-    desktop.set_value(di_value)
-    nautilus.set_value(ni_value)
-
-
 def fun_create():
     # RETURNING DISPLAY BOX
     # _______(Box)______________________________
@@ -113,9 +73,7 @@ def fun_create():
     # |                                          |
     # |__________________________________________|
     cur_dir = os.path.dirname(__file__)
-    ui_logo_image = Ptk.Image(
-        file=os.getcwd() + "/../data/assets/logo.svg", pixel_size=200
-    )
+
     ui_display_scale = Ptk.Scale(
         value=0.0,
         lower=0.0,
@@ -136,7 +94,6 @@ def fun_create():
     markup = f"<b>{_('Recommended scale option for main display is')} {get_recommended_scale()}%</b>"
     ui_recommended_scale_label = Ptk.Label(markup=markup)
 
-    # masaustu simge boyutu
     ui_desktop_icons_scale = Ptk.Scale(
         value=0.0,
         lower=0.0,
@@ -159,7 +116,6 @@ def fun_create():
         markup=ui_desktop_icons_label_markup, margin_top=21
     )
 
-    # dosya yoneticisi simge boyutu
     ui_nautilus_icons_scale = Ptk.Scale(
         value=0.0,
         lower=0.0,
@@ -249,3 +205,40 @@ def fun_create():
         ],
     )
     return ui_display_box
+
+
+def fun_change_display_scale(widget):
+    value = widget.get_value()
+    scale = float(1 + (0.25 * value))
+    key = "text-scaling-factor"
+    Ptk.utils.gsettings_set(desktop_schema, key, scale)
+
+
+def fun_change_cursor_scale(widget):
+    key = "cursor-size"
+    value = int(widget.get_name())
+    if widget.get_active():
+        Ptk.utils.gsettings_set(desktop_schema, key, value)
+
+
+def fun_change_desktop_icons_scale(widget):
+    widget_value = widget.get_value()
+    value = di_options[widget_value]
+    Ptk.utils.gsettings_set(desktop_icons_schema, desktop_icons_key, value)
+
+
+def fun_change_nautilus_icons_scale(widget):
+    widget_value = widget.get_value()
+    value = ni_options[widget_value]
+    Ptk.utils.gsettings_set(nautilus_schema, nautilus_key, value)
+
+
+def fun_set_values_to_scale(desktop, nautilus):
+    desktop_icon_size = str(
+        Ptk.utils.gsettings_get(desktop_icons_schema, desktop_icons_key)
+    )
+    nautilus_icon_size = str(Ptk.utils.gsettings_get(nautilus_schema, nautilus_key))
+    di_value = di_options[desktop_icon_size]
+    ni_value = ni_options[nautilus_icon_size]
+    desktop.set_value(di_value)
+    nautilus.set_value(ni_value)

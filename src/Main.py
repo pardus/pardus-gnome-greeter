@@ -4,7 +4,7 @@ import gi, sys
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Gio, GLib, Adw
+from gi.repository import Gio, GLib, Adw
 
 
 class Application(Adw.Application):
@@ -24,12 +24,13 @@ class Application(Adw.Application):
             GLib.OptionFlags(0),
             GLib.OptionFlags(1),
             "First page to be opened of application",
-            None
+            None,
         )
 
     def on_activate(self, app):
         if not self.main_window:
             from MainWindow import MainWindow
+
             self.main_window = MainWindow(app=app).window
             self.main_window.present()
 

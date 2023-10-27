@@ -1,5 +1,5 @@
-import subprocess
 import gi
+import subprocess
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gio", "2.0")

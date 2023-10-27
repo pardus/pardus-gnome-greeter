@@ -1,9 +1,6 @@
 import gi
 import os
 import sys
-import time
-import json
-
 import subprocess
 
 sys.path.append("../")
@@ -26,7 +23,6 @@ def set_layout_name(layout_name: str):
         % layout_name
     )
     return subprocess.getoutput(cmd)
-    # return subprocess.run(escape_cmd)
 
 
 def get_color_scheme():
@@ -79,7 +75,6 @@ def get_recommended_scale():
 
 def dconf_set(path, value):
     cmd = ["dconf", "write", path, value]
-    #    cmd = f"dconf write {path} {value}"
     return subprocess.run(cmd)
 
 

@@ -2,19 +2,21 @@ import os
 import gi
 import os
 import json
+import locale
 import subprocess
 
-gi.require_version("Gtk", "4.0")
 from libpardus import Ptk
-from gi.repository import GLib, Gtk
-import locale
 from locale import gettext as _
+
+gi.require_version("Gtk", "4.0")
+from gi.repository import Gtk
 
 APPNAME_CODE = "pardus-gnome-greeter"
 TRANSLATIONS_PATH = "/usr/share/locale"
 
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
+
 
 def fun_create():
     # RETURNING OUTRO BOX
@@ -58,7 +60,6 @@ def fun_create():
     # |                                                       |
     # |_______________________________________________________|
 
-
     def ui_shortcut_trigger_button_clicked(button):
         subprocess.Popen(["gtk-launch", "tr.org.pardus.pardus-gnome-shortcuts"])
 
@@ -68,7 +69,9 @@ def fun_create():
     with open(cur_dir + "/../data/links.json") as links:
         link_datas = json.loads(links.read())
     ui_bold_markup = """<span size='27pt'><b>{text}</b></span>"""
-    ui_social_media_label_markup = ui_bold_markup.format(text=_("Social Media Accounts"))
+    ui_social_media_label_markup = ui_bold_markup.format(
+        text=_("Social Media Accounts")
+    )
     ui_social_media_label = Ptk.Label(
         markup=ui_social_media_label_markup, halign="center"
     )

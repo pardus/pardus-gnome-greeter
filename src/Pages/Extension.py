@@ -16,6 +16,40 @@ locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
 
+def fun_create():
+    extension_datas = None
+    enabled_extensions = ExtensionManager.get_extensions("enabled-extensions")
+    ui_extension_flowbox = Ptk.FlowBox(
+        hexpand=True,
+        vexpand=True,
+        max_children_per_line=5,
+        min_children_per_line=2,
+        row_spacing=21,
+        column_spacing=21,
+    )
+
+    with open(
+        os.path.dirname(os.path.abspath(__file__)) + "/../../data/extensions.json"
+    ) as file_content:
+        extension_datas = json.loads(file_content.read())
+    for item in extension_datas:
+        extension = fun_create_extension_box(item, enabled_extensions)
+        ui_extension_flowbox.insert(extension, -1)
+    ui_extension_scrolledwindow = Ptk.ScrolledWindow(
+        vexpand=True,
+        hexpand=True,
+        child=ui_extension_flowbox,
+        margin_bottom=21,
+        margin_end=21,
+        margin_start=21,
+        margin_top=21,
+    )
+    ui_extension_box = Ptk.Box(
+        vexpand=True, hexpand=True, children=[ui_extension_scrolledwindow]
+    )
+    return ui_extension_box
+
+
 def fun_extension_toggle(switch, param, extension_id):
     info = {True: "enable", False: "disable"}
     status = info[switch.get_active()]
@@ -99,37 +133,3 @@ def fun_create_extension_box(extension_props, extensions):
     )
     # RETURN CONTAINER
     return ui_box_container
-
-
-def fun_create():
-    extension_datas = None
-    enabled_extensions = ExtensionManager.get_extensions("enabled-extensions")
-    ui_extension_flowbox = Ptk.FlowBox(
-        hexpand=True,
-        vexpand=True,
-        max_children_per_line=5,
-        min_children_per_line=2,
-        row_spacing=21,
-        column_spacing=21,
-    )
-
-    with open(
-        os.path.dirname(os.path.abspath(__file__)) + "/../../data/extensions.json"
-    ) as file_content:
-        extension_datas = json.loads(file_content.read())
-    for item in extension_datas:
-        extension = fun_create_extension_box(item, enabled_extensions)
-        ui_extension_flowbox.insert(extension, -1)
-    ui_extension_scrolledwindow = Ptk.ScrolledWindow(
-        vexpand=True,
-        hexpand=True,
-        child=ui_extension_flowbox,
-        margin_bottom=21,
-        margin_end=21,
-        margin_start=21,
-        margin_top=21,
-    )
-    ui_extension_box = Ptk.Box(
-        vexpand=True, hexpand=True, children=[ui_extension_scrolledwindow]
-    )
-    return ui_extension_box
