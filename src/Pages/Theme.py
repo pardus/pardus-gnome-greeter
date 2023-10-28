@@ -141,7 +141,6 @@ def fun_change_theme(toggle_button, theme, is_special=False):
             )
             Ptk.utils.gsettings_set(arcmenu_schema, arcmenu_distro_key, 20)
         else:
-            print(theme["panel"])
             Ptk.utils.gsettings_set(
                 arcmenu_schema, arcmenu_custom_icon_key, theme["panel"]
             )
@@ -192,8 +191,9 @@ def fun_check_special_themes():
 
             bg = special_theme_json[var]["background"]
             img = special_theme_json[var]["image"]
-            panel = f'\'{special_theme_json[var]["panel"]}\''
+            # panel = f'\'{special_theme_json[var]["panel"]}\''
 
+            panel = special_theme_json[var]["panel"]
             new_theme = {
                 "label": _(label[lang]),
                 "icon": name,
