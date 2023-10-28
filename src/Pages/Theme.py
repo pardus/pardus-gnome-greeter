@@ -130,28 +130,28 @@ def fun_change_theme(toggle_button, theme, is_special=False):
     if state:
         Ptk.utils.gsettings_set(schema, key, name)
         Ptk.utils.gsettings_set(schema, theme_key, theme["theme"])
-        Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
 
         panel = theme["panel"]
 
-        if "type" in theme.keys():
-            Ptk.utils.gsettings_set(
-                arcmenu_schema, arcmenu_menu_key, arcmenu_distro_menu_value
-            )
-            Ptk.utils.gsettings_set(arcmenu_schema, arcmenu_distro_key, 20)
-
-            utils.dconf_set(panel_icon_path, panel)
-        else:
-            Ptk.utils.gsettings_set(
-                arcmenu_schema, arcmenu_custom_icon_key, panel[1:-1]
-            )
-            Ptk.utils.gsettings_set(
-                arcmenu_schema, arcmenu_menu_key, arcmenu_custom_menu_value
-            )
-            utils.dconf_set(panel_icon_path, f"{panel}")
-            print("here:", panel_icon_path, panel)
         if is_special:
             WallpaperManager.change_wallpaper(theme["wallpaper"])
+            Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
+            if "type" in theme.keys():
+                Ptk.utils.gsettings_set(
+                    arcmenu_schema, arcmenu_menu_key, arcmenu_distro_menu_value
+                )
+                Ptk.utils.gsettings_set(arcmenu_schema, arcmenu_distro_key, 20)
+
+                utils.dconf_set(panel_icon_path, panel)
+            else:
+                Ptk.utils.gsettings_set(
+                    arcmenu_schema, arcmenu_custom_icon_key, panel[1:-1]
+                )
+                Ptk.utils.gsettings_set(
+                    arcmenu_schema, arcmenu_menu_key, arcmenu_custom_menu_value
+                )
+                utils.dconf_set(panel_icon_path, f"{panel}")
+                print("here:", panel_icon_path, panel)
 
 
 def fun_check_special_themes():
