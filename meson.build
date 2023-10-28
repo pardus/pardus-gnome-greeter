@@ -1,4 +1,4 @@
-project('pardus-gnome-greeter',  version: '0.0.2')
+project('pardus-gnome-greeter',  version: '0.0.9')
 
 # Configuration
 gnome = import('gnome')

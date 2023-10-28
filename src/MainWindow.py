@@ -14,7 +14,7 @@ from gi.repository import Adw, Gtk, GLib
 from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
 
 
-VERSION = "0.0.8"
+VERSION = "0.0.9"
 APPNAME = "Pardus GNOME Greeter"
 DEV = "Osman Coskun"
 WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
