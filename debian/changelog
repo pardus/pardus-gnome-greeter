@@ -1,3 +1,18 @@
+pardus-gnome-greeter (0.0.9) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * fix: arcmenu 100th year support added
+  * fix:type on special theme path
+  * fix:typo
+  * fix: pardus layout 100th year theme
+  * fix: logic changed
+  * fix: icon set removed from standart themes
+
+  [ Fatih Altun ]
+  * Update version for next release
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Sat, 28 Oct 2023 13:44:06 +0300
+
 pardus-gnome-greeter (0.0.8) unstable; urgency=medium
 
   [ Osman Coskun ]
