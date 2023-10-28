@@ -134,7 +134,6 @@ def fun_change_theme(toggle_button, theme, is_special=False):
 
         panel = theme["panel"]
 
-        utils.dconf_set(panel_icon_path, panel)
         if "type" in theme.keys():
             Ptk.utils.gsettings_set(
                 arcmenu_schema, arcmenu_menu_key, arcmenu_distro_menu_value
@@ -150,6 +149,9 @@ def fun_change_theme(toggle_button, theme, is_special=False):
 
         if is_special:
             WallpaperManager.change_wallpaper(theme["wallpaper"])
+            utils.dconf_set(panel_icon_path, f"'{panel}'")
+        else:
+            utils.dconf_set(panel_icon_path, panel)
 
 
 def fun_check_special_themes():
