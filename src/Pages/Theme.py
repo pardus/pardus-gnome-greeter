@@ -132,7 +132,8 @@ def fun_change_theme(toggle_button, theme, is_special=False):
         Ptk.utils.gsettings_set(schema, theme_key, theme["theme"])
         Ptk.utils.gsettings_set(schema, icon_theme_key, theme["icon"])
 
-        panel = f'\'{theme["panel"]}\''
+        panel = theme["panel"]
+
         utils.dconf_set(panel_icon_path, panel)
         if "type" in theme.keys():
             Ptk.utils.gsettings_set(
@@ -191,7 +192,7 @@ def fun_check_special_themes():
 
             bg = special_theme_json[var]["background"]
             img = special_theme_json[var]["image"]
-            panel = special_theme_json[var]["panel"]
+            panel = f'\'{special_theme_json[var]["panel"]}\''
 
             new_theme = {
                 "label": _(label[lang]),
