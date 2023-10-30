@@ -1,28 +1,11 @@
 ## PARDUS GNOME GREETER
 Customize and configure Pardus with few clicks.
 
-### Testing Stored Layout
-First we need to compile schema xml file. <br/>
-* `glib-compile-schemas ./schema` <br/>
-for testing we need to export gsettings schema directory <br>
-* `export GSETTINGS_SCHEMA_DIR=<project_dir>/pardus-gnome-greeter/data/schema/`
+#### Tech Stack: `Python`, `Ptk (GTK4 Wrapper)`
 
+#### Programming Logic
+Application comes with main window and sub windows. In these sub-windows, `Gtk.Stack` used. For each stack pages, Gtk widgets are created from functions or classes that is currently under `src/Pages` folder. Application also has responsive mode. If window resize and listbox cannot fit, listbox hides and new navigation buttons appears on header of the application.
 
-### Running Application
-To test and use application run the following command <br/>
-`python3 <project_dir>/pardus-gnome-greeter/src/Main.py`
-
-### Build deb package
-
-* `sudo apt install devscripts git-buildpackage dh-python python3-distutils python3-lib2to3 python3-setuptools`
-* `sudo mk-build-deps -ir`
-* `gbp buildpackage --git-export-dir=./build/ -us -uc`
-
-### Install deb package
-After building deb package, it will be under your `<current_dir>/build/`.
-
-You can install deb package with the following command: <br>
-* ```sudo dpkg -i ./build/pardus-gnome-greeter_0.0.1_all.deb```
 
 ### Some Screenshots
 ![Screenshot1](/data/assets/screenshot1.png)
