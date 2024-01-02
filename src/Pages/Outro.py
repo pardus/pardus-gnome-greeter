@@ -63,10 +63,10 @@ def fun_create():
     def ui_shortcut_trigger_button_clicked(button):
         subprocess.Popen(["gtk-launch", "tr.org.pardus.pardus-gnome-shortcuts"])
 
-    cur_dir = os.getcwd()
-    with open(cur_dir + "/../data/social_media.json") as file:
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
+    with open(cur_dir + "/../../data/social_media.json") as file:
         social_media_datas = json.loads(file.read())
-    with open(cur_dir + "/../data/links.json") as links:
+    with open(cur_dir + "/../../data/links.json") as links:
         link_datas = json.loads(links.read())
     ui_bold_markup = """<span size='27pt'><b>{text}</b></span>"""
     ui_social_media_label_markup = ui_bold_markup.format(
@@ -78,7 +78,7 @@ def fun_create():
     ui_social_media_link_box = Ptk.Box(halign="center", hexpand=True, spacing=13)
     for data in social_media_datas:
         btn = Gtk.LinkButton(uri=data["url"])
-        img_file_dir = cur_dir + "/../data/assets/" + data["img"]
+        img_file_dir = cur_dir + "/../../data/assets/" + data["img"]
         ui_media_img = Ptk.Image(file=img_file_dir, pixel_size=37)
         btn.set_child(ui_media_img)
         ui_social_media_link_box.append(btn)

@@ -1,3 +1,4 @@
+import os
 import locale
 from libpardus import Ptk
 from locale import gettext as _
@@ -29,7 +30,7 @@ def fun_create():
     # |                                        |
     # |________________________________________|
 
-    ui_logo_image = Ptk.Image(file="../data/assets/logo.svg", pixel_size=180)
+    ui_logo_image = Ptk.Image(file=os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/logo.svg", pixel_size=180)
 
     ui_os_name_label = Ptk.Label(
         markup="<span size='50pt'><b>Pardus 23</b></span>", halign="center"

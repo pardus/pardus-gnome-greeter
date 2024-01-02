@@ -34,7 +34,7 @@ class Apps:
         self.apps_url = "https://apps.pardus.org.tr/api/greeter"
         self.non_tls_tried = False
         self.lang = os.getenv("LANG")[0:2]
-        cur_dir = os.path.dirname(__file__)
+        cur_dir = os.path.dirname(os.path.abspath(__file__))
         ui_software_center_image = Ptk.Image(
             file=cur_dir + "/../../data/assets/pardus-software.svg",
             pixel_size=100,

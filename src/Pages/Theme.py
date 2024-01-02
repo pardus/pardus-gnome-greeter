@@ -38,7 +38,7 @@ def fun_create():
     # | |____________________________||____________________________|    |
     # |                                                                 |
     # |_________________________________________________________________|
-    cur_dir = os.getcwd()
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
 
     themes = [
         {
@@ -48,7 +48,7 @@ def fun_create():
             "theme": "adw-gtk3",
             "toggle_button": None,
             "label": _("Light Theme"),
-            "image": cur_dir + "/../data/assets/theme-light.png",
+            "image": cur_dir + "/../../data/assets/theme-light.png",
             "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
             "wallpaper": "/usr/share/backgrounds/pardus23-0_default-light.svg",
         },
@@ -59,7 +59,7 @@ def fun_create():
             "toggle_button": None,
             "label": _("Dark Theme"),
             "theme": "adw-gtk3-dark",
-            "image": cur_dir + "/../data/assets/theme-dark.png",
+            "image": cur_dir + "/../../data/assets/theme-dark.png",
             "panel": "'/usr/share/desktop-base/pardus-logos/logo.svg'",
             "wallpaper": "/usr/share/backgrounds/pardus23-0_default-dark.svg",
         },

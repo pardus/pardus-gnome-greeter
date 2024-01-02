@@ -1,8 +1,7 @@
 import gi
 import sys
 import locale
-
-sys.path.append("../")
+import os
 
 from libpardus import Ptk
 from locale import gettext as _
@@ -22,43 +21,43 @@ layouts = [
     {
         "id": "gnome",
         "label": "Classic",
-        "gif": "../data/assets/layout_gif_gnome.gif",
-        "img": "../data/assets/layout_img_gnome.svg",
+        "gif": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_gif_gnome.gif",
+        "img": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_img_gnome.svg",
         "togglebutton": None,
     },
     {
         "id": "mac",
         "label": "Mac",
-        "gif": "../data/assets/layout_gif_mac.gif",
-        "img": "../data/assets/layout_img_mac.svg",
+        "gif": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_gif_mac.gif",
+        "img": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_img_mac.svg",
         "togglebutton": None,
     },
     {
         "id": "ubuntu",
         "label": "Ubuntu",
-        "gif": "../data/assets/layout_gif_ubuntu.gif",
-        "img": "../data/assets/layout_img_ubuntu.svg",
+        "gif": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_gif_ubuntu.gif",
+        "img": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_img_ubuntu.svg",
         "togglebutton": None,
     },
     {
         "id": "10",
         "label": "10",
-        "gif": "../data/assets/layout_gif_10.gif",
-        "img": "../data/assets/layout_img_10.svg",
+        "gif": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_gif_10.gif",
+        "img": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_img_10.svg",
         "togglebutton": None,
     },
     {
         "id": "xp",
         "label": "XP",
-        "gif": "../data/assets/layout_gif_xp.gif",
-        "img": "../data/assets/layout_img_xp.svg",
+        "gif": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_gif_xp.gif",
+        "img": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_img_xp.svg",
         "togglebutton": None,
     },
     {
         "id": "pardus",
         "label": "Pardus",
-        "gif": "../data/assets/layout_gif_pardus.gif",
-        "img": "../data/assets/layout_img_pardus.svg",
+        "gif": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_gif_pardus.gif",
+        "img": os.path.dirname(os.path.abspath(__file__)) + "/../../data/assets/layout_img_pardus.svg",
         "togglebutton": None,
     },
 ]

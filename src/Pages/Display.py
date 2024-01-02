@@ -72,7 +72,7 @@ def fun_create():
     # |   |______________________|               |
     # |                                          |
     # |__________________________________________|
-    cur_dir = os.path.dirname(__file__)
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
 
     ui_display_scale = Ptk.Scale(
         value=0.0,

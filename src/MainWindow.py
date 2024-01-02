@@ -58,11 +58,11 @@ class MainWindow(Ptk.ApplicationWindow):
         )
         self.window.set_application(app)
 
-        Ptk.utils.load_css("../data/style.css")
-        with open("../data/shortcuts.json") as shortcut_json_file:
+        Ptk.utils.load_css(os.path.dirname(os.path.abspath(__file__)) + "/../data/style.css")
+        with open(os.path.dirname(os.path.abspath(__file__)) + "/../data/shortcuts.json") as shortcut_json_file:
             self.shortcuts = json.loads(shortcut_json_file.read())
 
-        with open("../data/custom_shortcuts.json") as custom_shortcuts_json_file:
+        with open(os.path.dirname(os.path.abspath(__file__)) + "/../data/custom_shortcuts.json") as custom_shortcuts_json_file:
             self.custom_shortcuts = json.loads(custom_shortcuts_json_file.read())
         self.schema = "org.pardus.pardus-gnome-greeter"
         self.first_run = bool(Ptk.utils.gsettings_get(self.schema, "first-run"))
