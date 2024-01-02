@@ -15,8 +15,6 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 
-url = "https://apps.pardus.org.tr/api/greeter"
-
 
 class Apps:
     def __init__(self):
@@ -33,6 +31,8 @@ class Apps:
         # |                          |                            |
         # +--------------------------+----------------------------+
 
+        self.apps_url = "https://apps.pardus.org.tr/api/greeter"
+        self.non_tls_tried = False
         self.lang = os.getenv("LANG")[0:2]
         cur_dir = os.path.dirname(__file__)
         ui_software_center_image = Ptk.Image(
@@ -82,7 +82,7 @@ class Apps:
         self.server_response = None
         self.server = Server()
         self.server.ServerGet = self.ServerGet
-        self.server.get(url, "test")
+        self.server.get(self.apps_url, "test")
 
     def open_app(self, widget, path):
         selected_item = widget.get_selected_items()
@@ -103,12 +103,20 @@ class Apps:
             datas = response["greeter"]["suggestions"]
             if len(datas) > 0:
                 for data in datas:
+                    if self.non_tls_tried:
+                        data["icon"] = data["icon"].replace("https", "http")
                     self.stream.fetch(data)
             self.ui_display_box.append(self.iconview)
         else:
-            error_message = response["message"]
-            error_label = Ptk.Label(label=error_message, hexpand=True, halign="center")
-            self.ui_display_box.append(error_label)
+            if "tlserror" in response.keys() and not self.non_tls_tried:
+                self.non_tls_tried = True
+                self.apps_url = self.apps_url.replace("https", "http")
+                print("trying {}".format(self.apps_url))
+                self.server.get(self.apps_url, "test")
+            else:
+                error_message = response["message"]
+                error_label = Ptk.Label(label=error_message, hexpand=True, halign="center")
+                self.ui_display_box.append(error_label)
 
     def fun_create(self):
         return self.ui_display_box
