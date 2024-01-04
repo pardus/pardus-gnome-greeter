@@ -11,7 +11,17 @@ from libpardus import Ptk
 from locale import gettext as _
 from Keybindings import Keybindings
 from gi.repository import Adw, Gtk, GLib
-from Pages import Welcome, Layout, Wallpaper, Theme, Display, Extension, Outro, Apps
+from Pages import (
+    Time,
+    Welcome,
+    Layout,
+    Wallpaper,
+    Theme,
+    Display,
+    Extension,
+    Outro,
+    Apps,
+)
 
 
 VERSION = "0.0.9"
@@ -58,11 +68,18 @@ class MainWindow(Ptk.ApplicationWindow):
         )
         self.window.set_application(app)
 
-        Ptk.utils.load_css(os.path.dirname(os.path.abspath(__file__)) + "/../data/style.css")
-        with open(os.path.dirname(os.path.abspath(__file__)) + "/../data/shortcuts.json") as shortcut_json_file:
+        Ptk.utils.load_css(
+            os.path.dirname(os.path.abspath(__file__)) + "/../data/style.css"
+        )
+        with open(
+            os.path.dirname(os.path.abspath(__file__)) + "/../data/shortcuts.json"
+        ) as shortcut_json_file:
             self.shortcuts = json.loads(shortcut_json_file.read())
 
-        with open(os.path.dirname(os.path.abspath(__file__)) + "/../data/custom_shortcuts.json") as custom_shortcuts_json_file:
+        with open(
+            os.path.dirname(os.path.abspath(__file__))
+            + "/../data/custom_shortcuts.json"
+        ) as custom_shortcuts_json_file:
             self.custom_shortcuts = json.loads(custom_shortcuts_json_file.read())
         self.schema = "org.pardus.pardus-gnome-greeter"
         self.first_run = bool(Ptk.utils.gsettings_get(self.schema, "first-run"))
@@ -133,6 +150,14 @@ class MainWindow(Ptk.ApplicationWindow):
                 "togglebutton": None,
                 "text": _("Applications"),
                 "icon": "view-grid-symbolic",
+            },
+            {
+                "id": "ui_config_listboxrow",
+                "page": Time.fun_create(),
+                "listboxrow": None,
+                "togglebutton": None,
+                "text": _("Clock"),
+                "icon": "emblem-system-symbolic",
             },
             {
                 "id": "ui_outro_listboxrow",

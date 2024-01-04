@@ -36,6 +36,7 @@ class ExtensionManager:
         if ext_type == "all":
             for ext_type in types:
                 extensions += Ptk.utils.gsettings_get(schema, ext_type)
+
         else:
             extensions = Ptk.utils.gsettings_get(schema, ext_type)
-        return extensions
+        return list(set(extensions))
