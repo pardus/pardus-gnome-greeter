@@ -16,6 +16,12 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 schema = "org.gnome.shell.extensions.date-menu-formatter"
+types = {
+    "time": "HH:MM",
+    "time-sec": "HH:MM:ss",
+    "date": "HH:MM\\ndd:MM:YYYY",
+    "date-sec": "HH:MM:ss\\ndd:MM:YYYY",
+}
 
 
 def fun_create():
@@ -113,14 +119,16 @@ def fun_create():
 def change_sec(self, state, switch):
     key = "pattern"
     res = str(Ptk.utils.gsettings_get(schema, key))[1:-1]
-    new_val_arr = res.split("HH:MM")
-    if "HH:MM" in new_val_arr:
-        new_val_arr.insert(1, ":ss")
-    print(new_val_arr)
-    new_val = "".join(new_val_arr)
-    Ptk.utils.gsettings_set(schema, key, new_val)
-
-    pass
+    if state:
+        if "dd:MM:YYYY" in res:
+            Ptk.utils.gsettings_set(schema, key, types["date-sec"])
+        else:
+            Ptk.utils.gsettings_set(schema, key, types["time-sec"])
+    else:
+        if "dd:MM:YYYY" in res:
+            Ptk.utils.gsettings_set(schema, key, types["date"])
+        else:
+            Ptk.utils.gsettings_set(schema, key, types["time"])
 
 
 def on_f_size_change(self, button):
@@ -134,6 +142,5 @@ def change_f_size(size: int):
 
 
 def change_format(self, button, f_type):
-    types = {"time": "HH:MM", "date": "HH:MM\\ndd:MM:YYYY"}
     key = "pattern"
     Ptk.utils.gsettings_set(schema, key, types[f_type])
