@@ -51,7 +51,6 @@ class Apps:
 
         self.liststore = Gtk.ListStore(GdkPixbuf.Pixbuf, str, str)
         self.iconview = Gtk.IconView.new()
-
         self.iconview.set_model(self.liststore)
         self.iconview.set_pixbuf_column(0)
         self.iconview.set_text_column(1)
@@ -91,6 +90,9 @@ class Apps:
         widget.unselect_all()
         subprocess.Popen(["pardus-software", "-d", appname])
 
+    def open_software_center(self, button):
+        subprocess.Popen(["pardus-software"])
+
     def StreamGet(self, pixbuf, data):
         lang = f"pretty_{self.lang}"
 
@@ -107,6 +109,7 @@ class Apps:
                         data["icon"] = data["icon"].replace("https", "http")
                     self.stream.fetch(data)
             self.ui_display_box.append(self.iconview)
+            self.ui_display_box.append(self.fun_create_more_apps())
         else:
             if "tlserror" in response.keys() and not self.non_tls_tried:
                 self.non_tls_tried = True
@@ -115,8 +118,31 @@ class Apps:
                 self.server.get(self.apps_url, "test")
             else:
                 error_message = response["message"]
-                error_label = Ptk.Label(label=error_message, hexpand=True, halign="center")
+                error_label = Ptk.Label(
+                    label=error_message, hexpand=True, halign="center"
+                )
                 self.ui_display_box.append(error_label)
 
     def fun_create(self):
         return self.ui_display_box
+
+    def fun_create_more_apps(self):
+        more_apps_markup = "<b>For more applications</b>"
+        more_apps_label = Ptk.Label(markup=more_apps_markup, yalign=0.5)
+        software_center_markup = (
+            "<span size='x-large'>➤</span><span>Pardus Software Center</span>"
+        )
+        software_center_label = Ptk.Label(
+            markup=software_center_markup, margin_bottom=5
+        )
+        more_apps_button = Ptk.Button()
+        more_apps_button.connect("clicked", self.open_software_center)
+        more_apps_button.set_child(software_center_label)
+        return Ptk.Box(
+            margin_bottom=23,
+            spacing=15,
+            hexpand=True,
+            halign="center",
+            valign="center",
+            children=[more_apps_label, more_apps_button],
+        )
