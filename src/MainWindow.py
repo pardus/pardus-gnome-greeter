@@ -294,7 +294,8 @@ class MainWindow(Ptk.ApplicationWindow):
         if name == "prev":
             self.current_page -= 1
         else:
-            self.current_page += 1
+            if self.current_page + 1 <= len(self.page_datas) - 1:
+                self.current_page += 1
 
         self.fun_check_navigation_buttons()
         self.change_page()
@@ -322,9 +323,10 @@ class MainWindow(Ptk.ApplicationWindow):
             self.change_page()
 
     def change_page(self):
-        self.ui_listbox_pages.select_row(
-            self.page_datas[self.current_page]["listboxrow"]
-        )
+        if self.current_page <= len(self.page_datas):
+            self.ui_listbox_pages.select_row(
+                self.page_datas[self.current_page]["listboxrow"]
+            )
         self.page_datas[self.current_page]["togglebutton"].set_active(True)
         self.ui_pages_stack.set_visible_child(
             self.page_datas[self.current_page]["page"]
