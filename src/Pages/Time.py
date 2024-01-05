@@ -31,7 +31,7 @@ class Time:
         date_txt = "01.01.2023"
 
         ui_clock_label = Ptk.Label(
-            label="Enable clock formatting", yalign=0.5, vexpand=True
+            label=_("Enable clock formatting"), yalign=0.5, vexpand=True
         )
         ui_clock_switch = Gtk.Switch()
 
@@ -62,7 +62,7 @@ class Time:
         ui_date_button = Ptk.Button()
         ui_date_button.connect("clicked", self.change_format, "date")
         ui_date_button.set_child(ui_date_box)
-        ui_datetime_label = Ptk.Label(label="Date / Time Format")
+        ui_datetime_label = Ptk.Label(label=_("Date / Time Format"))
         ui_datetime_button_box = Ptk.Box(
             hexpand=True,
             halign="end",
@@ -78,7 +78,7 @@ class Time:
             children=[ui_datetime_label, ui_datetime_button_box],
         )
 
-        ui_fontsize_label = Ptk.Label(label="Font Size", yalign=0.5, vexpand=True)
+        ui_fontsize_label = Ptk.Label(label=_("Font Size"), yalign=0.5, vexpand=True)
         ui_fontsize_spinbutton = Gtk.SpinButton.new_with_range(0, 100, 1)
         ui_fontsize_spinbutton.connect("value-changed", self.on_f_size_change)
         ui_fontsize_spinbutton.set_value(12)
@@ -96,7 +96,7 @@ class Time:
             children=[ui_fontsize_label, ui_fontsize_sb_box],
         )
 
-        ui_seconds_label = Ptk.Label(label="Show Seconds", yalign=0.5, vexpand=True)
+        ui_seconds_label = Ptk.Label(label=_("Show Seconds"), yalign=0.5, vexpand=True)
         ui_seconds_switch = Gtk.Switch()
         ptrn = Ptk.utils.gsettings_get(schema, "pattern")
         if "ss" in str(ptrn):
