@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, "../")
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 from ExtensionManager import ExtensionManager
 from libpardus import Ptk
 from locale import gettext as _
@@ -41,6 +41,8 @@ class Time:
         ui_clock_switch.connect("state-set", self.on_ext_change)
         ui_switch_box = Ptk.Box(hexpand=True, halign="end", children=[ui_clock_switch])
         ui_clock_box = Ptk.Box(
+            margin_end=13,
+            margin_start=26,
             hexpand=True,
             halign="fill",
             spacing=13,
@@ -74,14 +76,15 @@ class Time:
             margin_start=13,
             margin_end=13,
             hexpand=True,
-            margin_top=13,
+            margin_bottom=13,
             children=[ui_datetime_label, ui_datetime_button_box],
         )
 
         ui_fontsize_label = Ptk.Label(label=_("Font Size"), yalign=0.5, vexpand=True)
         ui_fontsize_spinbutton = Gtk.SpinButton.new_with_range(0, 100, 1)
         ui_fontsize_spinbutton.connect("value-changed", self.on_f_size_change)
-        ui_fontsize_spinbutton.set_value(12)
+        f_size = Ptk.utils.gsettings_get(schema, "font-size")
+        ui_fontsize_spinbutton.set_value(GLib.Variant.get_int32(f_size))
         ui_fontsize_sb_box = Ptk.Box(
             hexpand=True,
             halign="end",
@@ -113,18 +116,19 @@ class Time:
             margin_start=13,
             margin_end=13,
             hexpand=True,
-            margin_bottom=13,
+            margin_top=13,
             children=[ui_seconds_label, ui_fontsize_sb_box],
         )
         self.ui_settings_box = Ptk.Box(
             css=["settings-box", "rounded"],
             orientation="vertical",
             margin_top=13,
+            margin_start=13,
             spacing=13,
             children=[
-                ui_datetime_box,
-                ui_font_box,
                 ui_seconds_box,
+                ui_font_box,
+                ui_datetime_box,
             ],
         )
 
