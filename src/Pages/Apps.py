@@ -14,6 +14,7 @@ APPNAME_CODE = "pardus-gnome-greeter"
 TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
+pardus_software_icon_dir = "/usr/share/icons/hicolor/scalable/apps/pardus-software.svg"
 
 
 class Apps:
@@ -34,11 +35,8 @@ class Apps:
         self.apps_url = "https://apps.pardus.org.tr/api/greeter"
         self.non_tls_tried = False
         self.lang = os.getenv("LANG")[0:2]
-        cur_dir = os.path.dirname(os.path.abspath(__file__))
         ui_software_center_image = Ptk.Image(
-            file=cur_dir + "/../../data/assets/pardus-software.svg",
-            pixel_size=100,
-            margin_top=50,
+            file=pardus_software_icon_dir, pixel_size=100, margin_top=50
         )
 
         ui_software_center_markup = (
@@ -127,12 +125,12 @@ class Apps:
         return self.ui_display_box
 
     def fun_create_more_apps(self):
-        more_apps_markup = "<b>For more applications</b>"
+        more_apps_markup = _(f"<b>{'For more applications'}</b>")
         more_apps_label = Ptk.Label(
             markup=more_apps_markup, yalign=0.5, xalign=1, hexpand=True
         )
 
-        software_center_label = Ptk.Label(label="Pardus Software Center")
+        software_center_label = Ptk.Label(label=_("Pardus Software Center"))
         more_apps_image = Ptk.Image(icon="media-playback-start-symbolic")
 
         more_apps_button_box = Ptk.Box(

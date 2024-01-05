@@ -72,6 +72,10 @@ msgstr ""
 msgid "Pardus Software Center"
 msgstr ""
 
+msgid "For more applications"
+msgstr ""
+
+
 
 # Theme.py
 msgid "Dark Theme"
@@ -142,7 +146,18 @@ msgid "Forum"
 msgstr ""
 
 
+# Clock
+msgid "Enable clock formatting"
+msgstr ""
 
+msgid "Date / Time Format"
+msgstr ""
+
+msgid "Font Size"
+msgstr ""
+
+msgid "Show Seconds"
+msgstr ""
 
 
 # Welcome.py

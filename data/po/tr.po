@@ -65,7 +65,11 @@ msgstr "Katkı Sağlayanlar"
 
 # Apps.py
 msgid "Pardus Software Center"
-msgstr "Pardus Uygulama Merkezi"
+msgstr "Pardus Yazılım Merkezi"
+
+msgid "For more applications"
+msgstr "Daha fazla uygulama için"
+
 
 # Theme.py
 msgid "Dark Theme"
@@ -80,6 +84,21 @@ msgstr "Tarzı"
 
 msgid "Classic"
 msgstr "Klasik"
+
+
+# Clock
+msgid "Enable clock formatting"
+msgstr "Saat özelleştirmeyi etkinleştir"
+
+msgid "Date / Time Format"
+msgstr "Tarih / Saat Düzeni"
+
+msgid "Font Size"
+msgstr "Yazı Tipi Boyutu"
+
+msgid "Show Seconds"
+msgstr "Saniyeleri Göster"
+
 
 
 
