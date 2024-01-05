@@ -25,9 +25,6 @@ types = {
 
 
 def fun_create():
-    lbl_warn = Ptk.Label(
-        label="This config only works if Dash to Panel is enabled", xalign=0.5
-    )
     time_txt = "10:00"
     date_txt = "01.01.2023"
 
@@ -103,7 +100,7 @@ def fun_create():
         margin_end=23,
         margin_start=23,
         margin_bottom=23,
-        children=[lbl_warn, ui_seconds_box, ui_font_box, ui_datetime_box],
+        children=[ui_seconds_box, ui_font_box, ui_datetime_box],
     )
 
     enabled_ext = ExtensionManager.get_extensions("enabled-extensions")
