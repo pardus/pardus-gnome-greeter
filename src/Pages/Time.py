@@ -16,6 +16,7 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME_CODE, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME_CODE)
 schema = "org.gnome.shell.extensions.date-menu-formatter"
+clock_ext = "date-menu-formatter@marcinjakubowski.github.com"
 types = {
     "time": "HH:MM",
     "time-sec": "HH:MM:ss",
@@ -28,6 +29,23 @@ class Time:
     def __init__(self) -> None:
         time_txt = "10:00"
         date_txt = "01.01.2023"
+
+        ui_clock_label = Ptk.Label(
+            label="Enable clock formatting", yalign=0.5, vexpand=True
+        )
+        ui_clock_switch = Gtk.Switch()
+
+        enab_exts = ExtensionManager.get_extensions("enabled-extensions")
+        if clock_ext in enab_exts:
+            ui_clock_switch.set_state(True)
+        ui_clock_switch.connect("state-set", self.on_ext_change)
+        ui_switch_box = Ptk.Box(hexpand=True, halign="end", children=[ui_clock_switch])
+        ui_clock_box = Ptk.Box(
+            hexpand=True,
+            halign="fill",
+            spacing=13,
+            children=[ui_clock_label, ui_switch_box],
+        )
 
         ui_time_button = Ptk.Button(vexpand=True)
         ui_time_button.connect("clicked", self.change_format, "time")
@@ -53,6 +71,8 @@ class Time:
         )
 
         ui_datetime_box = Ptk.Box(
+            margin_start=13,
+            margin_end=13,
             hexpand=True,
             margin_top=13,
             children=[ui_datetime_label, ui_datetime_button_box],
@@ -70,8 +90,9 @@ class Time:
         )
 
         ui_font_box = Ptk.Box(
+            margin_start=13,
+            margin_end=13,
             hexpand=True,
-            margin_top=13,
             children=[ui_fontsize_label, ui_fontsize_sb_box],
         )
 
@@ -89,19 +110,17 @@ class Time:
         )
 
         ui_seconds_box = Ptk.Box(
+            margin_start=13,
+            margin_end=13,
             hexpand=True,
-            margin_top=13,
+            margin_bottom=13,
             children=[ui_seconds_label, ui_fontsize_sb_box],
         )
-
-        self.box = Ptk.Box(
+        self.ui_settings_box = Ptk.Box(
+            css=["settings-box", "rounded"],
             orientation="vertical",
-            hexpand=True,
-            vexpand=True,
-            margin_top=23,
-            margin_end=23,
-            margin_start=23,
-            margin_bottom=23,
+            margin_top=13,
+            spacing=13,
             children=[
                 ui_datetime_box,
                 ui_font_box,
@@ -109,13 +128,18 @@ class Time:
             ],
         )
 
-        enabled_ext = ExtensionManager.get_extensions("enabled-extensions")
-        clock_ext = "date-menu-formatter@marcinjakubowski.github.com"
-        if clock_ext not in enabled_ext:
-            ui_date_button.set_sensitive(False)
-            ui_time_button.set_sensitive(False)
-            ui_fontsize_spinbutton.set_sensitive(False)
-            ui_seconds_switch.set_sensitive(False)
+        self.box = Ptk.Box(
+            orientation="vertical",
+            hexpand=True,
+            margin_top=23,
+            margin_end=23,
+            margin_start=23,
+            margin_bottom=23,
+            children=[
+                ui_clock_box,
+                self.ui_settings_box,
+            ],
+        )
 
     def change_sec(self, switch, state):
         key = "pattern"
@@ -144,6 +168,14 @@ class Time:
     def change_format(self, button, f_type):
         key = "pattern"
         Ptk.utils.gsettings_set(schema, key, types[f_type])
+
+    def on_ext_change(self, switch, state):
+        if state:
+            ExtensionManager.extension_operations("enable", clock_ext)
+
+        else:
+            ExtensionManager.extension_operations("disable", clock_ext)
+        self.ui_settings_box.set_sensitive(state)
 
 
 def fun_create():

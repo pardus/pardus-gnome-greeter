@@ -20,7 +20,12 @@
     border:1px solid red;
 }
 
-
+.settings-box{
+    background-color: @shade_color;
+}
+.rounded{
+    border-radius: 8px;
+}
 
 /* NEW CSS RULES */
 .listboxrow {
