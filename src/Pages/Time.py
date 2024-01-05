@@ -100,7 +100,11 @@ def fun_create():
         margin_end=23,
         margin_start=23,
         margin_bottom=23,
-        children=[ui_seconds_box, ui_font_box, ui_datetime_box],
+        children=[
+            ui_datetime_box,
+            ui_font_box,
+            ui_seconds_box,
+        ],
     )
 
     enabled_ext = ExtensionManager.get_extensions("enabled-extensions")
