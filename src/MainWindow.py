@@ -157,7 +157,7 @@ class MainWindow(Ptk.ApplicationWindow):
                 "listboxrow": None,
                 "togglebutton": None,
                 "text": _("Clock"),
-                "icon": "emblem-system-symbolic",
+                "icon": "org.gnome.Settings-time-symbolic",
             },
             {
                 "id": "ui_outro_listboxrow",

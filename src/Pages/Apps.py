@@ -128,21 +128,33 @@ class Apps:
 
     def fun_create_more_apps(self):
         more_apps_markup = "<b>For more applications</b>"
-        more_apps_label = Ptk.Label(markup=more_apps_markup, yalign=0.5)
-        software_center_markup = (
-            "<span size='x-large'>➤</span><span>Pardus Software Center</span>"
+        more_apps_label = Ptk.Label(
+            markup=more_apps_markup, yalign=0.5, xalign=1, hexpand=True
         )
-        software_center_label = Ptk.Label(
-            markup=software_center_markup, margin_bottom=5
+
+        software_center_label = Ptk.Label(label="Pardus Software Center")
+        more_apps_image = Ptk.Image(icon="media-playback-start-symbolic")
+
+        more_apps_button_box = Ptk.Box(
+            valign="center",
+            spacing=3,
+            children=[
+                more_apps_image,
+                software_center_label,
+            ],
         )
         more_apps_button = Ptk.Button()
         more_apps_button.connect("clicked", self.open_software_center)
-        more_apps_button.set_child(software_center_label)
+        more_apps_button.set_child(more_apps_button_box)
+
+        box1 = Ptk.Box(children=[more_apps_label])
+        box2 = Ptk.Box(spacing=3, children=[more_apps_image, more_apps_button])
         return Ptk.Box(
-            margin_bottom=23,
+            homogeneous=True,
+            margin_bottom=73,
             spacing=15,
             hexpand=True,
-            halign="center",
-            valign="center",
-            children=[more_apps_label, more_apps_button],
+            halign="fill",
+            valign="fill",
+            children=[box1, box2],
         )
