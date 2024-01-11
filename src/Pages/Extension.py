@@ -79,11 +79,20 @@ def fun_create_extension_box(extension_props, extensions):
     # |_______________________________________________|
 
     # EXTENSION LOGO
-    ui_image_logo = Ptk.Image(file=os.path.dirname(os.path.abspath(__file__)) + "/../../" + extension_props["logo"], halign="start")
+    ui_image_logo = Ptk.Image(
+        file=os.path.dirname(os.path.abspath(__file__))
+        + "/../../"
+        + extension_props["logo"],
+        halign="start",
+    )
 
     # EXTENSION IMAGE
     ui_image_extension_image = Ptk.Image(
-        file=os.path.dirname(os.path.abspath(__file__)) + "/../../" + extension_props["image"], height=150, width=180
+        file=os.path.dirname(os.path.abspath(__file__))
+        + "/../../"
+        + extension_props["image"],
+        height=150,
+        width=180,
     )
 
     # EXTENSION NAME
