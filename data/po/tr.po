@@ -42,6 +42,9 @@ msgstr "Uzantılar"
 msgid "Display"
 msgstr "Ekran"
 
+msgid "Clock"
+msgstr "Saat"
+
 msgid "Applications"
 msgstr "Uygulamalar"
 
