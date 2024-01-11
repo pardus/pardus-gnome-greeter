@@ -34,11 +34,9 @@ class ExtensionManager:
         types = ["enabled-extensions", "disabled-extensions"]
         extensions = []
         if ext_type == "all":
-            print("all")
             for ext_type in types:
                 extensions += Ptk.utils.gsettings_get(schema, ext_type)
 
         else:
-            print("sadece ", ext_type)
             extensions = Ptk.utils.gsettings_get(schema, ext_type)
         return list(set(extensions))

@@ -19,17 +19,17 @@ schema = "org.gnome.shell.extensions.date-menu-formatter"
 key = "pattern"
 clock_ext = "date-menu-formatter@marcinjakubowski.github.com"
 types = {
-    "time": "HH:MM",
-    "time-sec": "HH:MM:ss",
-    "date": "HH:MM\\ndd:MM:YYYY",
-    "date-sec": "HH:MM:ss\\ndd:MM:YYYY",
+    "time": "HH.MM",
+    "time-sec": "HH.MM.ss",
+    "date": "HH.MM\\ndd.MM.YYYY",
+    "date-sec": "HH.MM.ss\\ndd.MM.YYYY",
 }
 
 
 class Time:
     def __init__(self) -> None:
-        time_txt = "10:00"
-        date_txt = "01.01.2023"
+        time_txt = "10.00"
+        date_txt = "30.08.2023"
 
         ui_clock_label = Ptk.Label(
             label=_("Enable clock formatting"), yalign=0.5, vexpand=True
@@ -140,7 +140,7 @@ class Time:
         ui_time_button.connect("clicked", self.change_format, "time")
         ui_fontsize_spinbutton.connect("value-changed", self.on_f_size_change)
         self.ui_seconds_switch.connect("state-set", self.change_sec)
-        print("sys sec check", self.sys_sec_check())
+
         self.box = Ptk.Box(
             orientation="vertical",
             hexpand=True,
@@ -157,13 +157,12 @@ class Time:
     def change_sec(self, switch, state):
         res = str(Ptk.utils.gsettings_get(schema, key))[1:-1]
         if state:
-            if "dd:MM:YYYY" in res:
+            if "dd.MM.YYYY" in res:
                 Ptk.utils.gsettings_set(schema, key, types["date-sec"])
             else:
                 Ptk.utils.gsettings_set(schema, key, types["time-sec"])
         if not state:
-            print("remove sec")
-            if "dd:MM:YYYY" in res:
+            if "dd.MM.YYYY" in res:
                 Ptk.utils.gsettings_set(schema, key, types["date"])
             else:
                 Ptk.utils.gsettings_set(schema, key, types["time"])
@@ -179,7 +178,6 @@ class Time:
     def change_format(self, button, f_type):
         sec_state = self.ui_seconds_switch.get_state()
         sec_type = f"{f_type}-sec"
-        print("sec-state", sec_state, sec_type)
         if sec_state:
             self.set_pattern(types[sec_type])
         else:
