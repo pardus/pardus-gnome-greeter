@@ -19,10 +19,10 @@ schema = "org.gnome.shell.extensions.date-menu-formatter"
 key = "pattern"
 clock_ext = "date-menu-formatter@marcinjakubowski.github.com"
 types = {
-    "time": "HH.MM",
-    "time-sec": "HH.MM.ss",
-    "date": "HH.MM\\ndd.MM.YYYY",
-    "date-sec": "HH.MM.ss\\ndd.MM.YYYY",
+    "time": "kk:mm",
+    "time-sec": "kk:mm:ss",
+    "date": "kk:mm\\ndd.MM.y",
+    "date-sec": "kk:mm:ss\\ndd.MM.y",
 }
 
 
