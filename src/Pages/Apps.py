@@ -125,7 +125,7 @@ class Apps:
         return self.ui_display_box
 
     def fun_create_more_apps(self):
-        more_apps_markup = _(f"<b>{'For more applications'}</b>")
+        more_apps_markup = f"<b>{_('For more applications')}</b>"
         more_apps_label = Ptk.Label(
             markup=more_apps_markup, yalign=0.5, xalign=1, hexpand=True
         )
