@@ -78,6 +78,7 @@ def fun_create():
     ui_social_media_link_box = Ptk.Box(halign="center", hexpand=True, spacing=13)
     for data in social_media_datas:
         btn = Gtk.LinkButton(uri=data["url"])
+        btn.set_tooltip_text(data["url"])
         img_file_dir = cur_dir + "/../../data/assets/" + data["img"]
         ui_media_img = Ptk.Image(file=img_file_dir, pixel_size=37)
         btn.set_child(ui_media_img)
