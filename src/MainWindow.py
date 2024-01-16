@@ -343,7 +343,7 @@ class MainWindow(Ptk.ApplicationWindow):
             issue_url=WEBSITE,
             credit_section=[_("Contributors"), [DEV]],
             translator_credits=DEV,
-            copyright="TÜBİTAK ULAKBİM | 2023",
+            copyright="TÜBİTAK ULAKBİM | 2024",
             developers=[DEV],
             application_icon=ICON,
             transient_for=self.window,
