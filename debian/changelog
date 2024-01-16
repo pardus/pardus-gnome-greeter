@@ -1,3 +1,40 @@
+pardus-gnome-greeter (0.0.10) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * Update 'README.md'
+  * fix: social medias reordered.discord changed
+
+  [ Fatih Altun ]
+  * Add handle for Gio.tls_error_quark
+  * Fix paths
+
+  [ Osman Coskun ]
+  * feat: clock options
+  * fix: seconds in time
+  * feat: more app button added
+  * fix: page index
+  * fix: removed warning text from clock
+  * fix: clock settings order changed
+  * fix: second button. code refactgor
+  * fix: minor fixes
+  * feat: extension switcher added
+  * fix: added date menu formatter as dependency
+  * fix: added new strings to translation files
+  * fix: missing translations
+  * fix: switch layout
+  * fix: seconds option on clock
+  * clock style changed
+  * feat: social media tooltip
+
+  [ Fatih Altun ]
+  * Fix typo
+  * Update Turkish translations
+  * Fix date time formats
+  * Update version for next release
+  * Update copyright to 2024
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jan 2024 11:12:50 +0300
+
 pardus-gnome-greeter (0.0.9) unstable; urgency=medium
 
   [ Osman Coskun ]
