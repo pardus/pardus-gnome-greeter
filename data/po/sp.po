@@ -1,0 +1,191 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-04 16:36+0300\n"
+"PO-Revision-Date: 2022-10-18 11:11+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sp\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+
+# MainWindow.py
+msgid "Pardus GNOME Greeter"
+msgstr "Bienvenida a Pardus GNOME"
+
+
+
+msgid "Welcome"
+msgstr "Bienvenido/a"
+
+msgid "Layout"
+msgstr "Disposición"
+
+msgid "Wallpaper"
+msgstr "Fondo de escritorio"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Extension"
+msgstr "Extensión"
+
+msgid "Extensions"
+msgstr "Extensiones"
+
+msgid "Display"
+msgstr "Pantalla"
+
+msgid "Applications"
+msgstr "Aplicaciones"
+
+msgid "Support"
+msgstr "Soporte"
+
+msgid "Configure Pardus with just a few clicks."
+msgstr "Configura Pardus con solo unos pocos clicks."
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Siguiente"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Contributors"
+msgstr "Contribuidores"
+
+
+
+# Apps.py
+msgid "Pardus Software Center"
+msgstr "Centro de Software Pardus"
+
+msgid "For more applications"
+msgstr "Para mas aplicaciones"
+
+
+
+# Theme.py
+msgid "Dark Theme"
+msgstr "Tema Oscuro"
+
+msgid "Light Theme"
+msgstr "Tema Claro"
+
+
+# Layout.py
+msgid "Style"
+msgstr "Estilo"
+
+msgid "Classic"
+msgstr "Clásico"
+
+
+
+# Display.py
+msgid "Recommended scale option for main display is"
+msgstr ""
+
+msgid "Cursor Size"
+msgstr "Tamaño del Cursor"
+
+msgid "Tiny"
+msgstr "Minúsculo"
+
+msgid "Small"
+msgstr "Pequeño"
+
+msgid "Standart"
+msgstr "Normal"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Huge"
+msgstr "Enorme"
+
+msgid "File manager icon size"
+msgstr "Tamaño de iconos del gestor de ficheros"
+
+msgid "Desktop icon size"
+msgstr "Tamaño de iconos del escritorio"
+
+
+# Outro.py
+msgid "Social Media Accounts"
+msgstr "Cuentas redes sociales"
+
+msgid "Shortcuts"
+msgstr "Atajos"
+
+msgid "Open Shortcuts"
+msgstr "Abrir atajos"
+
+msgid "Home Page"
+msgstr "Página de inicio"
+
+msgid "Documentation"
+msgstr "Documentación"
+
+msgid "Community"
+msgstr "Comunidad"
+
+msgid "Forum"
+msgstr "Foro"
+
+
+# Clock
+msgid "Enable clock formatting"
+msgstr "Activar formato de reloj"
+
+msgid "Date / Time Format"
+msgstr "Formato Fecha/Hora"
+
+msgid "Font Size"
+msgstr "Tamaño fuente"
+
+msgid "Show Seconds"
+msgstr "Mostrar segundos"
+
+
+# Welcome.py
+msgid "This application helps configure Pardus"
+msgstr "Esta aplicación ayuda a configurar Pardus"
+
+
+# Extension
+msgid "Add a quick navigation menu for system places."
+msgstr "Añade un menu de navegación rápida para lugares del sistema."
+
+msgid "Add a status menu for accessing and unmounting removable devices."
+msgstr "Añade un menu de estado para acceder y desmontar discos extraibles."
+
+msgid "Disable screensaver and auto-suspend."
+msgstr "Deshabilitar salvapantallas y auto-suspensión."
+
+msgid "Add a category-based application menu."
+msgstr "Añade un menu categorizado de aplicaciones."
+
+msgid "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."
+msgstr "Activar soporte para AppIndicator, KSstatusNotifierItem y iconos de legado en la bandeja del sistema en el intérprete de comandos."
+
+msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
+msgstr "Elimina la notificación de 'Ventana lista' y hace que la ventana se enfoque."
+
+msgid "Cutting-edge clipboard manager for GNOME Shell."
+msgstr "Gestor de portapapeles moderno para ambiente GNOME."
+
+msgid "Adds clipboard indicator to top panel, caches history."
+msgstr "Añade el indicador de portapapeles al panel superior y guarda el historial en caché."
