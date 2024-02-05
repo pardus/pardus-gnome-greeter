@@ -20,7 +20,7 @@ msgstr ""
 
 # MainWindow.py
 msgid "Pardus GNOME Greeter"
-msgstr "Bienvenida a Pardus GNOME"
+msgstr "Bienvenido/a a Pardus GNOME"
 
 
 
@@ -96,7 +96,7 @@ msgstr "Clásico"
 
 # Display.py
 msgid "Recommended scale option for main display is"
-msgstr ""
+msgstr "Opción de escala recomendada para la pantalla principal es"
 
 msgid "Cursor Size"
 msgstr "Tamaño del Cursor"
