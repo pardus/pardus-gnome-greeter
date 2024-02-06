@@ -89,10 +89,6 @@ If applicable, add screenshots to help explain your problem:
 
 ...
 
-#### Screenshot 2 description
-
-...
-
 ### Application Details
 
 #### What is pasted, if applicable
@@ -106,33 +102,4 @@ If applicable, add screenshots to help explain your problem:
 ``` bash
 $ app --version  # ...
 1.74.3
-```
-
-### Output and Logs
-
-#### Gnome
-
-**Command:** `journalctl --since=now --follow /usr/bin/gnome-shell`
-
-``` bash
-$ journalctl --since=now --follow /usr/bin/gnome-shell
-...
-```
-
-#### Pano Configuration
-
-**Command:** `dconf dump /org/gnome/shell/extensions/pano/`
-
-``` bash
-$ dconf dump /org/gnome/shell/extensions/pano/
-...
-```
-
-#### Enabled Extensions
-
-**Command:** `dconf read /org/gnome/shell/enabled-extensions | tr ' ' '\n'`
-
-``` bash
-$ dconf read /org/gnome/shell/enabled-extensions | tr ' ' '\n'
-...
 ```
