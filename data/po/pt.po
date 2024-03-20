@@ -1,15 +1,15 @@
 # Portuguese translation of pardus-gnome-greeter.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the pardus-gnome-greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pardus-gnome-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-04 16:36+0300\n"
-"PO-Revision-Date: 2023-09-04 00:26+0100\n"
+"PO-Revision-Date: 2024-03-20 19:11+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 # MainWindow.py
 msgid "Pardus GNOME Greeter"
-msgstr "Bem-vindo ao GNOME do Pardus"
+msgstr "Bem-vindo ao GNOME Pardus"
 
 msgid "Welcome"
 msgstr "Bem-vindo(a)"
 
 msgid "Layout"
-msgstr "Disposição"
+msgstr "Esquema"
 
 msgid "Wallpaper"
 msgstr "Papel de parede"
@@ -47,8 +47,8 @@ msgstr "Ecrã"
 msgid "Applications"
 msgstr "Aplicações"
 
-msgid "Outro"
-msgstr "Diversos"
+msgid "Support"
+msgstr "Suporte"
 
 msgid "Configure Pardus with just a few clicks."
 msgstr "Configure o Pardus com apenas alguns cliques."
@@ -68,6 +68,9 @@ msgstr "Contribuidores"
 # Apps.py
 msgid "Pardus Software Center"
 msgstr "Centro de Software Pardus"
+
+msgid "For more applications"
+msgstr "Para mais aplicações"
 
 # Theme.py
 msgid "Dark Theme"
@@ -115,9 +118,6 @@ msgstr "Tamanho dos ícones da área de trabalho"
 msgid "Social Media Accounts"
 msgstr "Contas de redes sociais"
 
-msgid "Support"
-msgstr "Suporte"
-
 msgid "Shortcuts"
 msgstr "Atalhos"
 
@@ -135,6 +135,19 @@ msgstr "Comunidade"
 
 msgid "Forum"
 msgstr "Fórum"
+
+# Clock
+msgid "Enable clock formatting"
+msgstr "Ativar a formatação do relógio"
+
+msgid "Date / Time Format"
+msgstr "Formato de Data / Hora"
+
+msgid "Font Size"
+msgstr "Tamanho do tipo de letra"
+
+msgid "Show Seconds"
+msgstr "Mostrar segundos"
 
 # Welcome.py
 msgid "This application helps configure Pardus"
@@ -174,3 +187,6 @@ msgid "Adds clipboard indicator to top panel, caches history."
 msgstr ""
 "Adiciona o indicador da área de transferência ao painel superior, coloca o "
 "histórico em cache."
+
+#~ msgid "Outro"
+#~ msgstr "Diversos"
