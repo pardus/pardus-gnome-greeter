@@ -40,9 +40,10 @@ def check_live():
     f = open("/proc/cmdline", "r").read()
     return "boot=live" in f
 
+config_dir = os.getenv("XDG_CONFIG_HOME", str(Path.home()) + "/.config/")
 
 autostart_file = (
-    str(Path.home()) + "/.config/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
+    config_dir + "/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
 )
 
 # In live mode, the application should not welcome the user
