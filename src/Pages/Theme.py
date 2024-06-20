@@ -156,11 +156,11 @@ def fun_change_theme(toggle_button, theme, is_special=False):
 
 def fun_check_special_themes():
     themes = ["pardus-yuzyil"]
-    home_path = Path.home()
+    config_dir = os.getenv("XDG_CONFIG_HOME", str(Path.home()) + "/.config/")
     lang = os.getenv("LANG")[0:2]
     desktop_env = utils.desktop_env()
     user_theme_json = (
-        f"{home_path}/.config/pardus/pardus-special-theme/special-theme.json"
+        f"{config_dir}/pardus/pardus-special-theme/special-theme.json"
     )
     user_theme_json_ok = os.path.isfile(user_theme_json)
 
