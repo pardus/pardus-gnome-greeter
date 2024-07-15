@@ -157,12 +157,12 @@ class Time:
     def change_sec(self, switch, state):
         res = str(Ptk.utils.gsettings_get(schema, key))[1:-1]
         if state:
-            if "dd.MM.YYYY" in res:
+            if "dd.MM.y" in res:
                 Ptk.utils.gsettings_set(schema, key, types["date-sec"])
             else:
                 Ptk.utils.gsettings_set(schema, key, types["time-sec"])
         if not state:
-            if "dd.MM.YYYY" in res:
+            if "dd.MM.y" in res:
                 Ptk.utils.gsettings_set(schema, key, types["date"])
             else:
                 Ptk.utils.gsettings_set(schema, key, types["time"])
