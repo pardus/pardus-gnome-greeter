@@ -40,11 +40,10 @@ def check_live():
     f = open("/proc/cmdline", "r").read()
     return "boot=live" in f
 
+
 config_dir = os.getenv("XDG_CONFIG_HOME", str(Path.home()) + "/.config/")
 
-autostart_file = (
-    config_dir + "/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
-)
+autostart_file = config_dir + "/autostart/tr.org.pardus.pardus-gnome-greeter.desktop"
 
 # In live mode, the application should not welcome the user
 if check_live() and os.path.isfile(autostart_file):
@@ -344,7 +343,7 @@ class MainWindow(Ptk.ApplicationWindow):
             issue_url=WEBSITE,
             credit_section=[_("Contributors"), [DEV]],
             translator_credits=DEV,
-            copyright="TÜBİTAK ULAKBİM | 2024",
+            copyright="© Pardus",
             developers=[DEV],
             application_icon=ICON,
             transient_for=self.window,
