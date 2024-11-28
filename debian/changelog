@@ -1,3 +1,16 @@
+pardus-gnome-greeter (0.0.12) unstable; urgency=medium
+
+  [ vilez ]
+  * feat: better support for XDG Base Directory
+
+  [ Osman Coskun ]
+  * ULAKBIM > BILGEM
+
+  [ Fatih Altun ]
+  * Update static appversion
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 28 Nov 2024 16:38:47 +0300
+
 pardus-gnome-greeter (0.0.11) unstable; urgency=medium
 
   [ migueldecode ]
