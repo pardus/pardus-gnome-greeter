@@ -45,7 +45,7 @@
     "logo": "data/assets/ext_app_battery_logo.svg",
     "id": "Bluetooth-Battery-Meter@maniacx.github.com",
     "name": "Bluetooth Battery Meter",
-    "description": "Adds a battery meter to the Bluetooth icon.",
+    "description": "Provides quick access to Bluetooth",
     "image": "data/assets/ext_app_battery_image.png"
   }
 ]
