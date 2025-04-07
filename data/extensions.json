@@ -43,7 +43,7 @@
   },
   {
     "logo": "data/assets/ext_app_battery_logo.svg",
-    "id": "Bluetooth-Battery-Meter@maniacx.github.com",
+    "id": "bluetooth-battery-meter@maniacx.github.com",
     "name": "Bluetooth Battery Meter",
     "description": "Provides quick access to Bluetooth",
     "image": "data/assets/ext_app_battery_image.png"
