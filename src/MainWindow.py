@@ -24,7 +24,7 @@ from Pages import (
 )
 
 
-VERSION = "0.0.12"
+VERSION = "0.0.13"
 APPNAME = "Pardus GNOME Greeter"
 DEV = "Osman Coskun"
 WEBSITE = "https://github.com/pardus/pardus-gnome-greeter"
