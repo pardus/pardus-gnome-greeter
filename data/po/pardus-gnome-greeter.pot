@@ -189,3 +189,6 @@ msgstr ""
 
 msgid "Adds clipboard indicator to top panel, caches history."
 msgstr ""
+
+msgid "Provides quick access to Bluetooth"
+msgstr ""
