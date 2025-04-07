@@ -185,3 +185,6 @@ msgstr "GNOME Shell için son teknoloji pano yöneticisi."
 
 msgid "Adds clipboard indicator to top panel, caches history."
 msgstr "Üst panele pano göstergesi ekler, geçmişi önbelleğe alır."
+
+msgid "Provides quick access to Bluetooth"
+msgstr "Bluetooth'a hızlı erişim sağlar"
