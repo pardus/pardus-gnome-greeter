@@ -1,3 +1,18 @@
+pardus-gnome-greeter (0.0.13) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * feat(extension): New extension added - Bluetooth Batter Meter
+  * fix(extension): changed description of extension
+
+  [ Fatih Altun ]
+  * Update static appversion
+  * Add gnome-shell-extension-bluetooth-battery-meter to depends
+  * Update pot file
+  * Update Turkish translations
+  * Fix typo
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 07 Apr 2025 16:30:01 +0300
+
 pardus-gnome-greeter (0.0.12) unstable; urgency=medium
 
   [ vilez ]
