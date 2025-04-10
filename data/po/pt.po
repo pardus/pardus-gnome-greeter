@@ -1,15 +1,14 @@
 # Portuguese translation of pardus-gnome-greeter.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pardus-gnome-greeter package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pardus-gnome-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-04 16:36+0300\n"
-"PO-Revision-Date: 2024-03-20 19:11+0000\n"
+"PO-Revision-Date: 2025-04-10 21:28+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 # MainWindow.py
 msgid "Pardus GNOME Greeter"
@@ -188,5 +187,5 @@ msgstr ""
 "Adiciona o indicador da área de transferência ao painel superior, coloca o "
 "histórico em cache."
 
-#~ msgid "Outro"
-#~ msgstr "Diversos"
+msgid "Provides quick access to Bluetooth"
+msgstr "Proporciona um acesso rápido ao Bluetooth"
