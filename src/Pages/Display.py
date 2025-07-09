@@ -3,7 +3,7 @@ import os
 import locale
 
 from libpardus import Ptk
-from utils import get_recommended_scale
+from utils import get_recommended_scale, is_gsettings_schema_exists
 from locale import gettext as _
 
 APPNAME_CODE = "pardus-gnome-greeter"
@@ -43,6 +43,7 @@ desktop_icons_key = "icon-size"
 
 nautilus_schema = "org.gnome.nautilus.icon-view"
 nautilus_key = "default-zoom-level"
+is_nautilus_installed = is_gsettings_schema_exists(nautilus_schema)
 
 
 def fun_create():
@@ -141,6 +142,16 @@ def fun_create():
 
     fun_set_values_to_scale(ui_desktop_icons_scale, ui_nautilus_icons_scale)
 
+    ui_nautilus_not_installed_label = Ptk.Label(
+        markup=f"<b>{_('Some options were disabled because Nautilus file manager is not installed')}</b>", margin_top=21
+    )
+
+    if is_nautilus_installed:
+        ui_nautilus_not_installed_label.set_visible(False)
+    else:
+        ui_nautilus_icons_scale.set_sensitive(False)
+        ui_nautilus_icons_label.set_sensitive(False)
+
     temporary_icon = Ptk.Image(
         file=cur_dir + "/../../data/assets/cursor.svg", pixel_size=12
     )
@@ -200,6 +211,7 @@ def fun_create():
             # file man scale
             ui_nautilus_icons_label,
             ui_nautilus_icons_scale,
+            ui_nautilus_not_installed_label,
             ui_font_scale_label,
             ui_cursor_buttons_box,
         ],
@@ -228,17 +240,24 @@ def fun_change_desktop_icons_scale(widget):
 
 
 def fun_change_nautilus_icons_scale(widget):
+    if not is_nautilus_installed:
+        return
     widget_value = widget.get_value()
     value = ni_options[widget_value]
     Ptk.utils.gsettings_set(nautilus_schema, nautilus_key, value)
 
 
 def fun_set_values_to_scale(desktop, nautilus):
+    # Desktop icon size
     desktop_icon_size = str(
         Ptk.utils.gsettings_get(desktop_icons_schema, desktop_icons_key)
     )
-    nautilus_icon_size = str(Ptk.utils.gsettings_get(nautilus_schema, nautilus_key))
     di_value = di_options[desktop_icon_size]
-    ni_value = ni_options[nautilus_icon_size]
     desktop.set_value(di_value)
+
+    # Nautilus icon size
+    if not is_nautilus_installed:
+        return
+    nautilus_icon_size = str(Ptk.utils.gsettings_get(nautilus_schema, nautilus_key))
+    ni_value = ni_options[nautilus_icon_size]
     nautilus.set_value(ni_value)

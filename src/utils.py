@@ -7,7 +7,7 @@ sys.path.append("../")
 
 
 gi.require_version("Gdk", "4.0")
-from gi.repository import Gdk
+from gi.repository import Gdk, Gio
 from libpardus import Ptk
 
 
@@ -85,3 +85,11 @@ def dconf_reset(path):
 
 def desktop_env():
     return os.environ["XDG_CURRENT_DESKTOP"].lower()
+
+def is_gsettings_schema_exists(schema):
+    schema_source = Gio.SettingsSchemaSource.get_default()
+    schema_obj = schema_source.lookup(schema, False)
+    if schema_obj is None:
+        return False
+
+    return True

@@ -26,6 +26,7 @@ Depends: ${misc:Depends},
   gnome-shell-extension-date-menu-formatter,
   gnome-shell-extension-no-annoyance,
   gnome-shell-extension-bluetooth-battery-meter
+Recommends: nautilus
 Breaks: pardus-welcome
 Description: Personalize your Pardus desktop with Pardus GNOME Greeter.
  This application offers easy customization of wallpapers,
