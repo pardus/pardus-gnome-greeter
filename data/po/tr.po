@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-04 16:36+0300\n"
-"PO-Revision-Date: 2022-10-18 11:11+0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2025-07-09 16:19+0300\n"
+"PO-Revision-Date: 2025-07-09 16:20+0300\n"
+"Last-Translator: Edip Hazuri <edip@medip.dev>\n"
 "Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 # MainWindow.py
 msgid "Pardus GNOME Greeter"
@@ -41,9 +41,6 @@ msgstr "Uzantılar"
 
 msgid "Display"
 msgstr "Ekran"
-
-msgid "Clock"
-msgstr "Saat"
 
 msgid "Applications"
 msgstr "Uygulamalar"
@@ -73,7 +70,6 @@ msgstr "Pardus Yazılım Merkezi"
 msgid "For more applications"
 msgstr "Daha fazla uygulama için"
 
-
 # Theme.py
 msgid "Dark Theme"
 msgstr "Koyu Tema"
@@ -87,23 +83,6 @@ msgstr "Tarzı"
 
 msgid "Classic"
 msgstr "Klasik"
-
-
-# Clock
-msgid "Enable clock formatting"
-msgstr "Saat özelleştirmeyi etkinleştir"
-
-msgid "Date / Time Format"
-msgstr "Tarih / Saat Düzeni"
-
-msgid "Font Size"
-msgstr "Yazı Tipi Boyutu"
-
-msgid "Show Seconds"
-msgstr "Saniyeleri Göster"
-
-
-
 
 # Display.py
 msgid "Recommended scale option for main display is"
@@ -133,7 +112,11 @@ msgstr "Dosya yöneticisi simge boyutu"
 msgid "Desktop icon size"
 msgstr "Masaüstü simge boyutu"
 
-
+msgid ""
+"Some options were disabled because Nautilus file manager is not installed"
+msgstr ""
+"Nautilus dosya yöneticisi kurulu olmadığı için bazı seçenekler devre dışı "
+"bırakılmıştır."
 
 # Outro.py
 msgid "Social Media Accounts"
@@ -157,6 +140,19 @@ msgstr "Topluluk"
 msgid "Forum"
 msgstr "Forum"
 
+# Clock
+msgid "Enable clock formatting"
+msgstr "Saat özelleştirmeyi etkinleştir"
+
+msgid "Date / Time Format"
+msgstr "Tarih / Saat Düzeni"
+
+msgid "Font Size"
+msgstr "Yazı Tipi Boyutu"
+
+msgid "Show Seconds"
+msgstr "Saniyeleri Göster"
+
 # Welcome.py
 msgid "This application helps configure Pardus"
 msgstr "Bu uygulama Pardusʼu özelleştirmenize yardımcı olur"
@@ -174,10 +170,16 @@ msgstr "Ekran koruyucu ve otomatik uyku kipini devre dışı bırak."
 msgid "Add a category-based application menu."
 msgstr "Kategori tabanlı uygulama menüsü ekle."
 
-msgid "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."
-msgstr "AppIndicator, KStatusNotifierItem ve eski Tepsi simgelerini Shell'de desteklemeyi etkinleştirir."
+msgid ""
+"Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons "
+"in the Shell."
+msgstr ""
+"AppIndicator, KStatusNotifierItem ve eski Tepsi simgelerini Shell'de "
+"desteklemeyi etkinleştirir."
 
-msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
+msgid ""
+"Eliminates the 'Windows is ready' notification and brings the window into "
+"focus."
 msgstr "'Pencere hazır' bildirimini kaldırır ve pencereyi odaklar."
 
 msgid "Cutting-edge clipboard manager for GNOME Shell."
@@ -188,3 +190,6 @@ msgstr "Üst panele pano göstergesi ekler, geçmişi önbelleğe alır."
 
 msgid "Provides quick access to Bluetooth"
 msgstr "Bluetooth'a hızlı erişim sağlar"
+
+#~ msgid "Clock"
+#~ msgstr "Saat"

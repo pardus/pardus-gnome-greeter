@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-04 16:36+0300\n"
+"POT-Creation-Date: 2025-07-09 16:19+0300\n"
 "PO-Revision-Date: 2022-10-18 11:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,12 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-
 # MainWindow.py
 msgid "Pardus GNOME Greeter"
 msgstr "Bienvenido/a a Pardus GNOME"
-
-
 
 msgid "Welcome"
 msgstr "Bienvenido/a"
@@ -66,16 +63,12 @@ msgstr "Cerrar"
 msgid "Contributors"
 msgstr "Contribuidores"
 
-
-
 # Apps.py
 msgid "Pardus Software Center"
 msgstr "Centro de Software Pardus"
 
 msgid "For more applications"
 msgstr "Para mas aplicaciones"
-
-
 
 # Theme.py
 msgid "Dark Theme"
@@ -84,15 +77,12 @@ msgstr "Tema Oscuro"
 msgid "Light Theme"
 msgstr "Tema Claro"
 
-
 # Layout.py
 msgid "Style"
 msgstr "Estilo"
 
 msgid "Classic"
 msgstr "Clásico"
-
-
 
 # Display.py
 msgid "Recommended scale option for main display is"
@@ -122,6 +112,9 @@ msgstr "Tamaño de iconos del gestor de ficheros"
 msgid "Desktop icon size"
 msgstr "Tamaño de iconos del escritorio"
 
+msgid ""
+"Some options were disabled because Nautilus file manager is not installed"
+msgstr ""
 
 # Outro.py
 msgid "Social Media Accounts"
@@ -145,7 +138,6 @@ msgstr "Comunidad"
 msgid "Forum"
 msgstr "Foro"
 
-
 # Clock
 msgid "Enable clock formatting"
 msgstr "Activar formato de reloj"
@@ -159,11 +151,9 @@ msgstr "Tamaño fuente"
 msgid "Show Seconds"
 msgstr "Mostrar segundos"
 
-
 # Welcome.py
 msgid "This application helps configure Pardus"
 msgstr "Esta aplicación ayuda a configurar Pardus"
-
 
 # Extension
 msgid "Add a quick navigation menu for system places."
@@ -178,14 +168,26 @@ msgstr "Deshabilitar salvapantallas y auto-suspensión."
 msgid "Add a category-based application menu."
 msgstr "Añade un menu categorizado de aplicaciones."
 
-msgid "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."
-msgstr "Activar soporte para AppIndicator, KSstatusNotifierItem y iconos de legado en la bandeja del sistema en el intérprete de comandos."
+msgid ""
+"Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons "
+"in the Shell."
+msgstr ""
+"Activar soporte para AppIndicator, KSstatusNotifierItem y iconos de legado "
+"en la bandeja del sistema en el intérprete de comandos."
 
-msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
-msgstr "Elimina la notificación de 'Ventana lista' y hace que la ventana se enfoque."
+msgid ""
+"Eliminates the 'Windows is ready' notification and brings the window into "
+"focus."
+msgstr ""
+"Elimina la notificación de 'Ventana lista' y hace que la ventana se enfoque."
 
 msgid "Cutting-edge clipboard manager for GNOME Shell."
 msgstr "Gestor de portapapeles moderno para ambiente GNOME."
 
 msgid "Adds clipboard indicator to top panel, caches history."
-msgstr "Añade el indicador de portapapeles al panel superior y guarda el historial en caché."
+msgstr ""
+"Añade el indicador de portapapeles al panel superior y guarda el historial "
+"en caché."
+
+msgid "Provides quick access to Bluetooth"
+msgstr ""
