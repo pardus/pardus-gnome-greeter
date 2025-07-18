@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-04 16:36+0300\n"
+"PO-Revision-Date: 2022-10-18 11:11+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+
+# MainWindow.py
+msgid "Pardus GNOME Greeter"
+msgstr ""
+
+
+
+msgid "Welcome"
+msgstr ""
+
+msgid "Layout"
+msgstr ""
+
+msgid "Wallpaper"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Extension"
+msgstr ""
+
+msgid "Extensions"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Applications"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid "Configure Pardus with just a few clicks."
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+
+
+# Apps.py
+msgid "Pardus Software Center"
+msgstr ""
+
+msgid "For more applications"
+msgstr ""
+
+
+
+# Theme.py
+msgid "Dark Theme"
+msgstr ""
+
+msgid "Light Theme"
+msgstr ""
+
+
+# Layout.py
+msgid "Style"
+msgstr ""
+
+msgid "Classic"
+msgstr ""
+
+
+
+# Display.py
+msgid "Recommended scale option for main display is"
+msgstr ""
+
+msgid "Cursor Size"
+msgstr ""
+
+msgid "Tiny"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Standart"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Huge"
+msgstr ""
+
+msgid "File manager icon size"
+msgstr ""
+
+msgid "Desktop icon size"
+msgstr ""
+
+
+# Outro.py
+msgid "Social Media Accounts"
+msgstr ""
+
+msgid "Shortcuts"
+msgstr ""
+
+msgid "Open Shortcuts"
+msgstr ""
+
+msgid "Home Page"
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "Community"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+
+# Clock
+msgid "Enable clock formatting"
+msgstr ""
+
+msgid "Date / Time Format"
+msgstr ""
+
+msgid "Font Size"
+msgstr ""
+
+msgid "Show Seconds"
+msgstr ""
+
+
+# Welcome.py
+msgid "This application helps configure Pardus"
+msgstr ""
+
+
+# Extension
+msgid "Add a quick navigation menu for system places."
+msgstr ""
+
+msgid "Add a status menu for accessing and unmounting removable devices."
+msgstr ""
+
+msgid "Disable screensaver and auto-suspend."
+msgstr ""
+
+msgid "Add a category-based application menu."
+msgstr ""
+
+msgid "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."
+msgstr ""
+
+msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
+msgstr ""
+
+msgid "Cutting-edge clipboard manager for GNOME Shell."
+msgstr ""
+
+msgid "Adds clipboard indicator to top panel, caches history."
+msgstr ""
+
+msgid "Provides quick access to Bluetooth"
+msgstr ""

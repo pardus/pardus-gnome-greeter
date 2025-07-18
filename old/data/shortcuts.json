@@ -1,0 +1,22 @@
+[
+    {
+        "schema": "org.gnome.settings-daemon.plugins.media-keys",
+        "key": "email",
+        "binding": "<Super>m"
+    },
+    {
+        "schema": "org.gnome.settings-daemon.plugins.media-keys",
+        "key": "calculator",
+        "binding": "<Super>c"
+    },
+    {
+        "schema": "org.gnome.settings-daemon.plugins.media-keys",
+        "key": "www",
+        "binding": "<Super>w"
+    },
+    {
+        "schema": "org.gnome.settings-daemon.plugins.media-keys",
+        "key": "home",
+        "binding": "<Super>f"
+    }
+]

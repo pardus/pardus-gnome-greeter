@@ -1,0 +1,51 @@
+[
+  {
+    "logo": "data/assets/ext_app_drive_menu_logo.png",
+    "id": "drive-menu@gnome-shell-extensions.gcampax.github.com",
+    "name": "Removable Drive Menu",
+    "description": "Add a status menu for accessing and unmounting removable devices.",
+    "image": "data/assets/ext_app_drive_menu_image.png"
+  },
+  {
+    "logo": "data/assets/ext_app_caffeine_logo.png",
+    "id": "caffeine@patapon.info",
+    "name": "Caffeine",
+    "description": "Disable screensaver and auto-suspend.",
+    "image": "data/assets/ext_app_caffeine_image.png"
+  },
+  {
+    "logo": "data/assets/ext_app_indicator_logo.png",
+    "id": "appindicatorsupport@rgcjonas.gmail.com",
+    "name": "AppIndicator Support",
+    "description": "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell.",
+    "image": "data/assets/ext_app_indicator_image.png"
+  },
+  {
+    "logo": "data/assets/ext_app_indicator_logo.png",
+    "id": "noannoyance@daase.net",
+    "name": "NoAnnoyance v2",
+    "description": "Eliminates the 'Windows is ready' notification and brings the window into focus.",
+    "image": "data/assets/ext_app_annoyance_image.png"
+  },
+  {
+    "logo": "data/assets/ext_app_pano_logo.png",
+    "id": "pano@elhan.io",
+    "name": "Pano - Clipboard Manager",
+    "description": "Cutting-edge clipboard manager for GNOME Shell.",
+    "image": "data/assets/ext_app_pano_image.png"
+  },
+  {
+    "logo": "data/assets/ext_app_clipboard_logo.png",
+    "id": "clipboard-indicator@tudmotu.com",
+    "name": "Clipboard Indicator",
+    "description": "Adds clipboard indicator to top panel, caches history.",
+    "image": "data/assets/ext_app_clipboard_image.png"
+  },
+  {
+    "logo": "data/assets/ext_app_battery_logo.svg",
+    "id": "bluetooth-battery-meter@maniacx.github.com",
+    "name": "Bluetooth Battery Meter",
+    "description": "Provides quick access to Bluetooth",
+    "image": "data/assets/ext_app_battery_image.png"
+  }
+]

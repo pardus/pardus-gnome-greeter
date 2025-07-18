@@ -1,0 +1,268 @@
+pardus-gnome-greeter (0.0.13) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * feat(extension): New extension added - Bluetooth Batter Meter
+  * fix(extension): changed description of extension
+
+  [ Fatih Altun ]
+  * Update static appversion
+  * Add gnome-shell-extension-bluetooth-battery-meter to depends
+  * Update pot file
+  * Update Turkish translations
+  * Fix typo
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 07 Apr 2025 16:30:01 +0300
+
+pardus-gnome-greeter (0.0.12) unstable; urgency=medium
+
+  [ vilez ]
+  * feat: better support for XDG Base Directory
+
+  [ Osman Coskun ]
+  * ULAKBIM > BILGEM
+
+  [ Fatih Altun ]
+  * Update static appversion
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 28 Nov 2024 16:38:47 +0300
+
+pardus-gnome-greeter (0.0.11) unstable; urgency=medium
+
+  [ migueldecode ]
+  * feat: translate to spanish
+  * fix: change filename and language type inside
+  * fix: improve some translates
+
+  [ Osman Coskun ]
+  * added spanish to linguas file
+  * new instructions added
+  * new instructions
+  * feat: shortcut added for pardus shortcuts
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Fatih Altun ]
+  * Fix typo on date control
+  * Update version for next release
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jul 2024 12:22:59 +0300
+
+pardus-gnome-greeter (0.0.10) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * Update 'README.md'
+  * fix: social medias reordered.discord changed
+
+  [ Fatih Altun ]
+  * Add handle for Gio.tls_error_quark
+  * Fix paths
+
+  [ Osman Coskun ]
+  * feat: clock options
+  * fix: seconds in time
+  * feat: more app button added
+  * fix: page index
+  * fix: removed warning text from clock
+  * fix: clock settings order changed
+  * fix: second button. code refactgor
+  * fix: minor fixes
+  * feat: extension switcher added
+  * fix: added date menu formatter as dependency
+  * fix: added new strings to translation files
+  * fix: missing translations
+  * fix: switch layout
+  * fix: seconds option on clock
+  * clock style changed
+  * feat: social media tooltip
+
+  [ Fatih Altun ]
+  * Fix typo
+  * Update Turkish translations
+  * Fix date time formats
+  * Update version for next release
+  * Update copyright to 2024
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jan 2024 11:12:50 +0300
+
+pardus-gnome-greeter (0.0.9) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * fix: arcmenu 100th year support added
+  * fix:type on special theme path
+  * fix:typo
+  * fix: pardus layout 100th year theme
+  * fix: logic changed
+  * fix: icon set removed from standart themes
+
+  [ Fatih Altun ]
+  * Update version for next release
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Sat, 28 Oct 2023 13:44:06 +0300
+
+pardus-gnome-greeter (0.0.8) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * fix: page order changed
+  * feat: option flag added
+  * feat: special theme added
+  * fix: removed unused imports, classes. functions
+  * fix: icon and wallpaper added for default theme
+  * fix: theme order changed
+  * fix: application wasnt closed on quit button
+  * fix: app doesnt start without pardus-yuzyil package
+
+  [ Fatih Altun ]
+  * Fix typo on special theme control
+
+  [ Osman Coskun ]
+  * fix: icon check removed from standart themes
+
+  [ Fatih Altun ]
+  * Update outro as support
+  * Clear unnecessary files
+  * Update version for new release
+  * Fix duplicate
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 27 Oct 2023 16:48:58 +0300
+
+pardus-gnome-greeter (0.0.7) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Add Portuguese translations
+  * Update Portuguese translations
+  * Update tr.org.pardus.pardus-gnome-greeter.desktop
+
+  [ Fatih Altun ]
+  * Add missing no-annoyance extension depends
+
+  [ Osman Coskun ]
+  * fix: wallpaper setting on both dark/light modes
+
+  [ Fatih Altun ]
+  * Add breaks for pardus-welcome
+  * Update version
+  * Update about menu icon
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 24 Oct 2023 17:08:16 +0300
+
+pardus-gnome-greeter (0.0.6) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+  * Update Portuguese translation
+
+  [ Osman Coskun ]
+  * fix: pardus icon size
+  * fix: Application title fixed
+  * feat: desktop icons added
+  * feat: nautilus and desktop icon scaling added
+  * fix: EN/TR translation files are updated
+  * fix: typo
+  * fix: removed unnecessary prints
+  * fix: display page layout fixed
+  * fix: extra large changed to huge
+
+  [ Fatih Altun ]
+  * Fix translation typo
+  * Update version for next release
+  * Update xp config menu button size
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 29 Aug 2023 19:40:23 +0300
+
+pardus-gnome-greeter (0.0.5) unstable; urgency=medium
+
+  [ Sabri Ünal ]
+  * data: Correct some translation errors
+
+  [ Hugo Carvalho ]
+  * Add portuguese translation
+  * Create pardus-gnome-greeter
+  * Add pt
+
+  [ Fatih Altun ]
+  * Fix typo
+  * Update pot file
+  * Update Turkish translations
+  * Update version for next release
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+  * Delete pardus-gnome-greeter
+  * Update Portuguese translation
+  * Update Portuguese translation
+  * Update Portuguese translation
+
+  [ Fatih Altun ]
+  * Fix initial theme set problem
+  * Update gtk theme names
+  * Add rounded-window-corners to depends
+  * Add gtk3-theme-switcher to depends
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 28 Aug 2023 19:21:58 +0300
+
+pardus-gnome-greeter (0.0.4) unstable; urgency=medium
+
+  * Add missing clicked signal to shortcut button
+  * Fix translatable value of gif
+  * Fix apps api url
+  * Add unselect to clicked app
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 25 Aug 2023 13:05:08 +0300
+
+pardus-gnome-greeter (0.0.3) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * translation fixed. GLib idle added
+  * translation fixed. images changed
+  * close button bug fixed
+  * next / close button bug fixed
+  * Update 'meson.build'
+  * Add 'data/po/meson.build'
+  * Add 'data/po/LINGUAS'
+  * Add 'data/po/POTFILES'
+  * fixed typo in meson
+  * Pardus layout added. typos fixed
+  * pardus layout added
+  * css added. minor fixes applied
+  * iconview css added. pardus layout gif added
+  * legacy applications dark / light theme support added
+  * pardus icon added for layout
+  * typo fixed. app removed after first run
+  * system conf changed
+  * about dialog icon fixed
+  * fix: terminal changed
+  * feat: layout configs added.
+  * fix: layouts are only 3 item per row
+  * locale: application Turkish name added
+  * Update 'data/custom_shortcuts.json'
+  * fix: translation fixed in layout
+  * update: application icon updated
+  * fix: Turkish keywords added
+  * feat: favourite apps added
+  * fix: layout issue
+  * update: keywords updated
+  * fix: pinned apps
+  * fix: pardus layout image. feat: user extensions enabled
+  * fix: gnome default wallpapers and subfolders are removed
+
+  [ Fatih Altun ]
+  * Update copyright
+  * Update debian standards
+  * Update caffeine image
+  * Add live control for welcome
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 24 Aug 2023 22:02:18 +0300
+
+pardus-gnome-greeter (0.0.2) unstable; urgency=medium
+
+  * Keybinding added.
+
+ -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri, 20 Jan 2023 13:19:20 +0300
+
+pardus-gnome-greeter (0.0.1) unstable; urgency=medium
+
+  * Initial release
+  * Created layout files and assets
+
+ -- Osman Coskun <osman.coskun@pardus.org.tr>  Fri 20 Jan 2023 01:19:20 +0300
