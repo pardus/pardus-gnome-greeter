@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MainWindow" parent="AdwApplicationWindow">
+    <property name="title" translatable="yes">Pardus GNOME Greeter</property>
+    <property name="default-width">800</property>
+    <property name="default-height">600</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 600sp</condition>
+        <setter object="split_view" property="collapsed">true</setter>
+      </object>
+    </child>
+    <property name="content">
+      <object class="AdwOverlaySplitView" id="split_view" />
+    </property>
+  </template>
+</interface> 

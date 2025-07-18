@@ -1,36 +1,81 @@
-project('pardus-gnome-greeter',  version: '0.0.9')
+project('pardus-gnome-greeter', 'c',
+    version: '0.0.13',
+    meson_version: '>= 0.60.0'
+)
 
-# Configuration
-gnome = import('gnome')
-
+application_id = 'tr.org.pardus.pardus-gnome-greeter'
+project_name = meson.project_name()
 prefix = get_option('prefix')
-sysconfdir = get_option('sysconfdir')
+datadir = join_paths(prefix, get_option('datadir'))
+pkgdatadir = join_paths(datadir, project_name)
 
-data_dir = join_paths(prefix,get_option('datadir'))
-schema_dir = join_paths(prefix, 'share', 'glib-2.0','schemas')
-icon_dir = join_paths(prefix,'share','icons','hicolor','scalable','apps')
-auto_start_dir = join_paths(sysconfdir,'skel','.config','autostart')
-desktop_file = 'tr.org.pardus.pardus-gnome-greeter.desktop'
+# GResource
+gnome = import('gnome')
+gresource_target = custom_target(
+    'pardus-gnome-greeter-gresource',
+    input: 'pardus-gnome-greeter.gresource.xml',
+    output: 'pardus-gnome-greeter.gresource',
+    command: [
+        'glib-compile-resources',
+        '--target=@OUTPUT@',
+        '--sourcedir=' + meson.current_source_dir() + '/data',
+        '@INPUT@'
+    ],
+    install: true,
+    install_dir: pkgdatadir
+)
 
-desktop_file_dir = join_paths(prefix,'share','applications')
+# Python sources
+install_subdir(
+    'src/pardus_gnome_greeter',
+    install_dir: pkgdatadir
+)
 
-#Source files
-source_dir = join_paths(prefix , 'share' , 'pardus' , 'pardus-gnome-greeter')
-install_data([desktop_file],install_dir : desktop_file_dir)
-install_data(['pardus-gnome-greeter.svg'],install_dir:icon_dir)
-install_data(['pardus-gnome-greeter','pardus-gnome-greeter.svg'], install_dir : source_dir)
-install_data([desktop_file],install_dir : auto_start_dir)
+# Executable script
+configure_file(
+    input: 'pardus-gnome-greeter.in',
+    output: project_name,
+    configuration: {
+        'PYTHON': '/usr/bin/python3',
+        'pkgdatadir': pkgdatadir
+    },
+    install: true,
+    install_dir: get_option('bindir')
+)
 
-install_subdir('data',install_dir : source_dir)
-install_subdir('src',install_dir : source_dir)
+# AppData file
+install_data(
+    'tr.org.pardus.pardus-gnome-greeter.appdata.xml.in',
+    install_dir: join_paths(datadir, 'metainfo'),
+    rename: application_id + '.appdata.xml'
+)
 
+# Icon
+install_data(
+    'data/icons/pardus-gnome-greeter.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: application_id + '.svg'
+)
 
+# .desktop file
+i18n = import('i18n')
+desktop_file = i18n.merge_file(
+    input: application_id + '.desktop.in',
+    output: application_id + '.desktop',
+    type: 'desktop',
+    po_dir: 'data/po',
+    install: true,
+    install_dir: join_paths(datadir, 'applications')
+)
 
-install_data(['pardus-gnome-greeter'], install_dir : prefix / 'bin')
-subdir('data/schema')
+# GSettings Schemas
+subdir('data/schemas')
 
+# JSON and Asset data
+install_subdir('data/json', install_dir: join_paths(pkgdatadir, 'json'))
+install_subdir('data/assets', install_dir: join_paths(pkgdatadir, 'assets'))
 
-# locale settings
-subdir('data/po')
+# Post-install script for manual installs (handled by dh_glib in debian)
+# meson.add_install_script('meson_post_install.py')
 
 

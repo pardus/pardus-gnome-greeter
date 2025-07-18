@@ -1,0 +1,5 @@
+/* Main stylesheet for Pardus GNOME Greeter */
+
+.header-border {
+  border-bottom: 1px solid @borders;
+} 

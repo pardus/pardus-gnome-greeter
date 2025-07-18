@@ -8,3 +8,22 @@ __pycache__
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+
+# Meson build directories
+/build/
+/obj-*/
+
+# Debian packaging files
+*.deb
+*.buildinfo
+*.changes
+*.tar.gz
+*.tar.xz
+*.dsc
+
+# Debian helper files
+/debian/files
+/debian/.debhelper
+/debian/debhelper-build-stamp
+/debian/*.substvars
+/debian/pardus-gnome-greeter/

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>tr.org.pardus.pardus-gnome-greeter</id>
+  
+  <name>Pardus GNOME Greeter</name>
+  <_comment>Configure your new Pardus GNOME desktop</_comment>
+  
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  
+  <developer_name>Pardus</developer_name>
+  
+  <description>
+    <p>
+      Pardus Greeter is a welcome application designed for the Pardus GNOME desktop. It helps users with initial setup and configuration of their new system.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">tr.org.pardus.pardus-gnome-greeter.desktop</launchable>
+  
+  <provides>
+    <binary>pardus-gnome-greeter</binary>
+  </provides>
+</component> 

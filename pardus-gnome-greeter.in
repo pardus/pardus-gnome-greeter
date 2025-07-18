@@ -1,0 +1,25 @@
+#!@PYTHON@
+
+import sys
+import os
+
+# Find the location of the script itself
+script_path = os.path.abspath(__file__)
+
+# If the script is in the 'build' directory within the project (development)
+if 'build' in script_path.split(os.sep):
+    # Find the project root (one level above 'build')
+    project_root = os.path.dirname(os.path.dirname(script_path))
+    # Add the 'src' directory to the path so Python can find the pardus_gnome_greeter package
+    sys.path.insert(0, os.path.join(project_root, 'src'))
+else:
+    # On an installed system, pkgdatadir will be /usr/share/pardus-gnome-greeter.
+    # The package is in the pardus_gnome_greeter folder inside it.
+    # We need to add /usr/share/pardus-gnome-greeter to the path for Python to find the package.
+    pkgdatadir = '@pkgdatadir@'
+    sys.path.insert(0, pkgdatadir)
+
+from pardus_gnome_greeter import __main__
+
+if __name__ == '__main__':
+    sys.exit(__main__.main()) 

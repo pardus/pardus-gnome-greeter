@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="ExtensionPage" parent="AdwPreferencesPage">
+    <property name="title">Extensions</property>
+    <property name="icon-name">puzzle-piece-symbolic</property>
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+            <object class="GtkLabel">
+                <property name="label">Extension page content will be here.</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="vexpand">true</property>
+            </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface> 

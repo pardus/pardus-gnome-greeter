@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0"/>
+  <template class="LayoutPage" parent="AdwPreferencesPage">
+    <property name="title">Layout</property>
+    <property name="icon-name">view-paged-symbolic</property>
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+            <object class="GtkLabel">
+                <property name="label">Layout page content will be here.</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="vexpand">true</property>
+            </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface> 
