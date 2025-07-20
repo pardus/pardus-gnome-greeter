@@ -1,38 +1,53 @@
 {
     "gnome": {
+        "enable": [],
         "disable": [
             "dash-to-panel@jderose9.github.com",
-            "dash-to-dock@micxgx.gmail.com",
             "arcmenu@arcmenu.com",
-            "start-overlay-in-application-view@Hex_cz"
-        ]
+            "dash-to-dock@micxgx.gmail.com"
+        ],
+        "config": []
     },
     "mac": {
         "enable": [
             "dash-to-dock@micxgx.gmail.com"
         ],
         "disable": [
-            "dash-to-panel@jderose9.github.com",
             "arcmenu@arcmenu.com",
-            "start-overlay-in-application-view@Hex_cz"
+            "dash-to-panel@jderose9.github.com"
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
-                "value": "'BOTTOM'"
+                "path": "/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme",
+                "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/extend-height",
-                "value": "false"
+                "path": "/org/gnome/shell/extensions/dash-to-dock/background-opacity",
+                "value": 0.8
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size",
+                "value": 48
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/disable-overview-on-startup",
+                "value": false
             },
             {
                 "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
-                "value": "false"
+                "value": true
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/click-action",
-                "value": "minimize",
-                "type": "string"
+                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
+                "value": "BOTTOM"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/height-fraction",
+                "value": 0.9
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/preferred-monitor",
+                "value": -2
             }
         ]
     },
@@ -41,62 +56,37 @@
             "dash-to-dock@micxgx.gmail.com"
         ],
         "disable": [
-            "dash-to-panel@jderose9.github.com",
             "arcmenu@arcmenu.com",
-            "start-overlay-in-application-view@Hex_cz"
+            "dash-to-panel@jderose9.github.com"
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
-                "value": "LEFT",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/extend-height",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/desktop/interface/enable-hot-corners",
-                "value": "false"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/click-action",
-                "value": "minimize",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/running-indicator-style",
-                "value": "DOTS",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/transparency-mode",
-                "value": "DYNAMIC",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/customize-alphas",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/min-alpha",
-                "value": "0.7"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/max-alpha",
-                "value": "0.85"
+                "path": "/org/gnome/shell/extensions/dash-to-dock/background-opacity",
+                "value": 0.8
             },
             {
                 "path": "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size",
-                "value": "38"
+                "value": 48
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
+                "value": true
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
+                "value": "LEFT"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/extend-height",
+                "value": true
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/height-fraction",
+                "value": 0.9
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-dock/preferred-monitor",
+                "value": -2
             }
         ]
     },
@@ -106,67 +96,44 @@
             "arcmenu@arcmenu.com"
         ],
         "disable": [
-            "dash-to-dock@micxgx.gmail.com",
-            "start-overlay-in-application-view@Hex_cz"
+            "dash-to-dock@micxgx.gmail.com"
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/group-apps",
-                "value": "true"
+                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-position",
+                "value": "BOTTOM"
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions",
-                "value": "{\"0\":[{\"element\":\"showAppsButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"activitiesButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}],\"1\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"activitiesButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}",
-                "type": "string"
+                "path": "/org/gnome/shell/extensions/dash-to-panel/multi-monitors",
+                "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/trans-panel-opacity",
-                "value": "0.7"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-use-dynamic-opacity",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-dynamic-anim-target",
-                "value": "0.85"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/hide-overview-on-startup",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/desktop/interface/enable-hot-corners",
-                "value": "false"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/panel-sizes",
-                "value": "'{\"0\":48}'"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/appicon-margin",
-                "value": "4"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/appicon-padding",
-                "value": "8"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-layout",
-                "value": "Windows",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/pinned-app-list",
-                "value": "['', '', 'firefox-esr.desktop', '', '', 'org.gnome.Evolution.desktop', '', '', 'org.gnome.Nautilus.desktop', '', '', 'tr.org.pardus.software.desktop', '', '', 'org.gnome.Console.desktop']"
+                "path": "/org/gnome/shell/extensions/arcmenu/button-padding",
+                "value": -1
             },
             {
                 "path": "/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
-                "value": "30.0"
+                "value": 40.0
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/distro-icon",
+                "value": 20
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/menu-button-icon",
+                "value": "Distro_Icon"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/menu-layout",
+                "value": "Windows"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/vert-separator",
+                "value": false
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-panel/show-show-apps-button",
+                "value": false
             }
         ]
     },
@@ -176,158 +143,63 @@
             "arcmenu@arcmenu.com"
         ],
         "disable": [
-            "dash-to-dock@micxgx.gmail.com",
-            "start-overlay-in-application-view@Hex_cz"
+            "dash-to-dock@micxgx.gmail.com"
         ],
         "config": [
             {
+                "path": "/org/gnome/shell/extensions/dash-to-panel/appicon-margin",
+                "value": 0
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-panel/appicon-padding",
+                "value": 2
+            },
+            {
+                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-position",
+                "value": "BOTTOM"
+            },
+            {
                 "path": "/org/gnome/shell/extensions/dash-to-panel/group-apps",
-                "value": "false"
+                "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions",
-                "value": "{\"0\":[{\"element\":\"showAppsButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"activitiesButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}],\"1\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"activitiesButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}",
-                "type": "string"
+                "path": "/org/gnome/shell/extensions/dash-to-panel/multi-monitors",
+                "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/trans-panel-opacity",
-                "value": "0.7"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-use-dynamic-opacity",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-dynamic-anim-target",
-                "value": "0.85"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/hide-overview-on-startup",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/desktop/interface/enable-hot-corners",
-                "value": "false"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/panel-sizes",
-                "value": "'{\"0\":38}'"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/show-window-previews",
-                "value": "false"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/show-tooltip",
-                "value": "false"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-size",
-                "value": "0"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-layout",
-                "value": "Whisker",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/searchbar-default-top-location",
-                "value": "Bottom",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/vert-separator",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-button-appearance",
-                "value": "Icon_Text",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/custom-menu-button-text",
-                "value": "Pardus",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-button-border-radius",
-                "value": "(true, 0)"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/left-panel-width",
-                "value": "175"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/right-panel-width",
-                "value": "250"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-item-icon-size",
-                "value": "Medium",
-                "type": "string"
+                "path": "/org/gnome/shell/extensions/dash-to-panel/show-favorites",
+                "value": false
             },
             {
                 "path": "/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
-                "value": "26.0"
+                "value": 36.0
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/distro-icon",
+                "value": 20
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/menu-button-icon",
+                "value": "Distro_Icon"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/menu-layout",
+                "value": "Whisker"
+            },
+            {
+                "path": "/org/gnome/shell/extensions/arcmenu/vert-separator",
+                "value": true
             }
         ]
     },
     "pardus": {
         "enable": [
-            "dash-to-panel@jderose9.github.com",
-            "start-overlay-in-application-view@Hex_cz"
+            "dash-to-panel@jderose9.github.com"
         ],
         "disable": [
-            "dash-to-dock@micxgx.gmail.com",
-            "arcmenu@arcmenu.com"
+            "arcmenu@arcmenu.com",
+            "dash-to-dock@micxgx.gmail.com"
         ],
-        "config": [
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/group-apps",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions",
-                "value": "{\"0\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"activitiesButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}],\"1\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"activitiesButton\",\"visible\":false,\"position\":\"stackedTL\"},{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}",
-                "type": "string"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/trans-panel-opacity",
-                "value": "0.7"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-use-dynamic-opacity",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/trans-dynamic-anim-target",
-                "value": "0.85"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/hide-overview-on-startup",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/desktop/interface/enable-hot-corners",
-                "value": "false"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-color-dominant",
-                "value": "true"
-            },
-            {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-style-unfocused",
-                "value": "DASHES",
-                "type": "string"
-            }
-        ]
+        "config": []
     }
 }
