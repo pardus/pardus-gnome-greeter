@@ -5,17 +5,140 @@
   <template class="ThemePage" parent="AdwPreferencesPage">
     <property name="title">Theme</property>
     <property name="icon-name">org.gnome.Settings-appearance-symbolic</property>
+    
+    <!-- Style Section -->
     <child>
       <object class="AdwPreferencesGroup">
+        <property name="title">Style</property>
         <child>
-            <object class="GtkLabel">
-                <property name="label">Theme page content will be here.</property>
-                <property name="halign">center</property>
+          <object class="AdwActionRow">
+            <style>
+              <class name="py-2"/>
+            </style>  
+            <property name="title">Appearance</property>
+            <property name="subtitle">Select your preferred theme style</property>
+            <child type="suffix">
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">8</property>
                 <property name="valign">center</property>
-                <property name="vexpand">true</property>
-            </object>
+                <property name="homogeneous">true</property>
+                
+                <!-- Light Theme Button -->
+                <child>
+                  <object class="GtkToggleButton" id="light_theme_button">
+                    <property name="name">light</property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">64</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">4</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">weather-clear-symbolic</property>
+                            <property name="pixel-size">20</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">Light</property>
+                            <style>
+                              <class name="caption"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                
+                <!-- Dark Theme Button -->
+                <child>
+                  <object class="GtkToggleButton" id="dark_theme_button">
+                    <property name="name">dark</property>
+                    <property name="group">light_theme_button</property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">64</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">4</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">weather-clear-night-symbolic</property>
+                            <property name="pixel-size">20</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">Dark</property>
+                            <style>
+                              <class name="caption"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
         </child>
       </object>
     </child>
+    
+    <!-- Accent Color Section -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title">Accent Color</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkListBox">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+                <child>
+                  <object class="GtkListBoxRow">
+                    <property name="activatable">false</property>
+                    <child>
+                      <object class="AdwBin">
+                        <property name="child">
+                          <object class="GtkBox" id="accent_colors_container">
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">16</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="margin-top">16</property>
+                            <property name="margin-bottom">16</property>
+                            <property name="margin-start">16</property>
+                            <property name="margin-end">16</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    
   </template>
 </interface> 

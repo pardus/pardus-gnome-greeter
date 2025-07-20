@@ -4,9 +4,25 @@
   border-bottom: 1px solid @borders;
 }
 
-*.navigation-sidebar row {
+.navigation-sidebar row {
   padding-top: 4px;
   padding-bottom: 4px;
+  border-radius: 8px;
+  margin: 2px 8px;
+}
+
+.navigation-sidebar row:selected {
+  background: alpha(@accent_bg_color, 0.15);
+  color: @accent_bg_color;
+  border: 1px solid alpha(@accent_bg_color, 0.3);
+}
+
+.navigation-sidebar row:selected:hover {
+  background: alpha(@accent_bg_color, 0.2);
+}
+
+.navigation-sidebar row:hover {
+  background: alpha(@theme_selected_bg_color, 0.1);
 }
 
 /* Layout Cards Styling */
@@ -15,13 +31,10 @@
   border: 1px solid @borders;
   border-radius: 12px;
   transition: all 200ms ease-in-out;
-  box-shadow: 0 1px 3px alpha(@shade_color, 0.1);
 }
 
 .card:hover,
 .card.card-hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px alpha(@shade_color, 0.15);
   background: @view_bg_color;
 }
 
@@ -33,8 +46,6 @@
 
 .card.selected:hover {
   background: @accent_bg_color;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px alpha(@accent_bg_color, 0.3);
 }
 
 .layout-image,
@@ -47,4 +58,144 @@
 .card.selected .layout-image,
 .card.selected .layout-gif {
   background: alpha(@accent_fg_color, 0.1);
-} 
+}
+
+/* Theme Card Styling */
+button.card {
+  background: @card_bg_color;
+  border: 2px solid @borders;
+  border-radius: 12px;
+  padding: 8px;
+  transition: all 200ms ease-in-out;
+}
+
+button.card:hover {
+  background: @view_bg_color;
+  border-color: alpha(@accent_bg_color, 0.5);
+}
+
+button.card:checked {
+  background: @card_bg_color;
+  border: 3px solid @accent_bg_color;
+  color: @window_fg_color;
+}
+
+button.card:checked image,
+button.card:checked label {
+  color: @accent_bg_color;
+}
+
+/* Theme Selector Styling */
+.theme-selector {
+  min-width: 280px;
+  min-height: 200px;
+  background: @card_bg_color;
+  border: 2px solid @borders;
+  border-radius: 12px;
+  padding: 0;
+}
+
+.theme-selector:hover {
+  border-color: alpha(@accent_bg_color, 0.5);
+}
+
+.theme-selector:checked {
+  border: 3px solid @accent_bg_color;
+  background: @card_bg_color;
+}
+
+/* Accent Color Buttons */
+.accent-color-button {
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  border: 2px solid;
+  margin: 0;
+  padding: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.accent-color-button:hover {
+  transform: scale(1.1);
+}
+
+/* Color variants - not selected state (border same as background) */
+.accent-blue { 
+  background: #3584e4; 
+  border-color: #3584e4;
+}
+.accent-teal { 
+  background: #2ec27e; 
+  border-color: #2ec27e;
+}
+.accent-green { 
+  background: #33d17a; 
+  border-color: #33d17a;
+}
+.accent-yellow { 
+  background: #f6d32d; 
+  border-color: #f6d32d;
+}
+.accent-orange { 
+  background: #ff7800; 
+  border-color: #ff7800;
+}
+.accent-red { 
+  background: #e01b24; 
+  border-color: #e01b24;
+}
+.accent-pink { 
+  background: #c061cb; 
+  border-color: #c061cb;
+}
+.accent-purple { 
+  background: #9141ac; 
+  border-color: #9141ac;
+}
+.accent-slate { 
+  background: #6c758f; 
+  border-color: #6c758f;
+}
+
+/* Selected state - contrasting border colors based on theme */
+.accent-color-button:checked.accent-blue { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-teal { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-green { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-yellow { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-orange { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-red { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-pink { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-purple { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-slate { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+
+.py-2{
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
