@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <requires lib="adw" version="1.0"/>
-  <template class="WelcomePage" parent="GtkBox">
-    <property name="orientation">vertical</property>
-    <property name="spacing">12</property>
-    <property name="margin-top">24</property>
-    <property name="margin-bottom">24</property>
-    <property name="margin-start">24</property>
-    <property name="margin-end">24</property>
+  <template class="WelcomePage" parent="AdwPreferencesPage">
+    <property name="title">Welcome</property>
+    <property name="icon-name">image-x-generic-symbolic</property>
     <child>
-      <object class="GtkLabel" id="welcome_label">
-        <property name="label" translatable="yes">This wizard will help you configure your new Pardus desktop.</property>
-        <property name="wrap">true</property>
-        <property name="justify">center</property>
-        <property name="halign">center</property>
-        <property name="valign">center</property>
-        <property name="vexpand">true</property>
-        <style>
-          <class name="title-2" />
-        </style>
-      </object>
-    </child>
-    <child>
-        <object class="GtkLabel">
-            <property name="label" translatable="yes">Use the sidebar to navigate through the settings.</property>
-            <property name="wrap">true</property>
-            <property name="justify">center</property>
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
             <property name="halign">center</property>
-            <style>
-                <class name="body" />
-                <class name="dim-label" />
-            </style>
-        </object>
+            <property name="valign">center</property>
+            <property name="vexpand">true</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkImage">
+                <property name="resource">/tr/org/pardus/pardus-gnome-greeter/assets/logo.svg</property>
+                <property name="pixel-size">256</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Welcome to Pardus GNOME Greeter! This application will help you configure your Pardus GNOME experience.</property>
+                <property name="wrap">true</property>
+                <property name="justify">center</property>
+                <attributes>
+                  <attribute name="weight" value="bold"></attribute>
+                  <attribute name="scale" value="1.2"></attribute>
+                </attributes>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
     </child>
   </template>
 </interface> 

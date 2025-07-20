@@ -2,4 +2,9 @@
 
 .header-border {
   border-bottom: 1px solid @borders;
+}
+
+*.navigation-sidebar row {
+  padding-top: 4px;
+  padding-bottom: 4px;
 } 

@@ -23,6 +23,15 @@ class MainWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         
+        # Load custom CSS
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_resource('/tr/org/pardus/pardus-gnome-greeter/css/style.css')
+        Gtk.StyleContext.add_provider_for_display(
+            self.get_display(),
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
         # 1. Create the Sidebar
         self.pages_listbox = Gtk.ListBox()
         self.pages_listbox.set_selection_mode(Gtk.SelectionMode.SINGLE)
@@ -50,8 +59,13 @@ class MainWindow(Adw.ApplicationWindow):
 
         content_header = Adw.HeaderBar()
         content_header.pack_start(self.menu_button)
-        self.content_title = Adw.WindowTitle(title="Welcome")
-        content_header.set_title_widget(self.content_title)
+        
+        content_title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        self.content_title_icon = Gtk.Image.new_from_icon_name("go-home-symbolic")
+        self.content_title_label = Gtk.Label(label="Welcome")
+        content_title_box.append(self.content_title_icon)
+        content_title_box.append(self.content_title_label)
+        content_header.set_title_widget(content_title_box)
         
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         content_box.append(content_header)
@@ -83,7 +97,9 @@ class MainWindow(Adw.ApplicationWindow):
         list_box_row_child = row.get_child()
         # The second element in the default Gtk.Box is the Gtk.Label
         page_title = list_box_row_child.get_last_child().get_label()
-        self.content_title.set_title(page_title)
+        icon_name = row.icon_name
+        self.content_title_label.set_label(page_title)
+        self.content_title_icon.set_from_icon_name(icon_name)
 
         if self.split_view.get_collapsed():
             self.split_view.set_show_sidebar(False)
@@ -106,12 +122,11 @@ class MainWindow(Adw.ApplicationWindow):
             self.view_stack.add_named(page, page_info["name"])
 
             row = Gtk.ListBoxRow(name=page_info["name"])
+            row.icon_name = page_info["icon"]
             
             box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
             box.set_margin_start(12)
             box.set_margin_end(12)
-            box.set_margin_top(6)
-            box.set_margin_bottom(6)
             
             icon = Gtk.Image.new_from_icon_name(page_info["icon"])
             label = Gtk.Label.new(page_info["title"])

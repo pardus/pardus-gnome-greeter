@@ -9,12 +9,16 @@ from gi.repository import Gio, GLib, Gtk, Adw
 
 def load_gresource():
     """Loads the GResource file."""
-    script_path = os.path.abspath(sys.argv[0])
-    
-    if 'build' in script_path.split(os.sep):
-        project_root = os.path.dirname(os.path.dirname(script_path))
-        resource_path = os.path.join(project_root, 'build', 'pardus-gnome-greeter.gresource')
+    # Simplified dev environment check
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    build_dir = os.path.join(project_root, 'build')
+    resource_path = os.path.join(build_dir, 'pardus-gnome-greeter.gresource')
+
+    if os.path.exists(build_dir) and os.path.exists(resource_path):
+        # Development environment
+        pass
     else:
+        # Installed environment
         resource_path = "/usr/share/pardus-gnome-greeter/pardus-gnome-greeter.gresource"
 
     try:

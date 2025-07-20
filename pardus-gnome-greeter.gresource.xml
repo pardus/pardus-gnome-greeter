@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/tr/org/pardus/pardus-gnome-greeter">
-    <file>css/style.css</file>
-    <file>icons/pardus-gnome-greeter.svg</file>
-    
     <file>ui/MainWindow.ui</file>
     <file>ui/WelcomePage.ui</file>
     <file>ui/LayoutPage.ui</file>
@@ -13,5 +10,7 @@
     <file>ui/ExtensionPage.ui</file>
     <file>ui/ApplicationsPage.ui</file>
     <file>ui/OutroPage.ui</file>
+    <file>css/style.css</file>
+    <file>assets/logo.svg</file>
   </gresource>
 </gresources> 
