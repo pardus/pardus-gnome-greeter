@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the pardus-gnome-greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
@@ -120,6 +120,9 @@ msgid "File manager icon size"
 msgstr ""
 
 msgid "Desktop icon size"
+msgstr ""
+
+msgid "Some options were disabled because Nautilus file manager is not installed"
 msgstr ""
 
 

@@ -113,6 +113,9 @@ msgstr "Tamanho dos ícones do gestor de ficheiros"
 msgid "Desktop icon size"
 msgstr "Tamanho dos ícones da área de trabalho"
 
+msgid "Some options were disabled because Nautilus file manager is not installed"
+msgstr ""
+
 # Outro.py
 msgid "Social Media Accounts"
 msgstr "Contas de redes sociais"

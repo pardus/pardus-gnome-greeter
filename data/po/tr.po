@@ -133,6 +133,9 @@ msgstr "Dosya yöneticisi simge boyutu"
 msgid "Desktop icon size"
 msgstr "Masaüstü simge boyutu"
 
+msgid "Some options were disabled because Nautilus file manager is not installed"
+msgstr "Nautilus dosya yöneticisi kurulu olmadığı için bazı seçenekler devre dışı bırakıldı"
+
 
 
 # Outro.py
