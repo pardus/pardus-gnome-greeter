@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="DisplayPage" parent="AdwPreferencesPage">
-    <property name="title">Display</property>
+    <property name="title" translatable="yes">Display</property>
     <property name="icon-name">video-display-symbolic</property>
     <child>
       <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Interface Scaling</property>
         <child>
-            <object class="GtkLabel">
-                <property name="label">Display page content will be here.</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="vexpand">true</property>
-            </object>
+          <object class="AdwComboRow" id="cursor_size_row">
+            <property name="title" translatable="yes">Cursor Size</property>
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Small</item>
+                  <item translatable="yes">Medium</item>
+                  <item translatable="yes">Large</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwComboRow" id="file_manager_icon_size_row">
+            <property name="title" translatable="yes">File Manager Icon Size</property>
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Small</item>
+                  <item translatable="yes">Standard</item>
+                  <item translatable="yes">Large</item>
+                </items>
+              </object>
+            </property>
+          </object>
         </child>
       </object>
     </child>
