@@ -201,26 +201,24 @@ button.card:checked label {
 }
 
 /* Wallpaper Page Styling */
-#wallpapers_flowbox flowboxchild {
-  border-radius: 12px;
-  transition: all 200ms ease-in-out;
-}
-
-#wallpapers_flowbox flowboxchild frame {
+.wallpaper-thumbnail {
+  background-color: transparent;
+  border: 3px solid transparent;
   border-radius: 8px;
-  overflow: hidden;
   transition: all 200ms ease-in-out;
-  border: 3px solid transparent;  /* Always 3px border, transparent by default */
-  box-shadow: 0 4px 8px transparent;  /* Always same shadow size, transparent by default */
+  min-width: 120px;
+  max-width: 180px;
+  min-height: 80px;
+  max-height: 120px;
 }
 
-#wallpapers_flowbox flowboxchild frame.selected {
-  border: 3px solid @accent_bg_color;  /* Same width, just colored */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Same size, just visible */
+.wallpaper-thumbnail.selected {
+  border-color: @accent_bg_color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#wallpapers_flowbox flowboxchild frame:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);  /* Same size, lighter shadow */
+.wallpaper-thumbnail:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 #wallpapers_flowbox flowboxchild image {

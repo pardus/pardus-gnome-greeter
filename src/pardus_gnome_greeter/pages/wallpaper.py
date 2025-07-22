@@ -19,7 +19,6 @@ class WallpaperPage(Adw.PreferencesPage):
     # Template children
     current_wallpaper_row = Gtk.Template.Child("current_wallpaper_row")
     current_wallpaper_preview = Gtk.Template.Child("current_wallpaper_preview")
-    wallpapers_scrolled = Gtk.Template.Child("wallpapers_scrolled")
     wallpapers_flowbox = Gtk.Template.Child("wallpapers_flowbox")
 
     def __init__(self, **kwargs):
@@ -108,98 +107,78 @@ class WallpaperPage(Adw.PreferencesPage):
     def create_wallpaper_thumbnail(self, wallpaper_path, current_wallpaper):
         """Create thumbnail for a single wallpaper"""
         try:
-            pixbuf = self.wallpaper_manager.create_thumbnail(wallpaper_path, 160, 90)
+            pixbuf = self.wallpaper_manager.create_thumbnail(wallpaper_path, 140, 140)
             if pixbuf:
                 GLib.idle_add(self.add_wallpaper_to_flowbox, wallpaper_path, pixbuf, current_wallpaper)
         except Exception as e:
             print(f"Error creating thumbnail for {wallpaper_path}: {e}")
             
     def add_wallpaper_to_flowbox(self, wallpaper_path, pixbuf, current_wallpaper):
-        """Add wallpaper thumbnail to the flowbox"""
+        """Add wallpaper thumbnail to the flowbox without a Gtk.Frame."""
         try:
-            # Create container box (like old implementation)
             container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
             container.set_margin_top(8)
             container.set_margin_bottom(8)
             container.set_margin_start(8)
             container.set_margin_end(8)
             
-            # Create image (like old implementation)
             image = Gtk.Image()
             image.set_from_pixbuf(pixbuf)
             image.set_halign(Gtk.Align.CENTER)
             image.set_valign(Gtk.Align.CENTER)
-            image.set_size_request(160, 90)
+            image.set_size_request(140, 140)
+            image.add_css_class("wallpaper-thumbnail")
             
-            # Create frame for image
-            frame = Gtk.Frame()
-            frame.set_child(image)
-            frame.add_css_class("card")
-            frame.add_css_class("wallpaper-thumbnail")
-            frame.set_size_request(160  , 90)
-            
-            # Create label for wallpaper name
             name = self.wallpaper_manager.get_wallpaper_name(wallpaper_path)
             label = Gtk.Label(label=name)
-            label.set_ellipsize(3)  # PANGO_ELLIPSIZE_END
+            label.set_ellipsize(3)
             label.set_max_width_chars(20)
             label.add_css_class("caption")
             
-            # Add to container
-            container.append(frame)
+            container.append(image)
             container.append(label)
             
-            # Create FlowBoxChild (like old implementation)
             child = Gtk.FlowBoxChild()
             child.set_child(container)
-            
-            # Store wallpaper path as data
             child.wallpaper_path = wallpaper_path
             
-            # Add selection styling if this is current wallpaper
             if current_wallpaper and wallpaper_path == current_wallpaper:
-                frame.add_css_class("selected")
+                image.add_css_class("selected")
                 self.current_selection = child
                 self.wallpapers_flowbox.select_child(child)
             
-            # Add to FlowBox (like old implementation)
             self.wallpapers_flowbox.append(child)
                 
         except Exception as e:
             print(f"Error adding wallpaper to flowbox: {e}")
-            
 
-        
     def on_wallpaper_selected(self, flowbox, flowbox_child):
-        """Handle wallpaper selection (like old implementation)"""
+        """Handle wallpaper selection, targeting the Gtk.Image directly."""
         try:
             if not hasattr(flowbox_child, 'wallpaper_path'):
                 return
                 
             wallpaper_path = flowbox_child.wallpaper_path
             
-            # Update selection styling
             if self.current_selection:
-                # Remove selected class from previous selection
-                container = self.current_selection.get_child()
-                if container and container.get_first_child():
-                    frame = container.get_first_child()
-                    frame.remove_css_class("selected")
+                prev_container = self.current_selection.get_child()
+                if prev_container:
+                    prev_image = prev_container.get_first_child()
+                    if prev_image:
+                        prev_image.remove_css_class("selected")
             
-            # Add selected class to new selection
-            container = flowbox_child.get_child()
-            if container and container.get_first_child():
-                frame = container.get_first_child()
-                frame.add_css_class("selected")
+            new_container = flowbox_child.get_child()
+            if new_container:
+                new_image = new_container.get_first_child()
+                if new_image:
+                    new_image.add_css_class("selected")
             
             self.current_selection = flowbox_child
             
-            # Set wallpaper
             success = self.wallpaper_manager.set_wallpaper(wallpaper_path)
             if success:
                 print(f"Wallpaper changed to: {wallpaper_path}")
-                # Update current wallpaper info
-                GLib.idle_add(self.update_current_wallpaper_info)
+                self.update_current_wallpaper_info()
             else:
                 print(f"Failed to set wallpaper: {wallpaper_path}")
                 

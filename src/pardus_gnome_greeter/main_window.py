@@ -18,7 +18,7 @@ from .pages.outro import OutroPage
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 
-    split_view = Gtk.Template.Child()
+    split_view = Gtk.Template.Child("split_view")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
