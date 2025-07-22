@@ -199,3 +199,65 @@ button.card:checked label {
   padding-top: 8px;
   padding-bottom: 8px;
 }
+
+/* Wallpaper Page Styling */
+#wallpapers_flowbox flowboxchild {
+  border-radius: 12px;
+  transition: all 200ms ease-in-out;
+}
+
+#wallpapers_flowbox flowboxchild frame {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
+  border: 3px solid transparent;  /* Always 3px border, transparent by default */
+  box-shadow: 0 4px 8px transparent;  /* Always same shadow size, transparent by default */
+}
+
+#wallpapers_flowbox flowboxchild frame.selected {
+  border: 3px solid @accent_bg_color;  /* Same width, just colored */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Same size, just visible */
+}
+
+#wallpapers_flowbox flowboxchild frame:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);  /* Same size, lighter shadow */
+}
+
+#wallpapers_flowbox flowboxchild image {
+  border-radius: 6px;
+  min-width: 200px;
+  min-height: 130px;
+}
+
+/* Wallpaper thumbnail responsive styling */
+.wallpaper-thumbnail {
+  min-width: 120px;
+  max-width: 180px;
+  min-height: 80px;
+  max-height: 120px;
+}
+
+#wallpapers_flowbox flowboxchild label.caption {
+  font-size: 0.9em;
+  color: @window_fg_color;
+  opacity: 0.8;
+}
+
+/* Current wallpaper preview styling */
+#current_wallpaper_preview {
+  border-radius: 6px;
+  border: 1px solid @borders;
+}
+
+/* Loading and status states */
+#wallpapers_scrolled {
+  border-radius: 12px;
+  border: 1px solid @borders;
+  background: @card_bg_color;
+}
+
+/* No wallpapers status page adjustments */
+#no_wallpapers_status {
+  padding: 24px;
+}
+
