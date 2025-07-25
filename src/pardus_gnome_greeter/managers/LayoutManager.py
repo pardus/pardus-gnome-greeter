@@ -1,10 +1,9 @@
-
 import json
 import os
 from gi.repository import Gio, GLib
 
 class LayoutManager:
-    def __init__(self, config_path="data/json/layout_config.json"):
+    def __init__(self, config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json"):
         self.config_path = config_path
         self.layouts = self._load_layouts()
         self.dbus_proxy = self._get_dbus_proxy()
@@ -21,10 +20,13 @@ class LayoutManager:
         return self.layouts.get(layout_name, {})
 
     def _load_layouts(self):
-        if not os.path.exists(self.config_path):
-            raise FileNotFoundError(f"Layout configuration not found at: {self.config_path}")
-        with open(self.config_path, 'r') as f:
-            return json.load(f)
+        try:
+            file = Gio.File.new_for_uri(f'resource://{self.config_path}')
+            data = file.load_contents(None)[1]
+            json_data = data.decode('utf-8')
+            return json.loads(json_data)
+        except Exception as e:
+            raise FileNotFoundError(f"Layout configuration not found in GResource at: {self.config_path}\n{e}")
 
     def _get_dbus_proxy(self):
         try:
@@ -212,7 +214,7 @@ if __name__ == '__main__':
         parser.add_argument("-a", "--apply", metavar="LAYOUT", help="Apply the specified layout and exit.")
         args = parser.parse_args()
 
-        manager = LayoutManager(config_path="data/json/layout_config.json")
+        manager = LayoutManager(config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json")
         
         if args.apply:
             if args.apply in manager.layouts:

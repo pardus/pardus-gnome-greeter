@@ -12,5 +12,11 @@
     <file>ui/OutroPage.ui</file>
     <file>css/style.css</file>
     <file>assets/logo.svg</file>
+    <file>json/layout_config.json</file>
+    <file>json/custom_shortcuts.json</file>
+    <file>json/extensions.json</file>
+    <file>json/links.json</file>
+    <file>json/shortcuts.json</file>
+    <file>json/social_media.json</file>
   </gresource>
 </gresources> 

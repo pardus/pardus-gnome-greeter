@@ -72,8 +72,7 @@ desktop_file = i18n.merge_file(
 subdir('data/schemas')
 
 # JSON and Asset data
-install_subdir('data/json', install_dir: join_paths(pkgdatadir, 'json'))
-install_subdir('data/assets', install_dir: join_paths(pkgdatadir, 'assets'))
+install_subdir('data/assets', install_dir: pkgdatadir)
 
 # Post-install script for manual installs (handled by dh_glib in debian)
 # meson.add_install_script('meson_post_install.py')
