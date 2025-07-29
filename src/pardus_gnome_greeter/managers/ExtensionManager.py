@@ -77,3 +77,17 @@ class ExtensionManager:
                     if ext == extension_id:
                         return True
         return False 
+
+    def get_sorted_extensions(self):
+        """Get extensions sorted by installation status (installed first)"""
+        extensions = self.get_extensions()
+        installed = []
+        not_installed = []
+        
+        for extension in extensions:
+            if self.is_extension_installed(extension['id']):
+                installed.append(extension)
+            else:
+                not_installed.append(extension)
+        
+        return installed + not_installed 

@@ -98,7 +98,7 @@ class ExtensionPage(Adw.PreferencesPage):
     
     def _load_extensions(self):
         """Load and display extensions"""
-        extensions = self.extension_manager.get_extensions()
+        extensions = self.extension_manager.get_sorted_extensions()
         
         for extension in extensions:
             card = ExtensionCard()
