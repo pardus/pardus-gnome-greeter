@@ -6,14 +6,58 @@ import sys
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Adw, GLib, GdkPixbuf
+from gi.repository import Gtk, Adw, GLib, GdkPixbuf, Gdk
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
 from WallpaperManager import WallpaperManager
 
-# Import the wallpaper thumbnail component
-from ..components.wallpaper_thumbnail import WallpaperThumbnail
+# WallpaperThumbnail template class
+@Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/WallpaperThumbnail.ui')
+class WallpaperThumbnail(Gtk.Box):
+    __gtype_name__ = 'WallpaperThumbnail'
+    
+    # Template children
+    picture = Gtk.Template.Child("picture")
+    
+    def __init__(self):
+        super().__init__()
+        
+        # Set size request
+        self.picture.set_size_request(160, 120)
+        
+        # Selection state
+        self._selected = False
+    
+    def load_wallpaper(self, wallpaper_path):
+        """Load wallpaper from file path"""
+        try:
+            if os.path.exists(wallpaper_path):
+                texture = Gdk.Texture.new_from_filename(wallpaper_path)
+                self.picture.set_paintable(texture)
+        except Exception as e:
+            print(f"Error loading wallpaper {wallpaper_path}: {e}")
+    
+    def load_pixbuf(self, pixbuf):
+        """Load wallpaper from GdkPixbuf"""
+        try:
+            if pixbuf:
+                texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                self.picture.set_paintable(texture)
+        except Exception as e:
+            print(f"Error loading pixbuf: {e}")
+    
+    def set_selected(self, selected):
+        """Set selection state"""
+        self._selected = selected
+        if selected:
+            self.add_css_class("selected")
+        else:
+            self.remove_css_class("selected")
+    
+    def is_selected(self):
+        """Get selection state"""
+        return self._selected
 
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/WallpaperPage.ui')
 class WallpaperPage(Adw.PreferencesPage):

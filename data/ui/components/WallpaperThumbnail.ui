@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="adw" version="1.0" />
+  <template class="WallpaperThumbnail" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="spacing">0</property>
+    <style>
+      <class name="wallpaper-thumbnail"/>
+    </style>
+    <child>
+      <object class="GtkPicture" id="picture">
+        <property name="halign">fill</property>
+        <property name="valign">fill</property>
+        <property name="can-shrink">false</property>
+        <property name="keep-aspect-ratio">false</property>
+        <property name="content-fit">cover</property>
+      </object>
+    </child>
+  </template>
+</interface> 

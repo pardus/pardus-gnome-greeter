@@ -224,7 +224,6 @@ button.card:checked label {
   transition: all 200ms ease-in-out;
   min-width: 160px;
   min-height: 120px;
-  overflow: hidden;
 }
 
 .wallpaper-thumbnail image {
@@ -313,6 +312,31 @@ scrolledwindow {
   margin: 0;
   padding: 0;
   background: transparent;
+}
+
+/* Extension Page Styling */
+.extension-card {
+  background: @card_bg_color;
+  border: 1px solid @borders;
+  border-radius: 12px;
+  transition: all 200ms ease-in-out;
+}
+
+.extension-card:hover {
+  background: @view_bg_color;
+  border-color: alpha(@accent_bg_color, 0.5);
+}
+
+.extension-card-disabled {
+  opacity: 0.5;
+}
+
+/* Extensions flowbox styling */
+.extensions-flowbox {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 /* Style AdwPreferencesGroup like GNOME Control Center */
