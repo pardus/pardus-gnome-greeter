@@ -67,25 +67,15 @@ class WallpaperManager:
         
         return wallpapers
     
-    def create_thumbnail(self, file_path, width=200, height=130):
+    def create_thumbnail(self, file_path, width=160, height=120):
         """Create thumbnail for wallpaper preview"""
         try:
+            # Load the original image
             pixbuf = GdkPixbuf.Pixbuf.new_from_file(file_path)
             
-            # Scale while maintaining aspect ratio
-            original_width = pixbuf.get_width()
-            original_height = pixbuf.get_height()
-            
-            # Calculate scaling factor
-            scale_x = width / original_width
-            scale_y = height / original_height
-            scale = min(scale_x, scale_y)
-            
-            new_width = int(original_width * scale)
-            new_height = int(original_height * scale)
-            
+            # Scale to exact dimensions (stretch to fit)
             scaled_pixbuf = pixbuf.scale_simple(
-                new_width, new_height, 
+                width, height, 
                 GdkPixbuf.InterpType.BILINEAR
             )
             

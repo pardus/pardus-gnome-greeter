@@ -37,16 +37,20 @@ class MainWindow(Adw.ApplicationWindow):
         self.pages_listbox.set_selection_mode(Gtk.SelectionMode.SINGLE)
         self.pages_listbox.add_css_class("navigation-sidebar")
         
-        sidebar_header = Adw.HeaderBar()
-        sidebar_title = Adw.WindowTitle(title="Settings")
-        sidebar_header.set_title_widget(sidebar_title)
+        # Simple label instead of AdwHeaderBar
+        sidebar_label = Gtk.Label(label="Settings")
+        sidebar_label.add_css_class("title-2")
+        sidebar_label.set_margin_start(24)
+        sidebar_label.set_margin_end(12)
+        sidebar_label.set_margin_top(10)
+        sidebar_label.set_margin_bottom(10)
         
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_vexpand(True)
         scrolled_window.set_child(self.pages_listbox)
         
         sidebar_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        sidebar_box.append(sidebar_header)
+        sidebar_box.append(sidebar_label)
         sidebar_box.append(scrolled_window)
 
         # 2. Create the Content Area
@@ -58,6 +62,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.menu_button.connect('clicked', self._on_menu_button_clicked)
 
         content_header = Adw.HeaderBar()
+        content_header.add_css_class("content-header")
+        
         content_header.pack_start(self.menu_button)
         
         content_title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)

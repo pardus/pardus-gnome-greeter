@@ -4,6 +4,22 @@
   border-bottom: 1px solid @borders;
 }
 
+/* Make header bar background same as content area */
+headerbar {
+  background: @window_bg_color;
+  border-bottom: none;
+  box-shadow: none;
+  border: none;
+}
+
+.content-header {
+  background: @window_bg_color;
+  border-bottom: none;
+  box-shadow: none;
+  border: none;
+  background-image: none;
+}
+
 .navigation-sidebar row {
   padding-top: 4px;
   padding-bottom: 4px;
@@ -204,58 +220,111 @@ button.card:checked label {
 .wallpaper-thumbnail {
   background-color: transparent;
   border: 3px solid transparent;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: all 200ms ease-in-out;
-  min-width: 120px;
-  max-width: 180px;
-  min-height: 80px;
-  max-height: 120px;
+  min-width: 160px;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.wallpaper-thumbnail image {
+  /* Force image to fill the container */
+  min-width: 160px;
+  min-height: 120px;
+  border-radius: 9px;
+}
+
+.wallpaper-thumbnail picture {
+  /* Force picture to fill the container */
+  min-width: 160px;
+  min-height: 120px;
+  border-radius: 9px;
 }
 
 .wallpaper-thumbnail.selected {
   border-color: @accent_bg_color;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
 
 .wallpaper-thumbnail:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-#wallpapers_flowbox flowboxchild image {
-  border-radius: 6px;
-  min-width: 200px;
-  min-height: 130px;
-}
-
-/* Wallpaper thumbnail responsive styling */
-.wallpaper-thumbnail {
-  min-width: 120px;
-  max-width: 180px;
-  min-height: 80px;
-  max-height: 120px;
-}
-
-#wallpapers_flowbox flowboxchild label.caption {
-  font-size: 0.9em;
-  color: @window_fg_color;
-  opacity: 0.8;
-}
-
-/* Current wallpaper preview styling */
-#current_wallpaper_preview {
-  border-radius: 6px;
-  border: 1px solid @borders;
-}
-
-/* Loading and status states */
-#wallpapers_scrolled {
+  border-color: alpha(@accent_bg_color, 0.5);
   border-radius: 12px;
-  border: 1px solid @borders;
-  background: @card_bg_color;
 }
 
-/* No wallpapers status page adjustments */
-#no_wallpapers_status {
-  padding: 24px;
+/* Background flowbox styling */
+.background-flowbox {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: @card_bg_color;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: none;
+  border: none;
+}
+
+/* Background flowbox child styling */
+.background-flowbox > flowboxchild {
+  background: none;
+  border-radius: 9px;
+}
+
+/* Background thumbnail styling */
+.background-thumbnail {
+  border-radius: 6px;
+}
+
+/* Slideshow icon styling */
+.slideshow-icon {
+  color: white;
+  -gtk-icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.33);
+  margin: 8px;
+}
+
+/* Selected check styling */
+.selected-check {
+  color: @accent_fg_color;
+  background: @accent_bg_color;
+  border-radius: 100px;
+  padding: 2px;
+  opacity: 0;
+  margin: 6px;
+  transition-duration: 200ms;
+}
+
+flowboxchild.active-item .selected-check {
+  opacity: 1;
+}
+
+/* Remove padding from AdwClamp */
+clamp {
+  margin: 0;
+  padding: 0;
+}
+
+viewport {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove padding from GtkScrolledWindow */
+scrolledwindow {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* Style AdwPreferencesGroup like GNOME Control Center */
+preferencesgroup {
+  background-color: @window_bg_color;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 12px;
+  box-shadow: none;
+  border: none;
+  background-image: none;
 }
 
