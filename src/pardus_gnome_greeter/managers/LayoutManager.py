@@ -2,11 +2,17 @@ import json
 import os
 from gi.repository import Gio, GLib
 
+# Import ExtensionManager
+from .ExtensionManager import ExtensionManager
+
 class LayoutManager:
     def __init__(self, config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json"):
         self.config_path = config_path
         self.layouts = self._load_layouts()
         self.dbus_proxy = self._get_dbus_proxy()
+        
+        # Initialize ExtensionManager
+        self.extension_manager = ExtensionManager()
         
         self.all_managed_extensions = self._get_all_managed_extensions()
         self.all_managed_settings = self._get_all_managed_settings()
@@ -141,14 +147,14 @@ class LayoutManager:
                 print(f"Warning: Failed to reset schema {schema_id}. It might not be installed. Error: {e}")
 
         # 2. Disable all known extensions to ensure a clean slate for the new layout.
-        if self.dbus_proxy:
-            for ext_uuid in self.all_managed_extensions:
-                try:
-                    self.dbus_proxy.DisableExtension('(s)', ext_uuid)
-                    print(f"SUCCESS: Disabled extension {ext_uuid}")
-                except GLib.Error as e:
-                    # Ignore errors, extension might already be disabled
-                    pass
+        for ext_uuid in self.all_managed_extensions:
+            try:
+                self.extension_manager.disable_extension(ext_uuid)
+                print(f"SUCCESS: Disabled extension {ext_uuid}")
+            except Exception as e:
+                # Ignore errors, extension might already be disabled
+                print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
+                pass
         
         print("--- Finished Reset ---")
 
@@ -164,25 +170,23 @@ class LayoutManager:
         self._reset_to_defaults()
 
         # 2. Apply the new configuration
-        if not self.dbus_proxy:
-            print("ERROR: DBus proxy not available. Cannot manage extensions.")
-        else:
-            # Enable extensions
-            for ext_uuid in layout_data.get("enable", []):
-                try:
-                    self.dbus_proxy.EnableExtension('(s)', ext_uuid)
-                    print(f"SUCCESS: Enabled extension {ext_uuid}")
-                except GLib.Error as e:
-                    print(f"ERROR: Failed to enable extension {ext_uuid}: {e.message}")
-            
-            # Disable extensions (for this specific layout)
-            for ext_uuid in layout_data.get("disable", []):
-                try:
-                    self.dbus_proxy.DisableExtension('(s)', ext_uuid)
-                    print(f"SUCCESS: Disabled extension {ext_uuid}")
-                except GLib.Error as e:
-                    # Ignore, might already be disabled from reset phase
-                    pass
+        # Enable extensions
+        for ext_uuid in layout_data.get("enable", []):
+            try:
+                self.extension_manager.enable_extension(ext_uuid)
+                print(f"SUCCESS: Enabled extension {ext_uuid}")
+            except Exception as e:
+                print(f"ERROR: Failed to enable extension {ext_uuid}: {e}")
+        
+        # Disable extensions (for this specific layout)
+        for ext_uuid in layout_data.get("disable", []):
+            try:
+                self.extension_manager.disable_extension(ext_uuid)
+                print(f"SUCCESS: Disabled extension {ext_uuid}")
+            except Exception as e:
+                # Ignore, might already be disabled from reset phase
+                print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
+                pass
         
         # Apply gsettings configurations
         for config in layout_data.get("config", []):

@@ -10,6 +10,8 @@
     <file>ui/ExtensionPage.ui</file>
     <file>ui/ApplicationsPage.ui</file>
     <file>ui/OutroPage.ui</file>
+    <file>ui/components/WallpaperThumbnail.ui</file>
+    <file>ui/components/ExtensionCard.ui</file>
     <file>css/style.css</file>
     <file>assets/logo.svg</file>
     <file>json/layout_config.json</file>
