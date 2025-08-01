@@ -115,12 +115,12 @@ class MainWindow(Adw.ApplicationWindow):
         pages = [
             {"name": "welcome", "title": "Welcome", "icon": "go-home-symbolic", "class": WelcomePage},
             {"name": "layout", "title": "Layout", "icon": "view-paged-symbolic", "class": LayoutPage},
-            {"name": "theme", "title": "Theme", "icon": "org.gnome.Settings-appearance-symbolic", "class": ThemePage},
+            {"name": "theme", "title": "Theme", "icon": "applications-graphics-symbolic", "class": ThemePage},
             {"name": "wallpaper", "title": "Wallpaper", "icon": "image-x-generic-symbolic", "class": WallpaperPage},
             {"name": "display", "title": "Display", "icon": "video-display-symbolic", "class": DisplayPage},
-            {"name": "extension", "title": "Extensions", "icon": "puzzle-piece-symbolic", "class": ExtensionPage},
+            {"name": "extension", "title": "Extensions", "icon": "org.gnome.Shell.Extensions-symbolic", "class": ExtensionPage},
             {"name": "applications", "title": "Applications", "icon": "view-app-grid-symbolic", "class": ApplicationsPage},
-            {"name": "outro", "title": "Finish", "icon": "emoji-celebrate-symbolic", "class": OutroPage},
+            {"name": "outro", "title": "Finish", "icon": "application-exit-symbolic", "class": OutroPage},
         ]
 
         for page_info in pages:

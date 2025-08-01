@@ -17,6 +17,7 @@
     <file>ui/components/CursorSizeSlider.ui</file>
     <file>css/style.css</file>
     <file>assets/logo.svg</file>
+    <file>assets/pardus-software-center.png</file>
     <file>json/layout_config.json</file>
     <file>json/custom_shortcuts.json</file>
     <file>json/extensions.json</file>

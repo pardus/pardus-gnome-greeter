@@ -6,12 +6,76 @@
     <child>
       <object class="AdwPreferencesGroup">
         <child>
-            <object class="GtkLabel">
-                <property name="label">Applications page content will be here.</property>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">24</property>
+            <property name="margin-top">40</property>
+            <property name="margin-bottom">40</property>
+            <property name="margin-start">20</property>
+            <property name="margin-end">20</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            
+            
+            <property name="vexpand">true</property>
+            
+            <!-- Pardus Software Center Image -->
+            <child>
+              <object class="GtkPicture">
+                <property name="file">resource:///tr/org/pardus/pardus-gnome-greeter/assets/pardus-software-center.png</property>
                 <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="vexpand">true</property>
-            </object>
+                <property name="can-shrink">true</property>
+                <property name="width-request">200</property>
+                <property name="height-request">200</property>
+              </object>
+            </child>
+            
+            <!-- Description Label -->
+            <child>
+              <object class="GtkLabel">
+                <property name="label">🎯 İhtiyacınız olan tüm uygulamalar burada! Pardus mağazasından güvenle indirin ve sisteminizi kişiselleştirin.</property>
+                <property name="halign">center</property>
+                <property name="justify">center</property>
+                <property name="wrap">true</property>
+                <property name="wrap-mode">word-char</property>
+                <property name="max-width-chars">60</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            
+            <!-- Open Store Button -->
+            <child>
+              <object class="GtkButton">
+                <property name="halign">center</property>
+                <property name="css-classes">suggested-action</property>
+                <signal name="clicked" handler="on_open_store_clicked"/>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">8</property>
+                    <property name="halign">center</property>
+                    
+                    <!-- Store Icon -->
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">software-update-available-symbolic</property>
+                        <property name="pixel-size">16</property>
+                      </object>
+                    </child>
+                    
+                    <!-- Button Label -->
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">Mağazayı Aç</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
         </child>
       </object>
     </child>

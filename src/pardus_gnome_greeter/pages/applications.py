@@ -1,4 +1,5 @@
 import gi
+import subprocess
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -11,4 +12,14 @@ class ApplicationsPage(Adw.PreferencesPage):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print("ApplicationsPage created.") 
+        print("ApplicationsPage created.")
+    
+    @Gtk.Template.Callback()
+    def on_open_store_clicked(self, button):
+        """Open Pardus Software Center"""
+        try:
+            subprocess.Popen(["pardus-software"])
+        except FileNotFoundError:
+            print("Pardus Software Center not found")
+        except Exception as e:
+            print(f"Error opening Pardus Software Center: {e}") 
