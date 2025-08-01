@@ -12,6 +12,9 @@
     <file>ui/OutroPage.ui</file>
     <file>ui/components/WallpaperThumbnail.ui</file>
     <file>ui/components/ExtensionCard.ui</file>
+    <file>ui/components/DesktopIconSlider.ui</file>
+    <file>ui/components/FileManagerIconSlider.ui</file>
+    <file>ui/components/CursorSizeSlider.ui</file>
     <file>css/style.css</file>
     <file>assets/logo.svg</file>
     <file>json/layout_config.json</file>

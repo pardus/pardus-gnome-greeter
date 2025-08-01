@@ -210,8 +210,22 @@ class DisplayManager:
                                     current_scale_actual = float(mode_preferred_scale) if mode_preferred_scale else 1.0
                                     supported_scales_actual = [float(s) for s in mode_supported_scales] if mode_supported_scales else [1.0]
                                     
+                                    # Also check logical monitors for actual scale
+                                    for x, y, scale, transform, primary, linked_monitors_info, props in logical_monitors:
+                                        for linked_monitor_connector, linked_monitor_vendor, linked_monitor_product, linked_monitor_serial in linked_monitors_info:
+                                            if linked_monitor_connector == connector_name:
+                                                # Use logical monitor scale if available
+                                                current_scale_actual = float(scale)
+                                                print(f"  Found logical monitor scale: {current_scale_actual}")
+                                                break
+                                        if current_scale_actual != 1.0:
+                                            break
+                                    
                                     monitor_data['scale'] = current_scale_actual
                                     monitor_data['supported_scales'] = supported_scales_actual
+                                    
+                                    # Update current_scale variable for filtering
+                                    current_scale = current_scale_actual
                                     
                                     print(f"  GetCurrentState: scale={current_scale_actual}, supported_scales={supported_scales_actual}")
                                     
@@ -434,15 +448,28 @@ class DisplayManager:
             return False
     
     def apply_scale_change(self, monitor_id, mode_id, new_scale):
-        """Apply scale change for a specific monitor without changing resolution"""
-        if not DBUS_AVAILABLE:
-            print("Error: python-dbus not available for scale changing")
-            return False
-            
+        """Apply scale change to a specific monitor"""
         try:
-            # Use standard dbus module
-            bus = dbus.SessionBus()
+            if not self._monitors_config:
+                print("No monitor configuration available")
+                return False
             
+            # Find target monitor
+            target_connector = None
+            for monitor in self._monitors_config:
+                if monitor['id'] == monitor_id:
+                    target_connector = monitor['connector']
+                    break
+            
+            if not target_connector:
+                print(f"Monitor {monitor_id} not found")
+                return False
+            
+            print(f"Changing scale for monitor {monitor_id} to {new_scale}")
+            print(f"Target connector: {target_connector}")
+            
+            # Get current state from D-Bus
+            bus = dbus.SessionBus()
             display_config_well_known_name = "org.gnome.Mutter.DisplayConfig"
             display_config_object_path = "/org/gnome/Mutter/DisplayConfig"
             
@@ -450,28 +477,64 @@ class DisplayManager:
             display_config_interface = dbus.Interface(display_config_proxy, dbus_interface=display_config_well_known_name)
             
             # Get current state
-            serial, physical_monitors, logical_monitors, properties = display_config_interface.GetCurrentState()
+            current_state = display_config_interface.GetCurrentState()
+            serial = current_state[0]
+            physical_monitors = current_state[1]
+            logical_monitors = current_state[2]
+            properties = current_state[3]
             
-            print(f"Changing scale for monitor {monitor_id} to {new_scale}")
+            print(f"Current state: {len(physical_monitors)} physical monitors, {len(logical_monitors)} logical monitors")
             
-            # Find our monitor info
-            target_monitor = None
-            for monitor_data in self._monitors_config:
-                if monitor_data['id'] == monitor_id:
-                    target_monitor = monitor_data
-                    break
-                    
-            if not target_monitor:
-                print(f"Monitor {monitor_id} not found in config")
-                return False
-            
-            target_connector = target_monitor['connector']
-            print(f"Target connector: {target_connector}")
-            
+            # Process logical monitors and normalize coordinates
             updated_logical_monitors = []
             monitor_found = False
             
+            # First pass: find all logical monitors and their positions
+            logical_monitor_positions = []
             for x, y, scale, transform, primary, linked_monitors_info, props in logical_monitors:
+                logical_monitor_positions.append((x, y, scale, transform, primary, linked_monitors_info, props))
+            
+            # Arrange all monitors strictly side by side, y=0 for all
+            if logical_monitor_positions:
+                # Calculate actual monitor widths for each logical monitor
+                monitor_widths = []
+                for x, y, scale, transform, primary, linked_monitors_info, props in logical_monitor_positions:
+                    width = None
+                    is_target = False
+                    for linked_monitor_connector, linked_monitor_vendor, linked_monitor_product, linked_monitor_serial in linked_monitors_info:
+                        for monitor_info, monitor_modes, monitor_properties in physical_monitors:
+                            monitor_connector, monitor_vendor, monitor_product, monitor_serial = monitor_info
+                            if linked_monitor_connector == monitor_connector:
+                                # Target monitör ise yeni scale ile hesapla
+                                if monitor_connector == target_connector:
+                                    is_target = True
+                                for mode_string, mode_width, mode_height, mode_refresh, mode_preferred_scale, mode_supported_scales, mode_properties in monitor_modes:
+                                    if mode_properties.get("is-current", False):
+                                        if is_target:
+                                            width = int(mode_width / new_scale)
+                                        else:
+                                            width = int(mode_width / scale)
+                                        break
+                        if width is not None:
+                            break
+                    if width is None:
+                        width = 1920  # fallback
+                    monitor_widths.append(width)
+
+                # Now arrange
+                arranged_positions = []
+                current_x = 0
+                for i, (orig, width) in enumerate(zip(logical_monitor_positions, monitor_widths)):
+                    x, y, scale, transform, primary, linked_monitors_info, props = orig
+                    new_x = current_x
+                    new_y = 0
+                    arranged_positions.append((new_x, new_y, scale, transform, primary, linked_monitors_info, props))
+                    current_x += width
+                logical_monitor_positions = arranged_positions
+                print(f"All monitors arranged strictly side by side, y=0, with calculated widths (target uses new scale)")
+            
+            # Second pass: build updated logical monitors
+            for x, y, scale, transform, primary, linked_monitors_info, props in logical_monitor_positions:
                 physical_monitors_config = []
                 current_logical_monitor_has_target = False
                 
@@ -517,10 +580,10 @@ class DisplayManager:
                 else:
                     use_scale = scale  # Keep original scale for other monitors
                 
-                # Create updated logical monitor struct
+                # Create updated logical monitor struct with normalized coordinates
                 updated_logical_monitor_struct = dbus.Struct([
-                    dbus.Int32(x),  # Keep original position
-                    dbus.Int32(y),  # Keep original position
+                    dbus.Int32(x),  # Use normalized position
+                    dbus.Int32(y),  # Use normalized position
                     dbus.Double(use_scale),
                     dbus.UInt32(transform), 
                     dbus.Boolean(primary), 
