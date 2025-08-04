@@ -141,7 +141,7 @@ class LayoutPage(Adw.PreferencesPage):
         picture.add_css_class("layout-image")
         
         # Load static image initially
-        static_path = f"data/assets/layout_img_{layout_id}.svg"
+        static_path = f"data/assets/layouts/layout-{layout_id}.svg"
         if os.path.exists(static_path):
             picture.set_filename(static_path)
         
@@ -174,7 +174,7 @@ class LayoutPage(Adw.PreferencesPage):
         card.picture = picture
         card.layout_id = layout_id
         card.static_path = static_path
-        card.gif_path = f"data/assets/layout_gif_{layout_id}.gif"
+        card.gif_path = f"data/assets/layouts/layout-{layout_id}.gif"
         
         # Connect signals
         card.connect("clicked", self._on_layout_selected)
