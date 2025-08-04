@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/tr/org/pardus/pardus-gnome-greeter">
+    <!-- UI Files -->
     <file>ui/MainWindow.ui</file>
     <file>ui/WelcomePage.ui</file>
     <file>ui/LayoutPage.ui</file>
@@ -10,11 +11,13 @@
     <file>ui/ExtensionPage.ui</file>
     <file>ui/ApplicationsPage.ui</file>
     <file>ui/OutroPage.ui</file>
-    <file>ui/components/WallpaperThumbnail.ui</file>
-    <file>ui/components/ExtensionCard.ui</file>
-    <file>ui/components/DesktopIconSlider.ui</file>
-    <file>ui/components/FileManagerIconSlider.ui</file>
     <file>ui/components/CursorSizeSlider.ui</file>
+    <file>ui/components/DesktopIconSlider.ui</file>
+    <file>ui/components/ExtensionCard.ui</file>
+    <file>ui/components/FileManagerIconSlider.ui</file>
+    <file>ui/components/WallpaperThumbnail.ui</file>
+    
+    <!-- CSS Files -->
     <file>css/style.css</file>
     <file>css/header.css</file>
     <file>css/sliders.css</file>
@@ -23,9 +26,73 @@
     <file>css/wallpaper.css</file>
     <file>css/extensions.css</file>
     <file>css/layout.css</file>
+    
+    <!-- JSON Files -->
+    <file>json/custom_shortcuts.json</file>
+    <file>json/extensions.json</file>
+    <file>json/layout_config.json</file>
+    <file>json/links.json</file>
+    <file>json/shortcuts.json</file>
+    <file>json/social_media.json</file>
+    
+    <!-- General Assets -->
     <file>assets/logo.svg</file>
     <file>assets/pardus-software-center.png</file>
     <file>assets/outro.png</file>
+    <file>assets/cursor.svg</file>
+    <file>assets/discord.svg</file>
+    <file>assets/medium.svg</file>
+    <file>assets/pardus-software.svg</file>
+    
+    <!-- Extension Assets -->
+    <file>assets/extensions/annoyance-screenshot.png</file>
+    <file>assets/extensions/battery-screenshot.png</file>
+    <file>assets/extensions/battery-icon.svg</file>
+    <file>assets/extensions/caffeine-screenshot.png</file>
+    <file>assets/extensions/caffeine-icon.png</file>
+    <file>assets/extensions/clipboard-screenshot.png</file>
+    <file>assets/extensions/clipboard-icon.png</file>
+    <file>assets/extensions/drive-menu-screenshot.png</file>
+    <file>assets/extensions/drive-menu-icon.png</file>
+    <file>assets/extensions/indicator-screenshot.png</file>
+    <file>assets/extensions/indicator-icon.png</file>
+    <file>assets/extensions/pano-screenshot.png</file>
+    <file>assets/extensions/pano-icon.png</file>
+    
+    <!-- Layout Assets -->
+    <file>assets/layouts/layout-10.gif</file>
+    <file>assets/layouts/layout-gnome.gif</file>
+    <file>assets/layouts/layout-mac.gif</file>
+    <file>assets/layouts/layout-pardus.gif</file>
+    <file>assets/layouts/layout-ubuntu.gif</file>
+    <file>assets/layouts/layout-xp.gif</file>
+    <file>assets/layouts/layout-10.svg</file>
+    <file>assets/layouts/layout-gnome.svg</file>
+    <file>assets/layouts/layout-mac.svg</file>
+    <file>assets/layouts/layout-pardus.svg</file>
+    <file>assets/layouts/layout-ubuntu.svg</file>
+    <file>assets/layouts/layout-xp.svg</file>
+    
+    <!-- Social Media Assets -->
+    <file>assets/social-media/facebook.svg</file>
+    <file>assets/social-media/github.svg</file>
+    <file>assets/social-media/linkedin.svg</file>
+    <file>assets/social-media/twitter.svg</file>
+    <file>assets/social-media/youtube.svg</file>
+    
+    <!-- Theme Assets -->
+    <file>assets/themes/theme-dark.png</file>
+    <file>assets/themes/theme-light.png</file>
+    
+
+    
+    <!-- Screenshot Assets -->
+    <file>assets/screenshots/screenshot-1.png</file>
+    <file>assets/screenshots/screenshot-2.png</file>
+    <file>assets/screenshots/screenshot-3.png</file>
+    <file>assets/screenshots/screenshot-4.png</file>
+    
+    <!-- Icon Assets -->
     <file>icons/github.svg</file>
     <file>icons/linkedin.svg</file>
     <file>icons/twitter.svg</file>
@@ -35,11 +102,5 @@
     <file>icons/document.svg</file>
     <file>icons/community.svg</file>
     <file>icons/forum.svg</file>
-    <file>json/layout_config.json</file>
-    <file>json/custom_shortcuts.json</file>
-    <file>json/extensions.json</file>
-    <file>json/links.json</file>
-    <file>json/shortcuts.json</file>
-    <file>json/social_media.json</file>
   </gresource>
 </gresources> 
