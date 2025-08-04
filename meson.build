@@ -57,6 +57,62 @@ install_data(
     rename: application_id + '.svg'
 )
 
+# Symbolic Icons for social media
+install_data(
+    'data/icons/github.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'github-symbolic.svg'
+)
+
+install_data(
+    'data/icons/linkedin.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'linkedin-symbolic.svg'
+)
+
+install_data(
+    'data/icons/twitter.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'twitter-symbolic.svg'
+)
+
+install_data(
+    'data/icons/youtube.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'youtube-symbolic.svg'
+)
+
+install_data(
+    'data/icons/facebook.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'facebook-symbolic.svg'
+)
+
+# Symbolic Icons for useful links
+install_data(
+    'data/icons/home.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'home-symbolic.svg'
+)
+
+install_data(
+    'data/icons/document.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'document-symbolic.svg'
+)
+
+install_data(
+    'data/icons/community.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'community-symbolic.svg'
+)
+
+install_data(
+    'data/icons/forum.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
+    rename: 'forum-symbolic.svg'
+)
+
 # .desktop file
 i18n = import('i18n')
 desktop_file = i18n.merge_file(

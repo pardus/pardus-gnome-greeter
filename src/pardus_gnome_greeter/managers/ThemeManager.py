@@ -10,6 +10,21 @@ class ThemeManager:
         except:
             self.shell_settings = None
         
+        # Callback system for theme changes
+        self.accent_color_callbacks = []
+        
+    def add_accent_color_callback(self, callback):
+        """Add a callback to be called when accent color changes"""
+        self.accent_color_callbacks.append(callback)
+        
+    def notify_accent_color_change(self, color_name):
+        """Notify all callbacks of accent color change"""
+        for callback in self.accent_color_callbacks:
+            try:
+                callback(color_name)
+            except Exception as e:
+                print(f"Error in accent color callback: {e}")
+        
     def get_current_color_scheme(self):
         """Get current color scheme (default or prefer-dark)"""
         try:
@@ -55,6 +70,10 @@ class ThemeManager:
             # Set accent color through gsettings
             self.interface_settings.set_string("accent-color", color_name)
             print(f"Successfully set accent color to: {color_name}")
+            
+            # Notify callbacks
+            self.notify_accent_color_change(color_name)
+            
             return True
                 
         except Exception as e:
