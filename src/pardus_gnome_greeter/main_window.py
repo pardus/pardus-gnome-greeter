@@ -13,6 +13,7 @@ from .pages.display import DisplayPage
 from .pages.extension import ExtensionPage
 from .pages.applications import ApplicationsPage
 from .pages.outro import OutroPage
+from .about_dialog import create_about_dialog
 
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/MainWindow.ui')
 class MainWindow(Adw.ApplicationWindow):
@@ -57,14 +58,20 @@ class MainWindow(Adw.ApplicationWindow):
         self.view_stack = Adw.ViewStack()
         self.view_stack.set_vexpand(True)
         
-        # Menu button
-        self.menu_button = Gtk.Button.new_from_icon_name("open-menu-symbolic")
-        self.menu_button.connect('clicked', self._on_menu_button_clicked)
-
+        # Create HeaderBar
         content_header = Adw.HeaderBar()
         content_header.add_css_class("content-header")
         
+        # Menu button
+        self.menu_button = Gtk.Button.new_from_icon_name("open-menu-symbolic")
+        self.menu_button.connect('clicked', self._on_menu_button_clicked)
         content_header.pack_start(self.menu_button)
+
+        # About button (sola, menu butonunun yanına)
+        self.about_button = Gtk.Button.new_from_icon_name("help-about-symbolic")
+        self.about_button.set_tooltip_text("About")
+        self.about_button.connect('clicked', self._on_about_button_clicked)
+        content_header.pack_start(self.about_button)
         
         content_title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         self.content_title_icon = Gtk.Image.new_from_icon_name("go-home-symbolic")
@@ -91,6 +98,10 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _on_menu_button_clicked(self, button):
         self.split_view.set_show_sidebar(not self.split_view.get_show_sidebar())
+
+    def _on_about_button_clicked(self, button):
+        about_dialog = create_about_dialog()
+        about_dialog.present()
 
     def _on_split_view_collapsed(self, split_view, param):
         is_collapsed = self.split_view.get_collapsed()
