@@ -1,0 +1,45 @@
+/* ==========================================================================
+   HEADER & NAVIGATION STYLES
+   ========================================================================== */
+
+.header-border {
+  border-bottom: 1px solid @borders;
+}
+
+/* Make header bar background same as content area */
+headerbar {
+  background: @window_bg_color;
+  border-bottom: none;
+  box-shadow: none;
+  border: none;
+}
+
+.content-header {
+  background: @window_bg_color;
+  border-bottom: none;
+  box-shadow: none;
+  border: none;
+  background-image: none;
+}
+
+/* Navigation Sidebar Styling */
+.navigation-sidebar row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 8px;
+  margin: 2px 8px;
+}
+
+.navigation-sidebar row:selected {
+  background: alpha(@accent_bg_color, 0.15);
+  color: @accent_bg_color;
+  border: 1px solid alpha(@accent_bg_color, 0.3);
+}
+
+.navigation-sidebar row:selected:hover {
+  background: alpha(@accent_bg_color, 0.2);
+}
+
+.navigation-sidebar row:hover {
+  background: alpha(@theme_selected_bg_color, 0.1);
+} 

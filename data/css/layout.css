@@ -1,0 +1,40 @@
+/* ==========================================================================
+   LAYOUT & UTILITY STYLES
+   ========================================================================== */
+
+/* Remove padding from AdwClamp */
+clamp {
+  margin: 0;
+  padding: 0;
+}
+
+viewport {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove padding from GtkScrolledWindow */
+scrolledwindow {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* Style AdwPreferencesGroup like GNOME Control Center */
+preferencesgroup {
+  background-color: @window_bg_color;
+  border-radius: 12px;
+  margin-bottom: 0px;  /* Reduced to 0px to eliminate gaps */
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 8px;  /* Reduced from 12px to 8px */
+  box-shadow: none;
+  border: none;
+  background-image: none;
+}
+
+/* Utility Classes */
+.py-2{
+  padding-top: 8px;
+  padding-bottom: 8px;
+} 

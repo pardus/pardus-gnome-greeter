@@ -1,0 +1,130 @@
+/* ==========================================================================
+   ACCENT COLOR SYSTEM
+   ========================================================================== */
+
+/* Accent Color Buttons */
+.accent-color-button {
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  border: 2px solid;
+  margin: 0;
+  padding: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.accent-color-button:hover {
+  transform: scale(1.1);
+}
+
+/* Color variants - not selected state (border same as background) */
+.accent-blue { 
+  background: #3584e4; 
+  border-color: #3584e4;
+}
+.accent-teal { 
+  background: #2ec27e; 
+  border-color: #2ec27e;
+}
+.accent-green { 
+  background: #33d17a; 
+  border-color: #33d17a;
+}
+.accent-yellow { 
+  background: #f6d32d; 
+  border-color: #f6d32d;
+}
+.accent-orange { 
+  background: #ff7800; 
+  border-color: #ff7800;
+}
+.accent-red { 
+  background: #e01b24; 
+  border-color: #e01b24;
+}
+.accent-pink { 
+  background: #c061cb; 
+  border-color: #c061cb;
+}
+.accent-purple { 
+  background: #9141ac; 
+  border-color: #9141ac;
+}
+.accent-slate { 
+  background: #6c758f; 
+  border-color: #6c758f;
+}
+
+/* Selected state - contrasting border colors based on theme */
+.accent-color-button:checked.accent-blue { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-teal { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-green { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-yellow { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-orange { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-red { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-pink { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-purple { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+.accent-color-button:checked.accent-slate { 
+  border-color: @window_fg_color;
+  border-width: 3px;
+}
+
+/* Accent Icon Styling - Force symbolic icons to use accent color */
+.accent-icon {
+  color: @accent_bg_color;
+}
+
+.accent-icon:hover {
+  color: @accent_bg_color;
+}
+
+.accent-icon:active {
+  color: @accent_bg_color;
+}
+
+/* Accent Link Styling - Force link buttons to use accent color with full width underline */
+.accent-link {
+  color: @accent_bg_color;
+  text-decoration: none;
+  border-bottom: 1px solid @accent_bg_color;
+  padding-bottom: 2px;
+}
+
+.accent-link:hover {
+  color: @accent_bg_color;
+  border-bottom: 2px solid @accent_bg_color;
+}
+
+.accent-link:active {
+  color: @accent_bg_color;
+  border-bottom: 2px solid @accent_bg_color;
+}
+
+/* Override GtkLinkButton default styling */
+.accent-link label {
+  text-decoration: none !important;
+} 

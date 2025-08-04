@@ -1,0 +1,99 @@
+/* ==========================================================================
+   CARD COMPONENTS
+   ========================================================================== */
+
+/* Layout Cards Styling */
+.card {
+  background: @card_bg_color;
+  border: 1px solid @borders;
+  border-radius: 12px;
+  transition: all 200ms ease-in-out;
+}
+
+.card:hover,
+.card.card-hover {
+  background: @view_bg_color;
+}
+
+.card.selected {
+  border: 2px solid @accent_bg_color;
+  background: @accent_bg_color;
+  color: @accent_fg_color;
+}
+
+.card.selected:hover {
+  background: @accent_bg_color;
+}
+
+.layout-image,
+.layout-gif {
+  border-radius: 8px;
+  background: @window_bg_color;
+  transition: opacity 200ms ease-in-out;
+}
+
+.card.selected .layout-image,
+.card.selected .layout-gif {
+  background: alpha(@accent_fg_color, 0.1);
+}
+
+/* Theme Card Styling */
+button.card {
+  background: @card_bg_color;
+  border: 2px solid @borders;
+  border-radius: 12px;
+  padding: 8px;
+  transition: all 200ms ease-in-out;
+}
+
+button.card:hover {
+  background: @view_bg_color;
+  border-color: alpha(@accent_bg_color, 0.5);
+}
+
+button.card:checked {
+  background: @card_bg_color;
+  border: 3px solid @accent_bg_color;
+  color: @window_fg_color;
+}
+
+button.card:checked image,
+button.card:checked label {
+  color: @accent_bg_color;
+}
+
+/* Theme Selector Styling */
+.theme-selector {
+  min-width: 280px;
+  min-height: 200px;
+  background: @card_bg_color;
+  border: 2px solid @borders;
+  border-radius: 12px;
+  padding: 0;
+}
+
+.theme-selector:hover {
+  border-color: alpha(@accent_bg_color, 0.5);
+}
+
+.theme-selector:checked {
+  border: 3px solid @accent_bg_color;
+  background: @card_bg_color;
+}
+
+/* Extension Card Styling */
+.extension-card {
+  background: @card_bg_color;
+  border: 1px solid @borders;
+  border-radius: 12px;
+  transition: all 200ms ease-in-out;
+}
+
+.extension-card:hover {
+  background: @view_bg_color;
+  border-color: alpha(@accent_bg_color, 0.5);
+}
+
+.extension-card-disabled {
+  opacity: 0.5;
+} 
