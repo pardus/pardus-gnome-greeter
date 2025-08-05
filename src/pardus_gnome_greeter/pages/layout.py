@@ -1,12 +1,19 @@
+import locale
 import gi
 import os
 import threading
 import time
+from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, GLib, Gio, GdkPixbuf, Gdk, GObject
+
+# Gettext setup
+domain = 'pardus-gnome-greeter'
+locale.bindtextdomain(domain, '/usr/share/locale')
+locale.textdomain(domain)
 
 from ..managers.LayoutManager import LayoutManager
 
@@ -66,8 +73,31 @@ class LayoutPage(Adw.PreferencesPage):
         self.current_layout = None
         self.layout_cards = {}
         
+        # Manually translate UI elements
+        self._translate_ui_elements()
+        
         # Setup layouts
         self._setup_layouts()
+    
+    def _translate_ui_elements(self):
+        """Manually translate UI elements that are not automatically translated"""
+        try:
+            # Find and translate the title and subtitle labels
+            title_label = self.get_template_child(self.__class__, "title_label")
+            subtitle_label = self.get_template_child(self.__class__, "subtitle_label")
+            
+            if title_label:
+                # Get the original text and translate it
+                original_text = "Choose Your Desktop Layout"
+                title_label.set_label(_(original_text))
+            
+            if subtitle_label:
+                # Get the original text and translate it
+                original_text = "Select a desktop layout that suits your workflow. You can change this anytime later."
+                subtitle_label.set_label(_(original_text))
+                
+        except Exception as e:
+            print(f"Warning: Could not translate UI elements: {e}")
     
     def _setup_layouts(self):
         """Setup layout cards in fixed 2x3 grid"""
@@ -78,12 +108,12 @@ class LayoutPage(Adw.PreferencesPage):
         
         # Layout display information
         layout_info = {
-            'gnome': {'name': 'Classic GNOME', 'description': 'Traditional GNOME desktop experience'},
-            'mac': {'name': 'Mac Style', 'description': 'macOS-like interface with dock at bottom'},
-            'ubuntu': {'name': 'Ubuntu Style', 'description': 'Ubuntu Unity-like experience'},
-            '10': {'name': 'Windows 10', 'description': 'Windows 10 taskbar layout'},
-            'xp': {'name': 'Windows XP', 'description': 'Classic Windows XP experience'},
-            'pardus': {'name': 'Pardus Style', 'description': 'Custom Pardus desktop layout'}
+            'gnome': {'name': _('Classic GNOME'), 'description': _('Traditional GNOME desktop experience')},
+            'mac': {'name': _('Mac Style'), 'description': _('macOS-like interface with dock at bottom')},
+            'ubuntu': {'name': _('Ubuntu Style'), 'description': _('Ubuntu Unity-like experience')},
+            '10': {'name': _('Windows 10'), 'description': _('Windows 10 taskbar layout')},
+            'xp': {'name': _('Windows XP'), 'description': _('Classic Windows XP experience')},
+            'pardus': {'name': _('Pardus Style'), 'description': _('Custom Pardus desktop layout')}
         }
         
         # Fixed 2x3 grid layout

@@ -1,15 +1,33 @@
+import locale
 import gi
 import os
 import sys
+from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, GLib, Gdk
 
+# Gettext setup
+domain = 'pardus-gnome-greeter'
+locale.bindtextdomain(domain, '/usr/share/locale')
+locale.textdomain(domain)
+
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
 from ExtensionManager import ExtensionManager
+
+# Extension descriptions dictionary
+EXTENSION_DESCRIPTIONS = {
+    "drive-menu@gnome-shell-extensions.gcampax.github.com": _("Add a status menu for accessing and unmounting removable devices."),
+    "caffeine@patapon.info": _("Disable screensaver and auto-suspend."),
+    "appindicatorsupport@rgcjonas.gmail.com": _("Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."),
+    "noannoyance@daase.net": _("Eliminates the 'Windows is ready' notification and brings the window into focus."),
+    "pano@elhan.io": _("Cutting-edge clipboard manager for GNOME Shell."),
+    "clipboard-indicator@tudmotu.com": _("Adds clipboard indicator to top panel, caches history."),
+    "bluetooth-battery-meter@maniacx.github.com": _("Provides quick access to Bluetooth"),
+}
 
 # ExtensionCard template class
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/ExtensionCard.ui')
@@ -37,15 +55,19 @@ class ExtensionCard(Gtk.Box):
         self.extension_id = extension_data.get('id')
         self.extension_manager = extension_manager
         
+        # Set name and description
+        if hasattr(self, 'name_label') and self.name_label:
+            name = extension_data.get('name', '')
+            self.name_label.set_text(name)
+        
+        if hasattr(self, 'desc_label') and self.desc_label:
+            # Get description from our translations dictionary
+            description = EXTENSION_DESCRIPTIONS.get(self.extension_id, extension_data.get('description', ''))
+            self.desc_label.set_text(description)
+        
         # Set image size if template child is available
         if hasattr(self, 'image') and self.image:
             self.image.set_size_request(200, 120)
-        
-        # Set labels if template children are available
-        if hasattr(self, 'name_label') and self.name_label:
-            self.name_label.set_label(extension_data.get('name', ''))
-        if hasattr(self, 'desc_label') and self.desc_label:
-            self.desc_label.set_label(extension_data.get('description', ''))
         
         # Load image
         image_path = extension_data.get('image', '')

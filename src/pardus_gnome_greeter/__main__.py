@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
 import sys
 import os
+import locale
 import gi
+
+# Gettext setup - must be done before any other imports
+from locale import gettext as _
+locale.bindtextdomain('pardus-gnome-greeter', '/usr/share/locale')
+locale.textdomain('pardus-gnome-greeter')
+
+# Enable translation support for UI files
+Gtk = None  # Will be imported later
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")

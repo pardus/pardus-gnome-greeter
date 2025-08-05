@@ -1,9 +1,16 @@
+import locale
 import gi
+from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, Gio, GLib
+
+# Gettext setup
+domain = 'pardus-gnome-greeter'
+locale.bindtextdomain(domain, '/usr/share/locale')
+locale.textdomain(domain)
 from ..managers.DisplayManager import display_manager
 
 # Cursor Size Slider Component
@@ -24,7 +31,7 @@ class CursorSizeSlider(Adw.ActionRow):
 
     def setup_labels(self):
         # Add labels for each step
-        labels = ["Small", "Medium", "Large"]
+        labels = [_("Small"), _("Medium"), _("Large")]
         for i, label_text in enumerate(labels):
             label = Gtk.Label(label=label_text)
             label.set_hexpand(True)
@@ -83,7 +90,7 @@ class DesktopIconSlider(Adw.ActionRow):
 
     def setup_labels(self):
         # Add labels for each step
-        labels = ["Tiny", "Small", "Standard", "Large"]
+        labels = [_("Tiny"), _("Small"), _("Standard"), _("Large")]
         for i, label_text in enumerate(labels):
             label = Gtk.Label(label=label_text)
             label.set_hexpand(True)
@@ -143,7 +150,7 @@ class FileManagerIconSlider(Adw.ActionRow):
 
     def setup_labels(self):
         # Add labels for each step
-        labels = ["Small", "Small+", "Medium", "Large", "Extra Large"]
+        labels = [_("Small"), _("Small+"), _("Medium"), _("Large"), _("Extra Large")]
         for i, label_text in enumerate(labels):
             label = Gtk.Label(label=label_text)
             label.set_hexpand(True)
@@ -333,8 +340,6 @@ class DisplayPage(Adw.PreferencesPage):
         else:
             print(f"Failed to apply resolution change")
             
-        # Keep scale options independent - don't change them when resolution changes
-        # Scale options should remain the same regardless of resolution selection
 
 
 

@@ -1,25 +1,32 @@
+import locale
 import gi
 import os
 import re
+from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw
 
+# Gettext setup
+domain = 'pardus-gnome-greeter'
+locale.bindtextdomain(domain, '/usr/share/locale')
+locale.textdomain(domain)
+
 def create_about_dialog(parent=None):
     dialog = Adw.AboutDialog.new()
-    dialog.set_application_name('Pardus GNOME Greeter')
+    dialog.set_application_name(_('Pardus GNOME Greeter'))
     dialog.set_version(_get_version())
     dialog.set_developer_name('Osman Coskun')
     dialog.set_license_type(Gtk.License.LGPL_3_0)
     dialog.set_comments(
-        'Customize and configure Pardus with few clicks'
+        _('Customize and configure Pardus with few clicks')
     )
     dialog.set_website('https://github.com/pardus/pardus-gnome-greeter')
     dialog.set_issue_url('https://github.com/pardus/pardus-gnome-greeter/issues')
     dialog.set_translator_credits('Osman Coskun <osman.coskun@pardus.org.tr>')
-    dialog.set_copyright('© 2025 Pardus Team')
+    dialog.set_copyright(_('© 2025 Pardus Team'))
     dialog.set_developers(['Osman Coskun <osman.coskun@pardus.org.tr>','Fatih Altun <fatih.altun@pardus.org.tr>'])
     return dialog
 

@@ -1,4 +1,6 @@
+import locale
 import gi
+from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -6,6 +8,11 @@ gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw, GLib, Gio
 import os
 import sys
+
+# Gettext setup
+domain = 'pardus-gnome-greeter'
+locale.bindtextdomain(domain, '/usr/share/locale')
+locale.textdomain(domain)
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
@@ -33,9 +40,12 @@ class ThemePage(Adw.PreferencesPage):
         self.light_theme_button.connect("toggled", self.on_theme_button_toggled)
         self.dark_theme_button.connect("toggled", self.on_theme_button_toggled)
         
+        
         # Set initial state
         GLib.idle_add(self.update_button_states)
         GLib.idle_add(self.update_accent_color_states)
+    
+
         
     def setup_accent_colors(self):
         """Setup accent color selection"""

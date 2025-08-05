@@ -1,9 +1,16 @@
+import locale
 import gi
+from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, Gio
+
+# Gettext setup
+domain = 'pardus-gnome-greeter'
+locale.bindtextdomain(domain, '/usr/share/locale')
+locale.textdomain(domain)
 
 from .pages.welcome import WelcomePage
 from .pages.layout import LayoutPage
@@ -39,7 +46,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.pages_listbox.add_css_class("navigation-sidebar")
         
         # Simple label instead of AdwHeaderBar
-        sidebar_label = Gtk.Label(label="Settings")
+        sidebar_label = Gtk.Label(label=_("Settings"))
         sidebar_label.add_css_class("title-2")
         sidebar_label.set_margin_start(24)
         sidebar_label.set_margin_end(12)
@@ -69,13 +76,13 @@ class MainWindow(Adw.ApplicationWindow):
 
         # About button (sola, menu butonunun yanına)
         self.about_button = Gtk.Button.new_from_icon_name("help-about-symbolic")
-        self.about_button.set_tooltip_text("About")
+        self.about_button.set_tooltip_text(_("About"))
         self.about_button.connect('clicked', self._on_about_button_clicked)
         content_header.pack_start(self.about_button)
         
         content_title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         self.content_title_icon = Gtk.Image.new_from_icon_name("go-home-symbolic")
-        self.content_title_label = Gtk.Label(label="Welcome")
+        self.content_title_label = Gtk.Label(label=_("Welcome"))
         content_title_box.append(self.content_title_icon)
         content_title_box.append(self.content_title_label)
         content_header.set_title_widget(content_title_box)
@@ -124,14 +131,14 @@ class MainWindow(Adw.ApplicationWindow):
     def load_pages(self):
         # Create and add pages to the ViewStack
         pages = [
-            {"name": "welcome", "title": "Welcome", "icon": "go-home-symbolic", "class": WelcomePage},
-            {"name": "layout", "title": "Layout", "icon": "view-paged-symbolic", "class": LayoutPage},
-            {"name": "theme", "title": "Theme", "icon": "applications-graphics-symbolic", "class": ThemePage},
-            {"name": "wallpaper", "title": "Wallpaper", "icon": "image-x-generic-symbolic", "class": WallpaperPage},
-            {"name": "display", "title": "Display", "icon": "video-display-symbolic", "class": DisplayPage},
-            {"name": "extension", "title": "Extensions", "icon": "org.gnome.Shell.Extensions-symbolic", "class": ExtensionPage},
-            {"name": "applications", "title": "Applications", "icon": "view-app-grid-symbolic", "class": ApplicationsPage},
-            {"name": "outro", "title": "Finish", "icon": "application-exit-symbolic", "class": OutroPage},
+            {"name": "welcome", "title": _("Welcome"), "icon": "go-home-symbolic", "class": WelcomePage},
+            {"name": "layout", "title": _("Layout"), "icon": "view-paged-symbolic", "class": LayoutPage},
+            {"name": "theme", "title": _("Theme"), "icon": "applications-graphics-symbolic", "class": ThemePage},
+            {"name": "wallpaper", "title": _("Wallpaper"), "icon": "image-x-generic-symbolic", "class": WallpaperPage},
+            {"name": "display", "title": _("Display"), "icon": "video-display-symbolic", "class": DisplayPage},
+            {"name": "extension", "title": _("Extensions"), "icon": "org.gnome.Shell.Extensions-symbolic", "class": ExtensionPage},
+            {"name": "applications", "title": _("Applications"), "icon": "view-app-grid-symbolic", "class": ApplicationsPage},
+            {"name": "outro", "title": _("Finish"), "icon": "application-exit-symbolic", "class": OutroPage},
         ]
 
         for page_info in pages:
