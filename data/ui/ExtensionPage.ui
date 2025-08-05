@@ -3,11 +3,11 @@
   <requires lib="gtk" version="4.0" />
   <requires lib="adw" version="1.0" />
   <template class="ExtensionPage" parent="AdwPreferencesPage">
-    <property name="title">Extensions</property>
+    <property name="title" translatable="yes">Extensions</property>
     <property name="icon-name">puzzle-piece-symbolic</property>
     <child>
       <object class="AdwPreferencesGroup">
-        <property name="title">Available Extensions</property>
+        <property name="title" translatable="yes">Available Extensions</property>
         <child>
           <object class="GtkFlowBox" id="extensions_flowbox">
             <property name="hexpand">true</property>

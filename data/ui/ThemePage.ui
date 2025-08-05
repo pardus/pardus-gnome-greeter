@@ -3,20 +3,20 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0"/>
   <template class="ThemePage" parent="AdwPreferencesPage">
-    <property name="title">Theme</property>
+    <property name="title" translatable="yes">Theme</property>
     <property name="icon-name">org.gnome.Settings-appearance-symbolic</property>
     
     <!-- Style Section -->
     <child>
       <object class="AdwPreferencesGroup">
-        <property name="title">Style</property>
+        <property name="title" translatable="yes">Style</property>
         <child>
           <object class="AdwActionRow">
             <style>
               <class name="py-2"/>
             </style>  
-            <property name="title">Appearance</property>
-            <property name="subtitle">Select your preferred theme style</property>
+            <property name="title" translatable="yes">Appearance</property>
+            <property name="subtitle" translatable="yes">Select your preferred theme style</property>
             <child type="suffix">
               <object class="GtkBox">
                 <property name="orientation">horizontal</property>
@@ -47,7 +47,7 @@
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="label">Light</property>
+                            <property name="label" translatable="yes">Light</property>
                             <style>
                               <class name="caption"/>
                             </style>
@@ -82,7 +82,7 @@
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="label">Dark</property>
+                            <property name="label" translatable="yes">Dark</property>
                             <style>
                               <class name="caption"/>
                             </style>
@@ -102,7 +102,7 @@
     <!-- Accent Color Section -->
     <child>
       <object class="AdwPreferencesGroup">
-        <property name="title">Accent Color</property>
+        <property name="title" translatable="yes">Accent Color</property>
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>

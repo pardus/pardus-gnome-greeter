@@ -4,7 +4,7 @@
   <requires lib="libadwaita" version="1.0"/>
   
   <template class="OutroPage" parent="AdwPreferencesPage">
-    <property name="title">Finish</property>
+    <property name="title" translatable="yes">Finish</property>
     <property name="icon-name">application-exit-symbolic</property>
     
     <child>
@@ -38,7 +38,7 @@
             <!-- Success Title -->
             <child>
               <object class="GtkLabel">
-                <property name="label">🎉 Tebrikler! Kurulum Tamamlandı</property>
+                <property name="label" translatable="yes">🎉 Congratulations! Setup Completed</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <style>
@@ -50,7 +50,7 @@
             <!-- Success Description -->
             <child>
               <object class="GtkLabel">
-                <property name="label">Pardus GNOME sisteminiz başarıyla yapılandırıldı. Artık modern ve kullanıcı dostu bir masaüstü deneyiminin keyfini çıkarabilirsiniz!</property>
+                <property name="label" translatable="yes">Your Pardus GNOME system has been successfully configured. Now you can enjoy a modern and user-friendly desktop experience!</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <property name="wrap">true</property>
@@ -74,7 +74,7 @@
             <!-- Section Title -->
             <child>
               <object class="GtkLabel">
-                <property name="label">Bizi Takip Edin</property>
+                <property name="label" translatable="yes">Follow Us</property>
                 <property name="halign">center</property>
                 <style>
                   <class name="title-2"/>
@@ -110,9 +110,9 @@
                           </object>
                         </child>
                         
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label">GitHub</property>
+                                            <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">GitHub</property>
                           </object>
                         </child>
                       </object>
@@ -141,9 +141,9 @@
                           </object>
                         </child>
                         
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label">LinkedIn</property>
+                                            <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">LinkedIn</property>
                           </object>
                         </child>
                       </object>
@@ -172,9 +172,9 @@
                           </object>
                         </child>
                         
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label">Twitter</property>
+                                            <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Twitter</property>
                           </object>
                         </child>
                       </object>
@@ -203,9 +203,9 @@
                           </object>
                         </child>
                         
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label">YouTube</property>
+                                            <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">YouTube</property>
                           </object>
                         </child>
                       </object>
@@ -234,9 +234,9 @@
                           </object>
                         </child>
                         
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label">Facebook</property>
+                                            <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Facebook</property>
                           </object>
                         </child>
                       </object>
@@ -253,10 +253,10 @@
                 <property name="spacing">16</property>
                 <property name="halign">center</property>
                 
-                <!-- Section Title -->
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label">Faydalı Linkler</property>
+                            <!-- Section Title -->
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Useful Links</property>
                     <property name="halign">center</property>
                     <style>
                       <class name="title-2"/>
@@ -292,9 +292,9 @@
                               </object>
                             </child>
                             
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label">Home Page</property>
+                                                <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Home Page</property>
                               </object>
                             </child>
                           </object>
@@ -323,9 +323,9 @@
                               </object>
                             </child>
                             
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label">Documentation</property>
+                                                <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Documentation</property>
                               </object>
                             </child>
                           </object>
@@ -354,9 +354,9 @@
                               </object>
                             </child>
                             
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label">Community</property>
+                                                <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Community</property>
                               </object>
                             </child>
                           </object>
@@ -385,9 +385,9 @@
                               </object>
                             </child>
                             
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label">Forum</property>
+                                                <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Forum</property>
                               </object>
                             </child>
                           </object>
@@ -398,9 +398,9 @@
                 </child>
                 
                 <!-- Final Message -->
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label">Sorularınız için topluluk forumlarımızı ziyaret edebilirsiniz. İyi kullanımlar! 🚀</property>
+                            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">You can visit our community forums for your questions. Happy usage! 🚀</property>
                     <property name="halign">center</property>
                     <property name="justify">center</property>
                     <property name="wrap">true</property>

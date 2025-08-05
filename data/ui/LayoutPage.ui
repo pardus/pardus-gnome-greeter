@@ -3,7 +3,7 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0"/>
   <template class="LayoutPage" parent="AdwPreferencesPage">
-    <property name="title">Layout</property>
+    <property name="title" translatable="yes">Layout</property>
     <property name="icon-name">view-paged-symbolic</property>
     <child>
       <object class="AdwPreferencesGroup">
@@ -24,7 +24,7 @@
                 <property name="spacing">8</property>
                 <child>
                   <object class="GtkLabel" id="title_label">
-                    <property name="label">Choose Your Desktop Layout</property>
+                    <property name="label" translatable="yes">Choose Your Desktop Layout</property>
                     <property name="halign">center</property>
                     <style>
                       <class name="title-1"/>
@@ -33,7 +33,7 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="subtitle_label">
-                    <property name="label">Select a desktop layout that suits your workflow. You can change this anytime later.</property>
+                    <property name="label" translatable="yes">Select a desktop layout that suits your workflow. You can change this anytime later.</property>
                     <property name="halign">center</property>
                     <property name="wrap">true</property>
                     <property name="max-width-chars">60</property>

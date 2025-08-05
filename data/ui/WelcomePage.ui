@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="WelcomePage" parent="AdwPreferencesPage">
-    <property name="title">Welcome</property>
+    <property name="title" translatable="yes">Welcome</property>
     <property name="icon-name">image-x-generic-symbolic</property>
     <child>
       <object class="AdwPreferencesGroup">
@@ -19,8 +19,8 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel">
-                <property name="label">Welcome to Pardus GNOME Greeter! This application will help you configure your Pardus GNOME experience.</property>
+              <object class="GtkLabel" id="welcome_message">
+                <property name="label" translatable="yes">Welcome to Pardus GNOME Greeter! This application will help you configure your Pardus GNOME experience.</property>
                 <property name="wrap">true</property>
                 <property name="justify">center</property>
                 <attributes>
