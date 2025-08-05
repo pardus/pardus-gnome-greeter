@@ -249,8 +249,15 @@ class DisplayManager:
                     for res in supported_resolutions:
                         if current_scale in res['supported_scales']:
                             filtered_resolutions.append(res)
-                    monitor_data['supported_resolutions'] = filtered_resolutions
-                    print(f"  Filtered to {len(filtered_resolutions)} resolutions supporting scale {current_scale}")
+                    
+                    # If no resolutions support the current scale, show all resolutions
+                    # This prevents the dropdown from being empty
+                    if len(filtered_resolutions) == 0:
+                        print(f"  No resolutions support scale {current_scale}, showing all {len(supported_resolutions)} resolutions")
+                        monitor_data['supported_resolutions'] = supported_resolutions
+                    else:
+                        monitor_data['supported_resolutions'] = filtered_resolutions
+                        print(f"  Filtered to {len(filtered_resolutions)} resolutions supporting scale {current_scale}")
                 else:
                     print(f"  Scale is 1.0, showing all {len(supported_resolutions)} resolutions")
                 
