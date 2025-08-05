@@ -113,22 +113,17 @@ install_data(
     rename: 'forum-symbolic.svg'
 )
 
-# .desktop file
-i18n = import('i18n')
-desktop_file = i18n.merge_file(
-    input: application_id + '.desktop.in',
-    output: application_id + '.desktop',
-    type: 'desktop',
-    po_dir: 'data/po',
-    install: true,
-    install_dir: join_paths(datadir, 'applications')
-)
+# Çeviri dosyalarını işle
+subdir('data/po')
 
 # GSettings Schemas
 subdir('data/schemas')
 
 # JSON and Asset data
 install_subdir('data/assets', install_dir: pkgdatadir)
+install_subdir('data/css', install_dir: pkgdatadir)
+install_subdir('data/json', install_dir: pkgdatadir)
+install_subdir('data/ui', install_dir: pkgdatadir)
 
 # Post-install script for manual installs (handled by dh_glib in debian)
 # meson.add_install_script('meson_post_install.py')
