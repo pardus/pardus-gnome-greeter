@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-04 16:36+0300\n"
+"POT-Creation-Date: 2025-08-05 09:09+0300\n"
 "PO-Revision-Date: 2022-10-18 11:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,175 +17,383 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
+#: src/pardus_gnome_greeter/pages/welcome.py:27 data/ui/WelcomePage.ui:23
+msgid ""
+"Welcome to Pardus GNOME Greeter! This application will help you configure "
+"your Pardus GNOME experience."
+msgstr ""
 
-# MainWindow.py
-msgid "Pardus GNOME Greeter"
-msgstr "Bienvenido/a a Pardus GNOME"
-
-
-
-msgid "Welcome"
-msgstr "Bienvenido/a"
-
-msgid "Layout"
-msgstr "Disposición"
-
-msgid "Wallpaper"
-msgstr "Fondo de escritorio"
-
-msgid "Theme"
-msgstr "Tema"
-
-msgid "Extension"
-msgstr "Extensión"
-
-msgid "Extensions"
-msgstr "Extensiones"
-
-msgid "Display"
-msgstr "Pantalla"
-
-msgid "Applications"
-msgstr "Aplicaciones"
-
-msgid "Support"
-msgstr "Soporte"
-
-msgid "Configure Pardus with just a few clicks."
-msgstr "Configura Pardus con solo unos pocos clicks."
-
-msgid "Previous"
-msgstr "Anterior"
-
-msgid "Next"
-msgstr "Siguiente"
-
-msgid "Close"
-msgstr "Cerrar"
-
-msgid "Contributors"
-msgstr "Contribuidores"
-
-
-
-# Apps.py
-msgid "Pardus Software Center"
-msgstr "Centro de Software Pardus"
-
-msgid "For more applications"
-msgstr "Para mas aplicaciones"
-
-
-
-# Theme.py
-msgid "Dark Theme"
-msgstr "Tema Oscuro"
-
-msgid "Light Theme"
-msgstr "Tema Claro"
-
-
-# Layout.py
-msgid "Style"
-msgstr "Estilo"
-
-msgid "Classic"
+#: src/pardus_gnome_greeter/pages/layout.py:111
+#, fuzzy
+msgid "Classic GNOME"
 msgstr "Clásico"
 
+#: src/pardus_gnome_greeter/pages/layout.py:111
+msgid "Traditional GNOME desktop experience"
+msgstr ""
 
+# Layout.py
+#: src/pardus_gnome_greeter/pages/layout.py:112
+#, fuzzy
+msgid "Mac Style"
+msgstr "Estilo"
 
-# Display.py
-msgid "Recommended scale option for main display is"
-msgstr "Opción de escala recomendada para la pantalla principal es"
+#: src/pardus_gnome_greeter/pages/layout.py:112
+msgid "macOS-like interface with dock at bottom"
+msgstr ""
 
-msgid "Cursor Size"
-msgstr "Tamaño del Cursor"
+#: src/pardus_gnome_greeter/pages/layout.py:113
+msgid "Ubuntu Style"
+msgstr ""
 
-msgid "Tiny"
-msgstr "Minúsculo"
+#: src/pardus_gnome_greeter/pages/layout.py:113
+msgid "Ubuntu Unity-like experience"
+msgstr ""
 
+#: src/pardus_gnome_greeter/pages/layout.py:114
+msgid "Windows 10"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/layout.py:114
+msgid "Windows 10 taskbar layout"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/layout.py:115
+msgid "Windows XP"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/layout.py:115
+msgid "Classic Windows XP experience"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/layout.py:116
+msgid "Pardus Style"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/layout.py:116
+msgid "Custom Pardus desktop layout"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/display.py:34
+#: src/pardus_gnome_greeter/pages/display.py:93
+#: src/pardus_gnome_greeter/pages/display.py:153
 msgid "Small"
 msgstr "Pequeño"
 
-msgid "Standart"
-msgstr "Normal"
+#: src/pardus_gnome_greeter/pages/display.py:34
+#: src/pardus_gnome_greeter/pages/display.py:153
+msgid "Medium"
+msgstr ""
 
+#: src/pardus_gnome_greeter/pages/display.py:34
+#: src/pardus_gnome_greeter/pages/display.py:93
+#: src/pardus_gnome_greeter/pages/display.py:153
 msgid "Large"
 msgstr "Grande"
 
-msgid "Huge"
-msgstr "Enorme"
+#: src/pardus_gnome_greeter/pages/display.py:93
+msgid "Tiny"
+msgstr "Minúsculo"
 
-msgid "File manager icon size"
-msgstr "Tamaño de iconos del gestor de ficheros"
+#: src/pardus_gnome_greeter/pages/display.py:93
+#, fuzzy
+msgid "Standard"
+msgstr "Normal"
 
-msgid "Desktop icon size"
-msgstr "Tamaño de iconos del escritorio"
+#: src/pardus_gnome_greeter/pages/display.py:153
+#, fuzzy
+msgid "Small+"
+msgstr "Pequeño"
 
+#: src/pardus_gnome_greeter/pages/display.py:153
+#, fuzzy
+msgid "Extra Large"
+msgstr "Grande"
 
-# Outro.py
-msgid "Social Media Accounts"
-msgstr "Cuentas redes sociales"
-
-msgid "Shortcuts"
-msgstr "Atajos"
-
-msgid "Open Shortcuts"
-msgstr "Abrir atajos"
-
-msgid "Home Page"
-msgstr "Página de inicio"
-
-msgid "Documentation"
-msgstr "Documentación"
-
-msgid "Community"
-msgstr "Comunidad"
-
-msgid "Forum"
-msgstr "Foro"
-
-
-# Clock
-msgid "Enable clock formatting"
-msgstr "Activar formato de reloj"
-
-msgid "Date / Time Format"
-msgstr "Formato Fecha/Hora"
-
-msgid "Font Size"
-msgstr "Tamaño fuente"
-
-msgid "Show Seconds"
-msgstr "Mostrar segundos"
-
-
-# Welcome.py
-msgid "This application helps configure Pardus"
-msgstr "Esta aplicación ayuda a configurar Pardus"
-
-
-# Extension
-msgid "Add a quick navigation menu for system places."
-msgstr "Añade un menu de navegación rápida para lugares del sistema."
-
+#: src/pardus_gnome_greeter/pages/extension.py:23
 msgid "Add a status menu for accessing and unmounting removable devices."
 msgstr "Añade un menu de estado para acceder y desmontar discos extraibles."
 
+#: src/pardus_gnome_greeter/pages/extension.py:24
 msgid "Disable screensaver and auto-suspend."
 msgstr "Deshabilitar salvapantallas y auto-suspensión."
 
-msgid "Add a category-based application menu."
-msgstr "Añade un menu categorizado de aplicaciones."
+#: src/pardus_gnome_greeter/pages/extension.py:25
+msgid ""
+"Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons "
+"in the Shell."
+msgstr ""
+"Activar soporte para AppIndicator, KSstatusNotifierItem y iconos de legado "
+"en la bandeja del sistema en el intérprete de comandos."
 
-msgid "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."
-msgstr "Activar soporte para AppIndicator, KSstatusNotifierItem y iconos de legado en la bandeja del sistema en el intérprete de comandos."
+#: src/pardus_gnome_greeter/pages/extension.py:26
+msgid ""
+"Eliminates the 'Windows is ready' notification and brings the window into "
+"focus."
+msgstr ""
+"Elimina la notificación de 'Ventana lista' y hace que la ventana se enfoque."
 
-msgid "Eliminates the 'Windows is ready' notification and brings the window into focus."
-msgstr "Elimina la notificación de 'Ventana lista' y hace que la ventana se enfoque."
-
+#: src/pardus_gnome_greeter/pages/extension.py:27
 msgid "Cutting-edge clipboard manager for GNOME Shell."
 msgstr "Gestor de portapapeles moderno para ambiente GNOME."
 
+#: src/pardus_gnome_greeter/pages/extension.py:28
 msgid "Adds clipboard indicator to top panel, caches history."
-msgstr "Añade el indicador de portapapeles al panel superior y guarda el historial en caché."
+msgstr ""
+"Añade el indicador de portapapeles al panel superior y guarda el historial "
+"en caché."
+
+#: src/pardus_gnome_greeter/pages/extension.py:29
+msgid "Provides quick access to Bluetooth"
+msgstr ""
+
+#: src/pardus_gnome_greeter/main_window.py:49
+msgid "Settings"
+msgstr ""
+
+#: src/pardus_gnome_greeter/main_window.py:79
+msgid "About"
+msgstr ""
+
+#: src/pardus_gnome_greeter/main_window.py:85
+#: src/pardus_gnome_greeter/main_window.py:134 data/ui/WelcomePage.ui:4
+msgid "Welcome"
+msgstr "Bienvenido/a"
+
+#: src/pardus_gnome_greeter/main_window.py:135 data/ui/LayoutPage.ui:6
+msgid "Layout"
+msgstr "Disposición"
+
+#: src/pardus_gnome_greeter/main_window.py:136 data/ui/ThemePage.ui:6
+msgid "Theme"
+msgstr "Tema"
+
+#: src/pardus_gnome_greeter/main_window.py:137 data/ui/WallpaperPage.ui:6
+msgid "Wallpaper"
+msgstr "Fondo de escritorio"
+
+#: src/pardus_gnome_greeter/main_window.py:138 data/ui/DisplayPage.ui:4
+msgid "Display"
+msgstr "Pantalla"
+
+#: src/pardus_gnome_greeter/main_window.py:139 data/ui/ExtensionPage.ui:6
+msgid "Extensions"
+msgstr "Extensiones"
+
+#: src/pardus_gnome_greeter/main_window.py:140 data/ui/ApplicationsPage.ui:4
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#: src/pardus_gnome_greeter/main_window.py:141 data/ui/OutroPage.ui:7
+msgid "Finish"
+msgstr ""
+
+# MainWindow.py
+#: src/pardus_gnome_greeter/about_dialog.py:19
+msgid "Pardus GNOME Greeter"
+msgstr "Bienvenido/a a Pardus GNOME"
+
+#: src/pardus_gnome_greeter/about_dialog.py:24
+#, fuzzy
+msgid "Customize and configure Pardus with few clicks"
+msgstr "Configura Pardus con solo unos pocos clicks."
+
+#: src/pardus_gnome_greeter/about_dialog.py:29
+msgid "© 2025 Pardus Team"
+msgstr ""
+
+#: data/ui/ApplicationsPage.ui:36
+msgid ""
+"🎯 All the applications you need are here! Download safely from the Pardus "
+"store and customize your system."
+msgstr ""
+
+#: data/ui/ApplicationsPage.ui:71
+#, fuzzy
+msgid "Open Store"
+msgstr "Abrir atajos"
+
+#: data/ui/ExtensionPage.ui:10
+#, fuzzy
+msgid "Available Extensions"
+msgstr "Extensiones"
+
+#: data/ui/LayoutPage.ui:27
+msgid "Choose Your Desktop Layout"
+msgstr ""
+
+#: data/ui/LayoutPage.ui:36
+msgid ""
+"Select a desktop layout that suits your workflow. You can change this "
+"anytime later."
+msgstr ""
+
+# Layout.py
+#: data/ui/ThemePage.ui:12
+#, fuzzy
+msgid "Style"
+msgstr "Estilo"
+
+#: data/ui/ThemePage.ui:18
+msgid "Appearance"
+msgstr ""
+
+#: data/ui/ThemePage.ui:19
+msgid "Select your preferred theme style"
+msgstr ""
+
+#: data/ui/ThemePage.ui:50
+#, fuzzy
+msgid "Light"
+msgstr "Tema Claro"
+
+#: data/ui/ThemePage.ui:85
+msgid "Dark"
+msgstr ""
+
+#: data/ui/ThemePage.ui:105
+msgid "Accent Color"
+msgstr ""
+
+#: data/ui/WallpaperPage.ui:10
+msgid "Background"
+msgstr ""
+
+#: data/ui/OutroPage.ui:41
+msgid "🎉 Congratulations! Setup Completed"
+msgstr ""
+
+#: data/ui/OutroPage.ui:53
+msgid ""
+"Your Pardus GNOME system has been successfully configured. Now you can enjoy "
+"a modern and user-friendly desktop experience!"
+msgstr ""
+
+#: data/ui/OutroPage.ui:77
+msgid "Follow Us"
+msgstr ""
+
+#: data/ui/OutroPage.ui:115
+msgid "GitHub"
+msgstr ""
+
+#: data/ui/OutroPage.ui:146
+msgid "LinkedIn"
+msgstr ""
+
+#: data/ui/OutroPage.ui:177
+msgid "Twitter"
+msgstr ""
+
+#: data/ui/OutroPage.ui:208
+msgid "YouTube"
+msgstr ""
+
+#: data/ui/OutroPage.ui:239
+msgid "Facebook"
+msgstr ""
+
+#: data/ui/OutroPage.ui:259
+msgid "Useful Links"
+msgstr ""
+
+#: data/ui/OutroPage.ui:297
+msgid "Home Page"
+msgstr "Página de inicio"
+
+#: data/ui/OutroPage.ui:328
+msgid "Documentation"
+msgstr "Documentación"
+
+#: data/ui/OutroPage.ui:359
+msgid "Community"
+msgstr "Comunidad"
+
+#: data/ui/OutroPage.ui:390
+msgid "Forum"
+msgstr "Foro"
+
+#: data/ui/OutroPage.ui:403
+msgid "You can visit our community forums for your questions. Happy usage! 🚀"
+msgstr ""
+
+#: data/ui/components/CursorSizeSlider.ui:4
+msgid "Cursor Size"
+msgstr "Tamaño del Cursor"
+
+#: data/ui/components/DesktopIconSlider.ui:4
+#, fuzzy
+msgid "Desktop Icon Size"
+msgstr "Tamaño de iconos del escritorio"
+
+#: data/ui/components/FileManagerIconSlider.ui:4
+#, fuzzy
+msgid "File Manager Icon Size"
+msgstr "Tamaño de iconos del gestor de ficheros"
+
+#~ msgid "Extension"
+#~ msgstr "Extensión"
+
+#~ msgid "Support"
+#~ msgstr "Soporte"
+
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Next"
+#~ msgstr "Siguiente"
+
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#~ msgid "Contributors"
+#~ msgstr "Contribuidores"
+
+# Apps.py
+#~ msgid "Pardus Software Center"
+#~ msgstr "Centro de Software Pardus"
+
+#~ msgid "For more applications"
+#~ msgstr "Para mas aplicaciones"
+
+# Theme.py
+#~ msgid "Dark Theme"
+#~ msgstr "Tema Oscuro"
+
+# Display.py
+#~ msgid "Recommended scale option for main display is"
+#~ msgstr "Opción de escala recomendada para la pantalla principal es"
+
+#~ msgid "Huge"
+#~ msgstr "Enorme"
+
+# Outro.py
+#~ msgid "Social Media Accounts"
+#~ msgstr "Cuentas redes sociales"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Atajos"
+
+# Clock
+#~ msgid "Enable clock formatting"
+#~ msgstr "Activar formato de reloj"
+
+#~ msgid "Date / Time Format"
+#~ msgstr "Formato Fecha/Hora"
+
+#~ msgid "Font Size"
+#~ msgstr "Tamaño fuente"
+
+#~ msgid "Show Seconds"
+#~ msgstr "Mostrar segundos"
+
+# Welcome.py
+#~ msgid "This application helps configure Pardus"
+#~ msgstr "Esta aplicación ayuda a configurar Pardus"
+
+# Extension
+#~ msgid "Add a quick navigation menu for system places."
+#~ msgstr "Añade un menu de navegación rápida para lugares del sistema."
+
+#~ msgid "Add a category-based application menu."
+#~ msgstr "Añade un menu categorizado de aplicaciones."
