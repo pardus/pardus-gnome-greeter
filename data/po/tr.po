@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-05 09:09+0300\n"
-"PO-Revision-Date: 2025-08-05 09:44+0300\n"
+"POT-Creation-Date: 2025-08-05 12:39+0300\n"
+"PO-Revision-Date: 2025-08-05 12:41+0300\n"
 "Last-Translator: Osman Coskun <osman.coskun@pardus.org.tr>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -195,11 +195,11 @@ msgstr "© 2025 Pardus Ekibi"
 
 #: data/ui/ApplicationsPage.ui:36
 msgid ""
-"🎯 All the applications you need are here! Download safely from the Pardus "
+"All the applications you need are here! Download safely from the Pardus "
 "store and customize your system."
 msgstr ""
-"🎯 İhtiyacınız olan tüm uygulamalar burada! Pardus mağazasından güvenle "
-"indirin ve sisteminizi özelleştirin."
+"İhtiyacınız olan tüm uygulamalar burada! Pardus mağazasından güvenle indirin "
+"ve sisteminizi özelleştirin."
 
 #: data/ui/ApplicationsPage.ui:71
 msgid "Open Store"
@@ -251,8 +251,8 @@ msgid "Background"
 msgstr "Arka Plan"
 
 #: data/ui/OutroPage.ui:41
-msgid "🎉 Congratulations! Setup Completed"
-msgstr "🎉 Tebrikler! Kurulum Tamamlandı"
+msgid "Congratulations! Setup Completed"
+msgstr "Tebrikler! Kurulum Tamamlandı"
 
 #: data/ui/OutroPage.ui:53
 msgid ""
@@ -307,10 +307,10 @@ msgid "Forum"
 msgstr "Forum"
 
 #: data/ui/OutroPage.ui:403
-msgid "You can visit our community forums for your questions. Happy usage! 🚀"
+msgid "You can visit our community forums for your questions. Happy usage!"
 msgstr ""
 "Sorularınız için topluluk forumlarımızı ziyaret edebilirsiniz. İyi "
-"kullanımlar! 🚀"
+"kullanımlar!"
 
 # Additional UI Elements
 #: data/ui/components/CursorSizeSlider.ui:4

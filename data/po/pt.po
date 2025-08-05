@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pardus-gnome-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-05 09:09+0300\n"
+"POT-Creation-Date: 2025-08-05 12:39+0300\n"
 "PO-Revision-Date: 2025-04-10 21:28+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
@@ -206,7 +206,7 @@ msgstr ""
 
 #: data/ui/ApplicationsPage.ui:36
 msgid ""
-"🎯 All the applications you need are here! Download safely from the Pardus "
+"All the applications you need are here! Download safely from the Pardus "
 "store and customize your system."
 msgstr ""
 
@@ -262,7 +262,7 @@ msgid "Background"
 msgstr ""
 
 #: data/ui/OutroPage.ui:41
-msgid "🎉 Congratulations! Setup Completed"
+msgid "Congratulations! Setup Completed"
 msgstr ""
 
 #: data/ui/OutroPage.ui:53
@@ -316,7 +316,7 @@ msgid "Forum"
 msgstr "Fórum"
 
 #: data/ui/OutroPage.ui:403
-msgid "You can visit our community forums for your questions. Happy usage! 🚀"
+msgid "You can visit our community forums for your questions. Happy usage!"
 msgstr ""
 
 #: data/ui/components/CursorSizeSlider.ui:4

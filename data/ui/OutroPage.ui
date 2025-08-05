@@ -38,7 +38,7 @@
             <!-- Success Title -->
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">🎉 Congratulations! Setup Completed</property>
+                <property name="label" translatable="yes">Congratulations! Setup Completed</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <style>
@@ -400,7 +400,7 @@
                 <!-- Final Message -->
                             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">You can visit our community forums for your questions. Happy usage! 🚀</property>
+                <property name="label" translatable="yes">You can visit our community forums for your questions. Happy usage!</property>
                     <property name="halign">center</property>
                     <property name="justify">center</property>
                     <property name="wrap">true</property>

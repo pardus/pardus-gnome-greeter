@@ -33,7 +33,7 @@
             <!-- Description Label -->
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">🎯 All the applications you need are here! Download safely from the Pardus store and customize your system.</property>
+                <property name="label" translatable="yes">All the applications you need are here! Download safely from the Pardus store and customize your system.</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <property name="wrap">true</property>
