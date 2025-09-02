@@ -110,18 +110,15 @@
 .accent-link {
   color: @accent_bg_color;
   text-decoration: none;
-  border-bottom: 1px solid @accent_bg_color;
   padding-bottom: 2px;
 }
 
 .accent-link:hover {
   color: @accent_bg_color;
-  border-bottom: 2px solid @accent_bg_color;
 }
 
 .accent-link:active {
   color: @accent_bg_color;
-  border-bottom: 2px solid @accent_bg_color;
 }
 
 /* Override GtkLinkButton default styling */

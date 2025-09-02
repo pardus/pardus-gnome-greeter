@@ -19,6 +19,7 @@ from .pages.wallpaper import WallpaperPage
 from .pages.display import DisplayPage
 from .pages.extension import ExtensionPage
 from .pages.applications import ApplicationsPage
+from .pages.time import TimePage
 from .pages.outro import OutroPage
 from .about_dialog import create_about_dialog
 
@@ -138,6 +139,7 @@ class MainWindow(Adw.ApplicationWindow):
             {"name": "display", "title": _("Display"), "icon": "video-display-symbolic", "class": DisplayPage},
             {"name": "extension", "title": _("Extensions"), "icon": "org.gnome.Shell.Extensions-symbolic", "class": ExtensionPage},
             {"name": "applications", "title": _("Applications"), "icon": "view-app-grid-symbolic", "class": ApplicationsPage},
+            {"name": "time", "title": _("Time"), "icon": "org.gnome.Settings-time-symbolic", "class": TimePage},
             {"name": "outro", "title": _("Finish"), "icon": "application-exit-symbolic", "class": OutroPage},
         ]
 
@@ -153,6 +155,7 @@ class MainWindow(Adw.ApplicationWindow):
             box.set_margin_end(12)
             
             icon = Gtk.Image.new_from_icon_name(page_info["icon"])
+            icon.set_pixel_size(16)
             label = Gtk.Label.new(page_info["title"])
             label.set_xalign(0)
 

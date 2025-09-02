@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0"/>
+  <template class="TimePage" parent="AdwPreferencesPage">
+    <property name="title" translatable="yes">Time</property>
+    <property name="icon-name">clock-symbolic</property>
+    
+    <!-- Clock Formatting Section -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Clock Formatting</property>
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Enable clock formatting</property>
+            <property name="subtitle" translatable="yes">Customize the date and time format in the top panel</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="clock_format_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    
+    <!-- Date/Time Format Section -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Date / Time Format</property>
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Format Style</property>
+            <property name="subtitle" translatable="yes">Choose how the date and time are displayed</property>
+            <child type="suffix">
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">8</property>
+                <property name="valign">center</property>
+                
+                <!-- Time Only Button -->
+                <child>
+                  <object class="GtkToggleButton" id="time_only_button">
+                    <property name="name">time_only</property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">64</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">4</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">10:30</property>
+                            <style>
+                              <class name="heading"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label" translatable="yes">Time Only</property>
+                            <style>
+                              <class name="caption"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                
+                <!-- Date and Time Button -->
+                <child>
+                  <object class="GtkToggleButton" id="date_time_button">
+                    <property name="name">date_time</property>
+                    <property name="group">time_only_button</property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">64</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">4</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">10:30</property>
+                            <style>
+                              <class name="caption"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">30.08.2025</property>
+                            <style>
+                              <class name="caption"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label" translatable="yes">Date &amp; Time</property>
+                            <style>
+                              <class name="caption"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    
+    <!-- Font Size Section -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Font Size</property>
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Font Size</property>
+            <property name="subtitle" translatable="yes">Adjust the size of the clock text</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="font_size_spinbutton">
+                <property name="valign">center</property>
+                <property name="width-request">80</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">8</property>
+                    <property name="upper">32</property>
+                    <property name="value">12</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    
+    <!-- Show Seconds Section -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Display Options</property>
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Show seconds</property>
+            <property name="subtitle" translatable="yes">Display seconds in the time format</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="show_seconds_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    
+  </template>
+</interface> 

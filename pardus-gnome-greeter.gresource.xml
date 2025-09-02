@@ -10,6 +10,7 @@
     <file>ui/DisplayPage.ui</file>
     <file>ui/ExtensionPage.ui</file>
     <file>ui/ApplicationsPage.ui</file>
+    <file>ui/TimePage.ui</file>
     <file>ui/OutroPage.ui</file>
     <file>ui/components/CursorSizeSlider.ui</file>
     <file>ui/components/DesktopIconSlider.ui</file>
