@@ -43,20 +43,62 @@ load_gresource()
 
 # Import UI classes after GResource is loaded
 from .main_window import MainWindow
+from .managers.settings import app_settings
 
 class PardusGreeterApplication(Adw.Application):
     """The main application."""
 
     def __init__(self):
         super().__init__(application_id='tr.org.pardus.pardus-gnome-greeter',
-                         flags=Gio.ApplicationFlags.FLAGS_NONE)
+                         flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
         self.win = None
+        self.is_first_run_check = False
+        self.start_page = None
+
+        self.add_main_option(
+            "first-run",
+            ord("c"),
+            GLib.OptionFlags.NONE,
+            GLib.OptionArg.NONE,
+            "Check if this is the first run (for autostart)",
+            None,
+        )
+        self.add_main_option(
+            "page",
+            ord("p"),
+            GLib.OptionFlags.NONE,
+            GLib.OptionArg.STRING,
+            "First page to be opened of application",
+            "PAGE",
+        )
+
+    def do_command_line(self, command_line):
+        options = command_line.get_options_dict()
+        options = options.end().unpack()
+
+        if "first-run" in options:
+            self.is_first_run_check = True
+
+        if "page" in options:
+            self.start_page = options["page"]
+
+        self.activate()
+        return 0
 
     def do_activate(self):
         """Called when the application is activated."""
+        if self.is_first_run_check:
+            if not app_settings.get('first-run'):
+                print("Autostart check: Not the first run, exiting.")
+                self.quit()
+                return
+        
         if not self.win:
-            self.win = MainWindow(application=self)
+            self.win = MainWindow(application=self, start_page=self.start_page)
         self.win.present()
+
+        if self.is_first_run_check:
+            app_settings.set('first-run', False)
 
 def main():
     """The main entry point of the application."""

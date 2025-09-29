@@ -1,15 +1,8 @@
 import os
-from gi.repository import Gio
+from settings import theme_settings, shell_settings
 
 class ThemeManager:
     def __init__(self):
-        self.interface_settings = Gio.Settings.new("org.gnome.desktop.interface")
-        try:
-            # Try to access GNOME Shell theme settings (for accent colors)
-            self.shell_settings = Gio.Settings.new("org.gnome.shell.extensions.user-theme")
-        except:
-            self.shell_settings = None
-        
         # Callback system for theme changes
         self.accent_color_callbacks = []
         
@@ -28,28 +21,28 @@ class ThemeManager:
     def get_current_color_scheme(self):
         """Get current color scheme (default or prefer-dark)"""
         try:
-            return self.interface_settings.get_string("color-scheme")
+            return theme_settings.get("color-scheme")
         except:
             return "default"
             
     def get_current_accent_color(self):
         """Get current accent color"""
         try:
-            return self.interface_settings.get_string("accent-color")
+            return theme_settings.get("accent-color")
         except:
             return "blue"  # Default accent color
         
     def get_current_gtk_theme(self):
         """Get current GTK theme"""
         try:
-            return self.interface_settings.get_string("gtk-theme")
+            return theme_settings.get("gtk-theme")
         except:
             return "Adwaita"
         
     def set_color_scheme(self, scheme):
         """Set color scheme (default or prefer-dark)"""
         try:
-            self.interface_settings.set_string("color-scheme", scheme)
+            theme_settings.set("color-scheme", scheme)
             return True
         except Exception as e:
             print(f"Error setting color scheme: {e}")
@@ -58,7 +51,7 @@ class ThemeManager:
     def set_gtk_theme(self, theme):
         """Set GTK theme"""
         try:
-            self.interface_settings.set_string("gtk-theme", theme)
+            theme_settings.set("gtk-theme", theme)
             return True
         except Exception as e:
             print(f"Error setting GTK theme: {e}")
@@ -68,7 +61,7 @@ class ThemeManager:
         """Set accent color using gsettings"""
         try:
             # Set accent color through gsettings
-            self.interface_settings.set_string("accent-color", color_name)
+            theme_settings.set("accent-color", color_name)
             print(f"Successfully set accent color to: {color_name}")
             
             # Notify callbacks

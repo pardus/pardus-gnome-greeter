@@ -1,12 +1,11 @@
 import json
 import os
-from gi.repository import Gio, GLib
+from .settings import shell_settings
 
 class ExtensionManager:
     def __init__(self, extensions_file="data/json/extensions.json"):
         self.extensions_file = extensions_file
         self.extensions = self._load_extensions()
-        self.shell_settings = Gio.Settings.new("org.gnome.shell")
         
     def _load_extensions(self):
         """Load extensions from JSON file"""
@@ -23,12 +22,12 @@ class ExtensionManager:
     
     def get_enabled_extensions(self):
         """Get currently enabled extensions"""
-        try:
-            return list(self.shell_settings.get_strv("enabled-extensions"))
-        except Exception as e:
-            print(f"Error getting enabled extensions: {e}")
-            return []
+        return shell_settings.get("enabled-extensions")
     
+    def set_enabled_extensions(self, extensions):
+        """Set enabled extensions"""
+        shell_settings.set("enabled-extensions", extensions)
+
     def is_extension_enabled(self, extension_id):
         """Check if an extension is enabled"""
         enabled_extensions = self.get_enabled_extensions()
@@ -40,7 +39,7 @@ class ExtensionManager:
             enabled_extensions = self.get_enabled_extensions()
             if extension_id not in enabled_extensions:
                 enabled_extensions.append(extension_id)
-                self.shell_settings.set_strv("enabled-extensions", enabled_extensions)
+                self.set_enabled_extensions(enabled_extensions)
                 print(f"Enabled extension: {extension_id}")
                 return True
         except Exception as e:
@@ -53,7 +52,7 @@ class ExtensionManager:
             enabled_extensions = self.get_enabled_extensions()
             if extension_id in enabled_extensions:
                 enabled_extensions.remove(extension_id)
-                self.shell_settings.set_strv("enabled-extensions", enabled_extensions)
+                self.set_enabled_extensions(enabled_extensions)
                 print(f"Disabled extension: {extension_id}")
                 return True
         except Exception as e:

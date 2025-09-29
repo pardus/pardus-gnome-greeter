@@ -4,6 +4,7 @@ from gi.repository import Gio, GLib
 
 # Import ExtensionManager
 from .ExtensionManager import ExtensionManager
+from .settings import app_settings, SettingsManager
 
 class LayoutManager:
     def __init__(self, config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json"):
@@ -77,48 +78,10 @@ class LayoutManager:
 
     def _set_gsetting(self, schema_id, key, value, value_type=None):
         try:
-            settings = Gio.Settings.new(schema_id)
-
-            # --- Start of new type conversion logic ---
-            # Try to intelligently convert the value from JSON to the correct Python type,
-            # as GSettings is strict about types.
-            
-            final_value = value
-            
-            # 1. Handle booleans explicitly
-            if str(value).lower() == 'true':
-                final_value = True
-            elif str(value).lower() == 'false':
-                final_value = False
-            
-            # 2. Handle numbers (integers and floats)
-            # Only try to convert if it's not already a bool
-            if not isinstance(final_value, bool):
-                try:
-                    # Try converting to integer first
-                    final_value = int(str(value))
-                except (ValueError, TypeError):
-                    try:
-                        # If int conversion fails, try float
-                        final_value = float(str(value))
-                    except (ValueError, TypeError):
-                        # If all fails, it's a string
-                        pass
-
-            # --- End of new type conversion logic ---
-
-            if isinstance(final_value, bool):
-                settings.set_boolean(key, final_value)
-            elif isinstance(final_value, int):
-                settings.set_int(key, final_value)
-            elif isinstance(final_value, float):
-                settings.set_double(key, final_value)
-            else: # Fallback to string for everything else
-                # Remove extra quotes from string values if they exist
-                final_value_str = str(final_value).strip("'\"")
-                settings.set_string(key, final_value_str)
-            
-            print(f"SUCCESS: Set {schema_id} [{key}] to {final_value} (Type: {type(final_value).__name__})")
+            # Use the generic SettingsManager for dynamic schemas
+            settings_manager = SettingsManager(schema_id)
+            settings_manager.set(key, value)
+            print(f"SUCCESS: Set {schema_id} [{key}] to {value} (Type: {type(value).__name__})")
 
         except GLib.Error as e:
             print(f"ERROR: Failed to set GSetting {schema_id} [{key}]: {e.message}")

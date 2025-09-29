@@ -1,12 +1,11 @@
 import os
 import glob
-from gi.repository import Gio, GdkPixbuf, GLib
+from gi.repository import GdkPixbuf, GLib
 from pathlib import Path
+from .settings import background_settings, theme_settings
 
 class WallpaperManager:
     def __init__(self):
-        self.background_settings = Gio.Settings.new("org.gnome.desktop.background")
-        
         # Common wallpaper directories
         self.wallpaper_dirs = [
             "/usr/share/backgrounds",
@@ -21,13 +20,12 @@ class WallpaperManager:
         """Get current wallpaper URI"""
         try:
             # Check color scheme to get appropriate wallpaper
-            interface_settings = Gio.Settings.new("org.gnome.desktop.interface")
-            color_scheme = interface_settings.get_string("color-scheme")
+            color_scheme = theme_settings.get("color-scheme")
             
             if color_scheme == "prefer-dark":
-                uri = self.background_settings.get_string("picture-uri-dark")
+                uri = background_settings.get("picture-uri-dark")
             else:
-                uri = self.background_settings.get_string("picture-uri")
+                uri = background_settings.get("picture-uri")
                 
             # Remove file:// prefix if present
             if uri.startswith("file://"):
@@ -41,8 +39,8 @@ class WallpaperManager:
         """Set wallpaper for both light and dark themes"""
         try:
             uri = f"file://{file_path}"
-            self.background_settings.set_string("picture-uri", uri)
-            self.background_settings.set_string("picture-uri-dark", uri)
+            background_settings.set("picture-uri", uri)
+            background_settings.set("picture-uri-dark", uri)
             return True
         except Exception as e:
             print(f"Error setting wallpaper: {e}")
