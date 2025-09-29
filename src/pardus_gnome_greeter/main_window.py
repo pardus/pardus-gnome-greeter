@@ -29,7 +29,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     split_view = Gtk.Template.Child("split_view")
 
-    def __init__(self, **kwargs):
+    def __init__(self, start_page=None, **kwargs):
         super().__init__(**kwargs)
         
         # Load custom CSS
@@ -100,7 +100,17 @@ class MainWindow(Adw.ApplicationWindow):
         self.pages_listbox.connect('row-activated', self._on_row_activated)
         self.split_view.connect('notify::collapsed', self._on_split_view_collapsed)
 
-        self.pages_listbox.select_row(self.pages_listbox.get_row_at_index(0))
+        # Set start page if provided
+        if start_page:
+            for row in self.pages_listbox:
+                if row.get_name() == start_page:
+                    self.pages_listbox.select_row(row)
+                    break
+            else: # If loop finishes without break
+                self.pages_listbox.select_row(self.pages_listbox.get_row_at_index(0))
+        else:
+            self.pages_listbox.select_row(self.pages_listbox.get_row_at_index(0))
+
         self._on_split_view_collapsed(self.split_view, None)
 
 
