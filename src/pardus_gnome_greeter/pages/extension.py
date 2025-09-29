@@ -16,7 +16,8 @@ locale.textdomain(domain)
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
-from ExtensionManager import ExtensionManager
+from ..managers.ExtensionManager import ExtensionManager
+from ..managers.ThemeManager import ThemeManager
 
 # Extension descriptions dictionary
 EXTENSION_DESCRIPTIONS = {

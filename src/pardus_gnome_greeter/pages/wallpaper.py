@@ -17,7 +17,8 @@ locale.textdomain(domain)
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
-from WallpaperManager import WallpaperManager
+from ..managers.WallpaperManager import WallpaperManager
+from ..managers.ThemeManager import ThemeManager
 
 # WallpaperThumbnail template class
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/WallpaperThumbnail.ui')

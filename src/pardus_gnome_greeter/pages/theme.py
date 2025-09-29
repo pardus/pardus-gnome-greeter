@@ -16,7 +16,7 @@ locale.textdomain(domain)
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
-from ThemeManager import ThemeManager
+from ..managers.ThemeManager import ThemeManager
 
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/ThemePage.ui')
 class ThemePage(Adw.PreferencesPage):
