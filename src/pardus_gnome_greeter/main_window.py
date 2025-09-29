@@ -105,6 +105,7 @@ class MainWindow(Adw.ApplicationWindow):
             for row in self.pages_listbox:
                 if row.get_name() == start_page:
                     self.pages_listbox.select_row(row)
+                    self.view_stack.set_visible_child_name(row.get_name())
                     break
             else: # If loop finishes without break
                 self.pages_listbox.select_row(self.pages_listbox.get_row_at_index(0))
