@@ -1,0 +1,159 @@
+{
+  "sources": {
+    "bing": {
+      "name": "Bing Daily",
+      "description": "Microsoft Bing daily wallpapers",
+      "enabled": true,
+      "api_url": "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US",
+      "headers": {},
+      "response_mapping": {
+        "data_path": "images.0",
+        "title_keys": [
+          "title"
+        ],
+        "description_keys": [
+          "copyright"
+        ],
+        "image_url_keys": [
+          "url"
+        ],
+        "image_url_prefix": "https://www.bing.com",
+        "thumbnail_transform": {
+          "type": "replace",
+          "find": "1920x1080",
+          "replace": "480x270"
+        }
+      },
+      "validation": {
+        "required_fields": [
+          "images"
+        ],
+        "image_check": "images.0.url"
+      }
+    },
+    "nasa": {
+      "name": "NASA APOD",
+      "description": "NASA Astronomy Picture of the Day - Nasa Daily",
+      "enabled": true,
+      "api_url": "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",
+      "headers": {
+        "User-Agent": "PardusGnomeGreeter/1.0 (https://github.com/pardus/pardus-gnome-greeter) Python/requests"
+      },
+      "rate_limit": {
+        "requests_per_hour": 30,
+        "retry_delay": 60
+      },
+      "response_mapping": {
+        "data_path": "",
+        "title_keys": [
+          "title"
+        ],
+        "description_keys": [
+          "explanation"
+        ],
+        "image_url_keys": [
+          "hdurl",
+          "url"
+        ],
+        "thumbnail_url_keys": [
+          "url"
+        ],
+        "image_url_prefix": ""
+      },
+      "validation": {
+        "required_fields": [
+          "url",
+          "media_type"
+        ],
+        "media_type_check": "image"
+      }
+    },
+    "wikipedia": {
+      "name": "Wikipedia POTD",
+      "description": "Wikipedia Picture of the Day",
+      "enabled": true,
+      "api_url": "https://en.wikipedia.org/api/rest_v1/feed/featured/{year}/{month:02d}/{day:02d}",
+      "headers": {
+        "User-Agent": "PardusGnomeGreeter/1.0 (https://github.com/pardus/pardus-gnome-greeter) Python/requests"
+      },
+      "response_mapping": {
+        "data_path": "image",
+        "title_keys": [
+          "title"
+        ],
+        "description_keys": [
+          "description.text"
+        ],
+        "image_url_keys": [
+          "image.source"
+        ],
+        "image_url_prefix": "",
+        "title_transform": {
+          "type": "remove_prefix",
+          "prefix": "File:"
+        },
+        "thumbnail_transform": {
+          "type": "replace",
+          "find": "/1920px-",
+          "replace": "/480px-"
+        }
+      },
+      "validation": {
+        "required_fields": [
+          "image"
+        ],
+        "image_check": "image.image.source"
+      }
+    },
+    "unsplash": {
+      "name": "Unsplash Daily",
+      "description": "High-quality photos from Unsplash",
+      "enabled": false,
+      "api_url": "https://api.unsplash.com/photos/random?orientation=landscape&w=1920&h=1080",
+      "headers": {
+        "Authorization": "Client-ID YOUR_UNSPLASH_ACCESS_KEY"
+      },
+      "response_mapping": {
+        "data_path": "",
+        "title_keys": [
+          "description",
+          "alt_description"
+        ],
+        "description_keys": [
+          "user.name"
+        ],
+        "image_url_keys": [
+          "urls.full"
+        ],
+        "thumbnail_url_keys": [
+          "urls.small"
+        ],
+        "image_url_prefix": ""
+      },
+      "validation": {
+        "required_fields": [
+          "urls"
+        ],
+        "image_check": "urls.full"
+      }
+    },
+    "picsum": {
+      "name": "Lorem Picsum",
+      "description": "Random beautiful photos from Lorem Picsum",
+      "enabled": true,
+      "api_url": "https://picsum.photos/1920/1080.jpg",
+      "headers": {},
+      "response_mapping": {
+        "data_path": "",
+        "title_keys": [],
+        "description_keys": [],
+        "image_url_keys": [],
+        "image_url_prefix": "",
+        "direct_image": true
+      },
+      "validation": {
+        "required_fields": []
+      }
+    }
+  }
+}
