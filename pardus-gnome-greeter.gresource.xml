@@ -16,7 +16,9 @@
     <file>ui/components/DesktopIconSlider.ui</file>
     <file>ui/components/ExtensionCard.ui</file>
     <file>ui/components/FileManagerIconSlider.ui</file>
+    <file>ui/components/LiveWallpaperSourceRow.ui</file>
     <file>ui/components/WallpaperThumbnail.ui</file>
+    <file>ui/WallpaperPreviewDialog.ui</file>
     
     <!-- CSS Files -->
     <file>css/style.css</file>
@@ -35,6 +37,7 @@
     <file>json/links.json</file>
     <file>json/shortcuts.json</file>
     <file>json/social_media.json</file>
+    <file>json/wallpaper_sources.json</file>
     
     <!-- General Assets -->
     <file>assets/logo.svg</file>
