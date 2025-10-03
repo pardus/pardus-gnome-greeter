@@ -21,16 +21,15 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
     
     # Define signals
     __gsignals__ = {
-        'source-toggled': (GObject.SignalFlags.RUN_FIRST, None, (str, bool)),
         'download-requested': (GObject.SignalFlags.RUN_FIRST, None, (str,)),
         'wallpaper-set-requested': (GObject.SignalFlags.RUN_FIRST, None, (str, str)),
     }
     
     # Template children
-    source_checkbox = Gtk.Template.Child("source_checkbox")
     preview_container = Gtk.Template.Child("preview_container")
     preview_image = Gtk.Template.Child("preview_image")
     download_button_row = Gtk.Template.Child("download_button_row")
+    download_spinner = Gtk.Template.Child("download_spinner")
     preview_button = Gtk.Template.Child("preview_button")
     action_button = Gtk.Template.Child("action_button")
     
@@ -47,7 +46,6 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
         self.set_subtitle(source_info['description'])
         
         # Connect signals
-        self.source_checkbox.connect("toggled", self.on_checkbox_toggled)
         self.download_button_row.connect("clicked", self.on_download_button_clicked)
         self.preview_button.connect("clicked", self.on_preview_button_clicked)
         self.action_button.connect("clicked", self.on_action_button_clicked)
@@ -73,8 +71,12 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
         if wallpaper_data:
             self.set_status(wallpaper_data.status, wallpaper_data)
             
-            # Update title and subtitle if they're different
-            if wallpaper_data.title and wallpaper_data.title != self.source_info['name']:
+            # Update subtitle based on status
+            if wallpaper_data.status == 'error' and wallpaper_data.error_message:
+                # Show error message in subtitle
+                self.set_subtitle(wallpaper_data.error_message)
+            elif wallpaper_data.title and wallpaper_data.title != self.source_info['name']:
+                # Show title in subtitle
                 self.set_subtitle(f"{self.source_info['description']} - {wallpaper_data.title}")
         else:
             self.set_status('error')
@@ -82,11 +84,19 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
     def set_download_progress(self, progress_percent):
         """Set download progress (0-100)"""
         if progress_percent >= 0 and progress_percent <= 100:
-            self.action_button.set_tooltip_text(f"{_('Downloading...')} {progress_percent}%")
+            # Show spinner and update tooltip
+            if not self.download_spinner.get_spinning():
+                self.download_spinner.set_visible(True)
+                self.download_spinner.start()
+                self.download_button_row.set_sensitive(False)
             
-            # Optional: Add progress indication to icon or styling
-            if progress_percent == 100:
-                self.action_button.set_tooltip_text(_("Download complete"))
+            self.download_button_row.set_tooltip_text(f"{_('Downloading...')} {progress_percent}%")
+            
+            # Hide spinner when complete
+            if progress_percent >= 100:
+                self.download_spinner.stop()
+                self.download_spinner.set_visible(False)
+                self.download_button_row.set_tooltip_text(_("Download complete"))
     
     def pulse_loading_animation(self):
         """Pulse the loading animation (for indefinite progress)"""
@@ -166,19 +176,35 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
         for css_class in self.ACTION_CSS_CLASSES.get(status, []):
             self.action_button.add_css_class(css_class)
         
-        # Update download button based on status
+        # Update button states based on status
         if status == 'available':
             self.update_button_states_after_download()
+        elif status == 'error':
+            # Error state: disable entire row, enable download for retry
+            self.set_sensitive(False)  # Disable entire row
+            self.add_css_class("error-row")  # Add error styling
+            self.download_button_row.set_sensitive(True)  # Keep download for retry
+            self.download_button_row.set_tooltip_text(_("Retry download"))
+            # Show fallback thumbnail with error
+            if wallpaper_data:
+                self._set_fallback_image(wallpaper_data.title, wallpaper_data.error_message)
         elif status in ['downloading']:
             self.download_button_row.set_sensitive(False)
             self.download_button_row.set_tooltip_text(_("Downloading..."))
+        else:
+            # Normal states: enable row, remove error styling
+            self.set_sensitive(True)
+            self.remove_css_class("error-row")
         
         # Set button sensitivity and tooltip
         self._set_button_state(status, wallpaper_data)
         
-        # Load preview image if available
-        if status == 'available' and wallpaper_data:
+        # Load preview image from thumbnail URL (for all statuses with data)
+        if wallpaper_data and wallpaper_data.thumbnail_url:
             self._load_preview_image(wallpaper_data)
+        elif status == 'error' and wallpaper_data:
+            # Show fallback for errors without thumbnail
+            self._set_fallback_image(wallpaper_data.title, wallpaper_data.error_message)
     
     def _set_button_state(self, status, wallpaper_data):
         """Set button sensitivity and tooltip based on status"""
@@ -199,18 +225,23 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
         self.action_button.set_tooltip_text(tooltip)
     
     def _load_preview_image(self, wallpaper_data):
-        """Load preview image from file or URL with fallback handling"""
+        """Load preview image from thumbnail URL or local file"""
         try:
-            # First try to load from local file
+            # Priority 1: Use downloaded wallpaper file if available
             if wallpaper_data.filepath and os.path.exists(wallpaper_data.filepath):
+                print(f"Loading preview from downloaded file: {wallpaper_data.filepath}")
                 self._load_image_from_file(wallpaper_data.filepath, wallpaper_data.title)
                 return
             
-            # If no local file, try to load thumbnail from URL in background
-            if wallpaper_data.thumbnail_url and wallpaper_data.thumbnail_url.startswith('http'):
+            # Priority 2: Check if thumbnail_url is a local file path
+            if wallpaper_data.thumbnail_url and os.path.exists(wallpaper_data.thumbnail_url):
+                # Load from local file directly
+                self._load_image_from_file(wallpaper_data.thumbnail_url, wallpaper_data.title)
+            elif wallpaper_data.thumbnail_url and wallpaper_data.thumbnail_url.startswith('http'):
+                # Download thumbnail from URL (with fallback to filepath if fails)
                 self._load_thumbnail_from_url(wallpaper_data)
             else:
-                # Set fallback image
+                # Set fallback image if no thumbnail URL
                 self._set_fallback_image(wallpaper_data.title)
                 
         except Exception as e:
@@ -231,6 +262,29 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
             print(f"Error loading image from {filepath}: {e}")
             self._set_fallback_image(title, str(e))
     
+    def _get_http_error_message(self, status_code):
+        """Get user-friendly error message for HTTP status codes"""
+        error_messages = {
+            400: _("Bad request"),
+            401: _("Authentication required"),
+            403: _("Access forbidden"),
+            404: _("Image not found"),
+            429: _("Too many requests - please try again later"),
+            500: _("Server error"),
+            502: _("Bad gateway"),
+            503: _("Service unavailable"),
+            504: _("Gateway timeout"),
+        }
+        
+        if status_code in error_messages:
+            return f"{error_messages[status_code]} (HTTP {status_code})"
+        elif 400 <= status_code < 500:
+            return _("Client error") + f" (HTTP {status_code})"
+        elif 500 <= status_code < 600:
+            return _("Server error") + f" (HTTP {status_code})"
+        else:
+            return f"HTTP {status_code}"
+    
     def _set_fallback_image(self, title, error_msg=None):
         """Set fallback/placeholder image"""
         try:
@@ -240,7 +294,7 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
             # Set tooltip
             tooltip = f"{title}\n{_('Preview not available')}"
             if error_msg:
-                tooltip += f"\n{_('Error')}: {error_msg}"
+                tooltip += f"\n{error_msg}"
             self.preview_image.set_tooltip_text(tooltip)
             
             # Add fallback styling
@@ -287,7 +341,9 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
                     # Load in main thread
                     GLib.idle_add(self._set_thumbnail_from_file, cache_path, wallpaper_data.title, False)
                 else:
-                    GLib.idle_add(self._set_fallback_image, wallpaper_data.title, f"HTTP {response.status_code}")
+                    # Handle different HTTP error codes
+                    error_msg = self._get_http_error_message(response.status_code)
+                    GLib.idle_add(self._set_fallback_image, wallpaper_data.title, error_msg)
                     
             except Exception as e:
                 print(f"Error downloading thumbnail for {self.source_id}: {e}")

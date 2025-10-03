@@ -8,21 +8,13 @@
       <class name="live-wallpaper-source-row" />
     </style>
 
-    <!-- Checkbox and Preview -->
+    <!-- Preview -->
     <child type="prefix">
       <object class="GtkBox">
         <property name="orientation">horizontal</property>
         <property name="spacing">8</property>
         <property name="valign">center</property>
         <property name="hexpand">false</property>
-
-        <!-- Source Checkbox -->
-        <child>
-          <object class="GtkCheckButton" id="source_checkbox">
-            <property name="valign">center</property>
-            <property name="margin-end">4</property>
-          </object>
-        </child>
 
         <!-- Preview Container -->
         <child>
@@ -58,19 +50,36 @@
         <property name="valign">center</property>
         <property name="hexpand">false</property>
 
-        <!-- Download Button -->
+        <!-- Download Button with Progress -->
         <child>
-          <object class="GtkButton" id="download_button_row">
-            <property name="icon-name">folder-download-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Download wallpaper</property>
+          <object class="GtkOverlay">
             <property name="valign">center</property>
-            <property name="width-request">32</property>
-            <property name="height-request">32</property>
-            <style>
-              <class name="flat" />
-              <class name="circular" />
-              <class name="download-button" />
-            </style>
+            <child>
+              <object class="GtkButton" id="download_button_row">
+                <property name="icon-name">folder-download-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Download wallpaper</property>
+                <property name="valign">center</property>
+                <property name="width-request">32</property>
+                <property name="height-request">32</property>
+                <style>
+                  <class name="flat" />
+                  <class name="circular" />
+                  <class name="download-button" />
+                </style>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkSpinner" id="download_spinner">
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+                <property name="width-request">32</property>
+                <property name="height-request">32</property>
+                <property name="visible">false</property>
+                <style>
+                  <class name="download-spinner" />
+                </style>
+              </object>
+            </child>
           </object>
         </child>
 
