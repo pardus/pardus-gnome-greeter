@@ -80,9 +80,13 @@ class LiveWallpaperData:
             # Extract or create thumbnail URL
             thumbnail_url = cls._extract_field_value(data, mapping.get('thumbnail_url_keys', []), image_url)
             
+            # Validate thumbnail URL (Reddit sometimes returns "self", "default", etc.)
+            if thumbnail_url and not thumbnail_url.startswith('http'):
+                thumbnail_url = image_url  # Fallback to main image
+            
             # Apply thumbnail transformations
             thumbnail_transform = mapping.get('thumbnail_transform')
-            if thumbnail_transform:
+            if thumbnail_transform and thumbnail_url:
                 thumbnail_url = cls._apply_transform(thumbnail_url, thumbnail_transform)
             
             return cls(
@@ -232,27 +236,24 @@ class LiveWallpaperManager:
     def _get_fallback_sources(self):
         """Fallback sources configuration if JSON file is not available"""
         return {
-            'bing': {
-                'name': 'Bing Daily',
-                'description': 'Microsoft Bing daily wallpapers',
+            'reddit': {
+                'name': 'Reddit Wallpapers',
+                'description': 'Top wallpapers from r/wallpaper',
                 'enabled': True,
-                'api_url': 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US',
-                'headers': {},
+                'api_url': 'https://www.reddit.com/r/wallpaper/top.json?t=day&limit=1',
+                'headers': {
+                    'User-Agent': 'PardusGnomeGreeter/1.0 (https://github.com/pardus/pardus-gnome-greeter)'
+                },
                 'response_mapping': {
-                    'data_path': 'images.0',
+                    'data_path': 'data.children.0.data',
                     'title_keys': ['title'],
-                    'description_keys': ['copyright'],
+                    'description_keys': ['subreddit_name_prefixed'],
                     'image_url_keys': ['url'],
-                    'image_url_prefix': 'https://www.bing.com',
-                    'thumbnail_transform': {
-                        'type': 'replace',
-                        'find': '1920x1080',
-                        'replace': '480x270'
-                    }
+                    'thumbnail_url_keys': ['thumbnail'],
+                    'image_url_prefix': ''
                 },
                 'validation': {
-                    'required_fields': ['images'],
-                    'image_check': 'images.0.url'
+                    'required_fields': ['data.children']
                 }
             }
         }
@@ -267,6 +268,103 @@ class LiveWallpaperManager:
         daily_dir = os.path.join(self.base_cache_dir, date_str)
         os.makedirs(daily_dir, exist_ok=True)
         return daily_dir
+    
+    def get_metadata_filepath(self, source_id, title=None, date=None):
+        """Get metadata JSON filepath for a wallpaper"""
+        daily_dir = self.get_daily_cache_dir(date)
+        filename = f"{source_id}.json"
+        return os.path.join(daily_dir, filename)
+    
+    def save_metadata(self, wallpaper_data):
+        """Save wallpaper metadata to JSON file"""
+        try:
+            if not wallpaper_data or not wallpaper_data.title:
+                return False
+            
+            metadata_path = self.get_metadata_filepath(
+                wallpaper_data.source,
+                wallpaper_data.title
+            )
+            
+            # Prepare metadata dict
+            metadata = {
+                'source': wallpaper_data.source,
+                'title': wallpaper_data.title,
+                'description': wallpaper_data.description,
+                'image_url': wallpaper_data.image_url,
+                'thumbnail_url': wallpaper_data.thumbnail_url,
+                'filepath': wallpaper_data.filepath,
+                'status': wallpaper_data.status,
+                'date': wallpaper_data.date.isoformat() if hasattr(wallpaper_data.date, 'isoformat') else str(wallpaper_data.date),
+                'fetched_at': datetime.now().isoformat(),
+                'error_message': wallpaper_data.error_message
+            }
+            
+            # Write to file
+            with open(metadata_path, 'w', encoding='utf-8') as f:
+                json.dump(metadata, f, indent=2, ensure_ascii=False)
+            
+            print(f"Saved metadata for {wallpaper_data.source}: {metadata_path}")
+            return True
+            
+        except Exception as e:
+            print(f"Error saving metadata: {e}")
+            return False
+    
+    def load_metadata(self, source_id, date=None):
+        """Load wallpaper metadata from JSON file"""
+        try:
+            # Try direct filename first (new format)
+            metadata_path = self.get_metadata_filepath(source_id, date=date)
+            
+            if os.path.exists(metadata_path):
+                with open(metadata_path, 'r', encoding='utf-8') as f:
+                    metadata = json.load(f)
+                
+                # Create LiveWallpaperData from metadata
+                wallpaper_data = LiveWallpaperData(
+                    source=metadata.get('source', source_id),
+                    title=metadata.get('title', ''),
+                    description=metadata.get('description', ''),
+                    image_url=metadata.get('image_url', ''),
+                    thumbnail_url=metadata.get('thumbnail_url', ''),
+                    filepath=metadata.get('filepath'),
+                    status=metadata.get('status', 'pending'),
+                    error_message=metadata.get('error_message')
+                )
+                
+                print(f"Loaded metadata for {source_id} from cache")
+                return wallpaper_data
+            
+            # Fallback: search for old format files (source_id-title.json)
+            daily_dir = self.get_daily_cache_dir(date)
+            if os.path.exists(daily_dir):
+                for filename in os.listdir(daily_dir):
+                    if filename.startswith(f"{source_id}-") and filename.endswith('.json'):
+                        metadata_path = os.path.join(daily_dir, filename)
+                        
+                        with open(metadata_path, 'r', encoding='utf-8') as f:
+                            metadata = json.load(f)
+                        
+                        wallpaper_data = LiveWallpaperData(
+                            source=metadata.get('source', source_id),
+                            title=metadata.get('title', ''),
+                            description=metadata.get('description', ''),
+                            image_url=metadata.get('image_url', ''),
+                            thumbnail_url=metadata.get('thumbnail_url', ''),
+                            filepath=metadata.get('filepath'),
+                            status=metadata.get('status', 'pending'),
+                            error_message=metadata.get('error_message')
+                        )
+                        
+                        print(f"Loaded metadata for {source_id} from cache (old format)")
+                        return wallpaper_data
+            
+            return None
+            
+        except Exception as e:
+            print(f"Error loading metadata for {source_id}: {e}")
+            return None
     
     def sanitize_filename(self, title):
         """Sanitize title for filename"""
@@ -314,9 +412,9 @@ class LiveWallpaperManager:
             sources_json = app_settings.get('live-wallpaper-sources')
             if sources_json:
                 return json.loads(sources_json)
-            return ['bing']  # Default
+            return ['reddit']  # Default
         except:
-            return ['bing']
+            return ['reddit']
     
     def set_selected_sources(self, sources):
         """Set selected sources"""
@@ -338,7 +436,11 @@ class LiveWallpaperManager:
     def set_shuffle_interval(self, minutes):
         """Set shuffle interval in minutes for cycling between sources"""
         try:
-            app_settings.set('live-wallpaper-shuffle-interval', minutes)
+            result = app_settings.set('live-wallpaper-shuffle-interval', int(minutes))
+            if result is False:
+                print(f"Failed to set shuffle interval to {minutes}")
+                return False
+            print(f"Shuffle interval set to {minutes} minutes")
             return True
         except Exception as e:
             print(f"Error setting shuffle interval: {e}")
@@ -435,14 +537,47 @@ class LiveWallpaperManager:
             return LiveWallpaperData.from_api_response('wikipedia', response_data, self.sources['wikipedia'])
         return LiveWallpaperData._create_error_instance('wikipedia', 'Wikipedia source not configured')
     
+    def _get_api_error_message(self, source_id, status_code):
+        """Get user-friendly error message for API HTTP status codes"""
+        source_name = self.sources.get(source_id, {}).get('name', source_id)
+        
+        if status_code == 429:
+            return f'{source_name} rate limit exceeded - please try again later'
+        elif status_code == 403:
+            return f'{source_name} access forbidden - API key may be invalid'
+        elif status_code == 404:
+            return f'{source_name} not found - no wallpaper available today'
+        elif status_code == 500:
+            return f'{source_name} server error - please try again later'
+        elif status_code == 503:
+            return f'{source_name} service unavailable - please try again later'
+        elif 400 <= status_code < 500:
+            return f'{source_name} client error (HTTP {status_code})'
+        elif 500 <= status_code < 600:
+            return f'{source_name} server error (HTTP {status_code})'
+        else:
+            return f'{source_name} error (HTTP {status_code})'
+    
     def fetch_wallpaper_info(self, source):
         """Fetch and normalize wallpaper info from any source (backward compatibility)"""
         return self.fetch_wallpaper_info_from_source(source)
     
-    def fetch_wallpaper_info_from_source(self, source_id):
-        """Fetch wallpaper info from any source using JSON configuration"""
+    def fetch_wallpaper_info_from_source(self, source_id, force_refresh=False):
+        """Fetch wallpaper info from any source using JSON configuration
+        
+        Args:
+            source_id: Source identifier
+            force_refresh: If True, bypass cache and fetch from API
+        """
         if source_id not in self.sources:
             return LiveWallpaperData._create_error_instance(source_id, 'Unknown source')
+        
+        # Try to load from cache first (unless force refresh)
+        if not force_refresh:
+            cached_data = self.load_metadata(source_id)
+            if cached_data:
+                print(f"Using cached metadata for {source_id} - no API request needed")
+                return cached_data
         
         source_config = self.sources[source_id]
         
@@ -475,17 +610,39 @@ class LiveWallpaperManager:
             
             # Make API request for JSON response
             response = requests.get(api_url, headers=headers, timeout=10)
+            
+            # Check for HTTP errors
+            if response.status_code != 200:
+                error_msg = self._get_api_error_message(source_id, response.status_code)
+                return LiveWallpaperData._create_error_instance(source_id, error_msg)
+            
             data = response.json()
             
             # Create normalized data using JSON configuration
-            return LiveWallpaperData.from_api_response(source_id, data, source_config)
+            wallpaper_data = LiveWallpaperData.from_api_response(source_id, data, source_config)
             
+            # Don't save metadata here - it will be saved after successful download
+            # in download_wallpaper_from_source()
+            
+            return wallpaper_data
+            
+        except requests.exceptions.Timeout:
+            return LiveWallpaperData._create_error_instance(source_id, 'Request timeout - server not responding')
+        except requests.exceptions.ConnectionError:
+            return LiveWallpaperData._create_error_instance(source_id, 'Connection error - check your internet')
+        except requests.exceptions.RequestException as e:
+            return LiveWallpaperData._create_error_instance(source_id, f'Network error: {str(e)}')
         except Exception as e:
             print(f"Error fetching {source_id} wallpaper info: {e}")
-            return LiveWallpaperData._create_error_instance(source_id, f'Network error: {str(e)}')
+            return LiveWallpaperData._create_error_instance(source_id, f'Error: {str(e)}')
     
-    def download_wallpaper_from_source(self, source_id):
-        """Download wallpaper from any source using JSON configuration"""
+    def download_wallpaper_from_source(self, source_id, progress_callback=None):
+        """Download wallpaper from any source using JSON configuration
+        
+        Args:
+            source_id: Source identifier
+            progress_callback: Optional callback function(current, total) for progress updates
+        """
         try:
             # First get wallpaper info
             wallpaper_data = self.fetch_wallpaper_info_from_source(source_id)
@@ -499,8 +656,10 @@ class LiveWallpaperManager:
             source_config = self.sources.get(source_id, {})
             headers = source_config.get('headers', {})
             
-            # Download image
-            img_response = requests.get(wallpaper_data.image_url, headers=headers, timeout=30)
+            # Download image with progress tracking
+            print(f"Downloading image from: {wallpaper_data.image_url}")
+            img_response = requests.get(wallpaper_data.image_url, headers=headers, timeout=30, stream=True)
+            
             if img_response.status_code == 200:
                 # Get file extension from URL
                 ext = wallpaper_data.image_url.split('.')[-1].lower()
@@ -509,18 +668,54 @@ class LiveWallpaperManager:
                 
                 # Generate organized filename
                 filepath = self.get_wallpaper_filename(source_id, wallpaper_data.title, ext)
+                print(f"Saving to: {filepath}")
+                
+                # Get total file size
+                total_size = int(img_response.headers.get('content-length', 0))
+                downloaded_size = 0
                 
                 with open(filepath, 'wb') as f:
-                    f.write(img_response.content)
+                    for chunk in img_response.iter_content(chunk_size=8192):
+                        if chunk:
+                            f.write(chunk)
+                            downloaded_size += len(chunk)
+                            
+                            # Call progress callback if provided
+                            if progress_callback and total_size > 0:
+                                progress_callback(downloaded_size, total_size)
+                
+                # Verify file was created
+                if not os.path.exists(filepath):
+                    print(f"Error: File was not created: {filepath}")
+                    wallpaper_data.status = 'error'
+                    wallpaper_data.error_message = 'File creation failed'
+                    return wallpaper_data.to_dict()
                 
                 wallpaper_data.filepath = filepath
                 wallpaper_data.status = 'available'
+                
+                # Update metadata with filepath
+                self.save_metadata(wallpaper_data)
+                print(f"✓ Successfully downloaded: {filepath}")
+                
                 return wallpaper_data.to_dict()
             else:
+                print(f"✗ Download failed with status {img_response.status_code}")
                 wallpaper_data.status = 'error'
-                wallpaper_data.error_message = f'Download failed with status {img_response.status_code}'
+                error_msg = self._get_api_error_message(source_id, img_response.status_code)
+                wallpaper_data.error_message = error_msg
+                # Don't save metadata for failed downloads
                 return wallpaper_data.to_dict()
                 
+        except requests.exceptions.Timeout:
+            error_data = LiveWallpaperData._create_error_instance(source_id, 'Download timeout - file too large or slow connection')
+            return error_data.to_dict()
+        except requests.exceptions.ConnectionError:
+            error_data = LiveWallpaperData._create_error_instance(source_id, 'Connection error - check your internet')
+            return error_data.to_dict()
+        except IOError as e:
+            error_data = LiveWallpaperData._create_error_instance(source_id, f'File write error: {str(e)}')
+            return error_data.to_dict()
         except Exception as e:
             print(f"Error downloading {source_id} wallpaper: {e}")
             error_data = LiveWallpaperData._create_error_instance(source_id, f'Download error: {str(e)}')
@@ -530,33 +725,56 @@ class LiveWallpaperManager:
     
     def download_daily_wallpapers(self):
         """Download today's wallpapers from all selected sources"""
+        print("Checking if daily wallpapers need to be downloaded...")
+        
         if not self.should_check_daily_wallpapers():
+            print("Today's wallpapers already checked, skipping download")
             return True  # Already have today's wallpapers
         
         selected_sources = self.get_selected_sources()
+        print(f"Selected sources for download: {selected_sources}")
+        
         if not selected_sources:
+            print("No sources selected!")
             return False
         
         downloaded_any = False
         
         # Download from all selected sources
         for source in selected_sources:
+            print(f"--- Downloading from {source} ---")
             wallpaper_info = self.download_wallpaper_from_source(source)
+            
             if wallpaper_info:
-                downloaded_any = True
-                print(f"Downloaded daily wallpaper from {source}: {wallpaper_info['title']}")
+                status = wallpaper_info.get('status')
+                print(f"Download result for {source}: status={status}")
+                
+                if status == 'available':
+                    downloaded_any = True
+                    print(f"✓ Downloaded daily wallpaper from {source}: {wallpaper_info.get('title')}")
+                else:
+                    print(f"✗ Failed to download from {source}: {wallpaper_info.get('error_message')}")
+            else:
+                print(f"✗ No wallpaper info returned from {source}")
         
         if downloaded_any:
+            print("Setting last check date...")
             self.set_last_check_date()
             # Set first wallpaper immediately
+            print("Setting first wallpaper...")
             self.cycle_wallpaper()
+        else:
+            print("No wallpapers were downloaded successfully")
         
         return downloaded_any
     
     def cycle_wallpaper(self):
         """Cycle to next wallpaper from available sources"""
         selected_sources = self.get_selected_sources()
+        print(f"Selected sources: {selected_sources}")
+        
         if not selected_sources:
+            print("No sources selected!")
             return False
         
         # Get current source index
@@ -566,27 +784,41 @@ class LiveWallpaperManager:
         
         # Try to set wallpaper from current source
         source = selected_sources[current_index]
+        print(f"Trying to cycle from source: {source} (index: {current_index})")
         
         wallpaper_set = False
         daily_dir = self.get_daily_cache_dir()
+        print(f"Daily cache directory: {daily_dir}")
         
         try:
             # Look for today's wallpapers with new naming format
             if os.path.exists(daily_dir):
-                for source_file in os.listdir(daily_dir):
+                files = os.listdir(daily_dir)
+                print(f"Files in cache: {files}")
+                
+                for source_file in files:
                     if source_file.startswith(f"{source}-") and source_file.endswith(('.jpg', '.jpeg', '.png')):
                         filepath = os.path.join(daily_dir, source_file)
+                        print(f"Found wallpaper file: {filepath}")
+                        
                         try:
                             from .WallpaperManager import WallpaperManager
                             wallpaper_manager = WallpaperManager()
                             success = wallpaper_manager.set_wallpaper(filepath)
                             
                             if success:
-                                print(f"Cycled to wallpaper from {source}: {source_file}")
+                                print(f"✓ Cycled to wallpaper from {source}: {source_file}")
                                 wallpaper_set = True
                                 break
+                            else:
+                                print(f"✗ Failed to set wallpaper: {filepath}")
                         except Exception as e:
-                            print(f"Error setting wallpaper: {e}")
+                            print(f"✗ Error setting wallpaper: {e}")
+                
+                if not wallpaper_set:
+                    print(f"No wallpaper file found for source: {source}")
+            else:
+                print(f"Daily cache directory does not exist: {daily_dir}")
         except Exception as e:
             print(f"Error accessing daily cache directory: {e}")
         
@@ -603,37 +835,121 @@ class LiveWallpaperManager:
             
             return True
         
+        print("Failed to cycle wallpaper")
         return False
     
     def update_wallpaper_now(self):
         """Force update wallpaper now (for manual update button)"""
-        # First ensure we have today's wallpapers
-        self.download_daily_wallpapers()
+        print("=== Manual wallpaper update requested ===")
+        
+        # Force download today's wallpapers (bypass daily check)
+        print("Force downloading today's wallpapers...")
+        selected_sources = self.get_selected_sources()
+        
+        if not selected_sources:
+            print("No sources selected!")
+            return False
+        
+        downloaded_any = False
+        
+        # Download from all selected sources
+        for source in selected_sources:
+            print(f"--- Downloading from {source} ---")
+            wallpaper_info = self.download_wallpaper_from_source(source)
+            
+            if wallpaper_info:
+                status = wallpaper_info.get('status')
+                print(f"Download result for {source}: status={status}")
+                
+                if status == 'available':
+                    downloaded_any = True
+                    print(f"✓ Downloaded from {source}: {wallpaper_info.get('title')}")
+                else:
+                    print(f"✗ Failed to download from {source}: {wallpaper_info.get('error_message')}")
+            else:
+                print(f"✗ No wallpaper info returned from {source}")
+        
+        if downloaded_any:
+            print("Setting last check date...")
+            self.set_last_check_date()
         
         # Then cycle to next wallpaper
-        return self.cycle_wallpaper()
+        print("Cycling to next wallpaper...")
+        cycle_result = self.cycle_wallpaper()
+        print(f"Cycle result: {cycle_result}")
+        print(f"=== Update completed: {cycle_result} ===")
+        
+        return cycle_result
     
     def start_background_service(self):
-        """Start background service for automatic wallpaper updates"""
-        def daily_check():
-            """Check for daily wallpapers once per day"""
-            if self.should_check_daily_wallpapers():
-                threading.Thread(target=self.download_daily_wallpapers, daemon=True).start()
-            
-            # Schedule next daily check in 1 hour
-            GLib.timeout_add_seconds(3600, daily_check)
-            return False
+        """Ensure background daemon service is running
         
-        def cycle_check():
-            """Check for wallpaper cycling (for multiple sources)"""
-            if self.should_cycle_wallpaper():
-                threading.Thread(target=self.cycle_wallpaper, daemon=True).start()
-            
-            # Schedule next cycle check based on interval
-            interval_minutes = self.get_shuffle_interval()
-            GLib.timeout_add_seconds(interval_minutes * 60, cycle_check)
-            return False
+        Note: Daemon is started automatically via autostart desktop file.
+        This method just ensures it's running if user manually enabled live wallpaper.
+        Settings changes are automatically propagated via GSettings/D-Bus.
+        """
+        import os
         
-        # Initial checks
-        GLib.timeout_add_seconds(5, daily_check)  # Daily check after 5 seconds
-        GLib.timeout_add_seconds(10, cycle_check)  # Cycle check after 10 seconds
+        try:
+            # Check if we're in a session where daemon can run
+            if not os.environ.get('DISPLAY') and not os.environ.get('WAYLAND_DISPLAY'):
+                print("No display session, daemon cannot be started")
+                return False
+            
+            # Check if daemon is already running by looking at /proc
+            daemon_running = False
+            try:
+                for pid_dir in os.listdir('/proc'):
+                    if not pid_dir.isdigit():
+                        continue
+                    try:
+                        cmdline_path = f'/proc/{pid_dir}/cmdline'
+                        with open(cmdline_path, 'r') as f:
+                            cmdline = f.read()
+                            if 'pardus-gnome-greeter' in cmdline and '--daemon' in cmdline:
+                                daemon_running = True
+                                break
+                    except (FileNotFoundError, PermissionError):
+                        continue
+            except Exception as e:
+                print(f"Could not check daemon status: {e}")
+            
+            if daemon_running:
+                print("Daemon is already running - settings will be updated automatically via GSettings")
+                return True
+            
+            # Start daemon using GLib spawn
+            from gi.repository import GLib
+            
+            print("Starting daemon...")
+            success, pid = GLib.spawn_async(
+                argv=['pardus-gnome-greeter', '--daemon'],
+                flags=GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.STDOUT_TO_DEV_NULL | GLib.SpawnFlags.STDERR_TO_DEV_NULL,
+                envp=None,
+                working_directory=None,
+                child_setup=None,
+                user_data=None
+            )
+            
+            if success:
+                print(f"Daemon started successfully (PID: {pid})")
+                return True
+            else:
+                print("Failed to start daemon")
+                return False
+            
+        except Exception as e:
+            print(f"Error starting daemon: {e}")
+            return False
+    
+    def stop_background_service(self):
+        """Stop background daemon service
+        
+        Note: We don't actually stop the daemon, just disable it via GSettings.
+        The daemon will stop its timers but remain running (minimal resource usage).
+        This avoids subprocess calls and the daemon can quickly resume when re-enabled.
+        """
+        # Settings are already updated (live-wallpaper-enabled = False)
+        # Daemon will receive the signal via GSettings and stop its timers
+        print("Daemon will stop its timers via GSettings (live-wallpaper-enabled = False)")
+        return True
