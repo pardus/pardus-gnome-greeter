@@ -34,7 +34,7 @@ def _get_version():
     """Get version from meson.build or fallback to default"""
     try:
         # Try to read from meson.build
-        meson_build_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'meson.build')
+        meson_build_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'meson.build')
         if os.path.exists(meson_build_path):
             with open(meson_build_path, 'r') as f:
                 content = f.read()
@@ -46,4 +46,4 @@ def _get_version():
         print(f"Error reading version: {e}")
     
     # Fallback version
-    return "0.0.13" 
+    return "0.0.13"

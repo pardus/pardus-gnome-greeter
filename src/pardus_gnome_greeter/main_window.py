@@ -21,7 +21,7 @@ from .pages.extension import ExtensionPage
 from .pages.applications import ApplicationsPage
 from .pages.time import TimePage
 from .pages.outro import OutroPage
-from .about_dialog import create_about_dialog
+from .components.about_dialog import create_about_dialog
 
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/MainWindow.ui')
 class MainWindow(Adw.ApplicationWindow):
