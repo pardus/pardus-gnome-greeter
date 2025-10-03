@@ -3,6 +3,7 @@ import gi
 import threading
 import os
 import sys
+import json
 from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
@@ -20,7 +21,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
 from ..managers.WallpaperManager import WallpaperManager
 from ..managers.ThemeManager import ThemeManager
 from ..managers.LiveWallpaperManager import LiveWallpaperManager
-# from ..components.LiveWallpaperSourceRow import LiveWallpaperSourceRow  # Disabled due to GResource issue
+from ..components.LiveWallpaperSourceRow import LiveWallpaperSourceRow
 
 # WallpaperThumbnail template class
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/WallpaperThumbnail.ui')
@@ -87,10 +88,10 @@ class WallpaperPage(Adw.PreferencesPage):
     
     # Dynamic source container
     wallpaper_sources_group = Gtk.Template.Child("wallpaper_sources_group")
+    add_source_button = Gtk.Template.Child("add_source_button")
     
     update_frequency_group = Gtk.Template.Child("update_frequency_group")
     shuffle_interval_spin = Gtk.Template.Child("shuffle_interval_spin")
-    update_now_button = Gtk.Template.Child("update_now_button")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -104,6 +105,10 @@ class WallpaperPage(Adw.PreferencesPage):
         # Dynamic source rows
         self.source_rows = {}
         
+        # File system monitor for real-time updates
+        self.cache_monitor = None
+        self.setup_cache_monitor()
+        
         # Connect signals with error checking
         if self.wallpaper_type_toggle_group:
             self.wallpaper_type_toggle_group.connect("notify::active", self.on_wallpaper_type_toggled)
@@ -116,8 +121,8 @@ class WallpaperPage(Adw.PreferencesPage):
             print("Live wallpaper switch signal connected")
         if self.shuffle_interval_spin:
             self.shuffle_interval_spin.connect("value-changed", self.on_interval_changed)
-        if self.update_now_button:
-            self.update_now_button.connect("clicked", self.on_update_now_clicked)
+        if self.add_source_button:
+            self.add_source_button.connect("clicked", self.on_add_source_clicked)
         
         # Create dynamic source rows
         self.create_source_rows()
@@ -141,22 +146,6 @@ class WallpaperPage(Adw.PreferencesPage):
         thread.daemon = True
         thread.start()
     
-    def on_wallpaper_type_toggled(self, toggle_group, param):
-        """Handle wallpaper type toggle group change"""
-        active_index = toggle_group.get_active()
-        if active_index is None:
-            return
-            
-        if self.content_stack:
-            if active_index == 0:  # Static toggle
-                self.content_stack.set_visible_child_name("static")
-            elif active_index == 1:  # Live toggle
-                self.content_stack.set_visible_child_name("live")
-    
-
-    
-
-    
     def on_live_wallpaper_toggled(self, switch, param):
         """Handle live wallpaper enable/disable"""
         try:
@@ -165,9 +154,13 @@ class WallpaperPage(Adw.PreferencesPage):
             if success:
                 if self.live_wallpaper_options:
                     self.live_wallpaper_options.set_sensitive(state)
+                
                 if state:
-                    # Start background service
+                    # Start background service if not running
+                    # (if already running, GSettings will update it automatically)
                     self.live_wallpaper_manager.start_background_service()
+                # When disabled, daemon will stop its timers via GSettings automatically
+                
                 print(f"Live wallpapers {'enabled' if state else 'disabled'}")
             else:
                 # Revert switch state on failure
@@ -203,37 +196,15 @@ class WallpaperPage(Adw.PreferencesPage):
             success = self.live_wallpaper_manager.set_shuffle_interval(interval)
             if success:
                 print(f"Cycle interval updated: {interval} minutes")
+                return True  # Signal handler should return True on success
+            else:
+                print(f"Failed to update cycle interval to {interval}")
+                return False
         except Exception as e:
             print(f"Error updating interval: {e}")
+            return False
     
-    def on_update_now_clicked(self, button):
-        """Handle manual wallpaper update"""
-        try:
-            button.set_sensitive(False)
-            button.set_label(_("Updating..."))
-            
-            def update_in_background():
-                success = self.live_wallpaper_manager.update_wallpaper_now()
-                
-                def update_ui():
-                    button.set_sensitive(True)
-                    if success:
-                        button.set_label(_("Updated!"))
-                        GLib.timeout_add_seconds(2, lambda: button.set_label(_("Update Now")))
-                    else:
-                        button.set_label(_("Failed"))
-                        GLib.timeout_add_seconds(2, lambda: button.set_label(_("Update Now")))
-                    return False
-                
-                GLib.idle_add(update_ui)
-            
-            thread = threading.Thread(target=update_in_background, daemon=True)
-            thread.start()
-            
-        except Exception as e:
-            print(f"Error updating wallpaper: {e}")
-            button.set_sensitive(True)
-            button.set_label(_("Update Now"))
+
     
     def check_daily_wallpaper_status(self):
         """Check status of today's wallpapers for each source"""
@@ -500,51 +471,7 @@ class WallpaperPage(Adw.PreferencesPage):
         except Exception as e:
             print(f"Error setting wallpaper: {e}")
     
-    def create_source_rows(self):
-        """Create dynamic source rows from JSON configuration"""
-        try:
-            if not self.wallpaper_sources_group:
-                print("Wallpaper sources group not found")
-                return
-            
-            # Get available sources from manager
-            sources = self.live_wallpaper_manager.get_available_sources()
-            
-            for source_id, source_config in sources.items():
-                # Only create rows for enabled sources
-                if source_config.get('enabled', False):
-                    self.create_source_row(source_id, source_config)
-                    
-        except Exception as e:
-            print(f"Error creating source rows: {e}")
-    
-    def create_source_row(self, source_id, source_config):
-        """Create a single source row component"""
-        try:
-            # TODO: Re-enable when GResource is properly configured
-            print(f"Would create source row for {source_id}: {source_config['name']}")
-            
-            # # Create the component
-            # source_row = LiveWallpaperSourceRow(source_id, source_config)
-            # source_row.set_live_wallpaper_manager(self.live_wallpaper_manager)
-            # 
-            # # Connect signals
-            # source_row.connect('source-toggled', self.on_dynamic_source_toggled)
-            # source_row.connect('download-requested', self.on_dynamic_download_requested)
-            # source_row.connect('wallpaper-set-requested', self.on_dynamic_wallpaper_set_requested)
-            # 
-            # # Add to container
-            # self.wallpaper_sources_group.add(source_row)
-            # 
-            # # Store reference
-            # self.source_rows[source_id] = source_row
-            # 
-            # # Load initial data
-            # self.load_source_data(source_id)
-            
-        except Exception as e:
-            print(f"Error creating source row for {source_id}: {e}")
-    
+
     def load_source_data(self, source_id):
         """Load data for a source in background"""
         def fetch_data():
@@ -563,22 +490,38 @@ class WallpaperPage(Adw.PreferencesPage):
                             existing_file = os.path.join(daily_dir, filename)
                             break
                 
-                if existing_file:
-                    # Create data object for existing file
-                    from ..managers.LiveWallpaperManager import LiveWallpaperData
-                    data = LiveWallpaperData(
-                        source=source_id,
-                        title=f'{source_id.title()} Daily',
-                        description='Today\'s wallpaper',
-                        image_url='',
-                        filepath=existing_file,
-                        status='available'
-                    )
+                # Try to load metadata from cache first (no API request)
+                data = self.live_wallpaper_manager.load_metadata(source_id)
+                
+                if data and data.filepath and os.path.exists(data.filepath):
+                    # Wallpaper already downloaded and available
+                    print(f"Using cached wallpaper for {source_id}")
+                    data.status = 'available'
                     GLib.idle_add(self.update_source_row_data, source_id, data)
                 else:
-                    # Fetch fresh data
-                    data = self.live_wallpaper_manager.fetch_wallpaper_info_from_source(source_id)
-                    GLib.idle_add(self.update_source_row_data, source_id, data)
+                    # Need to download - show downloading state
+                    print(f"Downloading wallpaper for {source_id}...")
+                    if source_id in self.source_rows:
+                        GLib.idle_add(self.source_rows[source_id].set_status, 'downloading')
+                    
+                    # Download wallpaper (this will fetch metadata and download image)
+                    result = self.live_wallpaper_manager.download_wallpaper_from_source(source_id)
+                    
+                    if result and result.get('status') == 'available':
+                        # Download successful - reload metadata
+                        data = self.live_wallpaper_manager.load_metadata(source_id)
+                        if data:
+                            print(f"✓ Downloaded and loaded {source_id}")
+                            GLib.idle_add(self.update_source_row_data, source_id, data)
+                    else:
+                        # Download failed
+                        print(f"✗ Failed to download {source_id}: {result.get('error_message') if result else 'Unknown error'}")
+                        from ..managers.LiveWallpaperManager import LiveWallpaperData
+                        error_data = LiveWallpaperData._create_error_instance(
+                            source_id, 
+                            result.get('error_message') if result else 'Download failed'
+                        )
+                        GLib.idle_add(self.update_source_row_data, source_id, error_data)
                     
             except Exception as e:
                 print(f"Error fetching data for {source_id}: {e}")
@@ -629,7 +572,17 @@ class WallpaperPage(Adw.PreferencesPage):
             
             def download_in_background():
                 try:
-                    result = self.live_wallpaper_manager.download_wallpaper_from_source(source_id)
+                    # Progress callback to update UI
+                    def progress_callback(current, total):
+                        if total > 0:
+                            progress_percent = int((current / total) * 100)
+                            GLib.idle_add(source_row.set_download_progress, progress_percent)
+                    
+                    result = self.live_wallpaper_manager.download_wallpaper_from_source(
+                        source_id, 
+                        progress_callback=progress_callback
+                    )
+                    
                     if result:
                         # Create LiveWallpaperData from result
                         from ..managers.LiveWallpaperManager import LiveWallpaperData
@@ -643,11 +596,13 @@ class WallpaperPage(Adw.PreferencesPage):
                         )
                         GLib.idle_add(source_row.set_wallpaper_data, data)
                     else:
+                        from ..managers.LiveWallpaperManager import LiveWallpaperData
                         error_data = LiveWallpaperData._create_error_instance(source_id, 'Download failed')
                         GLib.idle_add(source_row.set_wallpaper_data, error_data)
                         
                 except Exception as e:
                     print(f"Error downloading {source_id}: {e}")
+                    from ..managers.LiveWallpaperManager import LiveWallpaperData
                     error_data = LiveWallpaperData._create_error_instance(source_id, str(e))
                     GLib.idle_add(source_row.set_wallpaper_data, error_data)
             
@@ -758,23 +713,34 @@ class WallpaperPage(Adw.PreferencesPage):
         except Exception as e:
             print(f"Error refreshing source data: {e}")   
     def create_source_rows(self):
-        """Create dynamic source rows from JSON configuration"""
+        """Create dynamic source rows from user settings"""
         try:
             if not self.wallpaper_sources_group:
                 print("Wallpaper sources group not found")
                 return
             
-            # Get available sources from manager
-            sources = self.live_wallpaper_manager.get_available_sources()
-            print(f"Creating source rows for {len(sources)} sources")
+            # Clear existing rows first
+            print("Clearing existing source rows")
+            for source_id in list(self.source_rows.keys()):
+                row = self.source_rows[source_id]
+                self.wallpaper_sources_group.remove(row)
+            self.source_rows.clear()
             
-            for source_id, source_config in sources.items():
-                # Only create rows for enabled sources
-                if source_config.get('enabled', False):
-                    print(f"Creating row for {source_id}")
-                    self.create_source_row(source_id, source_config)
+            # Get available sources
+            sources = self.live_wallpaper_manager.get_available_sources()
+            
+            # Get selected sources from LiveWallpaperManager (the correct source of truth)
+            selected_source_ids = self.live_wallpaper_manager.get_selected_sources()
+            
+            print(f"Creating rows for selected sources: {selected_source_ids}")
+            
+            # Create rows for all selected sources
+            for source_id in selected_source_ids:
+                if source_id in sources:
+                    print(f"Creating row for: {source_id}")
+                    self.create_source_row(source_id, sources[source_id])
                 else:
-                    print(f"Skipping disabled source: {source_id}")
+                    print(f"Warning: Source {source_id} not found in available sources")
                     
         except Exception as e:
             print(f"Error creating source rows: {e}")
@@ -790,7 +756,6 @@ class WallpaperPage(Adw.PreferencesPage):
             source_row.set_live_wallpaper_manager(self.live_wallpaper_manager)
             
             # Connect signals
-            source_row.connect('source-toggled', self.on_dynamic_source_toggled)
             source_row.connect('download-requested', self.on_dynamic_download_requested)
             source_row.connect('wallpaper-set-requested', self.on_dynamic_wallpaper_set_requested)
             
@@ -807,25 +772,6 @@ class WallpaperPage(Adw.PreferencesPage):
         except Exception as e:
             print(f"Error creating source row for {source_id}: {e}") 
    
-    def on_live_wallpaper_toggled(self, switch, param):
-        """Handle live wallpaper enable/disable"""
-        try:
-            state = switch.get_active()
-            success = self.live_wallpaper_manager.set_enabled(state)
-            if success:
-                if self.live_wallpaper_options:
-                    self.live_wallpaper_options.set_sensitive(state)
-                if state:
-                    # Start background service
-                    self.live_wallpaper_manager.start_background_service()
-                print(f"Live wallpapers {'enabled' if state else 'disabled'}")
-            else:
-                # Revert switch state on failure
-                switch.set_active(not state)
-        except Exception as e:
-            print(f"Error toggling live wallpaper: {e}")
-            switch.set_active(not state)    
-  
     def on_wallpaper_type_toggled(self, toggle_group, param):
         """Handle wallpaper type toggle group change"""
         active_index = toggle_group.get_active()
@@ -838,6 +784,228 @@ class WallpaperPage(Adw.PreferencesPage):
             if active_index == 0:  # Static toggle
                 self.content_stack.set_visible_child_name("static")
                 print("Switched to static wallpapers")
+                
             elif active_index == 1:  # Live toggle
                 self.content_stack.set_visible_child_name("live")
                 print("Switched to live wallpapers")
+                
+                # Refresh immediately to show any cached wallpapers
+                self.refresh_all_sources()
+                
+                # File monitor will handle real-time updates automatically
+    
+    def setup_cache_monitor(self):
+        """Setup file system monitor for cache directory (inotify-based)"""
+        try:
+            from gi.repository import Gio
+            
+            # Get today's cache directory
+            cache_dir = self.live_wallpaper_manager.get_daily_cache_dir()
+            
+            # Create directory if it doesn't exist
+            if not os.path.exists(cache_dir):
+                os.makedirs(cache_dir, exist_ok=True)
+            
+            # Create GFile for the directory
+            cache_file = Gio.File.new_for_path(cache_dir)
+            
+            # Create file monitor (uses inotify on Linux)
+            self.cache_monitor = cache_file.monitor_directory(
+                Gio.FileMonitorFlags.NONE,
+                None
+            )
+            
+            # Connect to changed signal
+            self.cache_monitor.connect('changed', self.on_cache_changed)
+            
+            print(f"✓ File system monitor active on: {cache_dir}")
+            print("  Using inotify for real-time updates")
+            
+        except Exception as e:
+            print(f"Warning: Could not setup file monitor: {e}")
+            print("  Falling back to manual refresh")
+    
+    def on_cache_changed(self, monitor, file, other_file, event_type):
+        """Handle file system changes in cache directory (inotify callback)"""
+        try:
+            from gi.repository import Gio
+            
+            # Only process CREATED and CHANGES_DONE_HINT events
+            if event_type not in [Gio.FileMonitorEvent.CREATED, Gio.FileMonitorEvent.CHANGES_DONE_HINT]:
+                return
+            
+            filename = file.get_basename()
+            
+            # Check if it's a wallpaper file (image or metadata)
+            if filename.endswith(('.jpg', '.jpeg', '.png', '.json')):
+                print(f"📁 File system event: {filename} ({event_type.value_name})")
+                
+                # Extract source_id from filename
+                source_id = filename.split('-')[0] if '-' in filename else filename.split('.')[0]
+                
+                # Debounce: wait a bit for file to be fully written
+                GLib.timeout_add(500, self.refresh_source_after_file_change, source_id)
+                
+        except Exception as e:
+            print(f"Error handling cache change: {e}")
+    
+    def refresh_source_after_file_change(self, source_id):
+        """Refresh specific source after file change (debounced)"""
+        try:
+            if source_id in self.source_rows:
+                # Reload metadata
+                wallpaper_data = self.live_wallpaper_manager.load_metadata(source_id)
+                
+                if wallpaper_data and wallpaper_data.filepath and os.path.exists(wallpaper_data.filepath):
+                    print(f"✓ Auto-updating UI for {source_id} (file system event)")
+                    wallpaper_data.status = 'available'
+                    self.source_rows[source_id].set_wallpaper_data(wallpaper_data)
+        except Exception as e:
+            print(f"Error refreshing source {source_id}: {e}")
+        
+        return False  # Don't repeat timeout
+    
+    def refresh_all_sources(self):
+        """Refresh all source rows (reload metadata and update UI)"""
+        try:
+            selected_sources = self.live_wallpaper_manager.get_selected_sources()
+            
+            for source_id in selected_sources:
+                if source_id in self.source_rows:
+                    # Reload metadata from cache
+                    wallpaper_data = self.live_wallpaper_manager.load_metadata(source_id)
+                    
+                    if wallpaper_data and wallpaper_data.filepath and os.path.exists(wallpaper_data.filepath):
+                        # Wallpaper is available - update UI
+                        wallpaper_data.status = 'available'
+                        self.source_rows[source_id].set_wallpaper_data(wallpaper_data)
+        except Exception as e:
+            print(f"Error refreshing sources: {e}")
+    
+    def get_user_sources(self):
+        """Get user-added sources from LiveWallpaperManager (single source of truth)"""
+        try:
+            # Get selected sources from LiveWallpaperManager
+            source_ids = self.live_wallpaper_manager.get_selected_sources()
+            
+            # Convert to user_sources format for compatibility
+            user_sources = [{'source_id': sid, 'enabled': True} for sid in source_ids]
+            return user_sources
+        except Exception as e:
+            print(f"Error getting user sources: {e}")
+            return []
+    
+    def save_user_sources(self, user_sources):
+        """Save user-added sources to LiveWallpaperManager (single source of truth)"""
+        try:
+            # Extract source IDs
+            source_ids = [s.get('source_id') for s in user_sources if s.get('enabled', True)]
+            
+            # Save to LiveWallpaperManager
+            self.live_wallpaper_manager.set_selected_sources(source_ids)
+            print(f"Saved selected sources: {source_ids}")
+            return True
+        except Exception as e:
+            print(f"Error saving user sources: {e}")
+            return False
+    
+    def on_add_source_clicked(self, button):
+        """Handle add source button click - show modal"""
+        try:
+            from ..components.AddWallpaperSourcesDialog import AddWallpaperSourcesDialog
+            
+            # Get available sources
+            available_sources = self.live_wallpaper_manager.get_available_sources()
+            
+            # Get current user sources
+            user_sources = self.get_user_sources()
+            current_source_ids = [s.get('source_id') for s in user_sources]
+            
+            print(f"Current user sources: {user_sources}")
+            print(f"Current source IDs: {current_source_ids}")
+            
+            # Create and show dialog
+            dialog = AddWallpaperSourcesDialog(available_sources, current_source_ids)
+            dialog.connect('sources-added', self.on_sources_added)
+            
+            # Present dialog
+            parent_window = self.get_root()
+            if parent_window:
+                dialog.present(parent_window)
+            else:
+                dialog.present()
+                
+        except Exception as e:
+            print(f"Error showing add source dialog: {e}")
+    
+    def on_sources_added(self, dialog, new_sources):
+        """Handle sources added/removed from dialog"""
+        try:
+            print(f"Sources updated: {new_sources}")
+            
+            # Build new sources list (avoiding duplicates)
+            enabled_sources = []
+            seen_sources = set()
+            
+            for source in new_sources:
+                source_id = source.get('source_id')
+                
+                # Skip if already added
+                if source_id in seen_sources:
+                    print(f"Skipping duplicate source: {source_id}")
+                    continue
+                
+                if source.get('enabled', True):
+                    # Source is enabled - add it
+                    enabled_sources.append(source)
+                    seen_sources.add(source_id)
+                    
+                    # Save API key if provided
+                    if 'api_key' in source:
+                        self.save_api_key(source_id, source['api_key'])
+                else:
+                    # Source is disabled - remove it
+                    print(f"Removing source: {source_id}")
+            
+            print(f"Final enabled sources: {enabled_sources}")
+            
+            # Save user sources (this will save to LiveWallpaperManager)
+            self.save_user_sources(enabled_sources)
+            
+            # Save API keys separately
+            for source in enabled_sources:
+                if 'api_key' in source:
+                    self.save_api_key(source['source_id'], source['api_key'])
+            
+            # Recreate source rows
+            self.create_source_rows()
+            
+            # Load data for enabled sources
+            for source in enabled_sources:
+                source_id = source.get('source_id')
+                if source_id:
+                    self.load_source_data(source_id)
+            
+        except Exception as e:
+            print(f"Error handling sources update: {e}")
+    
+    def save_api_key(self, source_id, api_key):
+        """Save API key for a source"""
+        try:
+            from ..managers.settings import app_settings
+            
+            # Get current API keys
+            api_keys_json = app_settings.get('live-wallpaper-source-api-keys')
+            api_keys = json.loads(api_keys_json) if api_keys_json else {}
+            
+            # Update API key
+            api_keys[source_id] = api_key
+            
+            # Save back
+            app_settings.set('live-wallpaper-source-api-keys', json.dumps(api_keys))
+            
+            print(f"Saved API key for {source_id}")
+            return True
+        except Exception as e:
+            print(f"Error saving API key: {e}")
+            return False
