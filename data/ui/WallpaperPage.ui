@@ -138,6 +138,18 @@
                                 <property name="title" translatable="yes">Wallpaper Sources</property>
                                 <property name="description" translatable="yes">Choose which sources to use for daily wallpapers</property>
                                 
+                                <child type="header-suffix">
+                                  <object class="GtkButton" id="add_source_button">
+                                    <property name="icon-name">list-add-symbolic</property>
+                                    <property name="tooltip-text" translatable="yes">Add wallpaper sources</property>
+                                    <property name="valign">center</property>
+                                    <style>
+                                      <class name="flat"/>
+                                      <class name="circular"/>
+                                    </style>
+                                  </object>
+                                </child>
+                                
                                 <!-- Dynamic source rows will be added here programmatically -->
                                 
                               </object>
@@ -188,28 +200,7 @@
                               </object>
                             </child>
                             
-                            <!-- Update Now Button -->
-                            <child>
-                              <object class="AdwPreferencesGroup">
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="orientation">horizontal</property>
-                                    <property name="halign">center</property>
-                                    <property name="spacing">12</property>
-                                    <property name="margin-top">12</property>
-                                    
-                                    <child>
-                                      <object class="GtkButton" id="update_now_button">
-                                        <property name="label" translatable="yes">Update Now</property>
-                                        <style>
-                                          <class name="suggested-action"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
+                            <!-- Update Now button removed - daemon handles updates automatically -->
                           </object>
                         </child>
                       </object>
