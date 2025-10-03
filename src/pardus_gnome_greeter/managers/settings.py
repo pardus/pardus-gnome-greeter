@@ -10,17 +10,22 @@ class SettingsManager:
 
     def set(self, key, value):
         """Sets a setting value."""
-        variant = self.settings.get_value(key)
-        # Create a new GLib.Variant with the correct type
-        if variant.is_of_type(GLib.VariantType.new('b')):
-            new_variant = GLib.Variant('b', value)
-        elif variant.is_of_type(GLib.VariantType.new('i')) or variant.is_of_type(GLib.VariantType.new('n')) or variant.is_of_type(GLib.VariantType.new('q')):
-            new_variant = GLib.Variant('i', value)
-        elif variant.is_of_type(GLib.VariantType.new('d')):
-             new_variant = GLib.Variant('d', value)
-        else: # Default to string
-            new_variant = GLib.Variant('s', value)
-        self.settings.set_value(key, new_variant)
+        try:
+            variant = self.settings.get_value(key)
+            # Create a new GLib.Variant with the correct type
+            if variant.is_of_type(GLib.VariantType.new('b')):
+                new_variant = GLib.Variant('b', bool(value))
+            elif variant.is_of_type(GLib.VariantType.new('i')) or variant.is_of_type(GLib.VariantType.new('n')) or variant.is_of_type(GLib.VariantType.new('q')):
+                new_variant = GLib.Variant('i', int(value))
+            elif variant.is_of_type(GLib.VariantType.new('d')):
+                new_variant = GLib.Variant('d', float(value))
+            else: # Default to string
+                new_variant = GLib.Variant('s', str(value))
+            
+            return self.settings.set_value(key, new_variant)
+        except Exception as e:
+            print(f"Error setting {key} = {value}: {e}")
+            return False
 
 
 # Application specific settings

@@ -38,9 +38,19 @@ class WallpaperManager:
     def set_wallpaper(self, file_path):
         """Set wallpaper for both light and dark themes"""
         try:
+            if not os.path.exists(file_path):
+                print(f"Wallpaper file does not exist: {file_path}")
+                return False
+            
             uri = f"file://{file_path}"
-            background_settings.set("picture-uri", uri)
-            background_settings.set("picture-uri-dark", uri)
+            result1 = background_settings.set("picture-uri", uri)
+            result2 = background_settings.set("picture-uri-dark", uri)
+            
+            if result1 is False or result2 is False:
+                print(f"Failed to set wallpaper settings for: {file_path}")
+                return False
+            
+            print(f"Wallpaper set successfully: {file_path}")
             return True
         except Exception as e:
             print(f"Error setting wallpaper: {e}")
