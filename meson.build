@@ -125,6 +125,12 @@ install_subdir('data/css', install_dir: pkgdatadir)
 install_subdir('data/json', install_dir: pkgdatadir)
 install_subdir('data/ui', install_dir: pkgdatadir)
 
+# Autostart desktop file for daemon
+install_data(
+    'data/autostart/tr.org.pardus.pardus-gnome-greeter-daemon.desktop',
+    install_dir: join_paths(get_option('sysconfdir'), 'skel', '.config', 'autostart')
+)
+
 # Post-install script for manual installs (handled by dh_glib in debian)
 # meson.add_install_script('meson_post_install.py')
 

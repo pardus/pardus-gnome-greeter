@@ -53,6 +53,7 @@ class PardusGreeterApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
         self.win = None
         self.is_first_run_check = False
+        self.is_daemon_mode = False
         self.start_page = None
 
         self.add_main_option(
@@ -71,6 +72,14 @@ class PardusGreeterApplication(Adw.Application):
             "First page to be opened of application",
             "PAGE",
         )
+        self.add_main_option(
+            "daemon",
+            ord("d"),
+            GLib.OptionFlags.NONE,
+            GLib.OptionArg.NONE,
+            "Run in daemon mode for background wallpaper management",
+            None,
+        )
 
     def do_command_line(self, command_line):
         options = command_line.get_options_dict()
@@ -81,18 +90,30 @@ class PardusGreeterApplication(Adw.Application):
 
         if "page" in options:
             self.start_page = options["page"]
+        
+        if "daemon" in options:
+            self.is_daemon_mode = True
 
         self.activate()
         return 0
 
     def do_activate(self):
         """Called when the application is activated."""
+        # Daemon mode - run background service
+        if self.is_daemon_mode:
+            from .daemon import GreeterDaemon
+            daemon = GreeterDaemon()
+            daemon.start()
+            return
+        
+        # First run check
         if self.is_first_run_check:
             if not app_settings.get('first-run'):
                 print("Autostart check: Not the first run, exiting.")
                 self.quit()
                 return
         
+        # Normal GUI mode
         if not self.win:
             self.win = MainWindow(application=self, start_page=self.start_page)
         self.win.present()
