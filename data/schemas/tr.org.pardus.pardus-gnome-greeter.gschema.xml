@@ -41,5 +41,15 @@
           <summary>Last Cycle Time</summary>
           <description>ISO timestamp of last wallpaper cycle</description>
       </key>
+      <key name="live-wallpaper-user-sources" type="s">
+          <default>'[]'</default>
+          <summary>User Added Wallpaper Sources</summary>
+          <description>JSON array of user-added wallpaper sources with API keys</description>
+      </key>
+      <key name="live-wallpaper-source-api-keys" type="s">
+          <default>'{}'</default>
+          <summary>API Keys for Wallpaper Sources</summary>
+          <description>JSON object mapping source IDs to API keys</description>
+      </key>
   </schema>
 </schemalist> 

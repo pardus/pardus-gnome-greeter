@@ -18,7 +18,8 @@
     <file>ui/components/FileManagerIconSlider.ui</file>
     <file>ui/components/LiveWallpaperSourceRow.ui</file>
     <file>ui/components/WallpaperThumbnail.ui</file>
-    <file>ui/WallpaperPreviewDialog.ui</file>
+    <file>ui/components/WallpaperPreviewDialog.ui</file>
+    <file>ui/components/AddWallpaperSourcesDialog.ui</file>
     
     <!-- CSS Files -->
     <file>css/style.css</file>

@@ -303,6 +303,16 @@ flowboxchild.active-item .selected-check {
     color: @error_color;
 }
 
+/* Error row styling - light red background */
+.error-row {
+    background-color: alpha(@error_color, 0.08);
+    border-left: 3px solid @error_color;
+}
+
+.error-row:hover {
+    background-color: alpha(@error_color, 0.12);
+}
+
 
 
 /* ==========================================================================

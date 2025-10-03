@@ -18,6 +18,9 @@
           "url"
         ],
         "image_url_prefix": "https://www.bing.com",
+        "thumbnail_url_keys": [
+          "url"
+        ],
         "thumbnail_transform": {
           "type": "replace",
           "find": "1920x1080",
@@ -27,8 +30,37 @@
       "validation": {
         "required_fields": [
           "images"
+        ]
+      }
+    },
+    "reddit": {
+      "name": "Reddit Wallpapers",
+      "description": "Top wallpapers from r/wallpaper",
+      "enabled": true,
+      "api_url": "https://www.reddit.com/r/wallpaper/top.json?t=day&limit=1",
+      "headers": {
+        "User-Agent": "PardusGnomeGreeter/1.0 (https://github.com/pardus/pardus-gnome-greeter)"
+      },
+      "response_mapping": {
+        "data_path": "data.children.0.data",
+        "title_keys": [
+          "title"
         ],
-        "image_check": "images.0.url"
+        "description_keys": [
+          "subreddit_name_prefixed"
+        ],
+        "image_url_keys": [
+          "url"
+        ],
+        "thumbnail_url_keys": [
+          "thumbnail"
+        ],
+        "image_url_prefix": ""
+      },
+      "validation": {
+        "required_fields": [
+          "data.children"
+        ]
       }
     },
     "nasa": {
@@ -68,6 +100,34 @@
         "media_type_check": "image"
       }
     },
+    "wallhaven": {
+      "name": "Wallhaven Daily",
+      "description": "Top community wallpapers from Wallhaven",
+      "enabled": true,
+      "api_url": "https://wallhaven.cc/api/v1/search?sorting=toplist&topRange=1d&atleast=1920x1080&categories=100&purity=100",
+      "headers": {},
+      "response_mapping": {
+        "data_path": "data.0",
+        "title_keys": [
+          "id"
+        ],
+        "description_keys": [
+          "resolution"
+        ],
+        "image_url_keys": [
+          "path"
+        ],
+        "thumbnail_url_keys": [
+          "thumbs.large"
+        ],
+        "image_url_prefix": ""
+      },
+      "validation": {
+        "required_fields": [
+          "data"
+        ]
+      }
+    },
     "wikipedia": {
       "name": "Wikipedia POTD",
       "description": "Wikipedia Picture of the Day",
@@ -87,15 +147,13 @@
         "image_url_keys": [
           "image.source"
         ],
+        "thumbnail_url_keys": [
+          "thumbnail.source"
+        ],
         "image_url_prefix": "",
         "title_transform": {
           "type": "remove_prefix",
           "prefix": "File:"
-        },
-        "thumbnail_transform": {
-          "type": "replace",
-          "find": "/1920px-",
-          "replace": "/480px-"
         }
       },
       "validation": {
@@ -103,56 +161,6 @@
           "image"
         ],
         "image_check": "image.image.source"
-      }
-    },
-    "unsplash": {
-      "name": "Unsplash Daily",
-      "description": "High-quality photos from Unsplash",
-      "enabled": false,
-      "api_url": "https://api.unsplash.com/photos/random?orientation=landscape&w=1920&h=1080",
-      "headers": {
-        "Authorization": "Client-ID YOUR_UNSPLASH_ACCESS_KEY"
-      },
-      "response_mapping": {
-        "data_path": "",
-        "title_keys": [
-          "description",
-          "alt_description"
-        ],
-        "description_keys": [
-          "user.name"
-        ],
-        "image_url_keys": [
-          "urls.full"
-        ],
-        "thumbnail_url_keys": [
-          "urls.small"
-        ],
-        "image_url_prefix": ""
-      },
-      "validation": {
-        "required_fields": [
-          "urls"
-        ],
-        "image_check": "urls.full"
-      }
-    },
-    "picsum": {
-      "name": "Lorem Picsum",
-      "description": "Random beautiful photos from Lorem Picsum",
-      "enabled": true,
-      "api_url": "https://picsum.photos/1920/1080.jpg",
-      "headers": {},
-      "response_mapping": {
-        "data_path": "",
-        "title_keys": [],
-        "description_keys": [],
-        "image_url_keys": [],
-        "image_url_prefix": "",
-        "direct_image": true
-      },
-      "validation": {
-        "required_fields": []
       }
     }
   }

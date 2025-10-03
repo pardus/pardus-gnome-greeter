@@ -15,7 +15,7 @@ domain = 'pardus-gnome-greeter'
 locale.bindtextdomain(domain, '/usr/share/locale')
 locale.textdomain(domain)
 
-@Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/WallpaperPreviewDialog.ui')
+@Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/WallpaperPreviewDialog.ui')
 class WallpaperPreviewDialog(Adw.Dialog):
     __gtype_name__ = 'PardusWallpaperPreviewDialog'
     
