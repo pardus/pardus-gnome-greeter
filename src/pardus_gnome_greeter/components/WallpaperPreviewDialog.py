@@ -135,6 +135,14 @@ class WallpaperPreviewDialog(Adw.Dialog):
     def load_image_from_file(self, filepath):
         """Load image from local file"""
         try:
+            # Check if file is a supported image format
+            supported_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg']
+            file_ext = os.path.splitext(filepath)[1].lower()
+            
+            if file_ext not in supported_extensions:
+                self.show_error_state(f"{_('Unsupported file format')}: {file_ext}\n{_('Only image files are supported')}")
+                return
+            
             texture = Gdk.Texture.new_from_filename(filepath)
             self.preview_image.set_paintable(texture)
             self.show_image_state()

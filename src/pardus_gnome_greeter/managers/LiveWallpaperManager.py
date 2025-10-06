@@ -72,6 +72,12 @@ class LiveWallpaperData:
             if not image_url:
                 return cls._create_error_instance(source_id, 'No image URL found in response')
             
+            # Check if URL is a video file (common with Reddit posts)
+            video_extensions = ['.mp4', '.webm', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.m4v', '.gifv']
+            url_lower = image_url.lower()
+            if any(url_lower.endswith(ext) for ext in video_extensions):
+                return cls._create_error_instance(source_id, 'Video files are not supported')
+            
             # Add URL prefix if specified
             url_prefix = mapping.get('image_url_prefix', '')
             if url_prefix and not image_url.startswith('http'):
@@ -519,24 +525,7 @@ class LiveWallpaperManager:
         """Get all available wallpaper sources"""
         return self.sources
     
-    def normalize_bing_response(self, response_data):
-        """Convert Bing API response to LiveWallpaperData"""
-        if 'bing' in self.sources:
-            return LiveWallpaperData.from_api_response('bing', response_data, self.sources['bing'])
-        return LiveWallpaperData._create_error_instance('bing', 'Bing source not configured')
-    
-    def normalize_nasa_response(self, response_data):
-        """Convert NASA API response to LiveWallpaperData"""
-        if 'nasa' in self.sources:
-            return LiveWallpaperData.from_api_response('nasa', response_data, self.sources['nasa'])
-        return LiveWallpaperData._create_error_instance('nasa', 'NASA source not configured')
-    
-    def normalize_wikipedia_response(self, response_data):
-        """Convert Wikipedia API response to LiveWallpaperData"""
-        if 'wikipedia' in self.sources:
-            return LiveWallpaperData.from_api_response('wikipedia', response_data, self.sources['wikipedia'])
-        return LiveWallpaperData._create_error_instance('wikipedia', 'Wikipedia source not configured')
-    
+
     def _get_api_error_message(self, source_id, status_code):
         """Get user-friendly error message for API HTTP status codes"""
         source_name = self.sources.get(source_id, {}).get('name', source_id)
@@ -558,10 +547,7 @@ class LiveWallpaperManager:
         else:
             return f'{source_name} error (HTTP {status_code})'
     
-    def fetch_wallpaper_info(self, source):
-        """Fetch and normalize wallpaper info from any source (backward compatibility)"""
-        return self.fetch_wallpaper_info_from_source(source)
-    
+
     def fetch_wallpaper_info_from_source(self, source_id, force_refresh=False):
         """Fetch wallpaper info from any source using JSON configuration
         
@@ -618,13 +604,69 @@ class LiveWallpaperManager:
             
             data = response.json()
             
-            # Create normalized data using JSON configuration
-            wallpaper_data = LiveWallpaperData.from_api_response(source_id, data, source_config)
+            # Check if source uses find_first_valid feature
+            response_mapping = source_config.get('response_mapping', {})
+            find_first_valid = response_mapping.get('find_first_valid', {})
             
-            # Don't save metadata here - it will be saved after successful download
-            # in download_wallpaper_from_source()
+            if find_first_valid.get('enabled', False):
+                # Dynamic array iteration - find first valid item
+                array_path = find_first_valid.get('array_path', '')
+                item_path = find_first_valid.get('item_path', '')
+                max_items = find_first_valid.get('max_items', 10)
+                
+                # Navigate to the array
+                array_data = data
+                for key in array_path.split('.'):
+                    array_data = array_data.get(key, []) if isinstance(array_data, dict) else array_data
+                
+                if not isinstance(array_data, list):
+                    return LiveWallpaperData._create_error_instance(source_id, 'Invalid array path in configuration')
+                
+                # Try each item until we find a valid one
+                validation = source_config.get('validation', {})
+                item_validation = validation.get('item_validation', {})
+                
+                for i, item in enumerate(array_data[:max_items]):
+                    # Navigate to item data if needed
+                    item_data = item
+                    if item_path:
+                        for key in item_path.split('.'):
+                            item_data = item_data.get(key, {}) if isinstance(item_data, dict) else item_data
+                    
+                    # Check item-level validation
+                    is_valid = True
+                    reject_if_true = item_validation.get('reject_if_true', [])
+                    for field in reject_if_true:
+                        if item_data.get(field, False) is True:
+                            is_valid = False
+                            break
+                    
+                    if is_valid:
+                        # Replace {index} in data_path with actual index
+                        original_data_path = response_mapping.get('data_path', '')
+                        response_mapping['data_path'] = original_data_path.replace('{index}', str(i))
+                        
+                        # Create wallpaper data with this item
+                        wallpaper_data = LiveWallpaperData.from_api_response(source_id, data, source_config)
+                        
+                        # Restore original data_path
+                        response_mapping['data_path'] = original_data_path
+                        
+                        if wallpaper_data.status != 'error':
+                            print(f"Found valid wallpaper at index {i} for {source_id}")
+                            return wallpaper_data
+                
+                # No valid item found
+                return LiveWallpaperData._create_error_instance(source_id, 'No valid wallpapers found in response')
             
-            return wallpaper_data
+            else:
+                # Standard single-item API (like Bing, NASA)
+                wallpaper_data = LiveWallpaperData.from_api_response(source_id, data, source_config)
+                
+                # Don't save metadata here - it will be saved after successful download
+                # in download_wallpaper_from_source()
+                
+                return wallpaper_data
             
         except requests.exceptions.Timeout:
             return LiveWallpaperData._create_error_instance(source_id, 'Request timeout - server not responding')
@@ -644,6 +686,13 @@ class LiveWallpaperManager:
             progress_callback: Optional callback function(current, total) for progress updates
         """
         try:
+            # Check if already downloaded today
+            cached_data = self.load_metadata(source_id)
+            if cached_data and cached_data.filepath and os.path.exists(cached_data.filepath):
+                print(f"✓ Wallpaper already downloaded for {source_id}")
+                cached_data.status = 'available'
+                return cached_data.to_dict()
+            
             # First get wallpaper info
             wallpaper_data = self.fetch_wallpaper_info_from_source(source_id)
             if not wallpaper_data or wallpaper_data.status == 'error':
@@ -656,15 +705,36 @@ class LiveWallpaperManager:
             source_config = self.sources.get(source_id, {})
             headers = source_config.get('headers', {})
             
+            # Check if URL points to a video file (common issue with Reddit)
+            video_extensions = ['.mp4', '.webm', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.m4v', '.gifv']
+            url_lower = wallpaper_data.image_url.lower()
+            
+            # Check if it's a video file
+            if any(url_lower.endswith(ext) for ext in video_extensions):
+                wallpaper_data.status = 'error'
+                wallpaper_data.error_message = 'Video files are not supported - only images'
+                print(f"✗ Skipping video file: {wallpaper_data.image_url}")
+                return wallpaper_data.to_dict()
+            
             # Download image with progress tracking
             print(f"Downloading image from: {wallpaper_data.image_url}")
             img_response = requests.get(wallpaper_data.image_url, headers=headers, timeout=30, stream=True)
             
             if img_response.status_code == 200:
+                # Check Content-Type header to verify it's an image
+                content_type = img_response.headers.get('content-type', '').lower()
+                if content_type and not content_type.startswith('image/'):
+                    wallpaper_data.status = 'error'
+                    wallpaper_data.error_message = f'Not an image file (Content-Type: {content_type})'
+                    print(f"✗ Invalid content type: {content_type}")
+                    return wallpaper_data.to_dict()
+                
                 # Get file extension from URL
                 ext = wallpaper_data.image_url.split('.')[-1].lower()
-                if ext not in ['jpg', 'jpeg', 'png']:
-                    ext = 'jpg'
+                # Validate extension
+                supported_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']
+                if ext not in supported_extensions:
+                    ext = 'jpg'  # Default to jpg
                 
                 # Generate organized filename
                 filepath = self.get_wallpaper_filename(source_id, wallpaper_data.title, ext)

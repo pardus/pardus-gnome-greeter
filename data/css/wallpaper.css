@@ -1,56 +1,35 @@
 /* ==========================================================================
-   WALLPAPER PAGE STYLES
+   WALLPAPER PAGE STYLES - GNOME Control Center Style
    ========================================================================== */
 
-/* Wallpaper Page Styling */
-.wallpaper-thumbnail {
-    background-color: transparent;
-    border: 3px solid transparent;
-    border-radius: 12px;
-    transition: all 200ms ease-in-out;
-    min-width: 160px;
-    min-height: 120px;
-}
-
-.wallpaper-thumbnail image {
-    /* Force image to fill the container */
-    min-width: 160px;
-    min-height: 120px;
+/* Background preview button wrapper - EXACT GNOME Control Center style */
+.background-preview-button {
+    background: none;
     border-radius: 9px;
+    padding: 3px;
+    box-shadow: none;
+    outline: none;
 }
 
-.wallpaper-thumbnail picture {
-    /* Force picture to fill the container */
-    min-width: 160px;
-    min-height: 120px;
-    border-radius: 9px;
+.background-preview-button:checked {
+    box-shadow: 0 0 0 3px @accent_bg_color;
 }
 
-.wallpaper-thumbnail.selected {
-    border-color: @accent_bg_color;
-    border-radius: 12px;
+.background-preview-button:focus:focus-visible {
+    box-shadow: 0 0 0 3px @accent_bg_color, 0 0 0 6px alpha(@accent_color, 0.3);
 }
 
-.wallpaper-thumbnail:hover {
-    border-color: alpha(@accent_bg_color, 0.5);
-    border-radius: 12px;
+.background-preview-button:checked:focus:focus-visible {
+    box-shadow: 0 0 0 3px @accent_color, 0 0 0 6px alpha(@accent_color, 0.3);
 }
 
 /* Background flowbox styling */
 .background-flowbox {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-left: 0px;
-    margin-right: 0px;
-    background-color: @card_bg_color;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: none;
-    border: none;
+    background: none;
 }
 
 /* Background flowbox child styling */
-.background-flowbox>flowboxchild {
+.background-flowbox > flowboxchild {
     background: none;
     border-radius: 9px;
 }
@@ -60,14 +39,30 @@
     border-radius: 6px;
 }
 
-/* Slideshow icon styling */
+/* Wallpaper thumbnail - GNOME Control Center style */
+.wallpaper-thumbnail {
+    background: none;
+    border: none;
+    border-radius: 6px;
+    min-width: 160px;
+    min-height: 120px;
+}
+
+.wallpaper-thumbnail image,
+.wallpaper-thumbnail picture {
+    border-radius: 6px;
+    min-width: 160px;
+    min-height: 120px;
+}
+
+/* Slideshow icon styling - EXACT GNOME Control Center style */
 .slideshow-icon {
     color: white;
     -gtk-icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.33);
     margin: 8px;
 }
 
-/* Selected check styling */
+/* Selected check styling - EXACT GNOME Control Center style */
 .selected-check {
     color: @accent_fg_color;
     background: @accent_bg_color;
@@ -78,12 +73,13 @@
     transition-duration: 200ms;
 }
 
+/* Show checkmark on selected wallpaper */
+flowboxchild:selected .selected-check,
 flowboxchild.active-item .selected-check {
     opacity: 1;
 }
 
-/* ==
-========================================================================
+/* ==========================================================================
    LIVE WALLPAPER COMPONENT STYLES
    ========================================================================== */
 
@@ -103,18 +99,33 @@ flowboxchild.active-item .selected-check {
 /* Preview Image States */
 .wallpaper-preview.loading {
     opacity: 0.6;
-    animation: pulse 1.5s ease-in-out infinite;
+    animation: breathe 2s ease-in-out infinite;
+    background: linear-gradient(135deg, 
+        alpha(@accent_color, 0.05) 0%, 
+        alpha(@accent_color, 0.1) 50%, 
+        alpha(@accent_color, 0.05) 100%);
+    background-size: 200% 200%;
+    animation: breathe 2s ease-in-out infinite, gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .wallpaper-preview.loaded {
     opacity: 1;
-    animation: fade-in 0.3s ease-out;
+    animation: fade-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .wallpaper-preview.fallback {
-    opacity: 0.4;
-    background: alpha(@bg_color, 0.1);
-    border-style: dashed;
+    opacity: 0.5;
+    background: alpha(@bg_color, 0.15);
+    border: 2px dashed alpha(@borders, 0.4);
 }
 
 /* Action Button States */
@@ -198,7 +209,7 @@ flowboxchild.active-item .selected-check {
 
 /* Spinning animation for loading states */
 .spinning {
-    animation: spin 1s linear infinite;
+    animation: spin 1.2s linear infinite;
 }
 
 @keyframes spin {
@@ -209,6 +220,22 @@ flowboxchild.active-item .selected-check {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Smooth fade-in for new elements */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fade-in-up 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Success pulse animation */
@@ -248,14 +275,23 @@ flowboxchild.active-item .selected-check {
 
 /* Pulse animation for loading images */
 @keyframes pulse {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 0.6;
     }
-
     50% {
-        opacity: 0.3;
+        opacity: 0.35;
+    }
+}
+
+/* Gentle breathing animation for loading states */
+@keyframes breathe {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(0.98);
     }
 }
 
@@ -313,8 +349,6 @@ flowboxchild.active-item .selected-check {
     background-color: alpha(@error_color, 0.12);
 }
 
-
-
 /* ==========================================================================
    LIVE WALLPAPER THUMBNAIL OVERRIDE
    ========================================================================== */
@@ -338,8 +372,9 @@ flowboxchild.active-item .selected-check {
     height: 40px !important;
     max-width: 60px !important;
     min-height: 40px !important;
-}/* Li
-ve wallpaper row content alignment */
+}
+
+/* Live wallpaper row content alignment */
 .live-wallpaper-source-row {
     min-height: 70px;
 }
@@ -357,196 +392,9 @@ ve wallpaper row content alignment */
 .live-wallpaper-source-row .subtitle {
     margin-top: 0;
     margin-bottom: 0;
-}/* Fixed
- preview container - ABSOLUTE SIZE CONTROL */
-.preview-container-fixed {
-    width: 60px !important;
-    height: 40px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    border-radius: 6px;
-    border: none !important;
-    background: none !important;
-    background-color: transparent !important;
-    overflow: hidden;
-    flex-shrink: 0;
-    flex-grow: 0;
 }
 
-.preview-container-fixed picture,
-.preview-container-fixed image {
-    width: 60px !important;
-    height: 40px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-}/* Ou
-ter preview container - ULTIMATE SIZE CONTROL */
-.preview-outer-fixed {
-    width: 60px !important;
-    height: 40px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    border-radius: 6px;
-    border: 1px solid alpha(@borders, 0.3);
-    background-color: alpha(@bg_color, 0.1);
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* Double enforcement for inner container */
-.preview-outer-fixed .preview-container-fixed {
-    width: 100% !important;
-    height: 100% !important;
-    border: none !important;
-    background: none !important;
-}/
-* Perfect alignment for live wallpaper rows */
-.live-wallpaper-source-row {
-    padding: 6px 12px !important;
-    min-height: 52px !important;
-}
-
-/* Force the main content box to align properly */
-.live-wallpaper-source-row > box {
-    align-items: center !important;
-    min-height: 40px !important;
-}
-
-/* Ensure title/subtitle container is centered vertically */
-.live-wallpaper-source-row .title-box,
-.live-wallpaper-source-row > box > box:not([type]) {
-    align-items: center !important;
-    justify-content: center !important;
-    min-height: 40px !important;
-}
-
-/* Remove any extra margins from title/subtitle */
-.live-wallpaper-source-row .title {
-    margin: 0 !important;
-    line-height: 1.2 !important;
-}
-
-.live-wallpaper-source-row .subtitle {
-    margin: 0 !important;
-    margin-top: 2px !important;
-    line-height: 1.1 !important;
-}
-
-/* Ensure prefix (checkbox + image) is properly aligned */
-.live-wallpaper-source-row [type="prefix"] {
-    align-self: center !important;
-    min-height: 40px !important;
-}
-
-/* Ensure suffix (buttons) is properly aligned */
-.live-wallpaper-source-row [type="suffix"] {
-    align-self: center !important;
-    min-height: 40px !important;
-}/*
- ULTIMATE AdwActionRow alignment fix - OVERRIDE EVERYTHING */
-.live-wallpaper-source-row {
-    padding: 8px 12px !important;
-    min-height: 56px !important;
-}
-
-/* Force main container alignment */
-.live-wallpaper-source-row > box {
-    align-items: center !important;
-    min-height: 40px !important;
-}
-
-/* Target the title/subtitle container specifically */
-.live-wallpaper-source-row > box > box:nth-child(2) {
-    align-items: center !important;
-    justify-content: center !important;
-    align-self: center !important;
-    min-height: 40px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Force title alignment */
-.live-wallpaper-source-row .title {
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.2 !important;
-    align-self: center !important;
-}
-
-/* Force subtitle alignment */
-.live-wallpaper-source-row .subtitle {
-    margin: 0 !important;
-    margin-top: 1px !important;
-    padding: 0 !important;
-    line-height: 1.1 !important;
-    align-self: center !important;
-}
-
-/* Prefix alignment */
-.live-wallpaper-source-row > box > box:first-child {
-    align-self: center !important;
-    align-items: center !important;
-}
-
-/* Suffix alignment */
-.live-wallpaper-source-row > box > box:last-child {
-    align-self: center !important;
-    align-items: center !important;
-}
-/
-* ==========================================================================
-   PREVIEW IMAGE FIXED SIZE - ULTIMATE CONTROL
-   ========================================================================== */
-
-/* Preview container with absolute size control */
-.preview-container {
-    width: 60px !important;
-    height: 40px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    border-radius: 8px;
-    border: none !important;
-    background: none !important;
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    box-sizing: border-box !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Preview image with forced dimensions and rounded corners */
-.preview-image {
-    width: 60px !important;
-    height: 40px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    -gtk-icon-size: 60px !important;
-    object-fit: cover !important;
-    border-radius: 8px;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Hover effect for preview */
-.preview-container:hover {
-    border-color: alpha(@accent_color, 0.5);
-    transform: scale(1.02);
-    transition: all 200ms ease;
-}/* ==
-========================================================================
+/* ==========================================================================
    WALLPAPER PREVIEW DIALOG STYLES
    ========================================================================== */
 
@@ -592,3 +440,5 @@ ter preview container - ULTIMATE SIZE CONTROL */
     background: alpha(@accent_color, 0.2);
     transform: scale(1.05);
 }
+
+

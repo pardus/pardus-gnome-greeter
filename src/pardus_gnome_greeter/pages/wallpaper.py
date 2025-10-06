@@ -9,7 +9,7 @@ from locale import gettext as _
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Adw, GLib, GdkPixbuf, Gdk
+from gi.repository import Gtk, Adw, GLib, Gio, GdkPixbuf, Gdk
 
 # Gettext setup
 domain = 'pardus-gnome-greeter'
@@ -30,6 +30,7 @@ class WallpaperThumbnail(Gtk.Box):
     
     # Template children
     picture = Gtk.Template.Child("picture")
+    selected_check = Gtk.Template.Child("selected_check")
     
     def __init__(self):
         super().__init__()
@@ -39,6 +40,9 @@ class WallpaperThumbnail(Gtk.Box):
         
         # Selection state
         self._selected = False
+        
+        # Initially hide checkmark
+        self.selected_check.set_opacity(0)
     
     def load_wallpaper(self, wallpaper_path):
         """Load wallpaper from file path"""
@@ -61,10 +65,12 @@ class WallpaperThumbnail(Gtk.Box):
     def set_selected(self, selected):
         """Set selection state"""
         self._selected = selected
+        
+        # Show/hide checkmark with animation
         if selected:
-            self.add_css_class("selected")
+            self.selected_check.set_opacity(1)
         else:
-            self.remove_css_class("selected")
+            self.selected_check.set_opacity(0)
     
     def is_selected(self):
         """Get selection state"""
@@ -105,6 +111,14 @@ class WallpaperPage(Adw.PreferencesPage):
         # Dynamic source rows
         self.source_rows = {}
         
+        # Track active downloads to prevent duplicates
+        self.active_downloads = set()
+        self.download_lock = threading.Lock()
+        
+        # Track pending UI updates from file system events
+        self.pending_ui_updates = {}  # source_id -> timeout_id
+        self.ui_update_lock = threading.Lock()
+        
         # File system monitor for real-time updates
         self.cache_monitor = None
         self.setup_cache_monitor()
@@ -137,9 +151,6 @@ class WallpaperPage(Adw.PreferencesPage):
             self.content_stack.set_visible_child_name("static")
         
         # Settings will be loaded by load_settings() method
-        
-        # Check wallpaper status for today
-        self.check_daily_wallpaper_status()
         
         # Load wallpapers in background thread
         thread = threading.Thread(target=self.load_wallpapers_background)
@@ -206,160 +217,6 @@ class WallpaperPage(Adw.PreferencesPage):
     
 
     
-    def check_daily_wallpaper_status(self):
-        """Check status of today's wallpapers for each source"""
-        sources = ['bing', 'nasa', 'wikipedia']
-        
-        for source in sources:
-            # Start with loading state
-            self.update_source_status(source, 'loading')
-            
-            # Check if wallpaper exists for today
-            thread = threading.Thread(
-                target=self.check_source_wallpaper_background,
-                args=(source,),
-                daemon=True
-            )
-            thread.start()
-    
-    def check_source_wallpaper_background(self, source):
-        """Check if wallpaper exists for source in background"""
-        try:
-            daily_dir = self.live_wallpaper_manager.get_daily_cache_dir()
-            
-            # Look for existing wallpaper
-            existing_file = None
-            if os.path.exists(daily_dir):
-                for filename in os.listdir(daily_dir):
-                    if filename.startswith(f"{source}-") and filename.endswith(('.jpg', '.jpeg', '.png')):
-                        existing_file = os.path.join(daily_dir, filename)
-                        break
-            
-            if existing_file:
-                # Wallpaper exists, show preview
-                GLib.idle_add(self.update_source_status, source, 'available', existing_file)
-            else:
-                # Download wallpaper
-                GLib.idle_add(self.update_source_status, source, 'downloading')
-                
-                wallpaper_info = self.live_wallpaper_manager.download_wallpaper_from_source(source)
-                
-                if wallpaper_info:
-                    GLib.idle_add(self.update_source_status, source, 'available', wallpaper_info['filepath'])
-                else:
-                    GLib.idle_add(self.update_source_status, source, 'error')
-                    
-        except Exception as e:
-            print(f"Error checking {source} wallpaper: {e}")
-            GLib.idle_add(self.update_source_status, source, 'error')
-    
-    def update_source_status(self, source, status, filepath=None):
-        """Update UI status for a source"""
-        try:
-            # Get widgets for this source
-            preview_widget = getattr(self, f"{source}_preview", None)
-            status_icon = getattr(self, f"{source}_status_icon", None)
-            action_button = getattr(self, f"{source}_action_button", None)
-            
-            if not all([preview_widget, status_icon, action_button]):
-                return
-            
-            if status == 'loading':
-                # Show spinner
-                status_icon.set_from_icon_name("content-loading-symbolic")
-                status_icon.add_css_class("spinning")
-                action_button.set_sensitive(False)
-                action_button.set_icon_name("content-loading-symbolic")
-                
-            elif status == 'downloading':
-                # Show download in progress
-                status_icon.set_from_icon_name("folder-download-symbolic")
-                status_icon.add_css_class("spinning")
-                action_button.set_sensitive(False)
-                action_button.set_icon_name("content-loading-symbolic")
-                
-            elif status == 'available' and filepath:
-                # Show success and preview
-                status_icon.set_from_icon_name("emblem-ok-symbolic")
-                status_icon.remove_css_class("spinning")
-                status_icon.add_css_class("success")
-                
-                action_button.set_sensitive(True)
-                action_button.set_icon_name("media-playback-start-symbolic")
-                action_button.set_tooltip_text(_("Set as wallpaper"))
-                
-                # Load preview image
-                if os.path.exists(filepath):
-                    try:
-                        texture = Gdk.Texture.new_from_filename(filepath)
-                        preview_widget.set_paintable(texture)
-                        preview_widget.set_tooltip_text(_("Click to set as wallpaper"))
-                    except Exception as e:
-                        print(f"Error loading preview for {source}: {e}")
-                        
-            elif status == 'error':
-                # Show error state
-                status_icon.set_from_icon_name("dialog-error-symbolic")
-                status_icon.remove_css_class("spinning")
-                status_icon.add_css_class("error")
-                
-                action_button.set_sensitive(True)
-                action_button.set_icon_name("view-refresh-symbolic")
-                action_button.set_tooltip_text(_("Retry download"))
-                
-        except Exception as e:
-            print(f"Error updating {source} status: {e}")
-    
-    def on_download_source(self, source):
-        """Handle download button click for a source"""
-        try:
-            # Update UI to downloading state
-            self.update_source_status(source, 'downloading')
-            
-            # Download in background
-            thread = threading.Thread(
-                target=self.download_source_background,
-                args=(source,),
-                daemon=True
-            )
-            thread.start()
-            
-        except Exception as e:
-            print(f"Error starting download for {source}: {e}")
-    
-    def download_source_background(self, source):
-        """Download wallpaper for source in background"""
-        try:
-            wallpaper_info = self.live_wallpaper_manager.download_wallpaper_from_source(source)
-            
-            if wallpaper_info:
-                GLib.idle_add(self.update_source_status, source, 'available', wallpaper_info['filepath'])
-            else:
-                GLib.idle_add(self.update_source_status, source, 'error')
-                
-        except Exception as e:
-            print(f"Error downloading {source} wallpaper: {e}")
-            GLib.idle_add(self.update_source_status, source, 'error')
-    
-    def on_preview_clicked(self, source):
-        """Handle preview image click"""
-        try:
-            daily_dir = self.live_wallpaper_manager.get_daily_cache_dir()
-            
-            # Find wallpaper file for this source
-            if os.path.exists(daily_dir):
-                for filename in os.listdir(daily_dir):
-                    if filename.startswith(f"{source}-") and filename.endswith(('.jpg', '.jpeg', '.png')):
-                        filepath = os.path.join(daily_dir, filename)
-                        
-                        # Set as wallpaper
-                        success = self.wallpaper_manager.set_wallpaper(filepath)
-                        if success:
-                            print(f"Set wallpaper from {source}: {filename}")
-                        break
-                        
-        except Exception as e:
-            print(f"Error setting wallpaper from {source}: {e}")
 
     def load_wallpapers_background(self):
         """Load wallpapers in background thread"""
@@ -429,11 +286,18 @@ class WallpaperPage(Adw.PreferencesPage):
             else:
                 thumbnail.load_wallpaper(wallpaper_path)
             
+            # Wrap in button with GNOME class (like GNOME Control Center)
+            button = Gtk.Button()
+            button.set_child(thumbnail)
+            button.add_css_class('background-preview-button')
+            button.set_has_frame(False)
+            
             child = Gtk.FlowBoxChild()
-            child.set_child(thumbnail)
+            child.set_child(button)
             child.wallpaper_path = wallpaper_path
             
             if current_wallpaper and wallpaper_path == current_wallpaper:
+                child.add_css_class('active-item')
                 thumbnail.set_selected(True)
                 self.current_selection = child
                 self.wallpapers_flowbox.select_child(child)
@@ -451,11 +315,15 @@ class WallpaperPage(Adw.PreferencesPage):
                 
             wallpaper_path = flowbox_child.wallpaper_path
             
+            # Remove active-item class from previous selection
             if self.current_selection:
+                self.current_selection.remove_css_class('active-item')
                 prev_thumbnail = self.current_selection.get_child()
                 if prev_thumbnail and hasattr(prev_thumbnail, 'set_selected'):
                     prev_thumbnail.set_selected(False)
             
+            # Add active-item class to new selection
+            flowbox_child.add_css_class('active-item')
             new_thumbnail = flowbox_child.get_child()
             if new_thumbnail and hasattr(new_thumbnail, 'set_selected'):
                 new_thumbnail.set_selected(True)
@@ -474,63 +342,61 @@ class WallpaperPage(Adw.PreferencesPage):
 
     def load_source_data(self, source_id):
         """Load data for a source in background"""
+        # Check if already downloading
+        with self.download_lock:
+            if source_id in self.active_downloads:
+                print(f"⏭️  Skipping {source_id} - already downloading")
+                return
+            self.active_downloads.add(source_id)
+        
+        # Set loading state immediately
+        if source_id in self.source_rows:
+            self.source_rows[source_id].set_status('loading')
+        
+        # Use simple threading instead of Gio.Task
         def fetch_data():
             try:
-                # Set loading state
-                if source_id in self.source_rows:
-                    GLib.idle_add(self.source_rows[source_id].set_status, 'loading')
-                
-                # Check if wallpaper already exists for today
-                daily_dir = self.live_wallpaper_manager.get_daily_cache_dir()
-                existing_file = None
-                
-                if os.path.exists(daily_dir):
-                    for filename in os.listdir(daily_dir):
-                        if filename.startswith(f"{source_id}-") and filename.endswith(('.jpg', '.jpeg', '.png')):
-                            existing_file = os.path.join(daily_dir, filename)
-                            break
-                
-                # Try to load metadata from cache first (no API request)
+                # Try to load metadata from cache first
                 data = self.live_wallpaper_manager.load_metadata(source_id)
                 
+                if data:
+                    print(f"📦 Cache check for {source_id}: data={bool(data)}, filepath={data.filepath if data else None}, exists={os.path.exists(data.filepath) if data and data.filepath else False}")
+                else:
+                    print(f"📦 Cache check for {source_id}: No metadata found")
+                
                 if data and data.filepath and os.path.exists(data.filepath):
-                    # Wallpaper already downloaded and available
-                    print(f"Using cached wallpaper for {source_id}")
+                    # Wallpaper already downloaded
+                    print(f"✅ Using cached wallpaper for {source_id}")
                     data.status = 'available'
                     GLib.idle_add(self.update_source_row_data, source_id, data)
                 else:
-                    # Need to download - show downloading state
-                    print(f"Downloading wallpaper for {source_id}...")
-                    if source_id in self.source_rows:
-                        GLib.idle_add(self.source_rows[source_id].set_status, 'downloading')
-                    
-                    # Download wallpaper (this will fetch metadata and download image)
+                    # Need to download
+                    print(f"⬇️  Downloading wallpaper for {source_id}...")
                     result = self.live_wallpaper_manager.download_wallpaper_from_source(source_id)
                     
                     if result and result.get('status') == 'available':
-                        # Download successful - reload metadata
                         data = self.live_wallpaper_manager.load_metadata(source_id)
                         if data:
                             print(f"✓ Downloaded and loaded {source_id}")
                             GLib.idle_add(self.update_source_row_data, source_id, data)
                     else:
-                        # Download failed
-                        print(f"✗ Failed to download {source_id}: {result.get('error_message') if result else 'Unknown error'}")
+                        error_msg = result.get('error_message') if result else 'Download failed'
+                        print(f"✗ Failed to download {source_id}: {error_msg}")
                         from ..managers.LiveWallpaperManager import LiveWallpaperData
-                        error_data = LiveWallpaperData._create_error_instance(
-                            source_id, 
-                            result.get('error_message') if result else 'Download failed'
-                        )
+                        error_data = LiveWallpaperData._create_error_instance(source_id, error_msg)
                         GLib.idle_add(self.update_source_row_data, source_id, error_data)
-                    
             except Exception as e:
                 print(f"Error fetching data for {source_id}: {e}")
                 from ..managers.LiveWallpaperManager import LiveWallpaperData
                 error_data = LiveWallpaperData._create_error_instance(source_id, str(e))
                 GLib.idle_add(self.update_source_row_data, source_id, error_data)
+            finally:
+                with self.download_lock:
+                    self.active_downloads.discard(source_id)
         
         threading.Thread(target=fetch_data, daemon=True).start()
     
+
     def update_source_row_data(self, source_id, wallpaper_data):
         """Update source row with fetched data"""
         try:
@@ -567,12 +433,19 @@ class WallpaperPage(Adw.PreferencesPage):
     def on_dynamic_download_requested(self, source_row, source_id):
         """Handle download request from dynamic source row"""
         try:
+            # Check if already downloading
+            with self.download_lock:
+                if source_id in self.active_downloads:
+                    print(f"⏭️  Skipping {source_id} - already downloading")
+                    return
+                self.active_downloads.add(source_id)
+            
             # Set downloading state
             source_row.set_status('downloading')
             
             def download_in_background():
                 try:
-                    # Progress callback to update UI
+                    # Progress callback
                     def progress_callback(current, total):
                         if total > 0:
                             progress_percent = int((current / total) * 100)
@@ -584,7 +457,6 @@ class WallpaperPage(Adw.PreferencesPage):
                     )
                     
                     if result:
-                        # Create LiveWallpaperData from result
                         from ..managers.LiveWallpaperManager import LiveWallpaperData
                         data = LiveWallpaperData(
                             source=result['source'],
@@ -599,18 +471,23 @@ class WallpaperPage(Adw.PreferencesPage):
                         from ..managers.LiveWallpaperManager import LiveWallpaperData
                         error_data = LiveWallpaperData._create_error_instance(source_id, 'Download failed')
                         GLib.idle_add(source_row.set_wallpaper_data, error_data)
-                        
                 except Exception as e:
                     print(f"Error downloading {source_id}: {e}")
                     from ..managers.LiveWallpaperManager import LiveWallpaperData
                     error_data = LiveWallpaperData._create_error_instance(source_id, str(e))
                     GLib.idle_add(source_row.set_wallpaper_data, error_data)
+                finally:
+                    with self.download_lock:
+                        self.active_downloads.discard(source_id)
             
             threading.Thread(target=download_in_background, daemon=True).start()
             
         except Exception as e:
             print(f"Error handling download request for {source_id}: {e}")
+            with self.download_lock:
+                self.active_downloads.discard(source_id)
     
+
     def on_dynamic_wallpaper_set_requested(self, source_row, source_id, filepath):
         """Handle wallpaper set request from dynamic source row"""
         try:
@@ -657,13 +534,7 @@ class WallpaperPage(Adw.PreferencesPage):
         except Exception as e:
             print(f"Error loading settings: {e}")
     
-    def refresh_all_sources(self):
-        """Refresh data for all source rows"""
-        try:
-            for source_id in self.source_rows.keys():
-                self.load_source_data(source_id)
-        except Exception as e:
-            print(f"Error refreshing sources: {e}")
+
     
     def add_new_source(self, source_id, source_config):
         """Add a new source row dynamically"""
@@ -705,13 +576,7 @@ class WallpaperPage(Adw.PreferencesPage):
         except Exception as e:
             print(f"Error loading settings: {e}")
     
-    def refresh_source_data(self):
-        """Refresh data for all source rows"""
-        try:
-            for source_id in self.source_rows.keys():
-                self.load_source_data(source_id)
-        except Exception as e:
-            print(f"Error refreshing source data: {e}")   
+
     def create_source_rows(self):
         """Create dynamic source rows from user settings"""
         try:
@@ -766,8 +631,8 @@ class WallpaperPage(Adw.PreferencesPage):
             # Store reference
             self.source_rows[source_id] = source_row
             
-            # Load initial data
-            self.load_source_data(source_id)
+            # Don't load data here - it will be loaded when Live tab is activated
+            # This prevents unnecessary downloads when app starts on Static tab
             
         except Exception as e:
             print(f"Error creating source row for {source_id}: {e}") 
@@ -789,8 +654,9 @@ class WallpaperPage(Adw.PreferencesPage):
                 self.content_stack.set_visible_child_name("live")
                 print("Switched to live wallpapers")
                 
-                # Refresh immediately to show any cached wallpapers
-                self.refresh_all_sources()
+                # Load data for all sources (will use cache if available)
+                for source_id in self.source_rows.keys():
+                    self.load_source_data(source_id)
                 
                 # File monitor will handle real-time updates automatically
     
@@ -830,21 +696,31 @@ class WallpaperPage(Adw.PreferencesPage):
         try:
             from gi.repository import Gio
             
-            # Only process CREATED and CHANGES_DONE_HINT events
-            if event_type not in [Gio.FileMonitorEvent.CREATED, Gio.FileMonitorEvent.CHANGES_DONE_HINT]:
+            # Only process CHANGES_DONE_HINT (file fully written)
+            # Skip CREATED to avoid duplicate updates
+            if event_type != Gio.FileMonitorEvent.CHANGES_DONE_HINT:
                 return
             
             filename = file.get_basename()
             
             # Check if it's a wallpaper file (image or metadata)
             if filename.endswith(('.jpg', '.jpeg', '.png', '.json')):
-                print(f"📁 File system event: {filename} ({event_type.value_name})")
-                
                 # Extract source_id from filename
                 source_id = filename.split('-')[0] if '-' in filename else filename.split('.')[0]
                 
-                # Debounce: wait a bit for file to be fully written
-                GLib.timeout_add(500, self.refresh_source_after_file_change, source_id)
+                # Check if this source is being tracked
+                if source_id not in self.source_rows:
+                    return
+                
+                # Debounce: cancel previous pending update for this source
+                with self.ui_update_lock:
+                    if source_id in self.pending_ui_updates:
+                        # Cancel previous timeout
+                        GLib.source_remove(self.pending_ui_updates[source_id])
+                    
+                    # Schedule new update
+                    timeout_id = GLib.timeout_add(300, self.refresh_source_after_file_change, source_id)
+                    self.pending_ui_updates[source_id] = timeout_id
                 
         except Exception as e:
             print(f"Error handling cache change: {e}")
@@ -852,6 +728,10 @@ class WallpaperPage(Adw.PreferencesPage):
     def refresh_source_after_file_change(self, source_id):
         """Refresh specific source after file change (debounced)"""
         try:
+            # Remove from pending updates
+            with self.ui_update_lock:
+                self.pending_ui_updates.pop(source_id, None)
+            
             if source_id in self.source_rows:
                 # Reload metadata
                 wallpaper_data = self.live_wallpaper_manager.load_metadata(source_id)

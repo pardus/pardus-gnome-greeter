@@ -37,12 +37,18 @@
       "name": "Reddit Wallpapers",
       "description": "Top wallpapers from r/wallpaper",
       "enabled": true,
-      "api_url": "https://www.reddit.com/r/wallpaper/top.json?t=day&limit=1",
+      "api_url": "https://www.reddit.com/r/wallpaper/top.json?t=day&limit=10",
       "headers": {
         "User-Agent": "PardusGnomeGreeter/1.0 (https://github.com/pardus/pardus-gnome-greeter)"
       },
       "response_mapping": {
-        "data_path": "data.children.0.data",
+        "data_path": "data.children.{index}.data",
+        "find_first_valid": {
+          "enabled": true,
+          "array_path": "data.children",
+          "item_path": "data",
+          "max_items": 10
+        },
         "title_keys": [
           "title"
         ],
@@ -60,7 +66,13 @@
       "validation": {
         "required_fields": [
           "data.children"
-        ]
+        ],
+        "item_validation": {
+          "reject_if_true": [
+            "is_video",
+            "is_gallery"
+          ]
+        }
       }
     },
     "nasa": {
@@ -107,7 +119,13 @@
       "api_url": "https://wallhaven.cc/api/v1/search?sorting=toplist&topRange=1d&atleast=1920x1080&categories=100&purity=100",
       "headers": {},
       "response_mapping": {
-        "data_path": "data.0",
+        "data_path": "data.{index}",
+        "find_first_valid": {
+          "enabled": true,
+          "array_path": "data",
+          "item_path": "",
+          "max_items": 5
+        },
         "title_keys": [
           "id"
         ],

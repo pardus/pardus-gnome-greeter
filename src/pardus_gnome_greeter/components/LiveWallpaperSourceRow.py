@@ -185,16 +185,30 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
             self.add_css_class("error-row")  # Add error styling
             self.download_button_row.set_sensitive(True)  # Keep download for retry
             self.download_button_row.set_tooltip_text(_("Retry download"))
+            # Hide spinner
+            self.download_spinner.stop()
+            self.download_spinner.set_visible(False)
             # Show fallback thumbnail with error
             if wallpaper_data:
                 self._set_fallback_image(wallpaper_data.title, wallpaper_data.error_message)
         elif status in ['downloading']:
+            # Show spinner for downloading state
+            self.download_spinner.set_visible(True)
+            self.download_spinner.start()
             self.download_button_row.set_sensitive(False)
             self.download_button_row.set_tooltip_text(_("Downloading..."))
+        elif status in ['loading', 'pending']:
+            # Show spinner for loading/pending states
+            self.download_spinner.set_visible(True)
+            self.download_spinner.start()
+            self.download_button_row.set_sensitive(False)
+            self.download_button_row.set_tooltip_text(_("Loading..."))
         else:
-            # Normal states: enable row, remove error styling
+            # Normal states: enable row, remove error styling, hide spinner
             self.set_sensitive(True)
             self.remove_css_class("error-row")
+            self.download_spinner.stop()
+            self.download_spinner.set_visible(False)
         
         # Set button sensitivity and tooltip
         self._set_button_state(status, wallpaper_data)
@@ -251,6 +265,16 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
     def _load_image_from_file(self, filepath, title):
         """Load image from local file with error handling"""
         try:
+            # Check if file is a supported image format
+            supported_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg']
+            file_ext = os.path.splitext(filepath)[1].lower()
+            
+            if file_ext not in supported_extensions:
+                error_msg = f"{_('Unsupported format')}: {file_ext}"
+                print(f"Unsupported image format for {filepath}: {file_ext}")
+                self._set_fallback_image(title, error_msg)
+                return
+            
             # For GtkImage, use set_from_file instead of set_paintable
             self.preview_image.set_from_file(filepath)
             self.preview_image.set_tooltip_text(f"{title}\n{_('Click to set as wallpaper')}")
@@ -469,6 +493,10 @@ class LiveWallpaperSourceRow(Adw.ActionRow):
     
     def update_button_states_after_download(self):
         """Update button states after successful download"""
+        # Stop and hide spinner
+        self.download_spinner.stop()
+        self.download_spinner.set_visible(False)
+        
         self.download_button_row.set_sensitive(False)
         self.download_button_row.set_tooltip_text(_("Downloaded"))
         self.preview_button.set_sensitive(True)

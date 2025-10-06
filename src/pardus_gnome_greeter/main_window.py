@@ -5,7 +5,7 @@ from locale import gettext as _
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Adw, Gio
+from gi.repository import Gtk, Adw, Gio, GLib
 
 # Gettext setup
 domain = 'pardus-gnome-greeter'
@@ -65,6 +65,8 @@ class MainWindow(Adw.ApplicationWindow):
         # 2. Create the Content Area
         self.view_stack = Adw.ViewStack()
         self.view_stack.set_vexpand(True)
+        self.view_stack.set_hexpand(True)
+        self.view_stack.set_size_request(0, -1)  # Allow shrinking
         
         # Create HeaderBar
         content_header = Adw.HeaderBar()
@@ -89,12 +91,21 @@ class MainWindow(Adw.ApplicationWindow):
         content_header.set_title_widget(content_title_box)
         
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        content_box.set_size_request(0, -1)  # Allow shrinking
         content_box.append(content_header)
         content_box.append(self.view_stack)
 
         # 3. Assign the created widgets to the SplitView
         self.split_view.set_sidebar(sidebar_box)
         self.split_view.set_content(content_box)
+        
+        # Set sidebar width for responsive behavior (very narrow for mobile)
+        self.split_view.set_min_sidebar_width(150)
+        self.split_view.set_max_sidebar_width(220)
+        
+        # Allow content to shrink
+        content_box.set_hexpand(True)
+        self.view_stack.set_hexpand(True)
         
         self.load_pages()
         self.pages_listbox.connect('row-activated', self._on_row_activated)
@@ -140,6 +151,8 @@ class MainWindow(Adw.ApplicationWindow):
         if self.split_view.get_collapsed():
             self.split_view.set_show_sidebar(False)
 
+
+    
     def load_pages(self):
         # Create and add pages to the ViewStack
         pages = [
