@@ -2,44 +2,35 @@
    WALLPAPER PAGE STYLES - GNOME Control Center Style
    ========================================================================== */
 
-/* Background preview button wrapper - EXACT GNOME Control Center style */
-.background-preview-button {
-    background: none;
-    border-radius: 9px;
-    padding: 3px;
-    box-shadow: none;
-    outline: none;
-}
-
-.background-preview-button:checked {
-    box-shadow: 0 0 0 3px @accent_bg_color;
-}
-
-.background-preview-button:focus:focus-visible {
-    box-shadow: 0 0 0 3px @accent_bg_color, 0 0 0 6px alpha(@accent_color, 0.3);
-}
-
-.background-preview-button:checked:focus:focus-visible {
-    box-shadow: 0 0 0 3px @accent_color, 0 0 0 6px alpha(@accent_color, 0.3);
-}
-
 /* Background flowbox styling */
 .background-flowbox {
     background: none;
 }
 
-/* Background flowbox child styling */
-.background-flowbox > flowboxchild {
+.background-flowbox>flowboxchild {
     background: none;
     border-radius: 9px;
+}
+
+.background-flowbox>flowboxchild:hover {
+    background: none;
+}
+
+.background-flowbox>flowboxchild:selected {
+    background: none;
 }
 
 /* Background thumbnail styling */
 .background-thumbnail {
     border-radius: 6px;
+    background: none;
 }
 
-/* Wallpaper thumbnail - GNOME Control Center style */
+.background-thumbnail:hover {
+    background: none;
+}
+
+/* Wallpaper thumbnail */
 .wallpaper-thumbnail {
     background: none;
     border: none;
@@ -48,21 +39,31 @@
     min-height: 120px;
 }
 
+.wallpaper-thumbnail:hover {
+    background: none;
+}
+
 .wallpaper-thumbnail image,
 .wallpaper-thumbnail picture {
     border-radius: 6px;
     min-width: 160px;
     min-height: 120px;
+    background: none;
 }
 
-/* Slideshow icon styling - EXACT GNOME Control Center style */
+.wallpaper-thumbnail image:hover,
+.wallpaper-thumbnail picture:hover {
+    background: none;
+}
+
+/* Slideshow icon */
 .slideshow-icon {
     color: white;
     -gtk-icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.33);
     margin: 8px;
 }
 
-/* Selected check styling - EXACT GNOME Control Center style */
+/* Selected check - with smooth transition */
 .selected-check {
     color: @accent_fg_color;
     background: @accent_bg_color;
@@ -70,11 +71,9 @@
     padding: 2px;
     opacity: 0;
     margin: 6px;
-    transition-duration: 200ms;
+    transition: opacity 200ms;
 }
 
-/* Show checkmark on selected wallpaper */
-flowboxchild:selected .selected-check,
 flowboxchild.active-item .selected-check {
     opacity: 1;
 }
@@ -91,7 +90,6 @@ flowboxchild.active-item .selected-check {
 }
 
 .wallpaper-preview:hover {
-    transform: scale(1.02);
     box-shadow: 0 2px 6px alpha(@shade_color, 0.15);
     border-color: alpha(@borders, 0.6);
 }
@@ -99,27 +97,11 @@ flowboxchild.active-item .selected-check {
 /* Preview Image States */
 .wallpaper-preview.loading {
     opacity: 0.6;
-    animation: breathe 2s ease-in-out infinite;
-    background: linear-gradient(135deg, 
-        alpha(@accent_color, 0.05) 0%, 
-        alpha(@accent_color, 0.1) 50%, 
-        alpha(@accent_color, 0.05) 100%);
-    background-size: 200% 200%;
-    animation: breathe 2s ease-in-out infinite, gradient-shift 3s ease infinite;
-}
-
-@keyframes gradient-shift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
+    background: alpha(@accent_color, 0.08);
 }
 
 .wallpaper-preview.loaded {
     opacity: 1;
-    animation: fade-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .wallpaper-preview.fallback {
@@ -130,7 +112,7 @@ flowboxchild.active-item .selected-check {
 
 /* Action Button States */
 .action-button {
-    transition: all 200ms ease;
+    transition: background 200ms;
 }
 
 .action-button.play {
@@ -141,7 +123,6 @@ flowboxchild.active-item .selected-check {
 
 .action-button.play:hover {
     background: alpha(@accent_color, 0.2);
-    transform: scale(1.1);
 }
 
 .action-button.download {
@@ -164,34 +145,27 @@ flowboxchild.active-item .selected-check {
     background: alpha(@error_color, 0.2);
 }
 
-/* Status Icon Animations and Colors */
+/* Status Icon Colors */
 .status-icon.loading {
-    animation: spin 1s linear infinite;
     color: alpha(@fg_color, 0.6);
 }
 
 .status-icon.success {
     color: @success_color;
-    animation: success-pulse 0.6s ease-out;
 }
 
 .status-icon.error {
     color: @error_color;
-    animation: error-shake 0.5s ease-out;
 }
 
-/* Hover Effects for Interactive Elements */
-.live-wallpaper-source-row:hover .wallpaper-preview {
-    /* cursor property not supported in GTK4 CSS */
-}
-
+/* Hover Effects */
 .live-wallpaper-source-row:hover .action-button {
     opacity: 1;
 }
 
 .live-wallpaper-source-row .action-button {
     opacity: 0.8;
-    transition: opacity 200ms ease;
+    transition: opacity 200ms;
 }
 
 /* Checkbox Styling */
@@ -201,128 +175,6 @@ flowboxchild.active-item .selected-check {
 
 .live-wallpaper-source-row checkbutton:checked {
     color: @accent_color;
-}
-
-/* ==========================================================================
-   ANIMATIONS
-   ========================================================================== */
-
-/* Spinning animation for loading states */
-.spinning {
-    animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Smooth fade-in for new elements */
-@keyframes fade-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in-up {
-    animation: fade-in-up 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Success pulse animation */
-@keyframes success-pulse {
-    0% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Error shake animation */
-@keyframes error-shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-2px);
-    }
-
-    75% {
-        transform: translateX(2px);
-    }
-}
-
-/* Pulse animation for loading images */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 0.35;
-    }
-}
-
-/* Gentle breathing animation for loading states */
-@keyframes breathe {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(0.98);
-    }
-}
-
-/* Fade-in animation for loaded images */
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* Status icon pulse effect */
-.status-icon.pulse {
-    animation: status-pulse 0.5s ease-out;
-}
-
-@keyframes status-pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
 }
 
 /* ==========================================================================
@@ -354,33 +206,23 @@ flowboxchild.active-item .selected-check {
    ========================================================================== */
 /* Override wallpaper-thumbnail for live wallpapers - FORCE FIXED SIZE */
 .live-wallpaper-source-row .wallpaper-thumbnail {
-    width: 60px !important;
-    height: 40px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
+    min-width: 60px;
+    min-height: 40px;
 }
 
 .live-wallpaper-source-row .wallpaper-thumbnail picture {
-    width: 60px !important;
-    height: 40px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
+    min-width: 60px;
+    min-height: 40px;
 }
 
 .live-wallpaper-source-row .wallpaper-thumbnail image {
-    width: 60px !important;
-    height: 40px !important;
-    max-width: 60px !important;
-    min-height: 40px !important;
+    min-width: 60px;
+    min-height: 40px;
 }
 
 /* Live wallpaper row content alignment */
 .live-wallpaper-source-row {
     min-height: 70px;
-}
-
-.live-wallpaper-source-row > box {
-    align-items: center;
 }
 
 /* Title and subtitle alignment */
@@ -402,8 +244,6 @@ flowboxchild.active-item .selected-check {
 .preview-image-large {
     border-radius: 12px;
     box-shadow: 0 4px 16px alpha(@shade_color, 0.15);
-    max-width: 100%;
-    max-height: 400px;
 }
 
 /* Info panel styling */
@@ -438,7 +278,4 @@ flowboxchild.active-item .selected-check {
 
 .preview-button:hover {
     background: alpha(@accent_color, 0.2);
-    transform: scale(1.05);
 }
-
-

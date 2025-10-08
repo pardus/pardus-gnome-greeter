@@ -11,45 +11,5 @@
           <summary>First Run</summary>
           <description>Did application run before or is this first run?</description>
       </key>
-      <key name="live-wallpaper-enabled" type="b">
-          <default>false</default>
-          <summary>Live Wallpaper Enabled</summary>
-          <description>Enable automatic daily wallpaper updates</description>
-      </key>
-      <key name="live-wallpaper-sources" type="s">
-          <default>'["bing"]'</default>
-          <summary>Live Wallpaper Sources</summary>
-          <description>JSON array of selected wallpaper sources</description>
-      </key>
-      <key name="live-wallpaper-shuffle-interval" type="i">
-          <default>30</default>
-          <summary>Shuffle Interval</summary>
-          <description>Minutes between wallpaper cycling (for multiple sources)</description>
-      </key>
-      <key name="live-wallpaper-last-check-date" type="s">
-          <default>''</default>
-          <summary>Last Check Date</summary>
-          <description>Last date when daily wallpapers were checked (YYYY-MM-DD)</description>
-      </key>
-      <key name="live-wallpaper-current-source-index" type="i">
-          <default>0</default>
-          <summary>Current Source Index</summary>
-          <description>Index of current source for cycling</description>
-      </key>
-      <key name="live-wallpaper-last-cycle" type="s">
-          <default>''</default>
-          <summary>Last Cycle Time</summary>
-          <description>ISO timestamp of last wallpaper cycle</description>
-      </key>
-      <key name="live-wallpaper-user-sources" type="s">
-          <default>'[]'</default>
-          <summary>User Added Wallpaper Sources</summary>
-          <description>JSON array of user-added wallpaper sources with API keys</description>
-      </key>
-      <key name="live-wallpaper-source-api-keys" type="s">
-          <default>'{}'</default>
-          <summary>API Keys for Wallpaper Sources</summary>
-          <description>JSON object mapping source IDs to API keys</description>
-      </key>
   </schema>
 </schemalist> 
