@@ -26,6 +26,44 @@ class LayoutManager:
         """Get layout information"""
         return self.layouts.get(layout_name, {})
 
+    def get_current_layout(self):
+        """
+        Detects the current layout by checking which extensions are enabled.
+        Returns the name of the current layout, or 'gnome' as a fallback.
+        """
+        try:
+            enabled_extensions = self.extension_manager.get_enabled_extensions()
+            enabled_set = set(enabled_extensions)
+
+            # Check layouts in a specific order for priority
+            layout_priority = ['pardus', 'xp', '10', 'ubuntu', 'mac', 'gnome']
+
+            for layout_name in layout_priority:
+                layout_info = self.layouts.get(layout_name)
+                if not layout_info:
+                    continue
+
+                # Get the extensions that this layout enables
+                required_extensions = set(layout_info.get("enable", []))
+
+                # If all required extensions for this layout are enabled, we have a match
+                if required_extensions.issubset(enabled_set):
+                    # A simple check for disabled extensions to resolve ambiguity
+                    # For example, both 'mac' and 'ubuntu' might use 'dash-to-dock'
+                    # We can refine this by checking a key setting if needed
+                    disabled_extensions = set(layout_info.get("disable", []))
+                    if not disabled_extensions.intersection(enabled_set):
+                        print(f"Detected current layout: {layout_name}")
+                        return layout_name
+            
+            # Fallback to 'gnome' if no other layout matches
+            print("Could not detect a specific layout, falling back to 'gnome'")
+            return 'gnome'
+
+        except Exception as e:
+            print(f"Error detecting current layout: {e}")
+            return 'gnome'  # Fallback in case of error
+
     def _load_layouts(self):
         try:
             file = Gio.File.new_for_uri(f'resource://{self.config_path}')

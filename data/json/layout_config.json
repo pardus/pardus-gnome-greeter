@@ -132,7 +132,7 @@
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/show-show-apps-button",
+                "path": "/org/gnome/shell/extensions/dash-to-panel/show-activities-button",
                 "value": false
             }
         ]

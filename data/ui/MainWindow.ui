@@ -2,8 +2,8 @@
 <interface>
   <template class="MainWindow" parent="AdwApplicationWindow">
     <property name="title" translatable="yes">Pardus GNOME Greeter</property>
-    <property name="default-width">900</property>
-    <property name="default-height">700</property>
+    <property name="default-width">950</property>
+    <property name="default-height">750</property>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 700sp</condition>

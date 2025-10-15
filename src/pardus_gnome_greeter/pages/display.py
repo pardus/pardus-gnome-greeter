@@ -13,187 +13,6 @@ locale.bindtextdomain(domain, '/usr/share/locale')
 locale.textdomain(domain)
 from ..managers.DisplayManager import display_manager
 
-# Cursor Size Slider Component
-@Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/CursorSizeSlider.ui')
-class CursorSizeSlider(Adw.ActionRow):
-    __gtype_name__ = 'CursorSizeSlider'
-
-    cursor_size_scale = Gtk.Template.Child()
-    labels_box = Gtk.Template.Child()
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        
-        self.settings = Gio.Settings.new(CURSOR_SCHEMA)
-        self.setup_labels()
-        self.load_settings()
-        self.cursor_size_scale.connect("value-changed", self.on_value_changed)
-
-    def setup_labels(self):
-        # Add labels for each step
-        labels = [_("Small"), _("Medium"), _("Large")]
-        for i, label_text in enumerate(labels):
-            label = Gtk.Label(label=label_text)
-            label.set_hexpand(True)
-            if i == 0:
-                label.set_xalign(0.0)  # Left align first label
-            elif i == len(labels) - 1:
-                label.set_xalign(1.0)  # Right align last label
-            else:
-                label.set_xalign(0.5)  # Center align middle labels
-            self.labels_box.append(label)
-        
-        # Add tick marks to the slider
-        for i in range(len(labels)):
-            self.cursor_size_scale.add_mark(i, Gtk.PositionType.BOTTOM, None)
-
-    def load_settings(self):
-        cursor_size = self.settings.get_int(CURSOR_KEY)
-        if cursor_size <= 24:
-            value = 0  # Small
-        elif cursor_size <= 32:
-            value = 1  # Medium
-        else:
-            value = 2  # Large
-        
-        self.cursor_size_scale.set_value(value)
-        # Update fill level to match the value
-        self.cursor_size_scale.set_fill_level(value)
-
-    def on_value_changed(self, widget):
-        value = int(widget.get_value())
-        cursor_size_mapping = {
-            0: 16,  # Small
-            1: 24,  # Medium
-            2: 32   # Large
-        }
-        size = cursor_size_mapping.get(value, 24)
-        self.settings.set_int(CURSOR_KEY, size)
-        # Update fill level to match the new value
-        widget.set_fill_level(value)
-
-# Desktop Icon Slider Component
-@Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/DesktopIconSlider.ui')
-class DesktopIconSlider(Adw.ActionRow):
-    __gtype_name__ = 'DesktopIconSlider'
-
-    desktop_icon_scale = Gtk.Template.Child()
-    labels_box = Gtk.Template.Child()
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        
-        self.settings = Gio.Settings.new(DESKTOP_ICONS_SCHEMA)
-        self.setup_labels()
-        self.load_settings()
-        self.desktop_icon_scale.connect("value-changed", self.on_value_changed)
-
-    def setup_labels(self):
-        # Add labels for each step
-        labels = [_("Tiny"), _("Small"), _("Standard"), _("Large")]
-        for i, label_text in enumerate(labels):
-            label = Gtk.Label(label=label_text)
-            label.set_hexpand(True)
-            if i == 0:
-                label.set_xalign(0.0)  # Left align first label
-            elif i == len(labels) - 1:
-                label.set_xalign(1.0)  # Right align last label
-            else:
-                label.set_xalign(0.5)  # Center align middle labels
-            self.labels_box.append(label)
-        
-        # Add tick marks to the slider
-        for i in range(len(labels)):
-            self.desktop_icon_scale.add_mark(i, Gtk.PositionType.BOTTOM, None)
-
-    def load_settings(self):
-        desktop_icon_size = self.settings.get_string(DESKTOP_ICONS_KEY)
-        desktop_icon_mapping = {
-            'tiny': 0,
-            'small': 1,
-            'standard': 2,
-            'large': 3
-        }
-        desktop_value = desktop_icon_mapping.get(desktop_icon_size, 2)
-        self.desktop_icon_scale.set_value(desktop_value)
-        # Update fill level to match the value
-        self.desktop_icon_scale.set_fill_level(desktop_value)
-
-    def on_value_changed(self, widget):
-        value = int(widget.get_value())
-        desktop_icon_mapping = {
-            0: 'tiny',
-            1: 'small',
-            2: 'standard',
-            3: 'large'
-        }
-        size = desktop_icon_mapping.get(value, 'standard')
-        self.settings.set_string(DESKTOP_ICONS_KEY, size)
-        # Update fill level to match the new value
-        widget.set_fill_level(value)
-
-# File Manager Icon Slider Component
-@Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/FileManagerIconSlider.ui')
-class FileManagerIconSlider(Adw.ActionRow):
-    __gtype_name__ = 'FileManagerIconSlider'
-
-    file_manager_icon_scale = Gtk.Template.Child()
-    labels_box = Gtk.Template.Child()
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        
-        self.settings = Gio.Settings.new(NAUTILUS_SCHEMA)
-        self.setup_labels()
-        self.load_settings()
-        self.file_manager_icon_scale.connect("value-changed", self.on_value_changed)
-
-    def setup_labels(self):
-        # Add labels for each step
-        labels = [_("Small"), _("Small+"), _("Medium"), _("Large"), _("Extra Large")]
-        for i, label_text in enumerate(labels):
-            label = Gtk.Label(label=label_text)
-            label.set_hexpand(True)
-            if i == 0:
-                label.set_xalign(0.0)  # Left align first label
-            elif i == len(labels) - 1:
-                label.set_xalign(1.0)  # Right align last label
-            else:
-                label.set_xalign(0.5)  # Center align middle labels
-            self.labels_box.append(label)
-        
-        # Add tick marks to the slider
-        for i in range(len(labels)):
-            self.file_manager_icon_scale.add_mark(i, Gtk.PositionType.BOTTOM, None)
-
-    def load_settings(self):
-        nautilus_icon_size = self.settings.get_string(NAUTILUS_KEY)
-        nautilus_icon_mapping = {
-            'small': 0,
-            'small-plus': 1,
-            'medium': 2,
-            'large': 3,
-            'extra-large': 4
-        }
-        nautilus_value = nautilus_icon_mapping.get(nautilus_icon_size, 2)
-        self.file_manager_icon_scale.set_value(nautilus_value)
-        # Update fill level to match the value
-        self.file_manager_icon_scale.set_fill_level(nautilus_value)
-
-    def on_value_changed(self, widget):
-        value = int(widget.get_value())
-        nautilus_icon_mapping = {
-            0: 'small',
-            1: 'small-plus',
-            2: 'medium',
-            3: 'large',
-            4: 'extra-large'
-        }
-        size = nautilus_icon_mapping.get(value, 'medium')
-        self.settings.set_string(NAUTILUS_KEY, size)
-        # Update fill level to match the new value
-        widget.set_fill_level(value)
-
 CURSOR_SCHEMA = "org.gnome.desktop.interface"
 CURSOR_KEY = "cursor-size"
 
@@ -214,6 +33,11 @@ class DisplayPage(Adw.PreferencesPage):
         self.desktop_icons_settings = Gio.Settings.new(DESKTOP_ICONS_SCHEMA)
         self.nautilus_settings = Gio.Settings.new(NAUTILUS_SCHEMA)
         self.monitors_group = None
+
+        # Maps for settings
+        self.cursor_size_map = {0: 24, 1: 32, 2: 48} # Small, Medium, Large
+        self.desktop_icons_map = {0: 'tiny', 1: 'small', 2: 'standard', 3: 'large'}
+        self.nautilus_zoom_map = {0: 'small', 1: 'small-plus', 2: 'medium', 3: 'large', 4: 'extra-large'}
 
         display_manager.get_monitors(self.on_monitors_loaded)
 
@@ -273,43 +97,67 @@ class DisplayPage(Adw.PreferencesPage):
                 resolution_row.scale_row = scale_row
                 resolution_row.supported_resolutions = supported_resolutions
         
-        # Add cursor size group after monitors
-        self.add_cursor_size_group()
-        
-        # Add desktop icons group after cursor size
-        self.add_desktop_icons_group()
-        
-        # Add file manager group after desktop icons
-        self.add_file_manager_group()
+        # Add scaling group after monitors
+        self.add_scaling_group()
 
-    def add_cursor_size_group(self):
-        # Create cursor size group
-        cursor_group = Adw.PreferencesGroup(title="Cursor")
-        self.add(cursor_group)
-        
-        # Create cursor size slider using UI template
-        cursor_slider = CursorSizeSlider()
-        cursor_group.add(cursor_slider)
+    def add_scaling_group(self):
+        # Create a single group for all scaling options
+        scaling_group = Adw.PreferencesGroup(title=_("Interface Scaling"))
+        self.add(scaling_group)
 
-    def add_desktop_icons_group(self):
-        # Create desktop icons group
-        desktop_group = Adw.PreferencesGroup(title="Desktop Icons")
-        self.add(desktop_group)
+        # Cursor Size
+        cursor_labels = [_("Small"), _("Medium"), _("Large")]
+        cursor_model = Gtk.StringList.new(cursor_labels)
+        self.cursor_size_row = Adw.ComboRow(title=_("Cursor Size"), model=cursor_model)
+        scaling_group.add(self.cursor_size_row)
         
-        # Create desktop icon slider using UI template
-        desktop_slider = DesktopIconSlider()
-        desktop_group.add(desktop_slider)
+        current_cursor_size = self.settings.get_int(CURSOR_KEY)
+        rev_cursor_map = {v: k for k, v in self.cursor_size_map.items()}
+        cursor_selected_index = rev_cursor_map.get(current_cursor_size, 1) # Default to Medium
+        self.cursor_size_row.set_selected(cursor_selected_index)
+        self.cursor_size_row.connect("notify::selected", self.on_cursor_size_changed)
 
-    def add_file_manager_group(self):
-        # Create file manager group
-        file_manager_group = Adw.PreferencesGroup(title="File Manager")
-        self.add(file_manager_group)
+        # Desktop Icons
+        desktop_labels = [_("Tiny"), _("Small"), _("Standard"), _("Large")]
+        desktop_model = Gtk.StringList.new(desktop_labels)
+        self.desktop_icons_row = Adw.ComboRow(title=_("Desktop Icon Size"), model=desktop_model)
+        scaling_group.add(self.desktop_icons_row)
         
-        # Create file manager icon slider using UI template
-        file_manager_slider = FileManagerIconSlider()
-        file_manager_group.add(file_manager_slider)
-        
+        current_desktop_size = self.desktop_icons_settings.get_string(DESKTOP_ICONS_KEY)
+        rev_desktop_map = {v: k for k, v in self.desktop_icons_map.items()}
+        desktop_selected_index = rev_desktop_map.get(current_desktop_size, 2) # Default to Standard
+        self.desktop_icons_row.set_selected(desktop_selected_index)
+        self.desktop_icons_row.connect("notify::selected", self.on_desktop_icon_size_changed)
 
+        # File Manager Icons
+        nautilus_labels = [_("Small"), _("Small+"), _("Medium"), _("Large"), _("Extra Large")]
+        nautilus_model = Gtk.StringList.new(nautilus_labels)
+        self.nautilus_zoom_row = Adw.ComboRow(title=_("File Manager Icon Zoom"), model=nautilus_model)
+        scaling_group.add(self.nautilus_zoom_row)
+        
+        current_nautilus_zoom = self.nautilus_settings.get_string(NAUTILUS_KEY)
+        rev_nautilus_map = {v: k for k, v in self.nautilus_zoom_map.items()}
+        nautilus_selected_index = rev_nautilus_map.get(current_nautilus_zoom, 2) # Default to Medium
+        self.nautilus_zoom_row.set_selected(nautilus_selected_index)
+        self.nautilus_zoom_row.connect("notify::selected", self.on_nautilus_zoom_changed)
+
+    def on_cursor_size_changed(self, combo, _):
+        selected_index = combo.get_selected()
+        new_size = self.cursor_size_map.get(selected_index)
+        if new_size is not None:
+            self.settings.set_int(CURSOR_KEY, new_size)
+
+    def on_desktop_icon_size_changed(self, combo, _):
+        selected_index = combo.get_selected()
+        new_size = self.desktop_icons_map.get(selected_index)
+        if new_size is not None:
+            self.desktop_icons_settings.set_string(DESKTOP_ICONS_KEY, new_size)
+
+    def on_nautilus_zoom_changed(self, combo, _):
+        selected_index = combo.get_selected()
+        new_zoom = self.nautilus_zoom_map.get(selected_index)
+        if new_zoom is not None:
+            self.nautilus_settings.set_string(NAUTILUS_KEY, new_zoom)
     
     def on_scale_changed(self, widget, _, monitor_id, scales):
         selected_index = widget.get_selected()

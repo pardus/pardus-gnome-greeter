@@ -78,6 +78,9 @@ class LayoutPage(Adw.PreferencesPage):
         
         # Setup layouts
         self._setup_layouts()
+        
+        # Set initial selection
+        self._set_initial_selection()
     
     def _translate_ui_elements(self):
         """Manually translate UI elements that are not automatically translated"""
@@ -130,16 +133,26 @@ class LayoutPage(Adw.PreferencesPage):
                 self.layouts_grid.attach(card, col, row, 1, 1)
                 
                 col += 1
-                if col >= 2:  # 2 columns per row
+                if col >= 3:  # 3 columns per row, so wrap to next row
                     col = 0
                     row += 1
     
+    def _set_initial_selection(self):
+        """Set the initial selection based on the current layout"""
+        if self.layout_manager:
+            try:
+                current_layout_name = self.layout_manager.get_current_layout()
+                if current_layout_name:
+                    self._update_selection(current_layout_name)
+            except Exception as e:
+                print(f"Failed to set initial layout selection: {e}")
+
     def _create_layout_card(self, layout_id, name, description):
         """Create a layout card widget"""
         # Main card container with fixed size
         card = Gtk.Button()
         # Fixed size for all cards
-        card.set_size_request(240, 180)  # Fixed width and height for all
+        card.set_size_request(220, 160)  # Fixed width and height for all
         card.add_css_class("card")
         card.set_halign(Gtk.Align.CENTER)
         card.set_valign(Gtk.Align.CENTER)
@@ -155,14 +168,14 @@ class LayoutPage(Adw.PreferencesPage):
         
         # Image container
         image_container = Gtk.Box()
-        image_container.set_size_request(140, 140)  # Fixed image size
+        image_container.set_size_request(120, 120)  # Fixed image size
         image_container.set_halign(Gtk.Align.CENTER)
         image_container.set_valign(Gtk.Align.CENTER)
         image_container.set_homogeneous(True)  # Center box children
         
         # Create single picture widget (no stack needed)
         picture = Gtk.Picture()
-        picture.set_size_request(140, 140)
+        picture.set_size_request(120, 120)
         picture.set_can_shrink(True)
         picture.set_keep_aspect_ratio(True)
         picture.set_content_fit(Gtk.ContentFit.CONTAIN)

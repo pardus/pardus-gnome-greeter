@@ -8,6 +8,10 @@ class SettingsManager:
         """Gets a setting value."""
         return self.settings.get_value(key).unpack()
 
+    def get_strv(self, key):
+        """Gets a string array value."""
+        return self.settings.get_strv(key)
+
     def set(self, key, value):
         """Sets a setting value."""
         try:
@@ -25,6 +29,14 @@ class SettingsManager:
             return self.settings.set_value(key, new_variant)
         except Exception as e:
             print(f"Error setting {key} = {value}: {e}")
+            return False
+
+    def set_strv(self, key, value):
+        """Sets a string array value."""
+        try:
+            return self.settings.set_strv(key, value)
+        except Exception as e:
+            print(f"Error setting strv {key} = {value}: {e}")
             return False
 
 

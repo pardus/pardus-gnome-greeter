@@ -22,11 +22,11 @@ class ExtensionManager:
     
     def get_enabled_extensions(self):
         """Get currently enabled extensions"""
-        return shell_settings.get("enabled-extensions")
+        return shell_settings.get_strv("enabled-extensions")
     
     def set_enabled_extensions(self, extensions):
         """Set enabled extensions"""
-        shell_settings.set("enabled-extensions", extensions)
+        shell_settings.set_strv("enabled-extensions", extensions)
 
     def is_extension_enabled(self, extension_id):
         """Check if an extension is enabled"""

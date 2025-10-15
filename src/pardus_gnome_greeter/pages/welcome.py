@@ -17,9 +17,11 @@ class WelcomePage(Adw.PreferencesPage):
     __gtype_name__ = 'WelcomePage'
     
     welcome_message = Gtk.Template.Child("welcome_message")
+    welcome_banner = Gtk.Template.Child("welcome_banner")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.welcome_banner.set_resource("/tr/org/pardus/pardus-gnome-greeter/assets/banner.png")
         self._setup_translations()
     
     def _setup_translations(self):

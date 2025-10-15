@@ -12,10 +12,7 @@
     <file>ui/ApplicationsPage.ui</file>
     <file>ui/TimePage.ui</file>
     <file>ui/OutroPage.ui</file>
-    <file>ui/components/CursorSizeSlider.ui</file>
-    <file>ui/components/DesktopIconSlider.ui</file>
     <file>ui/components/ExtensionCard.ui</file>
-    <file>ui/components/FileManagerIconSlider.ui</file>
     <file>ui/components/WallpaperThumbnail.ui</file>
     
     <!-- CSS Files -->
@@ -38,6 +35,7 @@
     
     <!-- General Assets -->
     <file>assets/logo.svg</file>
+    <file>assets/banner.png</file>
     <file>assets/pardus-software-center.png</file>
     <file>assets/outro.png</file>
     <file>assets/cursor.svg</file>
