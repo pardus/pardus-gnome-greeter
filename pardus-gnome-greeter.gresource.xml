@@ -24,6 +24,7 @@
     <file>css/wallpaper.css</file>
     <file>css/extensions.css</file>
     <file>css/layout.css</file>
+    <file>css/welcome.css</file>
     
     <!-- JSON Files -->
     <file>json/custom_shortcuts.json</file>

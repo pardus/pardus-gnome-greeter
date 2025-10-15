@@ -100,8 +100,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.split_view.set_content(content_box)
         
         # Set sidebar width for responsive behavior (very narrow for mobile)
-        self.split_view.set_min_sidebar_width(150)
-        self.split_view.set_max_sidebar_width(220)
+        self.split_view.set_min_sidebar_width(190)
+        self.split_view.set_max_sidebar_width(260)
         
         # Allow content to shrink
         content_box.set_hexpand(True)
@@ -125,6 +125,14 @@ class MainWindow(Adw.ApplicationWindow):
 
         self._on_split_view_collapsed(self.split_view, None)
 
+
+    def _on_navigate_request(self, widget, page_name):
+        # Find the row corresponding to the page name and activate it
+        for row in self.pages_listbox:
+            if row.get_name() == page_name:
+                self.pages_listbox.select_row(row)
+                self._on_row_activated(self.pages_listbox, row)
+                break
 
     def _on_menu_button_clicked(self, button):
         self.split_view.set_show_sidebar(not self.split_view.get_show_sidebar())
@@ -169,6 +177,8 @@ class MainWindow(Adw.ApplicationWindow):
 
         for page_info in pages:
             page = page_info["class"]()
+            if page_info["name"] == "welcome":
+                page.connect("navigate-to", self._on_navigate_request)
             self.view_stack.add_named(page, page_info["name"])
 
             row = Gtk.ListBoxRow(name=page_info["name"])
