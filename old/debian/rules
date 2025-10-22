@@ -1,4 +1,0 @@
-#!/usr/bin/make -f
-export DH_COMPAT=11
-%:
-	dh $@ --with python3 --buildsystem=meson
