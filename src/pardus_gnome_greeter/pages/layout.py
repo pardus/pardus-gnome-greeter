@@ -229,7 +229,7 @@ class LayoutPage(Adw.PreferencesPage):
         card.add_controller(motion_controller)
         
         return card
-    
+
     def _on_card_enter(self, controller, x, y):
         """Handle mouse enter on card"""
         card = controller.get_widget()
@@ -267,12 +267,8 @@ class LayoutPage(Adw.PreferencesPage):
         # Update visual selection
         self._update_selection(layout_id)
         
-        # Apply layout in background thread
-        threading.Thread(
-            target=self._apply_layout_threaded,
-            args=(layout_id,),
-            daemon=True
-        ).start()
+        # Apply layout directly; the manager handles asynchronicity
+        self.layout_manager.apply_layout(layout_id)
     
     def _update_selection(self, selected_layout):
         """Update visual selection of cards"""

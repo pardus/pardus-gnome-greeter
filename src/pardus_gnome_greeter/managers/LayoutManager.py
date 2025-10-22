@@ -9,7 +9,17 @@ from .settings import app_settings, SettingsManager
 class LayoutManager:
     def __init__(self, config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json"):
         self.config_path = config_path
-        self.layouts = self._load_layouts()
+        
+        try:
+            config_data = self._load_layouts()
+            self.global_resets = config_data.pop("global_resets", [])
+            self.always_enabled_extensions = config_data.pop("always_enabled_extensions", [])
+            self.layouts = config_data
+        except Exception as e:
+            print(f"Warning: Could not initialize LayoutManager: {e}")
+            self.layouts = {}
+            self.global_resets = []
+
         self.dbus_proxy = self._get_dbus_proxy()
         
         # Initialize ExtensionManager
@@ -103,14 +113,9 @@ class LayoutManager:
         all_settings = set()
         for layout_data in self.layouts.values():
             for config in layout_data.get("config", []):
-                path = config.get("path")
-                if not path:
-                    continue
-                
-                parts = path.split('/')
-                if len(parts) > 2:
-                    schema_id = '.'.join(parts[1:-1])
-                    key = parts[-1]
+                schema_id = config.get("schema")
+                key = config.get("key")
+                if schema_id and key:
                     all_settings.add((schema_id, key))
         return list(all_settings)
 
@@ -129,8 +134,26 @@ class LayoutManager:
 
     def _reset_to_defaults(self):
         print("--- Starting Reset to Defaults ---")
-        
-        # 1. Reset all GSettings for every schema we manage.
+
+        # 1. Apply any global resets defined in the config.
+        # This handles special cases that need to be reset to a specific default
+        # before the general schema reset.
+        if self.global_resets:
+            print("--- Applying Global Resets ---")
+            for reset_config in self.global_resets:
+                schema_id = reset_config.get("schema")
+                key = reset_config.get("key")
+                value = reset_config.get("value")
+                value_type = reset_config.get("type")
+
+                if schema_id and key and value is not None:
+                    try:
+                        self._set_gsetting(schema_id, key, value, value_type)
+                        print(f"SUCCESS: Globally reset {schema_id} [{key}] to its default value.")
+                    except Exception as e:
+                        print(f"Warning: Failed to globally reset {schema_id} [{key}]. Error: {e}")
+
+        # 2. Reset all GSettings for every schema we manage.
         # This is more robust than resetting individual keys, as it clears ALL settings
         # for a schema, preventing state from leaking between layouts.
         # We do this *before* disabling extensions to ensure their schemas are available.
@@ -144,11 +167,15 @@ class LayoutManager:
                     if settings.is_writable(key):
                         settings.reset(key)
                 print(f"SUCCESS: Completed reset for schema {schema_id}")
+
             except Exception as e:
                 print(f"Warning: Failed to reset schema {schema_id}. It might not be installed. Error: {e}")
 
-        # 2. Disable all known extensions to ensure a clean slate for the new layout.
+        # 2. Disable all manageable extensions EXCEPT those that should always be enabled.
         for ext_uuid in self.all_managed_extensions:
+            if ext_uuid in self.always_enabled_extensions:
+                print(f"INFO: Skipping disable for '{ext_uuid}' as it is marked as always enabled.")
+                continue
             try:
                 self.extension_manager.disable_extension(ext_uuid)
                 print(f"SUCCESS: Disabled extension {ext_uuid}")
@@ -159,6 +186,64 @@ class LayoutManager:
         
         print("--- Finished Reset ---")
 
+    def _apply_layout_settings(self, layout_name):
+        """Helper function to apply the settings of a layout. To be called after reset."""
+        layout_data = self.layouts.get(layout_name)
+        if not layout_data:
+            return # Already checked in apply_layout, but good practice
+
+        print(f"--- Applying settings for layout: {layout_name} ---")
+
+        # Step 1: Enable and disable extensions.
+        for ext_uuid in layout_data.get("enable", []):
+            try:
+                self.extension_manager.enable_extension(ext_uuid)
+                print(f"SUCCESS: Enabled extension {ext_uuid}")
+            except Exception as e:
+                print(f"ERROR: Failed to enable extension {ext_uuid}: {e}")
+        
+        for ext_uuid in layout_data.get("disable", []):
+            if ext_uuid in self.always_enabled_extensions:
+                print(f"INFO: Skipping disable for '{ext_uuid}' as it is marked as always enabled.")
+                continue
+            try:
+                self.extension_manager.disable_extension(ext_uuid)
+                print(f"SUCCESS: Disabled extension {ext_uuid}")
+            except Exception as e:
+                print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
+                pass
+
+        # Step 2: Schedule the GSettings application to run after a short delay.
+        # This gives the extensions time to fully initialize before we configure them.
+        GLib.timeout_add(200, self._apply_gsettings_for_layout, layout_name)
+
+        return False # Stop idle_add from repeating
+
+    def _apply_gsettings_for_layout(self, layout_name):
+        layout_data = self.layouts.get(layout_name)
+        if not layout_data:
+            return False # Stop timeout from repeating
+
+        print(f"--- Applying GSettings for layout: {layout_name} ---")
+        
+        # Apply gsettings configurations
+        for config in layout_data.get("config", []):
+            schema_id = config.get("schema")
+            key = config.get("key")
+            value = config.get("value")
+            value_type = config.get("type")
+
+            if not schema_id or not key or value is None:
+                continue
+            
+            self._set_gsetting(schema_id, key, value, value_type)
+        
+        app_settings.set("layout-name", layout_name)
+        print(f"SUCCESS: Set layout-name to {layout_name}")
+
+        print(f"--- Finished applying GSettings for layout: {layout_name} ---")
+        return False # Stop timeout from repeating
+
     def apply_layout(self, layout_name):
         layout_data = self.layouts.get(layout_name)
         if not layout_data:
@@ -167,44 +252,12 @@ class LayoutManager:
 
         print(f"--- Applying layout: {layout_name} ---")
 
-        # 1. Reset everything to a known default state
+        # Step 1: Reset everything to a known default state.
         self._reset_to_defaults()
 
-        # 2. Apply the new configuration
-        # Enable extensions
-        for ext_uuid in layout_data.get("enable", []):
-            try:
-                self.extension_manager.enable_extension(ext_uuid)
-                print(f"SUCCESS: Enabled extension {ext_uuid}")
-            except Exception as e:
-                print(f"ERROR: Failed to enable extension {ext_uuid}: {e}")
-        
-        # Disable extensions (for this specific layout)
-        for ext_uuid in layout_data.get("disable", []):
-            try:
-                self.extension_manager.disable_extension(ext_uuid)
-                print(f"SUCCESS: Disabled extension {ext_uuid}")
-            except Exception as e:
-                # Ignore, might already be disabled from reset phase
-                print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
-                pass
-        
-        # Apply gsettings configurations
-        for config in layout_data.get("config", []):
-            path = config.get("path")
-            value = config.get("value")
-            value_type = config.get("type")
-
-            if not path or value is None:
-                continue
-            
-            parts = path.split('/')
-            if len(parts) > 2:
-                schema_id = ".".join(parts[1:-1])
-                key = parts[-1]
-                self._set_gsetting(schema_id, key, value, value_type)
-        
-        print(f"--- Finished applying layout: {layout_name} ---")
+        # Step 2: Schedule the application of new settings to run after the current
+        # events have been processed. This gives the system time to handle the resets.
+        GLib.idle_add(self._apply_layout_settings, layout_name)
 
 
 # Example usage (for testing purposes)

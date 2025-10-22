@@ -18,35 +18,43 @@
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "apply-custom-theme",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/background-opacity",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "background-opacity",
                 "value": 0.8
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "dash-max-icon-size",
                 "value": 48
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/disable-overview-on-startup",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "disable-overview-on-startup",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "dock-fixed",
                 "value": true
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "dock-position",
                 "value": "BOTTOM"
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/height-fraction",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "height-fraction",
                 "value": 0.9
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/preferred-monitor",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "preferred-monitor",
                 "value": -2
             }
         ]
@@ -61,31 +69,38 @@
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/background-opacity",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "background-opacity",
                 "value": 0.8
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "dash-max-icon-size",
                 "value": 48
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-fixed",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "dock-fixed",
                 "value": true
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/dock-position",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "dock-position",
                 "value": "LEFT"
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/extend-height",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "extend-height",
                 "value": true
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/height-fraction",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "height-fraction",
                 "value": 0.9
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-dock/preferred-monitor",
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "preferred-monitor",
                 "value": -2
             }
         ]
@@ -100,39 +115,53 @@
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-position",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "dot-position",
                 "value": "BOTTOM"
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/multi-monitors",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "multi-monitors",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/button-padding",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "button-padding",
                 "value": -1
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "custom-menu-button-icon-size",
                 "value": 40.0
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/distro-icon",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "distro-icon",
                 "value": 20
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-button-icon",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "menu-button-icon",
                 "value": "Distro_Icon"
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-layout",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "menu-layout",
                 "value": "Windows"
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/vert-separator",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "vert-separator",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/show-activities-button",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "show-activities-button",
+                "value": false
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "show-apps-button-visible",
                 "value": false
             }
         ]
@@ -147,48 +176,64 @@
         ],
         "config": [
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/appicon-margin",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-margin",
                 "value": 0
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/appicon-padding",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-padding",
                 "value": 2
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/dot-position",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "dot-position",
                 "value": "BOTTOM"
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/group-apps",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "group-apps",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/multi-monitors",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "multi-monitors",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/dash-to-panel/show-favorites",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "show-favorites",
                 "value": false
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "custom-menu-button-icon-size",
                 "value": 36.0
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/distro-icon",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "distro-icon",
                 "value": 20
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-button-icon",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "menu-button-icon",
                 "value": "Distro_Icon"
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/menu-layout",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "menu-layout",
                 "value": "Whisker"
             },
             {
-                "path": "/org/gnome/shell/extensions/arcmenu/vert-separator",
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "vert-separator",
                 "value": true
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "show-apps-button-visible",
+                "value": false
             }
         ]
     },
