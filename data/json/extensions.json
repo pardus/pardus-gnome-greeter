@@ -28,13 +28,6 @@
     "image": "data/assets/extensions/annoyance-screenshot.png"
   },
   {
-    "logo": "data/assets/extensions/pano-icon.png",
-    "id": "pano@elhan.io",
-    "name": "Pano - Clipboard Manager",
-    "description": "Cutting-edge clipboard manager for GNOME Shell.",
-    "image": "data/assets/extensions/pano-screenshot.png"
-  },
-  {
     "logo": "data/assets/extensions/clipboard-icon.png",
     "id": "clipboard-indicator@tudmotu.com",
     "name": "Clipboard Indicator",
