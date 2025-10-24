@@ -59,21 +59,20 @@ install_data(
 
 # Symbolic Icons
 symbolic_icons = [
-  'github-symbolic.svg',
-  'linkedin-symbolic.svg',
-  'twitter-symbolic.svg',
-  'youtube-symbolic.svg',
-  'facebook-symbolic.svg',
-  'home-symbolic.svg',
-  'document-symbolic.svg',
-  'community-symbolic.svg',
-  'forum-symbolic.svg'
+  'data/icons/github-symbolic.svg',
+  'data/icons/linkedin-symbolic.svg',
+  'data/icons/twitter-symbolic.svg',
+  'data/icons/youtube-symbolic.svg',
+  'data/icons/facebook-symbolic.svg',
+  'data/icons/home-symbolic.svg',
+  'data/icons/document-symbolic.svg',
+  'data/icons/community-symbolic.svg',
+  'data/icons/forum-symbolic.svg'
 ]
 
 install_data(
     symbolic_icons,
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    source_dir: 'data/icons'
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps')
 )
 
 # Çeviri dosyalarını işle
