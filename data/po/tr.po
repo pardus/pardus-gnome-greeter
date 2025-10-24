@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-24 14:16+0300\n"
+"POT-Creation-Date: 2025-10-24 16:08+0300\n"
 "PO-Revision-Date: 2025-08-05 12:41+0300\n"
 "Last-Translator: Osman Coskun <osman.coskun@pardus.org.tr>\n"
 "Language-Team: \n"
@@ -286,10 +286,6 @@ msgstr "Osman Coşkun <osman.coskun@pardus.org.tr>"
 msgid "Pardus GNOME Greeter"
 msgstr "Pardus GNOME Karşılayıcı"
 
-#: tr.org.pardus.pardus-gnome-greeter.desktop.in:3
-msgid "Configure your new Pardus GNOME desktop"
-msgstr "Yeni Pardus GNOME masaüstünüzü yapılandırın"
-
 #: data/ui/WallpaperPage.ui:15
 msgid "Pardus Live Wallpaper"
 msgstr "Pardus Canlı Duvar Kağıdı"
@@ -447,3 +443,10 @@ msgstr "Alt kısımda dock ile macOS benzeri arayüz"
 #: src/pardus_gnome_greeter/components/AboutDialog.py:22
 msgid "© 2025 Pardus Team"
 msgstr "© 2025 Pardus Ekibi"
+
+msgid ""
+"Display system information in gnome shell status bar, such as memory "
+"usage, cpu usage, network rates..."
+msgstr ""
+"Bellek kullanımı, işlemci kullanımı, ağ hızları gibi sistem bilgilerini "
+"gnome kabuğu durum çubuğunda gösterir."

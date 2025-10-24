@@ -13,17 +13,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
 from ..managers.ExtensionManager import ExtensionManager
 from ..managers.ThemeManager import ThemeManager
 
-# Extension descriptions dictionary
-EXTENSION_DESCRIPTIONS = {
-    "drive-menu@gnome-shell-extensions.gcampax.github.com": _("Add a status menu for accessing and unmounting removable devices."),
-    "caffeine@patapon.info": _("Disable screensaver and auto-suspend."),
-    "appindicatorsupport@rgcjonas.gmail.com": _("Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons in the Shell."),
-    "noannoyance@daase.net": _("Eliminates the 'Windows is ready' notification and brings the window into focus."),
-    "pano@elhan.io": _("Cutting-edge clipboard manager for GNOME Shell."),
-    "clipboard-indicator@tudmotu.com": _("Adds clipboard indicator to top panel, caches history."),
-    "bluetooth-battery-meter@maniacx.github.com": _("Provides quick access to Bluetooth"),
-}
-
 # ExtensionCard template class
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/ExtensionCard.ui')
 class ExtensionCard(Gtk.Box):
@@ -57,7 +46,7 @@ class ExtensionCard(Gtk.Box):
         
         if hasattr(self, 'desc_label') and self.desc_label:
             # Get description from our translations dictionary
-            description = EXTENSION_DESCRIPTIONS.get(self.extension_id, extension_data.get('description', ''))
+            description = _(extension_data.get('description', ''))
             self.desc_label.set_text(description)
         
         # Set image size if template child is available
