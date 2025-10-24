@@ -7,11 +7,6 @@ gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, Gio, GLib
 
-# Gettext setup
-domain = 'pardus-gnome-greeter'
-locale.bindtextdomain(domain, '/usr/share/locale')
-locale.textdomain(domain)
-
 from .pages.welcome import WelcomePage
 from .pages.layout import LayoutPage
 from .pages.theme import ThemePage

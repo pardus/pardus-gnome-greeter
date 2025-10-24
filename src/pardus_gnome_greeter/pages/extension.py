@@ -2,17 +2,11 @@ import locale
 import gi
 import os
 import sys
-from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, GLib, Gdk
-
-# Gettext setup
-domain = 'pardus-gnome-greeter'
-locale.bindtextdomain(domain, '/usr/share/locale')
-locale.textdomain(domain)
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))

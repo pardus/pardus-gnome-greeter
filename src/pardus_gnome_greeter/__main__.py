@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 import sys
 import os
-import locale
 import gi
 
 # Gettext setup - must be done before any other imports
-from locale import gettext as _
-locale.bindtextdomain('pardus-gnome-greeter', '/usr/share/locale')
-locale.textdomain('pardus-gnome-greeter')
+from .translation import init_translation
+init_translation()
 
 # Enable translation support for UI files
 Gtk = None  # Will be imported later
@@ -17,6 +15,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Gio, GLib, Gtk, Adw
 
 def load_gresource():
+
     """Loads the GResource file."""
     # Simplified dev environment check
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -33,6 +32,7 @@ def load_gresource():
     try:
         resource = Gio.resource_load(resource_path)
         Gio.Resource._register(resource)
+        _("GResource loaded from")
         print(f"GResource loaded from {resource_path}")
     except GLib.Error as e:
         print(f"FATAL: Could not load GResource: {e}")

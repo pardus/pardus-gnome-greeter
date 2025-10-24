@@ -9,11 +9,6 @@ from gi.repository import Gtk, Adw, GLib, Gio
 import os
 import sys
 
-# Gettext setup
-domain = 'pardus-gnome-greeter'
-locale.bindtextdomain(domain, '/usr/share/locale')
-locale.textdomain(domain)
-
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
 from ..managers.ThemeManager import ThemeManager
@@ -69,7 +64,7 @@ class ThemePage(Adw.PreferencesPage):
             button.set_name(name)
             button.add_css_class("accent-color-button")
             button.add_css_class(f"accent-{name}")
-            button.set_tooltip_text(name.title())
+            button.set_tooltip_text(_(name.title()))
             button.set_size_request(32, 32)
             
             if first_button is None:

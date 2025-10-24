@@ -47,7 +47,7 @@ class DisplayPage(Adw.PreferencesPage):
             self.remove(self.monitors_group)
         
         # Create monitors group
-        self.monitors_group = Adw.PreferencesGroup(title="Monitors")
+        self.monitors_group = Adw.PreferencesGroup(title=_("Monitors"))
         self.add(self.monitors_group)
         
         # Add monitors if available
@@ -58,7 +58,7 @@ class DisplayPage(Adw.PreferencesPage):
                 self.monitors_group.add(expander_row)
 
                 # Add resolution selection
-                resolution_row = Adw.ComboRow(title="Resolution")
+                resolution_row = Adw.ComboRow(title=_("Resolution"))
                 resolution_store = Gtk.StringList()
                 supported_resolutions = monitor_info.get('supported_resolutions', [])
                 for res_info in supported_resolutions:
@@ -78,7 +78,7 @@ class DisplayPage(Adw.PreferencesPage):
                 expander_row.add_row(resolution_row)
 
                 # Add scale selection (independent)
-                scale_row = Adw.ComboRow(title="Scale")
+                scale_row = Adw.ComboRow(title=_("Scale"))
                 scale_store = Gtk.StringList()
                 supported_scales = monitor_info.get('supported_scales', [1.0])
                 for scale in supported_scales:
@@ -132,7 +132,7 @@ class DisplayPage(Adw.PreferencesPage):
         # File Manager Icons
         nautilus_labels = [_("Small"), _("Small+"), _("Medium"), _("Large"), _("Extra Large")]
         nautilus_model = Gtk.StringList.new(nautilus_labels)
-        self.nautilus_zoom_row = Adw.ComboRow(title=_("File Manager Icon Zoom"), model=nautilus_model)
+        self.nautilus_zoom_row = Adw.ComboRow(title=_("File Manager Icon Size"), model=nautilus_model)
         scaling_group.add(self.nautilus_zoom_row)
         
         current_nautilus_zoom = self.nautilus_settings.get_string(NAUTILUS_KEY)

@@ -163,6 +163,11 @@
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-apps-button-visible",
                 "value": false
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "show-apps-icon-file",
+                "value": "/usr/share/pardus/gnome-settings/start-pardus-gnome-25.svg"
             }
         ]
     },
@@ -231,6 +236,16 @@
                 "value": true
             },
             {
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "menu-button-appearance",
+                "value": "Icon_Text"
+            },
+            {
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key": "custom-menu-button-text",
+                "value": "Pardus"
+            },
+            {
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-apps-button-visible",
                 "value": false
@@ -245,6 +260,12 @@
             "arcmenu@arcmenu.com",
             "dash-to-dock@micxgx.gmail.com"
         ],
-        "config": []
+        "config": [
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "show-apps-icon-file",
+                "value": "/usr/share/pardus/gnome-settings/start-pardus-gnome-25.svg"
+            }
+        ]
     }
 }

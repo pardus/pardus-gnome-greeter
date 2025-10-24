@@ -1,6 +1,5 @@
 import locale
 import gi
-from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -8,11 +7,6 @@ gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw, GLib, Gio
 import os
 import sys
-
-# Gettext setup
-domain = 'pardus-gnome-greeter'
-locale.bindtextdomain(domain, '/usr/share/locale')
-locale.textdomain(domain)
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
@@ -42,12 +36,12 @@ class TimePage(Adw.PreferencesPage):
         self.pattern_key = "pattern"
         self.font_size_key = "font-size"
         
-        # Format types (Luxon format)
+        # Format types (Luxon format for the extension)
         self.format_types = {
-            "time": "T",
-            "time-sec": "TT",
-            "date": "T\\nD",
-            "date-sec": "TT\\nD",
+            "time": "H:mm",
+            "time-sec": "H:mm:ss",
+            "date": "H:mm\ndd.MM.yyyy",
+            "date-sec": "H:mm:ss\ndd.MM.yyyy",
         }
         
         # Connect signals
@@ -71,14 +65,14 @@ class TimePage(Adw.PreferencesPage):
             settings = Gio.Settings.new(self.schema)
             current_pattern = settings.get_string(self.pattern_key)
             
-            # Set format buttons based on pattern
-            if "EEE, MMM d" in current_pattern:
+            # Set format buttons based on pattern (detects Luxon components)
+            if any(c in current_pattern for c in ['d', 'M', 'y', 'E', 'c']):
                 self.date_time_button.set_active(True)
             else:
                 self.time_only_button.set_active(True)
             
             # Set seconds switch
-            if "ss" in current_pattern:
+            if 'ss' in current_pattern:
                 self.show_seconds_switch.set_active(True)
             else:
                 self.show_seconds_switch.set_active(False)

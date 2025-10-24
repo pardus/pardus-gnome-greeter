@@ -1,19 +1,12 @@
-import locale
 import gi
 import os
 import threading
 import time
-from locale import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Adw, GLib, Gio, GdkPixbuf, Gdk, GObject
-
-# Gettext setup
-domain = 'pardus-gnome-greeter'
-locale.bindtextdomain(domain, '/usr/share/locale')
-locale.textdomain(domain)
 
 from ..managers.LayoutManager import LayoutManager
 
@@ -73,34 +66,11 @@ class LayoutPage(Adw.PreferencesPage):
         self.current_layout = None
         self.layout_cards = {}
         
-        # Manually translate UI elements
-        self._translate_ui_elements()
-        
         # Setup layouts
         self._setup_layouts()
         
         # Set initial selection
         self._set_initial_selection()
-    
-    def _translate_ui_elements(self):
-        """Manually translate UI elements that are not automatically translated"""
-        try:
-            # Find and translate the title and subtitle labels
-            title_label = self.get_template_child(self.__class__, "title_label")
-            subtitle_label = self.get_template_child(self.__class__, "subtitle_label")
-            
-            if title_label:
-                # Get the original text and translate it
-                original_text = "Choose Your Desktop Layout"
-                title_label.set_label(_(original_text))
-            
-            if subtitle_label:
-                # Get the original text and translate it
-                original_text = "Select a desktop layout that suits your workflow. You can change this anytime later."
-                subtitle_label.set_label(_(original_text))
-                
-        except Exception as e:
-            print(f"Warning: Could not translate UI elements: {e}")
     
     def _setup_layouts(self):
         """Setup layout cards in fixed 2x3 grid"""
@@ -114,8 +84,8 @@ class LayoutPage(Adw.PreferencesPage):
             'gnome': {'name': _('Classic GNOME'), 'description': _('Traditional GNOME desktop experience')},
             'mac': {'name': _('Mac Style'), 'description': _('macOS-like interface with dock at bottom')},
             'ubuntu': {'name': _('Ubuntu Style'), 'description': _('Ubuntu Unity-like experience')},
-            '10': {'name': _('Windows 10'), 'description': _('Windows 10 taskbar layout')},
-            'xp': {'name': _('Windows XP'), 'description': _('Classic Windows XP experience')},
+            '10': {'name': _('10'), 'description': _('Windows 10 taskbar layout')},
+            'xp': {'name': _('XP'), 'description': _('Classic Windows XP experience')},
             'pardus': {'name': _('Pardus Style'), 'description': _('Custom Pardus desktop layout')}
         }
         
@@ -125,7 +95,7 @@ class LayoutPage(Adw.PreferencesPage):
         row, col = 0, 0
         for layout_name in layout_order:
             if layout_name in layouts:
-                info = layout_info.get(layout_name, {'name': layout_name.title(), 'description': f'{layout_name.title()} layout'})
+                info = layout_info.get(layout_name, {'name': layout_name.title(), 'description': _(f'{layout_name.title()} layout')})
                 card = self._create_layout_card(layout_name, info['name'], info['description'])
                 self.layout_cards[layout_name] = card
                 
@@ -200,11 +170,13 @@ class LayoutPage(Adw.PreferencesPage):
         desc_label = Gtk.Label(label=description)
         desc_label.add_css_class("caption")
         desc_label.add_css_class("dim-label")
+        desc_label.add_css_class("layout-description")
         desc_label.set_halign(Gtk.Align.CENTER)
         desc_label.set_valign(Gtk.Align.CENTER)
         desc_label.set_wrap(True)
         desc_label.set_max_width_chars(22)
         desc_label.set_justify(Gtk.Justification.CENTER)
+        desc_label.set_lines(2)
         
         # Add to content box
         content_box.append(image_container)
