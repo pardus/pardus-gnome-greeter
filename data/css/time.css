@@ -1,0 +1,22 @@
+/*
+ * Time Page Card Styles
+ */
+
+/* Make sub-captions slightly dimmer */
+.time-format-card .caption {
+    opacity: 0.7;
+}
+
+/*
+ * Define the style for the SELECTED card.
+ * Use !important to be absolutely sure nothing else overrides this.
+ */
+.time-format-card:checked {
+    background-color: @card_background_color !important;
+    border-color: @accent_color !important;
+}
+
+/* Fix vertical alignment and jumping */
+.time-card-vbox {
+    min-height: 4em;
+}
