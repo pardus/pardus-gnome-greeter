@@ -1,17 +1,20 @@
 import json
 import os
+from gi.repository import Gio, GLib
 from .settings import shell_settings
 
 class ExtensionManager:
-    def __init__(self, extensions_file="data/json/extensions.json"):
+    def __init__(self, extensions_file="/tr/org/pardus/pardus-gnome-greeter/json/extensions.json"):
         self.extensions_file = extensions_file
         self.extensions = self._load_extensions()
         
     def _load_extensions(self):
-        """Load extensions from JSON file"""
+        """Load extensions from JSON file in GResource"""
         try:
-            with open(self.extensions_file, 'r') as f:
-                return json.load(f)
+            file = Gio.File.new_for_uri(f'resource://{self.extensions_file}')
+            data = file.load_contents(None)[1]
+            json_data = data.decode('utf-8')
+            return json.loads(json_data)
         except Exception as e:
             print(f"Error loading extensions: {e}")
             return []
