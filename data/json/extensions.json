@@ -1,44 +1,44 @@
 [
   {
-    "logo": "data/assets/extensions/drive-menu-icon.png",
+    "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/drive-menu-icon.png",
     "id": "drive-menu@gnome-shell-extensions.gcampax.github.com",
     "name": "Removable Drive Menu",
     "description": "Add a status menu for accessing and unmounting removable devices.",
-    "image": "data/assets/extensions/drive-menu-screenshot.png"
+    "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/drive-menu-screenshot.png"
   },
   {
-    "logo": "data/assets/extensions/caffeine-icon.png",
+    "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/caffeine-icon.png",
     "id": "caffeine@patapon.info",
     "name": "Caffeine",
     "description": "Disable screensaver and auto-suspend.",
-    "image": "data/assets/extensions/caffeine-screenshot.png"
+    "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/caffeine-screenshot.png"
   },
   {
-    "logo": "data/assets/extensions/annoyance-icon.png",
+    "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/annoyance-screenshot.png",
     "id": "noannoyance-fork@vrba.dev",
     "name": "NoAnnoyance v2",
     "description": "Eliminates the 'Windows is ready' notification and brings the window into focus.",
-    "image": "data/assets/extensions/annoyance-screenshot.png"
+    "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/annoyance-screenshot.png"
   },
   {
-    "logo": "data/assets/extensions/clipboard-icon.png",
+    "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/clipboard-icon.png",
     "id": "clipboard-indicator@tudmotu.com",
     "name": "Clipboard Indicator",
     "description": "Adds clipboard indicator to top panel, caches history.",
-    "image": "data/assets/extensions/clipboard-screenshot.png"
+    "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/clipboard-screenshot.png"
   },
   {
-    "logo": "data/assets/extensions/battery-icon.svg",
+    "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/battery-icon.svg",
     "id": "Bluetooth-Battery-Meter@maniacx.github.com",
     "name": "Bluetooth Battery Meter",
     "description": "Provides quick access to Bluetooth",
-    "image": "data/assets/extensions/battery-screenshot.png"
+    "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/battery-screenshot.png"
   },
   {
-    "logo": "data/assets/extensions/system-monitor-logo.png",
+    "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/system-monitor-logo.png",
     "id": "system-monitor@gnome-shell-extensions.gcampax.github.com",
     "name": "System Monitor",
     "description": "Display system information in gnome shell status bar, such as memory usage, cpu usage, network rates...",
-    "image": "data/assets/extensions/system-monitor-screenshot.png"
+    "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/system-monitor-screenshot.png"
   }
 ]

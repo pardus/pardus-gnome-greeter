@@ -53,12 +53,19 @@ class ExtensionCard(Gtk.Box):
         if hasattr(self, 'image') and self.image:
             self.image.set_size_request(200, 120)
         
-        # Load image
+        # Load image from gresource
         image_path = extension_data.get('image', '')
-        if image_path and os.path.exists(image_path) and hasattr(self, 'image') and self.image:
+        if image_path and hasattr(self, 'image') and self.image:
             try:
-                texture = Gdk.Texture.new_from_filename(image_path)
-                self.image.set_paintable(texture)
+                # Check if it's a gresource path
+                if image_path.startswith('/tr/org/pardus/pardus-gnome-greeter/'):
+                    texture = Gdk.Texture.new_from_resource(image_path)
+                    self.image.set_paintable(texture)
+                else:
+                    # Fallback to filename for backward compatibility
+                    if os.path.exists(image_path):
+                        texture = Gdk.Texture.new_from_filename(image_path)
+                        self.image.set_paintable(texture)
             except Exception as e:
                 print(f"Error loading extension image {image_path}: {e}")
         
