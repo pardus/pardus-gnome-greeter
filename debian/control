@@ -12,15 +12,7 @@ Depends: ${misc:Depends},
   python3 (>= 3.6),
   python3-pydbus,
   gnome-shell (>=40),
-  gnome-shell-extension-drive-menu,
-  gnome-shell-extension-caffeine,
-  gnome-shell-extension-appindicator,
-  gnome-shell-extension-no-annoyance,
-  gnome-shell-extension-clipboard-indicator,
-  gnome-shell-extension-bluetooth-battery-meter,
-  gnome-shell-extension-dashtodock,
-  gnome-shell-extension-dash-to-panel,
-  gnome-shell-extension-arc-menu
+  pardus-gnome-settings
 Breaks: pardus-welcome
 Description: Personalize your Pardus desktop with Pardus GNOME Greeter.
  This application offers easy customization of wallpapers,

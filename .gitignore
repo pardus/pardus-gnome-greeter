@@ -20,6 +20,7 @@ pip-delete-this-directory.txt
 *.tar.gz
 *.tar.xz
 *.dsc
+.kiro
 
 # Debian helper files
 /debian/files
