@@ -20,6 +20,18 @@ class GifPaintable(GObject.Object, Gdk.Paintable):
         self.timeout = GLib.timeout_add(self.delay, self.on_delay)
 
         self.invalidate_contents()
+    
+    @classmethod
+    def from_animation(cls, animation):
+        """Create GifPaintable from existing animation"""
+        instance = cls.__new__(cls)
+        GObject.Object.__init__(instance)
+        instance.animation = animation
+        instance.iterator = animation.get_iter()
+        instance.delay = instance.iterator.get_delay_time()
+        instance.timeout = GLib.timeout_add(instance.delay, instance.on_delay)
+        instance.invalidate_contents()
+        return instance
 
     def on_delay(self):
         delay = self.iterator.get_delay_time()
@@ -153,10 +165,14 @@ class LayoutPage(Adw.PreferencesPage):
         picture.set_valign(Gtk.Align.CENTER)
         picture.add_css_class("layout-image")
         
-        # Load static image initially
-        static_path = f"data/assets/layouts/layout-{layout_id}.svg"
-        if os.path.exists(static_path):
-            picture.set_filename(static_path)
+        # Load static image initially from gresource
+        static_path = f"/tr/org/pardus/pardus-gnome-greeter/assets/layouts/layout-{layout_id}.svg"
+        try:
+            file = Gio.File.new_for_uri(f'resource://{static_path}')
+            if file.query_exists():
+                picture.set_resource(static_path)
+        except Exception as e:
+            print(f"Error loading static image: {e}")
         
         image_container.append(picture)
         
@@ -189,7 +205,7 @@ class LayoutPage(Adw.PreferencesPage):
         card.picture = picture
         card.layout_id = layout_id
         card.static_path = static_path
-        card.gif_path = f"data/assets/layouts/layout-{layout_id}.gif"
+        card.gif_path = f"/tr/org/pardus/pardus-gnome-greeter/assets/layouts/layout-{layout_id}.gif"
         
         # Connect signals
         card.connect("clicked", self._on_layout_selected)
@@ -206,13 +222,17 @@ class LayoutPage(Adw.PreferencesPage):
         """Handle mouse enter on card"""
         card = controller.get_widget()
         
-        # Switch to GIF using GifPaintable
-        if os.path.exists(card.gif_path):
-            try:
-                gif_paintable = GifPaintable(card.gif_path)
+        # Switch to GIF using GifPaintable from gresource
+        try:
+            # Try to load GIF directly from gresource using GdkPixbuf
+            from gi.repository import GdkPixbuf
+            pixbuf_animation = GdkPixbuf.PixbufAnimation.new_from_resource(card.gif_path)
+            if pixbuf_animation:
+                # Create a simple paintable from the animation
+                gif_paintable = GifPaintable.from_animation(pixbuf_animation)
                 card.picture.set_paintable(gif_paintable)
-            except Exception as e:
-                print(f"Error loading GIF: {e}")
+        except Exception as e:
+            print(f"Error loading GIF: {e}")
         
         # Add hover style
         card.add_css_class("card-hover")
@@ -221,9 +241,13 @@ class LayoutPage(Adw.PreferencesPage):
         """Handle mouse leave from card"""
         card = controller.get_widget()
         
-        # Switch back to static image
-        if os.path.exists(card.static_path):
-            card.picture.set_filename(card.static_path)
+        # Switch back to static image from gresource
+        try:
+            file = Gio.File.new_for_uri(f'resource://{card.static_path}')
+            if file.query_exists():
+                card.picture.set_resource(card.static_path)
+        except Exception as e:
+            print(f"Error loading static image: {e}")
         
         # Remove hover style
         card.remove_css_class("card-hover")
