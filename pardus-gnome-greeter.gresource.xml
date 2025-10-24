@@ -54,10 +54,8 @@
     <file>assets/extensions/clipboard-icon.png</file>
     <file>assets/extensions/drive-menu-screenshot.png</file>
     <file>assets/extensions/drive-menu-icon.png</file>
-    <file>assets/extensions/indicator-screenshot.png</file>
-    <file>assets/extensions/indicator-icon.png</file>
-    <file>assets/extensions/pano-screenshot.png</file>
-    <file>assets/extensions/pano-icon.png</file>
+    <file>assets/extensions/system-monitor-screenshot.png</file>
+    <file>assets/extensions/system-monitor-logo.png</file>
     
     <!-- Layout Assets -->
     <file>assets/layouts/layout-10.gif</file>
