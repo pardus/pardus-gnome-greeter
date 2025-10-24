@@ -2,13 +2,7 @@
     min-height: 200px;
 }
 
-@media (max-width: 400px) {
-    .welcome-banner {
-        display: none;
-    }
-
-    .welcome-container {
-        margin: 12px;
-        spacing: 6px;
-    }
+.welcome-container {
+    margin: 12px;
+    spacing: 6px;
 }
