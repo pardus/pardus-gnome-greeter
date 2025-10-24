@@ -18,6 +18,7 @@ data/ui/WallpaperPage.ui
 data/ui/DisplayPage.ui
 data/ui/OutroPage.ui
 data/ui/TimePage.ui
+tr.org.pardus.pardus-gnome-greeter.desktop.in
 data/ui/components/ExtensionCard.ui
 data/ui/components/WallpaperThumbnail.ui
 

@@ -57,60 +57,23 @@ install_data(
     rename: application_id + '.svg'
 )
 
-# Symbolic Icons for social media
-install_data(
-    'data/icons/github.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'github-symbolic.svg'
-)
+# Symbolic Icons
+symbolic_icons = [
+  'github-symbolic.svg',
+  'linkedin-symbolic.svg',
+  'twitter-symbolic.svg',
+  'youtube-symbolic.svg',
+  'facebook-symbolic.svg',
+  'home-symbolic.svg',
+  'document-symbolic.svg',
+  'community-symbolic.svg',
+  'forum-symbolic.svg'
+]
 
 install_data(
-    'data/icons/linkedin.svg',
+    symbolic_icons,
     install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'linkedin-symbolic.svg'
-)
-
-install_data(
-    'data/icons/twitter.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'twitter-symbolic.svg'
-)
-
-install_data(
-    'data/icons/youtube.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'youtube-symbolic.svg'
-)
-
-install_data(
-    'data/icons/facebook.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'facebook-symbolic.svg'
-)
-
-# Symbolic Icons for useful links
-install_data(
-    'data/icons/home.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'home-symbolic.svg'
-)
-
-install_data(
-    'data/icons/document.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'document-symbolic.svg'
-)
-
-install_data(
-    'data/icons/community.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'community-symbolic.svg'
-)
-
-install_data(
-    'data/icons/forum.svg',
-    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps'),
-    rename: 'forum-symbolic.svg'
+    source_dir: 'data/icons'
 )
 
 # Çeviri dosyalarını işle
@@ -124,6 +87,17 @@ install_subdir('data/assets', install_dir: pkgdatadir)
 install_subdir('data/css', install_dir: pkgdatadir)
 install_subdir('data/json', install_dir: pkgdatadir)
 install_subdir('data/ui', install_dir: pkgdatadir)
+
+# Desktop file
+i18n = import('i18n')
+desktop_file = i18n.merge_file(
+    input: 'tr.org.pardus.pardus-gnome-greeter.desktop.in',
+    output: application_id + '.desktop',
+    po_dir: join_paths(meson.current_source_dir(), 'data', 'po'),
+    type: 'desktop',
+    install: true,
+    install_dir: join_paths(datadir, 'applications')
+)
 
 # Post-install script for manual installs (handled by dh_glib in debian)
 # meson.add_install_script('meson_post_install.py')
