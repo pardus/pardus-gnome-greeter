@@ -48,12 +48,12 @@ class DisplayManager:
             
             print(f"DEBUG: Active mode IDs: {active_mode_ids}")
             
-            # Create a mapping from active mode ID to actual mode data by searching height
+            # Create a mapping from active mode ID to actual mode data
             active_mode_data = {}
             for crtc_id, active_mode_id in active_mode_ids.items():
-                # Try to find mode by height (seems like mode ID correlates with height)
+                # Find mode by mode ID (mode[0] is the mode ID)
                 for mode in modes:
-                    if len(mode) >= 4 and mode[3] == active_mode_id:  # mode[3] is height
+                    if len(mode) >= 4 and mode[0] == active_mode_id:  # mode[0] is the mode ID
                         active_mode_data[crtc_id] = mode
                         print(f"DEBUG: Matched CRTC {crtc_id} with mode: {mode}")
                         break
@@ -146,10 +146,10 @@ class DisplayManager:
                     
                     if len(mode_data) >= 4:
                         # Set current resolution
-                        width = mode_data[2]
-                        height = mode_data[3] 
+                        width = mode_data[2]   # mode[2] is width
+                        height = mode_data[3]  # mode[3] is height
                         refresh_rate = mode_data[4] if len(mode_data) > 4 else 60.0
-                        mode_id = mode_data[0]  # Use the actual mode ID from the mode data
+                        mode_id = mode_data[0]  # mode[0] is the mode ID
                         
                         monitor_data['current_resolution'] = {
                             'resolution': f"{width}x{height}",
@@ -203,10 +203,22 @@ class DisplayManager:
                     for monitor_info_current, monitor_modes_current, monitor_properties_current in physical_monitors:
                         connector_name = str(monitor_info_current[0])
                         if connector_name == output_name:
+                            # Get the active mode ID for this monitor
+                            active_mode_id = active_mode_ids.get(current_crtc_id, 0)
                             # Found our monitor, get current mode scale info
                             for mode_string, mode_width, mode_height, mode_refresh, mode_preferred_scale, mode_supported_scales, mode_properties in monitor_modes_current:
                                 if mode_properties.get("is-current", False):
-                                    # This is the current mode, get its scale info
+                                    # This is the current mode, update resolution info from GetCurrentState
+                                    monitor_data['current_resolution'] = {
+                                        'resolution': f"{mode_width}x{mode_height}",
+                                        'width': mode_width,
+                                        'height': mode_height,
+                                        'refresh_rate': mode_refresh,
+                                        'mode_id': active_mode_id  # Use the active mode ID
+                                    }
+                                    print(f"  Updated current resolution from GetCurrentState: {mode_width}x{mode_height} @ {mode_refresh}Hz")
+                                    
+                                    # Get scale info
                                     current_scale_actual = float(mode_preferred_scale) if mode_preferred_scale else 1.0
                                     supported_scales_actual = [float(s) for s in mode_supported_scales] if mode_supported_scales else [1.0]
                                     
