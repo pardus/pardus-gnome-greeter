@@ -208,7 +208,7 @@
             {
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-favorites",
-                "value": false
+                "value": true
             },
             {
                 "schema": "org.gnome.shell.extensions.arcmenu",
