@@ -44,6 +44,7 @@ load_gresource()
 # Import UI classes after GResource is loaded
 from .main_window import MainWindow
 from .managers.settings import app_settings
+from .managers.ShortcutManager import ShortcutManager
 
 class PardusGreeterApplication(Adw.Application):
     """The main application."""
@@ -93,6 +94,12 @@ class PardusGreeterApplication(Adw.Application):
                 print("Autostart check: Not the first run, exiting.")
                 self.quit()
                 return
+            
+            # Apply shortcuts only on the actual first run
+            print("--- First run detected, applying shortcuts ---")
+            shortcut_manager = ShortcutManager()
+            shortcut_manager.apply_standard_shortcuts()
+            shortcut_manager.apply_custom_shortcuts()
         
         # Normal GUI mode
         if not self.win:

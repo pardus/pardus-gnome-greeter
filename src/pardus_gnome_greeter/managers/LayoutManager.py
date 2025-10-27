@@ -88,7 +88,9 @@ class LayoutManager:
     def _load_layouts(self):
         try:
             file = Gio.File.new_for_uri(f'resource://{self.config_path}')
-            data = file.load_contents(None)[1]
+            success, data, _ = file.load_contents(None)
+            if not success:
+                raise FileNotFoundError(f"Failed to load layout config from GResource: {self.config_path}")
             json_data = data.decode('utf-8')
             return json.loads(json_data)
         except Exception as e:
