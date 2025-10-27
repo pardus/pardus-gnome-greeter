@@ -265,6 +265,21 @@
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-apps-button-visible",
                 "value": false
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-margin",
+                "value": 4   
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-padding",
+                "value": 4
+            },
+            {
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key":"searchbar-default-top-location",
+                "value":"Bottom"
             }
         ]
     },
