@@ -81,6 +81,11 @@ subdir('data/po')
 # GSettings Schemas
 subdir('data/schemas')
 
+install_data(
+    'data/autostart/tr.org.pardus.pardus-gnome-greeter-autostart.desktop',
+    install_dir: join_paths(get_option('sysconfdir'), 'xdg', 'autostart')
+)
+
 # JSON and Asset data
 install_subdir('data/assets', install_dir: pkgdatadir)
 install_subdir('data/css', install_dir: pkgdatadir)

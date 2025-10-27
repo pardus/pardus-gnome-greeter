@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Pardus GNOME Greeter
+Comment=Set up your Pardus GNOME experience
+Exec=pardus-gnome-greeter --first-run
+Icon=pardus-gnome-greeter
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+Categories=GNOME;GTK;Settings;
