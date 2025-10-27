@@ -1,10 +1,16 @@
 {
+    "always_enabled_extensions": [
+        "gtk3-accent-sync@pardus.org.tr",
+        "blur-my-shell@aunetx",
+        "appindicatorsupport@rgcjonas.gmail.com"
+    ],
     "gnome": {
         "enable": [],
         "disable": [
             "dash-to-panel@jderose9.github.com",
             "arcmenu@arcmenu.com",
-            "dash-to-dock@micxgx.gmail.com"
+            "dash-to-dock@micxgx.gmail.com",
+            "date-menu-formatter@marcinjakubowski.github.com"
         ],
         "config": []
     },
@@ -102,6 +108,11 @@
                 "schema": "org.gnome.shell.extensions.dash-to-dock",
                 "key": "preferred-monitor",
                 "value": -2
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "force-straight-corner",
+                "value": true
             }
         ]
     },
@@ -207,13 +218,18 @@
             },
             {
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "panel-size",
+                "value": 38
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-favorites",
                 "value": true
             },
             {
                 "schema": "org.gnome.shell.extensions.arcmenu",
                 "key": "custom-menu-button-icon-size",
-                "value": 36.0
+                "value": 26.0
             },
             {
                 "schema": "org.gnome.shell.extensions.arcmenu",

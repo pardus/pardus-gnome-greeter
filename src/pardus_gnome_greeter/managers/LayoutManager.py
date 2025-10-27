@@ -38,9 +38,20 @@ class LayoutManager:
 
     def get_current_layout(self):
         """
-        Detects the current layout by checking which extensions are enabled.
+        Detects the current layout by first checking the saved gsetting,
+        and then falling back to checking which extensions are enabled.
         Returns the name of the current layout, or 'gnome' as a fallback.
         """
+        try:
+            # First, try to get the layout from GSettings
+            saved_layout = app_settings.get("layout-name")
+            if saved_layout and saved_layout in self.layouts:
+                print(f"Detected current layout from GSettings: {saved_layout}")
+                return saved_layout
+        except Exception as e:
+            print(f"Could not read saved layout from GSettings, falling back to extension check. Error: {e}")
+
+        # Fallback to extension-based detection if GSetting is not available
         try:
             enabled_extensions = self.extension_manager.get_enabled_extensions()
             enabled_set = set(enabled_extensions)
@@ -71,7 +82,7 @@ class LayoutManager:
             return 'gnome'
 
         except Exception as e:
-            print(f"Error detecting current layout: {e}")
+            print(f"Error detecting current layout by extensions: {e}")
             return 'gnome'  # Fallback in case of error
 
     def _load_layouts(self):
@@ -213,9 +224,9 @@ class LayoutManager:
                 print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
                 pass
 
-        # Step 2: Schedule the GSettings application to run after a short delay.
+        # Step 2: Schedule the GSettings application to run when the main loop is idle.
         # This gives the extensions time to fully initialize before we configure them.
-        GLib.timeout_add(200, self._apply_gsettings_for_layout, layout_name)
+        GLib.idle_add(self._apply_gsettings_for_layout, layout_name)
 
         return False # Stop idle_add from repeating
 
