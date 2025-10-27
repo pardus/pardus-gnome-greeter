@@ -1,6 +1,7 @@
 {
     "always_enabled_extensions": [
         "gtk3-accent-sync@pardus.org.tr",
+        "gtk3-theme-switcher@adwgtk3",
         "blur-my-shell@aunetx",
         "appindicatorsupport@rgcjonas.gmail.com"
     ],
