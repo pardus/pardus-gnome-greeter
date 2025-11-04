@@ -1,4 +1,5 @@
 from gi.repository import Gio, GLib
+import json
 
 class SettingsManager:
     def __init__(self, schema_id):
@@ -15,17 +16,14 @@ class SettingsManager:
     def set(self, key, value):
         """Sets a setting value."""
         try:
-            variant = self.settings.get_value(key)
-            # Create a new GLib.Variant with the correct type
-            if variant.is_of_type(GLib.VariantType.new('b')):
-                new_variant = GLib.Variant('b', bool(value))
-            elif variant.is_of_type(GLib.VariantType.new('i')) or variant.is_of_type(GLib.VariantType.new('n')) or variant.is_of_type(GLib.VariantType.new('q')):
-                new_variant = GLib.Variant('i', int(value))
-            elif variant.is_of_type(GLib.VariantType.new('d')):
-                new_variant = GLib.Variant('d', float(value))
-            else: # Default to string
-                new_variant = GLib.Variant('s', str(value))
-            
+            # Get the expected GVariant type string directly from the original variant.
+            # This is the most compatible and direct method.
+            original_variant = self.settings.get_value(key)
+            type_string = original_variant.get_type_string()
+
+            # Create a new GLib.Variant with the correct type signature and value.
+            new_variant = GLib.Variant(type_string, value)
+
             return self.settings.set_value(key, new_variant)
         except Exception as e:
             print(f"Error setting {key} = {value}: {e}")

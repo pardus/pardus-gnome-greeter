@@ -20,7 +20,9 @@ class LayoutManager:
             self.layouts = {}
             self.global_resets = []
 
-        self.dbus_proxy = self._get_dbus_proxy()
+        # For sequential layout application
+        self.task_queue = []
+        self.is_applying_layout = False
         
         # Initialize ExtensionManager
         self.extension_manager = ExtensionManager()
@@ -96,23 +98,6 @@ class LayoutManager:
         except Exception as e:
             raise FileNotFoundError(f"Layout configuration not found in GResource at: {self.config_path}\n{e}")
 
-    def _get_dbus_proxy(self):
-        try:
-            bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
-            proxy = Gio.DBusProxy.new_sync(
-                bus,
-                Gio.DBusProxyFlags.NONE,
-                None,
-                'org.gnome.Shell',
-                '/org/gnome/Shell',
-                'org.gnome.Shell.Extensions',
-                None
-            )
-            return proxy
-        except GLib.Error as e:
-            print(f"Failed to create DBus proxy: {e.message}")
-            return None
-
     def _get_all_managed_extensions(self):
         all_extensions = set()
         for layout_data in self.layouts.values():
@@ -134,6 +119,12 @@ class LayoutManager:
 
     def _set_gsetting(self, schema_id, key, value, value_type=None):
         try:
+            # Check if schema exists before trying to use it to prevent crashes
+            schema_source = Gio.SettingsSchemaSource.get_default()
+            if not schema_source.lookup(schema_id, True):
+                print(f"Warning: Schema '{schema_id}' not found. Skipping setting key '{key}'.")
+                return
+                
             # Use the generic SettingsManager for dynamic schemas
             settings_manager = SettingsManager(schema_id)
             settings_manager.set(key, value)
@@ -145,73 +136,44 @@ class LayoutManager:
             print(f"UNEXPECTED ERROR: Could not set gsetting {schema_id} [{key}]: {e}")
 
 
-    def _reset_to_defaults(self):
-        print("--- Starting Reset to Defaults ---")
-
-        # 1. Apply any global resets defined in the config.
-        # This handles special cases that need to be reset to a specific default
-        # before the general schema reset.
+    def _task_reset_settings(self):
+        """Resets all managed GSettings to their default values."""
         if self.global_resets:
             print("--- Applying Global Resets ---")
             for reset_config in self.global_resets:
-                schema_id = reset_config.get("schema")
-                key = reset_config.get("key")
-                value = reset_config.get("value")
-                value_type = reset_config.get("type")
-
+                schema_id, key, value, value_type = (
+                    reset_config.get("schema"),
+                    reset_config.get("key"),
+                    reset_config.get("value"),
+                    reset_config.get("type"),
+                )
                 if schema_id and key and value is not None:
-                    try:
-                        self._set_gsetting(schema_id, key, value, value_type)
-                        print(f"SUCCESS: Globally reset {schema_id} [{key}] to its default value.")
-                    except Exception as e:
-                        print(f"Warning: Failed to globally reset {schema_id} [{key}]. Error: {e}")
+                    self._set_gsetting(schema_id, key, value, value_type)
 
-        # 2. Reset all GSettings for every schema we manage.
-        # This is more robust than resetting individual keys, as it clears ALL settings
-        # for a schema, preventing state from leaking between layouts.
-        # We do this *before* disabling extensions to ensure their schemas are available.
         unique_schemas = {schema_id for schema_id, key in self.all_managed_settings}
         for schema_id in unique_schemas:
             try:
+                # Check if schema exists before trying to use it to prevent crashes
+                schema_source = Gio.SettingsSchemaSource.get_default()
+                if not schema_source.lookup(schema_id, True):
+                    print(f"Warning: Schema '{schema_id}' not found. Skipping reset for this schema.")
+                    continue
+
                 settings = Gio.Settings.new(schema_id)
                 print(f"--- Resetting all keys for schema: {schema_id} ---")
-                all_keys = settings.list_keys()
-                for key in all_keys:
+                for key in settings.list_keys():
                     if settings.is_writable(key):
                         settings.reset(key)
-                print(f"SUCCESS: Completed reset for schema {schema_id}")
-
             except Exception as e:
                 print(f"Warning: Failed to reset schema {schema_id}. It might not be installed. Error: {e}")
 
-        # 2. Disable all manageable extensions EXCEPT those that should always be enabled.
-        for ext_uuid in self.all_managed_extensions:
-            if ext_uuid in self.always_enabled_extensions:
-                print(f"INFO: Skipping disable for '{ext_uuid}' as it is marked as always enabled.")
-                continue
-            try:
-                self.extension_manager.disable_extension(ext_uuid)
-                print(f"SUCCESS: Disabled extension {ext_uuid}")
-            except Exception as e:
-                # Ignore errors, extension might already be disabled
-                print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
-                pass
+    def _task_apply_layout_extensions(self, layout_name):
+        """Enables and disables extensions specific to the chosen layout."""
+        layout_data = self.layouts.get(layout_name, {})
         
-        print("--- Finished Reset ---")
-
-    def _apply_layout_settings(self, layout_name):
-        """Helper function to apply the settings of a layout. To be called after reset."""
-        layout_data = self.layouts.get(layout_name)
-        if not layout_data:
-            return # Already checked in apply_layout, but good practice
-
-        print(f"--- Applying settings for layout: {layout_name} ---")
-
-        # Step 1: Enable and disable extensions.
         for ext_uuid in layout_data.get("enable", []):
             try:
                 self.extension_manager.enable_extension(ext_uuid)
-                print(f"SUCCESS: Enabled extension {ext_uuid}")
             except Exception as e:
                 print(f"ERROR: Failed to enable extension {ext_uuid}: {e}")
         
@@ -221,41 +183,50 @@ class LayoutManager:
                 continue
             try:
                 self.extension_manager.disable_extension(ext_uuid)
-                print(f"SUCCESS: Disabled extension {ext_uuid}")
             except Exception as e:
                 print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
-                pass
 
-        # Step 2: Schedule the GSettings application to run when the main loop is idle.
-        # This gives the extensions time to fully initialize before we configure them.
-        GLib.idle_add(self._apply_gsettings_for_layout, layout_name)
+    def _task_apply_layout_gsettings(self, layout_name):
+        """Applies the GSettings configurations for the chosen layout."""
+        layout_data = self.layouts.get(layout_name, {})
 
-        return False # Stop idle_add from repeating
-
-    def _apply_gsettings_for_layout(self, layout_name):
-        layout_data = self.layouts.get(layout_name)
-        if not layout_data:
-            return False # Stop timeout from repeating
-
-        print(f"--- Applying GSettings for layout: {layout_name} ---")
-        
-        # Apply gsettings configurations
         for config in layout_data.get("config", []):
-            schema_id = config.get("schema")
-            key = config.get("key")
-            value = config.get("value")
-            value_type = config.get("type")
-
-            if not schema_id or not key or value is None:
-                continue
-            
-            self._set_gsetting(schema_id, key, value, value_type)
+            schema_id, key, value, value_type = (
+                config.get("schema"),
+                config.get("key"),
+                config.get("value"),
+                config.get("type"),
+            )
+            if schema_id and key and value is not None:
+                self._set_gsetting(schema_id, key, value, value_type)
         
         app_settings.set("layout-name", layout_name)
         print(f"SUCCESS: Set layout-name to {layout_name}")
 
-        print(f"--- Finished applying GSettings for layout: {layout_name} ---")
-        return False # Stop timeout from repeating
+    def _process_next_task(self):
+        if not self.task_queue:
+            self.is_applying_layout = False
+            print("--- Layout application finished successfully ---")
+            return False
+
+        task_func, task_args, delay = self.task_queue.pop(0)
+
+        try:
+            print(f"--- Running task: {task_func.__name__} ---")
+            task_func(*task_args)
+        except Exception as e:
+            print(f"ERROR: An error occurred in task {task_func.__name__}: {e}")
+            self.is_applying_layout = False
+            self.task_queue = []
+            return False
+
+        if self.task_queue:
+            GLib.timeout_add(delay, self._process_next_task)
+        else:
+            self.is_applying_layout = False
+            print("--- Layout application finished successfully ---")
+
+        return False
 
     def apply_layout(self, layout_name):
         layout_data = self.layouts.get(layout_name)
@@ -263,15 +234,20 @@ class LayoutManager:
             print(f"ERROR: Layout '{layout_name}' not found in configuration.")
             return
 
+        if self.is_applying_layout:
+            print("WARNING: Another layout application is already in progress. Ignoring request.")
+            return
+
+        self.is_applying_layout = True
         print(f"--- Applying layout: {layout_name} ---")
 
-        # Step 1: Reset everything to a known default state.
-        self._reset_to_defaults()
+        self.task_queue = [
+            (self._task_reset_settings, [], 300),
+            (self._task_apply_layout_extensions, [layout_name], 500),
+            (self._task_apply_layout_gsettings, [layout_name], 100),
+        ]
 
-        # Step 2: Schedule the application of new settings to run after the current
-        # events have been processed. This gives the system time to handle the resets.
-        GLib.idle_add(self._apply_layout_settings, layout_name)
-
+        self._process_next_task()
 
 # Example usage (for testing purposes)
 if __name__ == '__main__':
@@ -308,7 +284,6 @@ if __name__ == '__main__':
             print(f"\nApplying '{layout_name}' layout in {timeout} seconds...")
             GLib.timeout_add_seconds(timeout, lambda name=layout_name: manager.apply_layout(name))
 
-        # A main loop is needed for DBus calls to be processed
         loop = GLib.MainLoop()
         print("\nRunning test... Press Ctrl+C to exit after a few seconds.")
         # Exit after all tests are done
