@@ -2,7 +2,7 @@
 Name=Pardus GNOME Greeter
 _Comment=Configure your new Pardus GNOME desktop
 Exec=pardus-gnome-greeter
-Icon=tr.org.pardus.pardus-gnome-greeter
+Icon=pardus-gnome-greeter
 Terminal=false
 Type=Application
 Categories=Settings;X-Pardus-Apps;

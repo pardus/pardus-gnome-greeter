@@ -1,3 +1,95 @@
+pardus-gnome-greeter (0.1.0~beta1) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Osman Coskun ]
+  * feat(layout): new layout structure
+  * feat(layout): new app structure
+  * feat(page): update Welcome Page
+  * feat(layout): implement layout management and UI enhancements
+  * feat(theme): theme and accent color selection
+  * feat(wallpaper): added wallpaper page
+  * refactor(wallpaper): wallpaper page layout and thumbnail handling
+  * feat(display): adding layout and managers
+  * feat(display): display settings UI with resolution and scale options
+  * refactor(layout): update gresource for json files
+  * feat(ui): wallpaper page style improved
+  * feat(ui): added wallpaper thumbnail component
+  * feat(extensions): implement extension management and integration
+  * feat(extensions): add method to sort extensions by installation status
+  * feat(ui): add sliders for cursor size, desktop icon size, and file manager icon size
+  * feat(applications): page created
+  * feat(ui): css file separated for better management
+  * feat(icons): add new SVG icons
+  * feat(outro): outro page with social media links etc.
+  * feat(assets): assets grouped and renamed.
+  * refactor(assets): update paths and filenames for extension logos and images
+  * feat(about-dialog): add About dialog with application details and version
+  * fix(display-manager): ensure supported resolutions are displayed even when none match the current scale
+  * feat(ui): make UI text translatable across multiple pages
+  * feat(i18n): implement gettext for translation on all pages
+  * feat(i18n):  added translation script and meson for translation
+  * refactor(meson):  organized data directories
+  * feat(i18n): update translations
+  * fix(i18n): remove emojis from translatable strings in UI text
+  * feat(ui): add TimePage for clock formatting and display options
+  * refactor(settings): Centralize GSettings management
+  * fix(imports): Correct relative imports in pages
+  * chore(debian): Add build and runtime dependencies
+  * feat(ui): Add start page selection logic
+  * fix(ui): Remove bottom margin from DisplayPage
+  * fix(args): switch main window content
+  * feat(wallpaper): add LiveWallpaperSourceRow component
+  * feat(wallpaper): add preview modal dialog
+  * style(wallpaper): add preview component styles
+  * config(wallpaper): add sources configuration
+  * feat(wallpaper): add live wallpaper manager
+  * build: update gresource with new components
+  * feat(wallpaper): integrate live wallpaper sources
+  * chore: update remaining config files
+  * refactor: move about_dialog to components directory
+  * feat(daemon): add background wallpaper service
+  * feat(wallpaper): add source selection dialog
+  * feat(wallpaper): implement file system monitoring
+  * feat(wallpaper): improve metadata caching system
+  * fix(wallpaper): improve preview loading fallback
+  * fix(settings): add return values and validation
+  * refactor(wallpaper): remove manual update button
+  * chore: update configuration and resource files
+  * chore(components): remove about_dialog module
+  * style(wallpaper): Refactor CSS and layout for gnome system design
+  * refactor(wallpaper): live wallpaper functions are removed
+  * refactor(wallpaper): live wallpaper components are removed.
+  * refactor(ui): remove unused slider components and update layout settings
+  * feat(ui): enhance welcome page layout and functionality with new styles and navigation
+  * cleanup: Remove unused 'old' directory
+  * refactor(layout): update layout configuration
+  * feat(deps): Add GNOME Shell extension dependencies and remove Pano
+  * feat(deps): Dependencies changed.
+  * feat(i18n): Add Turkish translation and i18n support
+  * fix(ui): Adjust layout and styles for consistency
+  * refactor(build): Clean up build script and fix desktop file
+  * fix(meson): icon files
+  * feat(extensions): Update extension list and UUIDs
+  * fix(i18n): Refactor extension translations and fix UI alignment
+  * fix: Add time.css to gresource
+  * fix: Remove unsupported @media rule
+  * fix: Load extensions from gresource
+  * fix: Load GIFs from gresource
+  * fix: Load extension images from gresource
+  * fix: Correct resolution detection logic
+  * refactor(layout): layout and app banner changed
+  * feat(app): autostart added
+  * feat(layout): Refine layouts and detection logic
+  * feat(app): Integrate ShortcutManager for first run
+  * feat(layout): remaining xp config added
+  * tmp(outro): outro image changed to banner for beta
+  * fix(layout): added missing extension
+  * fix(desktop_file): icon changed
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 27 Oct 2025 19:35:40 +0300
+
 pardus-gnome-greeter (0.0.13) unstable; urgency=medium
 
   [ Osman Coskun ]

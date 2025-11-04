@@ -1,6 +1,7 @@
 {
     "always_enabled_extensions": [
         "gtk3-accent-sync@pardus.org.tr",
+        "gtk3-theme-switcher@adwgtk3",
         "blur-my-shell@aunetx",
         "appindicatorsupport@rgcjonas.gmail.com"
     ],
@@ -289,6 +290,21 @@
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-apps-button-visible",
                 "value": false
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-margin",
+                "value": 4   
+            },
+            {
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-padding",
+                "value": 4
+            },
+            {
+                "schema": "org.gnome.shell.extensions.arcmenu",
+                "key":"searchbar-default-top-location",
+                "value":"Bottom"
             }
         ]
     },
