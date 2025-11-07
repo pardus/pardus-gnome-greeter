@@ -124,11 +124,17 @@ class LayoutManager:
             if not schema_source.lookup(schema_id, True):
                 print(f"Warning: Schema '{schema_id}' not found. Skipping setting key '{key}'.")
                 return
+            
+            print(f"DEBUG: Setting {schema_id} [{key}] - value type: {type(value).__name__}, value length: {len(str(value)) if isinstance(value, str) else 'N/A'}")
                 
             # Use the generic SettingsManager for dynamic schemas
             settings_manager = SettingsManager(schema_id)
-            settings_manager.set(key, value)
-            print(f"SUCCESS: Set {schema_id} [{key}] to {value} (Type: {type(value).__name__})")
+            success = settings_manager.set(key, value)
+            
+            if success:
+                print(f"SUCCESS: Set {schema_id} [{key}] to {value} (Type: {type(value).__name__})")
+            else:
+                print(f"ERROR: Failed to set {schema_id} [{key}] - SettingsManager.set returned False")
 
         except GLib.Error as e:
             print(f"ERROR: Failed to set GSetting {schema_id} [{key}]: {e.message}")
@@ -198,6 +204,11 @@ class LayoutManager:
                 config.get("type"),
             )
             if schema_id and key and value is not None:
+                # Debug: value tipini kontrol et
+                print(f"DEBUG: Processing config - schema: {schema_id}, key: {key}, value type: {type(value).__name__}, value: {str(value)[:100]}...")
+                
+                # pipelines key'i için value JSON'da string olarak tutuluyor
+                # SettingsManager.set metodunda string'i dict'e çevirip GLib.Variant'a geçiriyoruz
                 self._set_gsetting(schema_id, key, value, value_type)
         
         app_settings.set("layout-name", layout_name)

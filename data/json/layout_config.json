@@ -2,11 +2,12 @@
     "always_enabled_extensions": [
         "gtk3-accent-sync@pardus.org.tr",
         "gtk3-theme-switcher@adwgtk3",
-        "blur-my-shell@aunetx",
         "appindicatorsupport@rgcjonas.gmail.com"
     ],
     "gnome": {
-        "enable": [],
+        "enable": [
+            "blur-my-shell@aunetx"
+        ],
         "disable": [
             "dash-to-panel@jderose9.github.com",
             "arcmenu@arcmenu.com",
@@ -17,7 +18,8 @@
     },
     "mac": {
         "enable": [
-            "dash-to-dock@micxgx.gmail.com"
+            "dash-to-dock@micxgx.gmail.com",
+            "blur-my-shell@aunetx"
         ],
         "disable": [
             "arcmenu@arcmenu.com",
@@ -72,7 +74,8 @@
         ],
         "disable": [
             "arcmenu@arcmenu.com",
-            "dash-to-panel@jderose9.github.com"
+            "dash-to-panel@jderose9.github.com",
+            "blur-my-shell@aunetx"
         ],
         "config": [
             {
@@ -116,30 +119,17 @@
                 "value": true
             },
             {
-                "schema": "org.gnome.shell.extensions.blur-my-shell",
-                "key": "pipelines",
-                "value": {
-                    "pipeline_default": {
-                        "name": "Default",
-                        "effects": [
-                            {
-                                "type": "native_static_gaussian_blur",
-                                "id": "effect_000000000000",
-                                "params": {
-                                    "radius": 30,
-                                    "brightness": 0.6
-                                }
-                            }
-                        ]
-                    }
-                }
+                "schema": "org.gnome.shell.extensions.dash-to-dock",
+                "key": "transparency-mode",
+                "value": "DYNAMIC"
             }
         ]
     },
     "10": {
         "enable": [
             "dash-to-panel@jderose9.github.com",
-            "arcmenu@arcmenu.com"
+            "arcmenu@arcmenu.com",
+            "blur-my-shell@aunetx"
         ],
         "disable": [
             "dash-to-dock@micxgx.gmail.com"
@@ -205,7 +195,8 @@
     "xp": {
         "enable": [
             "dash-to-panel@jderose9.github.com",
-            "arcmenu@arcmenu.com"
+            "arcmenu@arcmenu.com",
+            "blur-my-shell@aunetx"
         ],
         "disable": [
             "dash-to-dock@micxgx.gmail.com"
@@ -310,7 +301,8 @@
     },
     "pardus": {
         "enable": [
-            "dash-to-panel@jderose9.github.com"
+            "dash-to-panel@jderose9.github.com",
+            "blur-my-shell@aunetx"
         ],
         "disable": [
             "arcmenu@arcmenu.com",
