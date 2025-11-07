@@ -524,7 +524,7 @@ class DisplayManager:
                         for monitor_info, monitor_modes, monitor_properties in physical_monitors:
                             monitor_connector, monitor_vendor, monitor_product, monitor_serial = monitor_info
                             if linked_monitor_connector == monitor_connector:
-                                # Target monitör ise yeni scale ile hesapla
+                                # If this is the target monitor, calculate with new scale
                                 if monitor_connector == target_connector:
                                     is_target = True
                                 for mode_string, mode_width, mode_height, mode_refresh, mode_preferred_scale, mode_supported_scales, mode_properties in monitor_modes:

@@ -72,7 +72,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.menu_button.connect('clicked', self._on_menu_button_clicked)
         content_header.pack_start(self.menu_button)
 
-        # About button (sola, menu butonunun yanına)
+        # About button (to the left, next to menu button)
         self.about_button = Gtk.Button.new_from_icon_name("help-about-symbolic")
         self.about_button.set_tooltip_text(_("About"))
         self.about_button.connect('clicked', self._on_about_button_clicked)

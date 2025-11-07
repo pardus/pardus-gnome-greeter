@@ -1,5 +1,6 @@
 import json
 import re
+import os
 from gi.repository import Gio
 
 class ShortcutManager:
@@ -14,15 +15,34 @@ class ShortcutManager:
         self.media_keys_settings = Gio.Settings.new(self.media_keys_schema_id)
 
     def _load_json_from_gresource(self, path):
-        """Loads a JSON file from the GResource bundle."""
+        """Loads a JSON file from the GResource bundle with fallback to filesystem."""
+        # Try GResource first
         try:
             file = Gio.File.new_for_uri(f'resource://{path}')
             success, data, _ = file.load_contents(None)
-            if not success:
-                print(f"Failed to load contents from GResource path: {path}")
-                return None
-            json_data = data.decode('utf-8')
-            return json.loads(json_data)
+            if success:
+                json_data = data.decode('utf-8')
+                return json.loads(json_data)
+        except Exception as e:
+            pass  # Fall through to filesystem fallback
+        
+        # Fallback: Try to load from filesystem
+        try:
+            # Extract filename from GResource path
+            filename = os.path.basename(path)
+            # Try common installation paths
+            fallback_paths = [
+                f"/usr/share/pardus-gnome-greeter/json/{filename}",
+                f"/usr/local/share/pardus-gnome-greeter/json/{filename}",
+            ]
+            
+            for fallback_path in fallback_paths:
+                if os.path.exists(fallback_path):
+                    with open(fallback_path, 'r', encoding='utf-8') as f:
+                        return json.load(f)
+            
+            print(f"Warning: Could not load JSON from GResource ({path}) or filesystem")
+            return None
         except Exception as e:
             print(f"Error loading JSON from {path}: {e}")
             return None

@@ -9,12 +9,32 @@ class ExtensionManager:
         self.extensions = self._load_extensions()
         
     def _load_extensions(self):
-        """Load extensions from JSON file in GResource"""
+        """Load extensions from JSON file in GResource with fallback to filesystem"""
+        # Try GResource first
         try:
             file = Gio.File.new_for_uri(f'resource://{self.extensions_file}')
-            data = file.load_contents(None)[1]
-            json_data = data.decode('utf-8')
-            return json.loads(json_data)
+            success, data, _ = file.load_contents(None)
+            if success:
+                json_data = data.decode('utf-8')
+                return json.loads(json_data)
+        except Exception as e:
+            pass  # Fall through to filesystem fallback
+        
+        # Fallback: Try to load from filesystem
+        try:
+            filename = os.path.basename(self.extensions_file)
+            fallback_paths = [
+                f"/usr/share/pardus-gnome-greeter/json/{filename}",
+                f"/usr/local/share/pardus-gnome-greeter/json/{filename}",
+            ]
+            
+            for fallback_path in fallback_paths:
+                if os.path.exists(fallback_path):
+                    with open(fallback_path, 'r', encoding='utf-8') as f:
+                        return json.load(f)
+            
+            print(f"Warning: Could not load extensions from GResource ({self.extensions_file}) or filesystem")
+            return []
         except Exception as e:
             print(f"Error loading extensions: {e}")
             return []
@@ -44,6 +64,9 @@ class ExtensionManager:
                 enabled_extensions.append(extension_id)
                 self.set_enabled_extensions(enabled_extensions)
                 print(f"Enabled extension: {extension_id}")
+                return True
+            else:
+                print(f"Extension {extension_id} is already enabled")
                 return True
         except Exception as e:
             print(f"Error enabling extension {extension_id}: {e}")

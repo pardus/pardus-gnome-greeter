@@ -1,5 +1,5 @@
 import os
-from settings import theme_settings, shell_settings
+from .settings import theme_settings, shell_settings
 
 class ThemeManager:
     def __init__(self):

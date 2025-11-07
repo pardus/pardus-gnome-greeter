@@ -88,15 +88,38 @@ class LayoutManager:
             return 'gnome'  # Fallback in case of error
 
     def _load_layouts(self):
+        """Load layout configuration from GResource with fallback to filesystem"""
+        # Try GResource first
         try:
             file = Gio.File.new_for_uri(f'resource://{self.config_path}')
             success, data, _ = file.load_contents(None)
-            if not success:
-                raise FileNotFoundError(f"Failed to load layout config from GResource: {self.config_path}")
-            json_data = data.decode('utf-8')
-            return json.loads(json_data)
+            if success:
+                json_data = data.decode('utf-8')
+                return json.loads(json_data)
         except Exception as e:
-            raise FileNotFoundError(f"Layout configuration not found in GResource at: {self.config_path}\n{e}")
+            pass  # Fall through to filesystem fallback
+        
+        # Fallback: Try to load from filesystem
+        try:
+            filename = os.path.basename(self.config_path)
+            fallback_paths = [
+                f"/usr/share/pardus-gnome-greeter/json/{filename}",
+                f"/usr/local/share/pardus-gnome-greeter/json/{filename}",
+            ]
+            
+            for fallback_path in fallback_paths:
+                if os.path.exists(fallback_path):
+                    with open(fallback_path, 'r', encoding='utf-8') as f:
+                        return json.load(f)
+            
+            raise FileNotFoundError(
+                f"Layout configuration not found in GResource ({self.config_path}) "
+                f"or filesystem. Tried: {', '.join(fallback_paths)}"
+            )
+        except FileNotFoundError:
+            raise
+        except Exception as e:
+            raise FileNotFoundError(f"Error loading layout configuration: {e}")
 
     def _get_all_managed_extensions(self):
         all_extensions = set()
@@ -142,8 +165,8 @@ class LayoutManager:
             print(f"UNEXPECTED ERROR: Could not set gsetting {schema_id} [{key}]: {e}")
 
 
-    def _task_reset_settings(self):
-        """Resets all managed GSettings to their default values."""
+    def _task_reset_settings(self, layout_name):
+        """Resets GSettings to their default values for schemas used by the target layout."""
         if self.global_resets:
             print("--- Applying Global Resets ---")
             for reset_config in self.global_resets:
@@ -156,8 +179,20 @@ class LayoutManager:
                 if schema_id and key and value is not None:
                     self._set_gsetting(schema_id, key, value, value_type)
 
-        unique_schemas = {schema_id for schema_id, key in self.all_managed_settings}
-        for schema_id in unique_schemas:
+        # Only reset schemas that are used in the target layout's config
+        layout_data = self.layouts.get(layout_name, {})
+        layout_schemas = {config.get("schema") for config in layout_data.get("config", []) if config.get("schema")}
+        
+        # Also reset schemas for extensions that are being disabled in this layout
+        # This ensures clean state for disabled extensions
+        disabled_extensions = layout_data.get("disable", [])
+        for ext_uuid in disabled_extensions:
+            # Convert extension UUID to schema ID (e.g., "blur-my-shell@aunetx" -> "org.gnome.shell.extensions.blur-my-shell")
+            ext_id = ext_uuid.split("@")[0]
+            schema_id = f"org.gnome.shell.extensions.{ext_id}"
+            layout_schemas.add(schema_id)
+        
+        for schema_id in layout_schemas:
             try:
                 # Check if schema exists before trying to use it to prevent crashes
                 schema_source = Gio.SettingsSchemaSource.get_default()
@@ -177,17 +212,24 @@ class LayoutManager:
         """Enables and disables extensions specific to the chosen layout."""
         layout_data = self.layouts.get(layout_name, {})
         
-        for ext_uuid in layout_data.get("enable", []):
+        enable_list = layout_data.get("enable", [])
+        disable_list = layout_data.get("disable", [])
+        
+        print(f"DEBUG: Layout '{layout_name}' - Enable: {enable_list}, Disable: {disable_list}")
+        
+        for ext_uuid in enable_list:
             try:
+                print(f"DEBUG: Attempting to enable extension: {ext_uuid}")
                 self.extension_manager.enable_extension(ext_uuid)
             except Exception as e:
                 print(f"ERROR: Failed to enable extension {ext_uuid}: {e}")
         
-        for ext_uuid in layout_data.get("disable", []):
+        for ext_uuid in disable_list:
             if ext_uuid in self.always_enabled_extensions:
                 print(f"INFO: Skipping disable for '{ext_uuid}' as it is marked as always enabled.")
                 continue
             try:
+                print(f"DEBUG: Attempting to disable extension: {ext_uuid}")
                 self.extension_manager.disable_extension(ext_uuid)
             except Exception as e:
                 print(f"Warning: Failed to disable extension {ext_uuid}: {e}")
@@ -204,11 +246,9 @@ class LayoutManager:
                 config.get("type"),
             )
             if schema_id and key and value is not None:
-                # Debug: value tipini kontrol et
+                # Debug: check value type
                 print(f"DEBUG: Processing config - schema: {schema_id}, key: {key}, value type: {type(value).__name__}, value: {str(value)[:100]}...")
                 
-                # pipelines key'i için value JSON'da string olarak tutuluyor
-                # SettingsManager.set metodunda string'i dict'e çevirip GLib.Variant'a geçiriyoruz
                 self._set_gsetting(schema_id, key, value, value_type)
         
         app_settings.set("layout-name", layout_name)
@@ -253,7 +293,7 @@ class LayoutManager:
         print(f"--- Applying layout: {layout_name} ---")
 
         self.task_queue = [
-            (self._task_reset_settings, [], 300),
+            (self._task_reset_settings, [layout_name], 300),
             (self._task_apply_layout_extensions, [layout_name], 500),
             (self._task_apply_layout_gsettings, [layout_name], 100),
         ]

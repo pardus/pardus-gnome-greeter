@@ -25,11 +25,38 @@ gresource_target = custom_target(
     install_dir: pkgdatadir
 )
 
-# Python sources
+# Python sources - Install to pkgdatadir for application use
 install_subdir(
     'src/pardus_gnome_greeter',
     install_dir: pkgdatadir
 )
+
+# Python package - Install to dist-packages for library use
+# This allows users to import pardus_gnome_greeter in their Python scripts
+python = import('python')
+py_installation = python.find_installation('python3', required: true)
+
+# Get Python installation directory for dist-packages/site-packages
+# Use prefix to determine correct path (/usr vs /usr/local)
+prefix = get_option('prefix')
+if prefix == '/usr' or prefix.startswith('/usr/')
+    # System installation: use /usr/lib/python3/dist-packages
+    python_site_packages = join_paths('/usr/lib', 'python3', 'dist-packages')
+else
+    # Local installation: use get_install_dir() which handles /usr/local correctly
+    python_site_packages = py_installation.get_install_dir()
+endif
+
+# Install Python package to site-packages/dist-packages
+# Exclude __main__.py as it's only for application entry point
+# Exclude __pycache__ directories
+install_subdir(
+    'src/pardus_gnome_greeter',
+    install_dir: python_site_packages,
+    exclude_directories: ['__pycache__'],
+    exclude_files: ['__main__.py']
+)
+
 
 # Executable script
 configure_file(
