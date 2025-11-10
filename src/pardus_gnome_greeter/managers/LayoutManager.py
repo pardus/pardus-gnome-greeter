@@ -1,6 +1,7 @@
 import json
 import os
 from gi.repository import Gio, GLib
+from pydbus import SessionBus
 
 # Import ExtensionManager
 from .ExtensionManager import ExtensionManager
@@ -9,6 +10,12 @@ from .settings import app_settings, SettingsManager
 class LayoutManager:
     def __init__(self, config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json"):
         self.config_path = config_path
+        self.dbus_service = None
+        try:
+            bus = SessionBus()
+            self.dbus_service = bus.get('org.gnome.Shell.Extensions', "/org.gnome/Shell/Extensions")
+        except Exception as e:
+            print(f"Could not connect to dbus service: {e}")
         
         try:
             config_data = self._load_layouts()
@@ -165,6 +172,18 @@ class LayoutManager:
             print(f"UNEXPECTED ERROR: Could not set gsetting {schema_id} [{key}]: {e}")
 
 
+    def _task_toggle_user_extensions(self, enable):
+        """Enable or disable all user extensions."""
+        if not self.dbus_service:
+            print("D-Bus service not available to toggle extensions.")
+            return
+        try:
+            self.dbus_service.UserExtensionsEnabled = enable
+            status = "Enabled" if enable else "Disabled"
+            print(f"--- All user extensions {status} ---")
+        except Exception as e:
+            print(f"Error toggling user extensions: {e}")
+
     def _task_reset_settings(self, layout_name):
         """Resets GSettings to their default values for schemas used by the target layout."""
         if self.global_resets:
@@ -293,9 +312,11 @@ class LayoutManager:
         print(f"--- Applying layout: {layout_name} ---")
 
         self.task_queue = [
+            (self._task_toggle_user_extensions, [False], 100),
             (self._task_reset_settings, [layout_name], 300),
-            (self._task_apply_layout_extensions, [layout_name], 500),
             (self._task_apply_layout_gsettings, [layout_name], 100),
+            (self._task_apply_layout_extensions, [layout_name], 500),
+            (self._task_toggle_user_extensions, [True], 500),
         ]
 
         self._process_next_task()

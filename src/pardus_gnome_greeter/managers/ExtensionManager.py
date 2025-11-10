@@ -1,12 +1,18 @@
 import json
 import os
+import dbus
 from gi.repository import Gio, GLib
-from .settings import shell_settings
 
 class ExtensionManager:
     def __init__(self, extensions_file="/tr/org/pardus/pardus-gnome-greeter/json/extensions.json"):
         self.extensions_file = extensions_file
         self.extensions = self._load_extensions()
+        self.dbus_service = None
+        try:
+            bus = dbus.SessionBus()
+            self.dbus_service = bus.get_object('org.gnome.Shell.Extensions', "/org/gnome/Shell/Extensions")
+        except Exception as e:
+            print(f"Could not connect to dbus service: {e}")
         
     def _load_extensions(self):
         """Load extensions from JSON file in GResource with fallback to filesystem"""
@@ -45,42 +51,52 @@ class ExtensionManager:
     
     def get_enabled_extensions(self):
         """Get currently enabled extensions"""
-        return shell_settings.get_strv("enabled-extensions")
-    
-    def set_enabled_extensions(self, extensions):
-        """Set enabled extensions"""
-        shell_settings.set_strv("enabled-extensions", extensions)
+        if not self.dbus_service:
+            return []
+        
+        enabled_extensions = []
+        try:
+            extensions = self.dbus_service.ListExtensions(dbus_interface='org.gnome.Shell.Extensions')
+            for ext_id, ext_info in extensions.items():
+                if 'state' in ext_info and ext_info['state'] == 1:
+                    enabled_extensions.append(ext_id)
+        except Exception as e:
+            print(f"Failed to get enabled extensions via D-Bus: {e}")
+        return enabled_extensions
 
     def is_extension_enabled(self, extension_id):
         """Check if an extension is enabled"""
-        enabled_extensions = self.get_enabled_extensions()
-        return extension_id in enabled_extensions
+        if not self.dbus_service:
+            return False
+        try:
+            extensions = self.dbus_service.ListExtensions(dbus_interface='org.gnome.Shell.Extensions')
+            if extension_id in extensions:
+                ext_info = extensions[extension_id]
+                return 'state' in ext_info and ext_info['state'] == 1
+        except Exception as e:
+            print(f"Failed to check if extension is enabled via D-Bus: {e}")
+        return False
     
     def enable_extension(self, extension_id):
         """Enable an extension"""
+        if not self.dbus_service:
+            return False
         try:
-            enabled_extensions = self.get_enabled_extensions()
-            if extension_id not in enabled_extensions:
-                enabled_extensions.append(extension_id)
-                self.set_enabled_extensions(enabled_extensions)
-                print(f"Enabled extension: {extension_id}")
-                return True
-            else:
-                print(f"Extension {extension_id} is already enabled")
-                return True
+            self.dbus_service.EnableExtension(extension_id, dbus_interface='org.gnome.Shell.Extensions')
+            print(f"Enabled extension: {extension_id}")
+            return True
         except Exception as e:
             print(f"Error enabling extension {extension_id}: {e}")
         return False
     
     def disable_extension(self, extension_id):
         """Disable an extension"""
+        if not self.dbus_service:
+            return False
         try:
-            enabled_extensions = self.get_enabled_extensions()
-            if extension_id in enabled_extensions:
-                enabled_extensions.remove(extension_id)
-                self.set_enabled_extensions(enabled_extensions)
-                print(f"Disabled extension: {extension_id}")
-                return True
+            self.dbus_service.DisableExtension(extension_id, dbus_interface='org.gnome.Shell.Extensions')
+            print(f"Disabled extension: {extension_id}")
+            return True
         except Exception as e:
             print(f"Error disabling extension {extension_id}: {e}")
         return False

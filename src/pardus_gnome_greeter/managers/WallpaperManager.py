@@ -11,6 +11,7 @@ class WallpaperManager:
         # Common wallpaper directories
         self.wallpaper_dirs = [
             "/usr/share/backgrounds",
+            "/usr/share/wallpapers",
         ]
         
         # Supported image formats
