@@ -382,8 +382,8 @@ msgid "Traditional GNOME desktop experience"
 msgstr "Geleneksel GNOME masaüstü deneyimi"
 
 #: data/ui/OutroPage.ui:177
-msgid "Twitter"
-msgstr "Twitter"
+msgid "X"
+msgstr "X"
 
 #: src/pardus_gnome_greeter/pages/layout.py:86
 msgid "Ubuntu Style"

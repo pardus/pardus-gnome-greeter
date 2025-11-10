@@ -151,10 +151,10 @@
                   </object>
                 </child>
                 
-                <!-- Twitter -->
+                <!-- X -->
                 <child>
                   <object class="GtkLinkButton">
-                    <property name="uri">https://twitter.com/PardusKurumsal</property>
+                    <property name="uri">https://x.com/PardusKurumsal</property>
                     <property name="halign">center</property>
                     <style>
                       <class name="accent-link"/>
@@ -167,14 +167,14 @@
                         
                         <child>
                           <object class="GtkImage">
-                            <property name="icon-name">twitter-symbolic</property>
+                            <property name="icon-name">x-symbolic</property>
                             <property name="pixel-size">16</property>
                           </object>
                         </child>
                         
                                             <child>
                       <object class="GtkLabel">
-                        <property name="label" translatable="yes">Twitter</property>
+                        <property name="label" translatable="yes">X</property>
                           </object>
                         </child>
                       </object>

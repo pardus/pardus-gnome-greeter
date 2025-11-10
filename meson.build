@@ -88,7 +88,7 @@ install_data(
 symbolic_icons = [
   'data/icons/github-symbolic.svg',
   'data/icons/linkedin-symbolic.svg',
-  'data/icons/twitter-symbolic.svg',
+  'data/icons/x-symbolic.svg',
   'data/icons/youtube-symbolic.svg',
   'data/icons/facebook-symbolic.svg',
   'data/icons/home-symbolic.svg',
