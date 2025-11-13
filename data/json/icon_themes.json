@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Gnome Default",
+        "icon": "gnome-default.svg",
+        "theme": "Adwaita"
+    },
+    {
+        "name": "Pardus Default",
+        "icon": "pardus-default.svg",
+        "theme": "pardus-gnome"
+    },
+    {
+        "name": "Pardus Brown",
+        "icon": "pardus-brown.svg",
+        "theme": "pardus-gnome-brown"
+    },
+    {
+        "name": "Pardus Gray",
+        "icon": "pardus-gray.svg",
+        "theme": "pardus-gnome-gray"
+    }
+]

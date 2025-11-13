@@ -140,5 +140,46 @@
       </object>
     </child>
     
+    <!-- Icon Theme Section -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Icon Theme</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkListBox">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+                <child>
+                  <object class="GtkListBoxRow">
+                    <property name="activatable">false</property>
+                    <child>
+                      <object class="AdwBin">
+                        <property name="child">
+                          <object class="GtkBox" id="icon_themes_container">
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">16</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="margin-top">16</property>
+                            <property name="margin-bottom">16</property>
+                            <property name="margin-start">16</property>
+                            <property name="margin-end">16</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    
   </template>
 </interface> 

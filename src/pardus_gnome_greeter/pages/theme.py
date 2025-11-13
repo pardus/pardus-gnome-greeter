@@ -1,6 +1,7 @@
 import locale
 import gi
 from locale import gettext as _
+import json
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -21,6 +22,7 @@ class ThemePage(Adw.PreferencesPage):
     light_theme_button = Gtk.Template.Child("light_theme_button")
     dark_theme_button = Gtk.Template.Child("dark_theme_button")
     accent_colors_container = Gtk.Template.Child("accent_colors_container")
+    icon_themes_container = Gtk.Template.Child("icon_themes_container")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -30,6 +32,7 @@ class ThemePage(Adw.PreferencesPage):
         
         # Setup accent colors
         self.setup_accent_colors()
+        self.setup_icon_themes()
         
         # Connect signals
         self.light_theme_button.connect("toggled", self.on_theme_button_toggled)
@@ -39,9 +42,95 @@ class ThemePage(Adw.PreferencesPage):
         # Set initial state
         GLib.idle_add(self.update_button_states)
         GLib.idle_add(self.update_accent_color_states)
+        GLib.idle_add(self.update_icon_theme_states)
     
-
+    def setup_icon_themes(self):
+        """Setup icon theme selection"""
+        self.icon_theme_buttons = {}
+        first_button = None
         
+        try:
+            resource_path = "/tr/org/pardus/pardus-gnome-greeter/json/icon_themes.json"
+            data_bytes = Gio.resources_lookup_data(resource_path, 0)
+            data_str = data_bytes.get_data().decode('utf-8')
+            icon_themes = json.loads(data_str)
+            
+            for theme in icon_themes:
+                name = theme["name"]
+                icon = theme["icon"]
+                theme_name = theme["theme"]
+                
+                button = Gtk.ToggleButton()
+                button.set_name(theme_name)
+                button.add_css_class("card")
+                button.set_tooltip_text(_(name.title()))
+                button.set_size_request(100, 64)
+
+                if first_button is None:
+                    first_button = button
+                else:
+                    button.set_group(first_button)
+                
+                box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+                box.set_halign(Gtk.Align.CENTER)
+                box.set_valign(Gtk.Align.CENTER)
+
+                img_resource_path = f"/tr/org/pardus/pardus-gnome-greeter/assets/icon-themes/{icon}"
+                img = Gtk.Image.new_from_resource(img_resource_path)
+                img.set_pixel_size(20)
+                
+                label = Gtk.Label(label=_(name.title()))
+                label.add_css_class("caption")
+                
+                box.append(img)
+                box.append(label)
+                button.set_child(box)
+                
+                button.connect("toggled", self.on_icon_theme_toggled)
+                self.icon_themes_container.append(button)
+                
+                self.icon_theme_buttons[theme_name] = button
+
+        except (GLib.Error, json.JSONDecodeError) as e:
+            print(f"Error setting up icon themes: {e}")
+
+    def on_icon_theme_toggled(self, button):
+        """Handle icon theme change"""
+        if not button.get_active():
+            return
+            
+        theme_name = button.get_name()
+        
+        try:
+            self.theme_manager.set_icon_theme(theme_name)
+        except Exception as e:
+            print(f"Error setting icon theme: {e}")
+            
+    def update_icon_theme_states(self):
+        """Update icon theme button states based on current setting"""
+        try:
+            current_icon_theme = self.theme_manager.get_current_icon_theme()
+            
+            for name, button in self.icon_theme_buttons.items():
+                button.handler_block_by_func(self.on_icon_theme_toggled)
+            
+            if current_icon_theme in self.icon_theme_buttons:
+                self.icon_theme_buttons[current_icon_theme].set_active(True)
+            else:
+                self.icon_theme_buttons["Adwaita"].set_active(True)
+            
+            for name, button in self.icon_theme_buttons.items():
+                button.handler_unblock_by_func(self.on_icon_theme_toggled)
+                
+        except Exception as e:
+            print(f"Error updating icon theme states: {e}")
+            try:
+                self.icon_theme_buttons["Adwaita"].set_active(True)
+            except:
+                pass
+                
+        return False
+
     def setup_accent_colors(self):
         """Setup accent color selection"""
         colors = [
@@ -188,4 +277,5 @@ class ThemePage(Adw.PreferencesPage):
     def refresh_theme_state(self):
         """Public method to refresh theme state from outside"""
         self.update_button_states()
-        self.update_accent_color_states() 
+        self.update_accent_color_states()
+        self.update_icon_theme_states() 

@@ -38,6 +38,13 @@ class ThemeManager:
             return theme_settings.get("gtk-theme")
         except:
             return "Adwaita"
+
+    def get_current_icon_theme(self):
+        """Get current icon theme"""
+        try:
+            return theme_settings.get("icon-theme")
+        except:
+            return "Adwaita"
         
     def set_color_scheme(self, scheme):
         """Set color scheme (default or prefer-dark)"""
@@ -55,6 +62,15 @@ class ThemeManager:
             return True
         except Exception as e:
             print(f"Error setting GTK theme: {e}")
+            return False
+
+    def set_icon_theme(self, theme):
+        """Set icon theme"""
+        try:
+            theme_settings.set("icon-theme", theme)
+            return True
+        except Exception as e:
+            print(f"Error setting icon theme: {e}")
             return False
             
     def set_accent_color(self, color_name):
@@ -108,6 +124,7 @@ class ThemeManager:
         return {
             "color_scheme": self.get_current_color_scheme(),
             "gtk_theme": self.get_current_gtk_theme(),
+            "icon_theme": self.get_current_icon_theme(),
             "accent_color": self.get_current_accent_color(),
             "is_dark": self.is_dark_theme_active(),
             "is_light": self.is_light_theme_active()

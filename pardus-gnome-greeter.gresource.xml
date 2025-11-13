@@ -34,6 +34,7 @@
     <file>json/links.json</file>
     <file>json/shortcuts.json</file>
     <file>json/social_media.json</file>
+    <file>json/icon_themes.json</file>
     
     <!-- General Assets -->
     <file>assets/logo.svg</file>
@@ -99,5 +100,9 @@
     <file>icons/document-symbolic.svg</file>
     <file>icons/community-symbolic.svg</file>
     <file>icons/forum-symbolic.svg</file>
+    <file>assets/icon-themes/gnome-default.svg</file>
+    <file>assets/icon-themes/pardus-brown.svg</file>
+    <file>assets/icon-themes/pardus-default.svg</file>
+    <file>assets/icon-themes/pardus-gray.svg</file>
   </gresource>
 </gresources> 
