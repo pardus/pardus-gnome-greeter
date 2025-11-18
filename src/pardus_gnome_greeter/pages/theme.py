@@ -77,7 +77,7 @@ class ThemePage(Adw.PreferencesPage):
 
                 img_resource_path = f"/tr/org/pardus/pardus-gnome-greeter/assets/icon-themes/{icon}"
                 img = Gtk.Image.new_from_resource(img_resource_path)
-                img.set_pixel_size(20)
+                img.set_pixel_size(48)
                 
                 label = Gtk.Label(label=_(name.title()))
                 label.add_css_class("caption")
