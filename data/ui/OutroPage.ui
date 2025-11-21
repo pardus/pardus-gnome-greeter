@@ -28,7 +28,7 @@
             <!-- Success Icon -->
             <child>
               <object class="GtkImage">
-                <property name="resource">/tr/org/pardus/pardus-gnome-greeter/assets/banner.png</property>
+                <property name="resource">/tr/org/pardus/pardus-gnome-greeter/assets/outro.png</property>
                 <property name="width-request">250</property>
                 <property name="height-request">250</property>
                 <property name="halign">center</property>
