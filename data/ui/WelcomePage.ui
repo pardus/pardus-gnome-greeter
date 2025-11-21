@@ -55,8 +55,9 @@
                 <property name="halign">center</property>
                 <property name="margin-top">12</property>
                 <style>
-                  <class name="pill"/>
                   <class name="suggested-action"/>
+                  <class name="rounded-12"/>
+                  <class name="wide-button"/>
                 </style>
               </object>
             </child>

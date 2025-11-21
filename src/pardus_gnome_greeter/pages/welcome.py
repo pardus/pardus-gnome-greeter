@@ -22,8 +22,8 @@ class WelcomePage(Adw.PreferencesPage):
         super().__init__(**kwargs)
         
         self.welcome_banner.set_resource("/tr/org/pardus/pardus-gnome-greeter/assets/banner.png")
-        self.welcome_title.set_label(_("Welcome to Pardus GNOME Greeter!"))
-        self.welcome_message.set_label(_("This application will help you configure your Pardus GNOME experience."))
+        self.welcome_title.set_label(_("Welcome to Pardus GNOME!"))
+        self.welcome_message.set_label(_("You can easily configure your system with the Greeter application."))
         self.start_button.connect("clicked", self.on_start_button_clicked)
 
     def on_start_button_clicked(self, button):
