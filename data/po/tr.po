@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-24 16:08+0300\n"
-"PO-Revision-Date: 2025-08-05 12:41+0300\n"
+"POT-Creation-Date: 2025-11-21 16:06+0300\n"
+"PO-Revision-Date: 2025-11-21 16:08+0300\n"
 "Last-Translator: Osman Coskun <osman.coskun@pardus.org.tr>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#: src/pardus_gnome_greeter/pages/layout.py:87
+#: src/pardus_gnome_greeter/pages/layout.py:99
 msgid "10"
 msgstr "10"
 
-#: src/pardus_gnome_greeter/main_window.py:77
+#: src/pardus_gnome_greeter/main_window.py:80
 msgid "About"
 msgstr "Hakkında"
 
@@ -29,15 +29,7 @@ msgstr "Hakkında"
 msgid "Accent Color"
 msgstr "Vurgu Rengi"
 
-#: src/pardus_gnome_greeter/pages/extension.py:18
-msgid "Add a status menu for accessing and unmounting removable devices."
-msgstr "Taşınabilir cihazlara erişim ve çıkartma için durum menüsü ekle."
-
-#: src/pardus_gnome_greeter/pages/extension.py:23
-msgid "Adds clipboard indicator to top panel, caches history."
-msgstr "Üst panele pano göstergesi ekler, geçmişi önbelleğe alır."
-
-#: data/ui/TimePage.ui:151
+#: data/ui/TimePage.ui:143
 msgid "Adjust the size of the clock text"
 msgstr "Saat metninin boyutunu ayarlayın"
 
@@ -53,7 +45,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: src/pardus_gnome_greeter/main_window.py:168 data/ui/ApplicationsPage.ui:4
+#: src/pardus_gnome_greeter/main_window.py:171 data/ui/ApplicationsPage.ui:4
 msgid "Applications"
 msgstr "Uygulamalar"
 
@@ -78,11 +70,11 @@ msgstr "Masaüstü Düzeninizi Seçin"
 msgid "Choose how the date and time are displayed"
 msgstr "Tarih ve saatin nasıl görüntüleneceğini seçin"
 
-#: src/pardus_gnome_greeter/pages/layout.py:84
+#: src/pardus_gnome_greeter/pages/layout.py:96
 msgid "Classic GNOME"
 msgstr "Klasik GNOME"
 
-#: src/pardus_gnome_greeter/pages/layout.py:88
+#: src/pardus_gnome_greeter/pages/layout.py:100
 msgid "Classic Windows XP experience"
 msgstr "Klasik Windows XP deneyimi"
 
@@ -103,7 +95,7 @@ msgstr "Tebrikler! Kurulum Tamamlandı"
 msgid "Cursor Size"
 msgstr "İmleç Boyutu"
 
-#: src/pardus_gnome_greeter/pages/layout.py:89
+#: src/pardus_gnome_greeter/pages/layout.py:101
 msgid "Custom Pardus desktop layout"
 msgstr "Özel Pardus masaüstü düzeni"
 
@@ -115,15 +107,11 @@ msgstr "Birkaç tıkla Pardusʼu özelleştirin ve yapılandırın"
 msgid "Customize the date and time format in the top panel"
 msgstr "Üst paneldeki tarih ve saat biçimini özelleştirin"
 
-#: src/pardus_gnome_greeter/pages/extension.py:22
-msgid "Cutting-edge clipboard manager for GNOME Shell."
-msgstr "GNOME Shell için son teknoloji pano yöneticisi."
-
 #: data/ui/ThemePage.ui:85
 msgid "Dark"
 msgstr "Koyu"
 
-#: data/ui/TimePage.ui:127
+#: data/ui/TimePage.ui:119
 msgid "Date & Time"
 msgstr "Tarih & Saat"
 
@@ -135,19 +123,15 @@ msgstr "Tarih / Saat Biçimi"
 msgid "Desktop Icon Size"
 msgstr "Masaüstü Simge Boyutu"
 
-#: src/pardus_gnome_greeter/pages/extension.py:19
-msgid "Disable screensaver and auto-suspend."
-msgstr "Ekran koruyucu ve otomatik uyku kipini devre dışı bırak."
-
-#: src/pardus_gnome_greeter/main_window.py:166 data/ui/DisplayPage.ui:4
+#: src/pardus_gnome_greeter/main_window.py:169 data/ui/DisplayPage.ui:4
 msgid "Display"
 msgstr "Ekran"
 
-#: data/ui/TimePage.ui:175
+#: data/ui/TimePage.ui:167
 msgid "Display Options"
 msgstr "Görünüm Seçenekleri"
 
-#: data/ui/TimePage.ui:179
+#: data/ui/TimePage.ui:171
 msgid "Display seconds in the time format"
 msgstr "Saat biçiminde saniyeleri göster"
 
@@ -155,29 +139,15 @@ msgstr "Saat biçiminde saniyeleri göster"
 msgid "Documentation"
 msgstr "Belgeler"
 
-#: src/pardus_gnome_greeter/pages/extension.py:21
-msgid ""
-"Eliminates the 'Windows is ready' notification and brings the window into "
-"focus."
-msgstr "'Pencere hazır' bildirimini kaldırır ve pencereyi odaklar."
-
 #: data/ui/TimePage.ui:15
 msgid "Enable clock formatting"
 msgstr "Saat biçimlendirmeyi etkinleştir"
-
-#: src/pardus_gnome_greeter/pages/extension.py:20
-msgid ""
-"Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray icons "
-"in the Shell."
-msgstr ""
-"AppIndicator, KStatusNotifierItem ve eski Tepsi simgelerini Shell'de "
-"desteklemeyi etkinleştirir."
 
 #: src/pardus_gnome_greeter/pages/wallpaper.py:222
 msgid "Extension Not Found"
 msgstr "Uzantı Bulunamadı"
 
-#: src/pardus_gnome_greeter/main_window.py:167 data/ui/ExtensionPage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:170 data/ui/ExtensionPage.ui:6
 msgid "Extensions"
 msgstr "Uzantılar"
 
@@ -197,7 +167,7 @@ msgstr "Fatih Altun <fatih.altun@pardus.org.tr>"
 msgid "File Manager Icon Size"
 msgstr "Dosya Yöneticisi Simge Boyutu"
 
-#: src/pardus_gnome_greeter/main_window.py:170 data/ui/OutroPage.ui:7
+#: src/pardus_gnome_greeter/main_window.py:173 data/ui/OutroPage.ui:7
 msgid "Finish"
 msgstr "Bitir"
 
@@ -206,7 +176,7 @@ msgid "Follow Us"
 msgstr "Bizi Takip Edin"
 
 # Additional UI Elements
-#: data/ui/TimePage.ui:147 data/ui/TimePage.ui:150
+#: data/ui/TimePage.ui:139 data/ui/TimePage.ui:142
 msgid "Font Size"
 msgstr "Yazı Tipi Boyutu"
 
@@ -226,9 +196,17 @@ msgstr ""
 msgid "GitHub"
 msgstr "GitHub"
 
+#: src/pardus_gnome_greeter/pages/theme.py:55
+msgid "Gnome Default"
+msgstr "Gnome Varsayılan"
+
 #: data/ui/OutroPage.ui:297
 msgid "Home Page"
 msgstr "Ana Sayfa"
+
+#: data/ui/ThemePage.ui:146
+msgid "Icon Theme"
+msgstr "Simge Teması"
 
 #: src/pardus_gnome_greeter/pages/display.py:105
 msgid "Interface Scaling"
@@ -240,7 +218,7 @@ msgstr "Arayüz Ölçeklendirme"
 msgid "Large"
 msgstr "Büyük"
 
-#: src/pardus_gnome_greeter/main_window.py:163 data/ui/LayoutPage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:166 data/ui/LayoutPage.ui:6
 msgid "Layout"
 msgstr "Tasarım"
 
@@ -256,7 +234,7 @@ msgstr "Açık"
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: src/pardus_gnome_greeter/pages/layout.py:85
+#: src/pardus_gnome_greeter/pages/layout.py:97
 msgid "Mac Style"
 msgstr "Mac Tarzı"
 
@@ -282,9 +260,21 @@ msgstr "Mağazayı Aç"
 msgid "Osman Coskun <osman.coskun@pardus.org.tr>"
 msgstr "Osman Coşkun <osman.coskun@pardus.org.tr>"
 
+#: src/pardus_gnome_greeter/pages/theme.py:65
+msgid "Pardus Brown"
+msgstr "Pardus Kahverengi"
+
+#: src/pardus_gnome_greeter/pages/theme.py:60
+msgid "Pardus Default"
+msgstr "Pardus Varsayılan"
+
 #: src/pardus_gnome_greeter/components/AboutDialog.py:12
 msgid "Pardus GNOME Greeter"
 msgstr "Pardus GNOME Karşılayıcı"
+
+#: src/pardus_gnome_greeter/pages/theme.py:70
+msgid "Pardus Gray"
+msgstr "Pardus Gri"
 
 #: data/ui/WallpaperPage.ui:15
 msgid "Pardus Live Wallpaper"
@@ -298,13 +288,9 @@ msgstr ""
 "Pardus Canlı Duvar Kağıdı uzantısı yüklü değil. Lütfen GNOME Uzantılarından "
 "yükleyin."
 
-#: src/pardus_gnome_greeter/pages/layout.py:89
+#: src/pardus_gnome_greeter/pages/layout.py:101
 msgid "Pardus Style"
 msgstr "Pardus Tarzı"
-
-#: src/pardus_gnome_greeter/pages/extension.py:24
-msgid "Provides quick access to Bluetooth"
-msgstr "Bluetooth'a hızlı erişim sağlar"
 
 #: src/pardus_gnome_greeter/pages/display.py:61
 msgid "Resolution"
@@ -330,11 +316,11 @@ msgstr "Mevcut resimlerden bir duvar kağıdı seçin"
 msgid "Select your preferred theme style"
 msgstr "Tercih ettiğiniz tema stilini seçin"
 
-#: src/pardus_gnome_greeter/main_window.py:45
+#: src/pardus_gnome_greeter/main_window.py:48
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: data/ui/TimePage.ui:178
+#: data/ui/TimePage.ui:170
 msgid "Show seconds"
 msgstr "Saniyeleri göster"
 
@@ -356,7 +342,7 @@ msgstr "Standart"
 msgid "Style"
 msgstr "Stil"
 
-#: src/pardus_gnome_greeter/main_window.py:164 data/ui/ThemePage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:167 data/ui/ThemePage.ui:6
 msgid "Theme"
 msgstr "Tema"
 
@@ -365,11 +351,11 @@ msgid "This application will help you configure your Pardus GNOME experience."
 msgstr ""
 "Bu uygulama Pardus GNOME deneyiminizi yapılandırmanıza yardımcı olacaktır."
 
-#: src/pardus_gnome_greeter/main_window.py:169 data/ui/TimePage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:172 data/ui/TimePage.ui:6
 msgid "Time"
 msgstr "Saat"
 
-#: data/ui/TimePage.ui:78
+#: data/ui/TimePage.ui:70
 msgid "Time Only"
 msgstr "Sadece Saat"
 
@@ -377,19 +363,15 @@ msgstr "Sadece Saat"
 msgid "Tiny"
 msgstr "Minik"
 
-#: src/pardus_gnome_greeter/pages/layout.py:84
+#: src/pardus_gnome_greeter/pages/layout.py:96
 msgid "Traditional GNOME desktop experience"
 msgstr "Geleneksel GNOME masaüstü deneyimi"
 
-#: data/ui/OutroPage.ui:177
-msgid "X"
-msgstr "X"
-
-#: src/pardus_gnome_greeter/pages/layout.py:86
+#: src/pardus_gnome_greeter/pages/layout.py:98
 msgid "Ubuntu Style"
 msgstr "Ubuntu Tarzı"
 
-#: src/pardus_gnome_greeter/pages/layout.py:86
+#: src/pardus_gnome_greeter/pages/layout.py:98
 msgid "Ubuntu Unity-like experience"
 msgstr "Ubuntu Unity benzeri deneyim"
 
@@ -397,12 +379,12 @@ msgstr "Ubuntu Unity benzeri deneyim"
 msgid "Useful Links"
 msgstr "Faydalı Linkler"
 
-#: src/pardus_gnome_greeter/main_window.py:165 data/ui/WallpaperPage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:168 data/ui/WallpaperPage.ui:6
 msgid "Wallpaper"
 msgstr "Duvar Kağıdı"
 
-#: src/pardus_gnome_greeter/main_window.py:83
-#: src/pardus_gnome_greeter/main_window.py:162 data/ui/WelcomePage.ui:4
+#: src/pardus_gnome_greeter/main_window.py:86
+#: src/pardus_gnome_greeter/main_window.py:165 data/ui/WelcomePage.ui:4
 msgid "Welcome"
 msgstr "Hoş Geldiniz"
 
@@ -410,11 +392,15 @@ msgstr "Hoş Geldiniz"
 msgid "Welcome to Pardus GNOME Greeter!"
 msgstr "Pardus GNOME Karşılayıcı'ya Hoş Geldiniz!"
 
-#: src/pardus_gnome_greeter/pages/layout.py:87
+#: src/pardus_gnome_greeter/pages/layout.py:99
 msgid "Windows 10 taskbar layout"
 msgstr "Windows 10 görev çubuğu düzeni"
 
-#: src/pardus_gnome_greeter/pages/layout.py:88
+#: data/ui/OutroPage.ui:177
+msgid "X"
+msgstr "X"
+
+#: src/pardus_gnome_greeter/pages/layout.py:100
 msgid "XP"
 msgstr "XP"
 
@@ -436,7 +422,7 @@ msgstr ""
 "Pardus GNOME sisteminiz başarıyla yapılandırıldı. Artık modern ve kullanıcı "
 "dostu bir masaüstü deneyiminin keyfini çıkarabilirsiniz!"
 
-#: src/pardus_gnome_greeter/pages/layout.py:85
+#: src/pardus_gnome_greeter/pages/layout.py:97
 msgid "macOS-like interface with dock at bottom"
 msgstr "Alt kısımda dock ile macOS benzeri arayüz"
 
@@ -444,9 +430,36 @@ msgstr "Alt kısımda dock ile macOS benzeri arayüz"
 msgid "© 2025 Pardus Team"
 msgstr "© 2025 Pardus Ekibi"
 
-msgid ""
-"Display system information in gnome shell status bar, such as memory "
-"usage, cpu usage, network rates..."
-msgstr ""
-"Bellek kullanımı, işlemci kullanımı, ağ hızları gibi sistem bilgilerini "
-"gnome kabuğu durum çubuğunda gösterir."
+#~ msgid "Add a status menu for accessing and unmounting removable devices."
+#~ msgstr "Taşınabilir cihazlara erişim ve çıkartma için durum menüsü ekle."
+
+#~ msgid "Adds clipboard indicator to top panel, caches history."
+#~ msgstr "Üst panele pano göstergesi ekler, geçmişi önbelleğe alır."
+
+#~ msgid "Cutting-edge clipboard manager for GNOME Shell."
+#~ msgstr "GNOME Shell için son teknoloji pano yöneticisi."
+
+#~ msgid "Disable screensaver and auto-suspend."
+#~ msgstr "Ekran koruyucu ve otomatik uyku kipini devre dışı bırak."
+
+#~ msgid ""
+#~ "Eliminates the 'Windows is ready' notification and brings the window into "
+#~ "focus."
+#~ msgstr "'Pencere hazır' bildirimini kaldırır ve pencereyi odaklar."
+
+#~ msgid ""
+#~ "Enables support for AppIndicator, KStatusNotifierItem, and legacy Tray "
+#~ "icons in the Shell."
+#~ msgstr ""
+#~ "AppIndicator, KStatusNotifierItem ve eski Tepsi simgelerini Shell'de "
+#~ "desteklemeyi etkinleştirir."
+
+#~ msgid "Provides quick access to Bluetooth"
+#~ msgstr "Bluetooth'a hızlı erişim sağlar"
+
+#~ msgid ""
+#~ "Display system information in gnome shell status bar, such as memory "
+#~ "usage, cpu usage, network rates..."
+#~ msgstr ""
+#~ "Bellek kullanımı, işlemci kullanımı, ağ hızları gibi sistem bilgilerini "
+#~ "gnome kabuğu durum çubuğunda gösterir."

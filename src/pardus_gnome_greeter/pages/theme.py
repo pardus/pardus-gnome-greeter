@@ -49,12 +49,31 @@ class ThemePage(Adw.PreferencesPage):
         self.icon_theme_buttons = {}
         first_button = None
         
+        # Define themes directly in code to enable translation support
+        icon_themes = [
+            {
+                "name": _("Gnome Default"),
+                "icon": "gnome-default.svg",
+                "theme": "Adwaita"
+            },
+            {
+                "name": _("Pardus Default"),
+                "icon": "pardus-default.svg",
+                "theme": "pardus-gnome"
+            },
+            {
+                "name": _("Pardus Brown"),
+                "icon": "pardus-brown.svg",
+                "theme": "pardus-gnome-brown"
+            },
+            {
+                "name": _("Pardus Gray"),
+                "icon": "pardus-gray.svg",
+                "theme": "pardus-gnome-gray"
+            }
+        ]
+        
         try:
-            resource_path = "/tr/org/pardus/pardus-gnome-greeter/json/icon_themes.json"
-            data_bytes = Gio.resources_lookup_data(resource_path, 0)
-            data_str = data_bytes.get_data().decode('utf-8')
-            icon_themes = json.loads(data_str)
-            
             for theme in icon_themes:
                 name = theme["name"]
                 icon = theme["icon"]
@@ -63,7 +82,7 @@ class ThemePage(Adw.PreferencesPage):
                 button = Gtk.ToggleButton()
                 button.set_name(theme_name)
                 button.add_css_class("card")
-                button.set_tooltip_text(_(name.title()))
+                button.set_tooltip_text(name)
                 button.set_size_request(100, 64)
 
                 if first_button is None:
@@ -79,7 +98,7 @@ class ThemePage(Adw.PreferencesPage):
                 img = Gtk.Image.new_from_resource(img_resource_path)
                 img.set_pixel_size(48)
                 
-                label = Gtk.Label(label=_(name.title()))
+                label = Gtk.Label(label=name)
                 label.add_css_class("caption")
                 
                 box.append(img)
@@ -91,7 +110,7 @@ class ThemePage(Adw.PreferencesPage):
                 
                 self.icon_theme_buttons[theme_name] = button
 
-        except (GLib.Error, json.JSONDecodeError) as e:
+        except Exception as e:
             print(f"Error setting up icon themes: {e}")
 
     def on_icon_theme_toggled(self, button):
