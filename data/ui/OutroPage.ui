@@ -15,10 +15,10 @@
         <property name="margin-start">20</property>
         <property name="margin-end">20</property>
         <property name="halign">center</property>
-        <property name="valign">start</property>
+        <property name="valign">center</property>
         <property name="vexpand">true</property>
         
-        <!-- Success Message -->
+        <!-- Success Message Section -->
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
@@ -38,7 +38,7 @@
             <!-- Success Title -->
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">Congratulations! Setup Completed</property>
+                <property name="label" translatable="yes">Setup Completed</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <style>
@@ -50,7 +50,7 @@
             <!-- Success Description -->
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">Your Pardus GNOME system has been successfully configured. Now you can enjoy a modern and user-friendly desktop experience!</property>
+                <property name="label" translatable="yes">You can now start exploring the modern and user-friendly experience.</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <property name="wrap">true</property>
@@ -61,184 +61,59 @@
                 </style>
               </object>
             </child>
-          </object>
-        </child>
-        
-        <!-- Social Media Section -->
-        <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="spacing">16</property>
-            <property name="halign">center</property>
-            
-            <!-- Section Title -->
+
+            <!-- Start Exploring Button -->
             <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Follow Us</property>
+              <object class="GtkButton" id="explore_button">
+                <property name="label" translatable="yes">Start Exploring</property>
                 <property name="halign">center</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">24</property>
                 <style>
-                  <class name="title-2"/>
+                  <class name="suggested-action"/>
+                  <class name="rounded-12"/>
+                  <class name="wide-button"/>
                 </style>
               </object>
             </child>
+          </object>
+        </child>
+        
+        <!-- Links Section -->
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">0</property>
+            <property name="halign">center</property>
+            <property name="margin-top">24</property>
+            <style>
+              <class name="outlined-box"/>
+            </style>
             
-            <!-- Social Media Buttons -->
+            <!-- Home Page -->
             <child>
-              <object class="GtkBox" id="social_box">
-                <property name="orientation">horizontal</property>
-                <property name="spacing">16</property>
+              <object class="GtkButton" id="btn_website">
                 <property name="halign">center</property>
-                
-                <!-- GitHub -->
+                <style>
+                  <class name="flat"/>
+                </style>
                 <child>
-                  <object class="GtkLinkButton">
-                    <property name="uri">https://github.com/pardus</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="accent-link"/>
-                    </style>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <property name="margin-start">16</property>
+                    <property name="margin-end">16</property>
+                    <property name="margin-top">16</property>
+                    <property name="margin-bottom">16</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">8</property>
-                        <property name="halign">center</property>
-                        
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">github-symbolic</property>
-                            <property name="pixel-size">16</property>
-                          </object>
-                        </child>
-                        
-                                            <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">GitHub</property>
-                          </object>
-                        </child>
+                      <object class="GtkImage">
+                        <property name="icon-name">home-symbolic</property>
+                        <property name="pixel-size">16</property>
                       </object>
                     </child>
-                  </object>
-                </child>
-                
-                <!-- LinkedIn -->
-                <child>
-                  <object class="GtkLinkButton">
-                    <property name="uri">https://www.linkedin.com/company/pardus</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="accent-link"/>
-                    </style>
                     <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">8</property>
-                        <property name="halign">center</property>
-                        
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">linkedin-symbolic</property>
-                            <property name="pixel-size">16</property>
-                          </object>
-                        </child>
-                        
-                                            <child>
                       <object class="GtkLabel">
-                        <property name="label" translatable="yes">LinkedIn</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                
-                <!-- X -->
-                <child>
-                  <object class="GtkLinkButton">
-                    <property name="uri">https://x.com/PardusKurumsal</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="accent-link"/>
-                    </style>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">8</property>
-                        <property name="halign">center</property>
-                        
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">x-symbolic</property>
-                            <property name="pixel-size">16</property>
-                          </object>
-                        </child>
-                        
-                                            <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">X</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                
-                <!-- YouTube -->
-                <child>
-                  <object class="GtkLinkButton">
-                    <property name="uri">https://www.youtube.com/channel/UC_e_SpvBKd3Us12jtZ1xrgg</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="accent-link"/>
-                    </style>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">8</property>
-                        <property name="halign">center</property>
-                        
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">youtube-symbolic</property>
-                            <property name="pixel-size">16</property>
-                          </object>
-                        </child>
-                        
-                                            <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">YouTube</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                
-                <!-- Facebook -->
-                <child>
-                  <object class="GtkLinkButton">
-                    <property name="uri">https://www.facebook.com/PardusKurumsal</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="accent-link"/>
-                    </style>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">8</property>
-                        <property name="halign">center</property>
-                        
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">facebook-symbolic</property>
-                            <property name="pixel-size">16</property>
-                          </object>
-                        </child>
-                        
-                                            <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Facebook</property>
-                          </object>
-                        </child>
+                        <property name="label" translatable="yes">Web Site</property>
                       </object>
                     </child>
                   </object>
@@ -246,176 +121,102 @@
               </object>
             </child>
             
-            <!-- Useful Links Section -->
+            <!-- Documentation -->
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">16</property>
+              <object class="GtkButton" id="btn_docs">
                 <property name="halign">center</property>
-                
-                            <!-- Section Title -->
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Useful Links</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="title-2"/>
-                    </style>
-                  </object>
-                </child>
-                
-                <!-- Useful Links Buttons -->
+                <style>
+                  <class name="flat"/>
+                </style>
                 <child>
-                  <object class="GtkBox" id="links_box">
+                  <object class="GtkBox">
                     <property name="orientation">horizontal</property>
-                    <property name="spacing">16</property>
-                    <property name="halign">center</property>
-                    
-                    <!-- Home Page -->
+                    <property name="spacing">12</property>
+                    <property name="margin-start">16</property>
+                    <property name="margin-end">16</property>
+                    <property name="margin-top">16</property>
+                    <property name="margin-bottom">16</property>
                     <child>
-                      <object class="GtkLinkButton">
-                        <property name="uri">https://www.pardus.org.tr/en/home/</property>
-                        <property name="halign">center</property>
-                        <style>
-                          <class name="accent-link"/>
-                        </style>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">8</property>
-                            <property name="halign">center</property>
-                            
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">home-symbolic</property>
-                                <property name="pixel-size">16</property>
-                              </object>
-                            </child>
-                            
-                                                <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Home Page</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                      <object class="GtkImage">
+                        <property name="icon-name">document-symbolic</property>
+                        <property name="pixel-size">16</property>
                       </object>
                     </child>
-                    
-                    <!-- Documentation -->
                     <child>
-                      <object class="GtkLinkButton">
-                        <property name="uri">https://belge.pardus.org.tr/</property>
-                        <property name="halign">center</property>
-                        <style>
-                          <class name="accent-link"/>
-                        </style>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">8</property>
-                            <property name="halign">center</property>
-                            
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">document-symbolic</property>
-                                <property name="pixel-size">16</property>
-                              </object>
-                            </child>
-                            
-                                                <child>
                       <object class="GtkLabel">
                         <property name="label" translatable="yes">Documentation</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
                       </object>
                     </child>
-                    
-                    <!-- Community -->
-                    <child>
-                      <object class="GtkLinkButton">
-                        <property name="uri">https://gonullu.pardus.org.tr/</property>
-                        <property name="halign">center</property>
-                        <style>
-                          <class name="accent-link"/>
-                        </style>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">8</property>
-                            <property name="halign">center</property>
-                            
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">community-symbolic</property>
-                                <property name="pixel-size">16</property>
-                              </object>
-                            </child>
-                            
-                                                <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Community</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    
-                    <!-- Forum -->
-                    <child>
-                      <object class="GtkLinkButton">
-                        <property name="uri">https://forum.pardus.org.tr/</property>
-                        <property name="halign">center</property>
-                        <style>
-                          <class name="accent-link"/>
-                        </style>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">8</property>
-                            <property name="halign">center</property>
-                            
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">forum-symbolic</property>
-                                <property name="pixel-size">16</property>
-                              </object>
-                            </child>
-                            
-                                                <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Forum</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                
-                <!-- Final Message -->
-                            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">You can visit our community forums for your questions. Happy usage!</property>
-                    <property name="halign">center</property>
-                    <property name="justify">center</property>
-                    <property name="wrap">true</property>
-                    <property name="wrap-mode">word-char</property>
-                    <property name="max-width-chars">60</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
                   </object>
                 </child>
               </object>
             </child>
+            
+            <!-- Community -->
+            <child>
+              <object class="GtkButton" id="btn_community">
+                <property name="halign">center</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <property name="margin-start">16</property>
+                    <property name="margin-end">16</property>
+                    <property name="margin-top">16</property>
+                    <property name="margin-bottom">16</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">community-symbolic</property>
+                        <property name="pixel-size">16</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Community</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            
+            <!-- Forum -->
+            <child>
+              <object class="GtkButton" id="btn_forum">
+                <property name="halign">center</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <property name="margin-start">16</property>
+                    <property name="margin-end">16</property>
+                    <property name="margin-top">16</property>
+                    <property name="margin-bottom">16</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">forum-symbolic</property>
+                        <property name="pixel-size">16</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Forum</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            
           </object>
         </child>
       </object>
     </child>
   </template>
-</interface> 
+</interface>
