@@ -1,21 +1,14 @@
 import json
 import os
 from gi.repository import Gio, GLib
-from pydbus import SessionBus
 
 # Import ExtensionManager
 from .ExtensionManager import ExtensionManager
-from .settings import app_settings, SettingsManager
+from .settings import app_settings, SettingsManager, shell_settings
 
 class LayoutManager:
     def __init__(self, config_path="/tr/org/pardus/pardus-gnome-greeter/json/layout_config.json"):
         self.config_path = config_path
-        self.dbus_service = None
-        try:
-            bus = SessionBus()
-            self.dbus_service = bus.get('org.gnome.Shell.Extensions', "/org.gnome/Shell/Extensions")
-        except Exception as e:
-            print(f"Could not connect to dbus service: {e}")
         
         try:
             config_data = self._load_layouts()
@@ -173,16 +166,19 @@ class LayoutManager:
 
 
     def _task_toggle_user_extensions(self, enable):
-        """Enable or disable all user extensions."""
-        if not self.dbus_service:
-            print("D-Bus service not available to toggle extensions.")
-            return
+        """Enable or disable all user extensions using GSettings."""
         try:
-            self.dbus_service.UserExtensionsEnabled = enable
-            status = "Enabled" if enable else "Disabled"
-            print(f"--- All user extensions {status} ---")
+            # Logic is inverted: enable=True means disable-user-extensions=False
+            # enable=False means disable-user-extensions=True
+            disable_value = not enable
+            
+            if shell_settings.set("disable-user-extensions", disable_value):
+                status = "Enabled" if enable else "Disabled"
+                print(f"--- All user extensions {status} (via GSettings) ---")
+            else:
+                 print("Failed to toggle user extensions via GSettings.")
         except Exception as e:
-            print(f"Error toggling user extensions: {e}")
+            print(f"Error toggling user extensions via GSettings: {e}")
 
     def _task_reset_settings(self, layout_name):
         """Resets GSettings to their default values for schemas used by the target layout."""
@@ -202,10 +198,12 @@ class LayoutManager:
         layout_data = self.layouts.get(layout_name, {})
         layout_schemas = {config.get("schema") for config in layout_data.get("config", []) if config.get("schema")}
         
-        # Also reset schemas for extensions that are being disabled in this layout
-        # This ensures clean state for disabled extensions
-        disabled_extensions = layout_data.get("disable", [])
-        for ext_uuid in disabled_extensions:
+        # Also reset schemas for extensions that are being ENABLED or DISABLED in this layout
+        # This ensures we start with a clean slate for active extensions before applying our custom config
+        extensions_to_reset = set(layout_data.get("disable", []))
+        extensions_to_reset.update(layout_data.get("enable", []))
+        
+        for ext_uuid in extensions_to_reset:
             # Convert extension UUID to schema ID (e.g., "blur-my-shell@aunetx" -> "org.gnome.shell.extensions.blur-my-shell")
             ext_id = ext_uuid.split("@")[0]
             schema_id = f"org.gnome.shell.extensions.{ext_id}"
