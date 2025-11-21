@@ -97,3 +97,33 @@ button.card:checked label {
 .extension-card-disabled {
   opacity: 0.5;
 } 
+
+/* Outro Links Box Styling */
+.outlined-box {
+  border: 1px solid @borders;
+  border-radius: 12px;
+  background: transparent;
+}
+
+/* Link Button Styling inside Outro Box */
+.outlined-box button {
+  color: alpha(@window_fg_color, 0.55); /* Dim label rengi gibi */
+  border-radius: 8px; /* Butonlar için de hafif radius */
+}
+
+.outlined-box button:hover {
+  color: @window_fg_color;
+}
+
+/* General Utility for Rounded Corners */
+.rounded-12 {
+  border-radius: 12px;
+}
+
+/* Wide Button Padding */
+.wide-button {
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
