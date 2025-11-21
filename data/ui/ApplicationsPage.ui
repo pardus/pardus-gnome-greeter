@@ -30,10 +30,22 @@
               </object>
             </child>
             
+            <!-- Title Label -->
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Pardus Software Center Renewed</property>
+                <property name="halign">center</property>
+                <property name="justify">center</property>
+                <style>
+                  <class name="title-1"/>
+                </style>
+              </object>
+            </child>
+
             <!-- Description Label -->
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">All the applications you need are here! Download safely from the Pardus store and customize your system.</property>
+                <property name="label" translatable="yes">Access hundreds of applications with the renewed interface.</property>
                 <property name="halign">center</property>
                 <property name="justify">center</property>
                 <property name="wrap">true</property>
@@ -49,7 +61,9 @@
             <child>
               <object class="GtkButton">
                 <property name="halign">center</property>
-                <property name="css-classes">suggested-action</property>
+                <style>
+                    <class name="flat"/>
+                </style>
                 <signal name="clicked" handler="on_open_store_clicked"/>
                 <child>
                   <object class="GtkBox">
@@ -60,15 +74,21 @@
                     <!-- Store Icon -->
                     <child>
                       <object class="GtkImage">
-                        <property name="icon-name">software-update-available-symbolic</property>
+                        <property name="icon-name">adw-external-link-symbolic</property>
                         <property name="pixel-size">16</property>
+                        <style>
+                             <class name="accent"/>
+                        </style>
                       </object>
                     </child>
                     
                     <!-- Button Label -->
                     <child>
                       <object class="GtkLabel">
-                        <property name="label" translatable="yes">Open Store</property>
+                        <property name="label" translatable="yes">Go to Store</property>
+                        <style>
+                             <class name="accent"/>
+                        </style>
                       </object>
                     </child>
                   </object>
