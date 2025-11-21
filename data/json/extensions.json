@@ -10,14 +10,14 @@
     "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/caffeine-icon.png",
     "id": "caffeine@patapon.info",
     "name": "Caffeine",
-    "description": "Disable screensaver and auto-suspend.",
+    "description": "Temporarily disable screensaver and auto-suspend.",
     "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/caffeine-screenshot.png"
   },
   {
     "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/annoyance-screenshot.png",
     "id": "noannoyance-fork@vrba.dev",
     "name": "NoAnnoyance v2",
-    "description": "Eliminates the 'Windows is ready' notification and brings the window into focus.",
+    "description": "Block 'Application is ready' notifications.",
     "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/annoyance-screenshot.png"
   },
   {
@@ -31,7 +31,7 @@
     "logo": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/battery-icon.svg",
     "id": "Bluetooth-Battery-Meter@maniacx.github.com",
     "name": "Bluetooth Battery Meter",
-    "description": "Provides quick access to Bluetooth",
+    "description": "View detailed Bluetooth device information.",
     "image": "/tr/org/pardus/pardus-gnome-greeter/assets/extensions/battery-screenshot.png"
   },
   {
