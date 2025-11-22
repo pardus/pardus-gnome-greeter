@@ -6,7 +6,7 @@ import sys
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Adw, GLib, Gdk
+from gi.repository import Gtk, Adw, GLib, Gdk, Gio
 
 # Add the managers directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
@@ -33,6 +33,7 @@ class ExtensionCard(Gtk.Box):
         # Extension data
         self.extension_id = None
         self.extension_manager = None
+        self._updating = False
         
     def load_extension(self, extension_data, extension_manager):
         """Load extension data into the card"""
@@ -71,8 +72,7 @@ class ExtensionCard(Gtk.Box):
         
         # Set switch state
         if self.extension_manager and hasattr(self, 'switch') and self.switch:
-            is_enabled = self.extension_manager.is_extension_enabled(self.extension_id)
-            self.switch.set_active(is_enabled)
+            self.update_state()
             
             # Connect switch signal
             self.switch.connect("state-set", self._on_switch_toggled)
@@ -82,8 +82,25 @@ class ExtensionCard(Gtk.Box):
             self.set_sensitive(False)
             self.get_style_context().add_class("extension-card-disabled")
     
+    def update_state(self):
+        """Update switch state from system"""
+        if self.extension_manager and hasattr(self, 'switch') and self.switch:
+            if self._updating:
+                return
+
+            self._updating = True
+            try:
+                is_enabled = self.extension_manager.is_extension_enabled(self.extension_id)
+                self.switch.set_state(is_enabled)
+                self.switch.set_active(is_enabled)
+            finally:
+                self._updating = False
+
     def _on_switch_toggled(self, switch, state):
         """Handle switch toggle"""
+        if self._updating:
+            return
+
         if self.extension_manager and self.extension_id:
             if state:
                 self.extension_manager.enable_extension(self.extension_id)
@@ -104,10 +121,31 @@ class ExtensionPage(Adw.PreferencesPage):
         self.extension_manager = ExtensionManager()
         self.extension_cards = {}
         
+        # Listen for extension enable/disable state changes in Gnome Shell
+        self.shell_settings = Gio.Settings.new("org.gnome.shell")
+        self.shell_settings.connect("changed::enabled-extensions", self.on_shell_settings_changed)
+        self.shell_settings.connect("changed::disabled-extensions", self.on_shell_settings_changed)
+        
+        # Update when page is mapped
+        self.connect("map", self.on_page_mapped)
+        
         # Load extensions
         self._load_extensions()
         
         print("ExtensionPage created.")
+    
+    def on_shell_settings_changed(self, settings, key):
+        """Called when enabled/disabled extensions change"""
+        GLib.idle_add(self.update_all_cards)
+
+    def on_page_mapped(self, widget):
+        """Called when the page becomes visible"""
+        self.update_all_cards()
+
+    def update_all_cards(self):
+        """Update state of all extension cards"""
+        for card in self.extension_cards.values():
+            card.update_state()
     
     def _load_extensions(self):
         """Load and display extensions"""

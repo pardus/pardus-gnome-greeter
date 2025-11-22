@@ -35,6 +35,18 @@ class TimePage(Adw.PreferencesPage):
         self.schema = "org.gnome.shell.extensions.date-menu-formatter"
         self.pattern_key = "pattern"
         self.font_size_key = "font-size"
+
+        # Keep a persistent settings object to listen for changes
+        self.settings = Gio.Settings.new(self.schema)
+        self.settings.connect("changed", self.on_settings_changed)
+        
+        # Listen for extension enable/disable state changes in Gnome Shell
+        self.shell_settings = Gio.Settings.new("org.gnome.shell")
+        self.shell_settings.connect("changed::enabled-extensions", self.on_shell_settings_changed)
+        self.shell_settings.connect("changed::disabled-extensions", self.on_shell_settings_changed)
+        
+        # State update flag to prevent signal loops
+        self._updating = False
         
         # Format types (Luxon format for the extension)
         self.format_types = {
@@ -51,19 +63,38 @@ class TimePage(Adw.PreferencesPage):
         self.font_size_spinbutton.connect("value-changed", self.on_font_size_change)
         self.show_seconds_switch.connect("state-set", self.on_seconds_toggle)
         
+        # Update when the page becomes visible
+        self.connect("map", self.on_page_mapped)
+
         # Set initial state
+        GLib.idle_add(self.update_initial_state)
+    
+    def on_page_mapped(self, widget):
+        """Called when the page becomes visible"""
+        self.update_initial_state()
+
+    def on_shell_settings_changed(self, settings, key):
+        """Called when enabled/disabled extensions change"""
+        GLib.idle_add(self.update_initial_state)
+
+    def on_settings_changed(self, settings, key):
+        """Called when settings change externally"""
+        # Update on ANY setting change in the extension schema
         GLib.idle_add(self.update_initial_state)
     
     def update_initial_state(self):
         """Update the initial state of all widgets"""
+        if self._updating:
+            return
+
+        self._updating = True
         try:
             # Check if extension is enabled
             is_enabled = self.extension_manager.is_extension_enabled(self.clock_extension_id)
             self.clock_format_switch.set_active(is_enabled)
             
             # Get current pattern
-            settings = Gio.Settings.new(self.schema)
-            current_pattern = settings.get_string(self.pattern_key)
+            current_pattern = self.settings.get_string(self.pattern_key)
             
             # Set format buttons based on pattern (detects Luxon components)
             if any(c in current_pattern for c in ['d', 'M', 'y', 'E', 'c']):
@@ -78,7 +109,7 @@ class TimePage(Adw.PreferencesPage):
                 self.show_seconds_switch.set_active(False)
             
             # Set font size
-            font_size = settings.get_int(self.font_size_key)
+            font_size = self.settings.get_int(self.font_size_key)
             self.font_size_spinbutton.set_value(font_size)
             
             # Update sensitivity
@@ -86,6 +117,8 @@ class TimePage(Adw.PreferencesPage):
             
         except Exception as e:
             print(f"Error updating initial state: {e}")
+        finally:
+            self._updating = False
     
     def update_sensitivity(self, enabled):
         """Update sensitivity of widgets based on extension state"""
@@ -96,6 +129,9 @@ class TimePage(Adw.PreferencesPage):
     
     def on_extension_toggle(self, switch, state):
         """Handle extension enable/disable"""
+        if self._updating:
+            return
+
         try:
             if state:
                 self.extension_manager.enable_extension(self.clock_extension_id)
@@ -109,6 +145,9 @@ class TimePage(Adw.PreferencesPage):
     
     def on_format_change(self, button, format_type):
         """Handle format type change"""
+        if self._updating:
+            return
+
         if not button.get_active():
             return
             
@@ -123,24 +162,28 @@ class TimePage(Adw.PreferencesPage):
                 pattern = self.format_types[format_type]
             
             # Set the pattern
-            settings = Gio.Settings.new(self.schema)
-            settings.set_string(self.pattern_key, pattern)
+            self.settings.set_string(self.pattern_key, pattern)
             
         except Exception as e:
             print(f"Error changing format: {e}")
     
     def on_font_size_change(self, spinbutton):
         """Handle font size change"""
+        if self._updating:
+            return
+
         try:
             size = int(spinbutton.get_value())
-            settings = Gio.Settings.new(self.schema)
-            settings.set_int(self.font_size_key, size)
+            self.settings.set_int(self.font_size_key, size)
             
         except Exception as e:
             print(f"Error changing font size: {e}")
     
     def on_seconds_toggle(self, switch, state):
         """Handle seconds display toggle"""
+        if self._updating:
+            return
+
         try:
             # Determine current format type
             if self.date_time_button.get_active():
@@ -154,8 +197,7 @@ class TimePage(Adw.PreferencesPage):
             else:
                 pattern = self.format_types[format_type]
             
-            settings = Gio.Settings.new(self.schema)
-            settings.set_string(self.pattern_key, pattern)
+            self.settings.set_string(self.pattern_key, pattern)
             
         except Exception as e:
             print(f"Error toggling seconds: {e}") 
