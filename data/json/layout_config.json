@@ -23,7 +23,8 @@
         ],
         "disable": [
             "arcmenu@arcmenu.com",
-            "dash-to-panel@jderose9.github.com"
+            "dash-to-panel@jderose9.github.com",
+            "date-menu-formatter@marcinjakubowski.github.com"
         ],
         "config": [
             {
@@ -75,7 +76,8 @@
         "disable": [
             "arcmenu@arcmenu.com",
             "dash-to-panel@jderose9.github.com",
-            "blur-my-shell@aunetx"
+            "blur-my-shell@aunetx",
+            "date-menu-formatter@marcinjakubowski.github.com"
         ],
         "config": [
             {
@@ -129,12 +131,33 @@
         "enable": [
             "dash-to-panel@jderose9.github.com",
             "arcmenu@arcmenu.com",
-            "blur-my-shell@aunetx"
+            "blur-my-shell@aunetx",
+            "date-menu-formatter@marcinjakubowski.github.com"
         ],
         "disable": [
             "dash-to-dock@micxgx.gmail.com"
         ],
         "config": [
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "formatter",
+                "value": "02_original"
+            },
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "font-size",
+                "value": 11
+            },
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "pattern",
+                "value": "kk:mm\\ndd.MM.y"
+            },
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "apply-all-panels",
+                "value": true
+            },
             {
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "dot-position",
@@ -199,7 +222,8 @@
             "blur-my-shell@aunetx"
         ],
         "disable": [
-            "dash-to-dock@micxgx.gmail.com"
+            "dash-to-dock@micxgx.gmail.com",
+            "date-menu-formatter@marcinjakubowski.github.com"
         ],
         "config": [
             {
@@ -302,13 +326,34 @@
     "pardus": {
         "enable": [
             "dash-to-panel@jderose9.github.com",
-            "blur-my-shell@aunetx"
+            "blur-my-shell@aunetx",
+            "date-menu-formatter@marcinjakubowski.github.com"
         ],
         "disable": [
             "arcmenu@arcmenu.com",
             "dash-to-dock@micxgx.gmail.com"
         ],
         "config": [
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "formatter",
+                "value": "02_original"
+            },
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "font-size",
+                "value": 11
+            },
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "pattern",
+                "value": "kk:mm\\ndd.MM.y"
+            },
+            {
+                "schema": "org.gnome.shell.extensions.date-menu-formatter",
+                "key": "apply-all-panels",
+                "value": true
+            },
             {
                 "schema": "org.gnome.shell.extensions.dash-to-panel",
                 "key": "show-apps-icon-file",
