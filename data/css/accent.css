@@ -123,5 +123,18 @@
 
 /* Override GtkLinkButton default styling */
 .accent-link label {
-  text-decoration: none !important;
-} 
+  text-decoration: none;
+}
+
+/* Generic Accent Color Class */
+.accent-color {
+  color: @accent_bg_color;
+}
+
+button.accent-color {
+  color: @accent_bg_color;
+}
+
+button.accent-color label {
+  color: inherit;
+}

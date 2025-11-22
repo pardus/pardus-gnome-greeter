@@ -12,8 +12,8 @@
  * Use !important to be absolutely sure nothing else overrides this.
  */
 .time-format-card:checked {
-    background-color: @card_background_color !important;
-    border-color: @accent_color !important;
+    background-color: @theme_bg_color;
+    border-color: @theme_selected_bg_color;
 }
 
 /* Fix vertical alignment and jumping */

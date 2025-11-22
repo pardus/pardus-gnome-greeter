@@ -28,7 +28,7 @@ class MainWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         
         # Set minimum window size (but still resizable)
-        self.set_size_request(970, 750)
+        #self.set_size_request(970, 750)
         
         # Load custom CSS
         css_provider = Gtk.CssProvider()
@@ -92,6 +92,9 @@ class MainWindow(Adw.ApplicationWindow):
         content_box.set_size_request(0, -1)  # Allow shrinking
         content_box.append(content_header)
         content_box.append(self.view_stack)
+        
+        # Navigation Bar
+        self.setup_navigation_bar(content_box)
 
         # 3. Assign the created widgets to the SplitView
         self.split_view.set_sidebar(sidebar_box)
@@ -122,7 +125,112 @@ class MainWindow(Adw.ApplicationWindow):
             self.pages_listbox.select_row(self.pages_listbox.get_row_at_index(0))
 
         self._on_split_view_collapsed(self.split_view, None)
+        
+        # Initial button state update
+        self._update_navigation_buttons()
 
+
+    def setup_navigation_bar(self, content_box):
+        """Creates and appends the navigation bar to the content box"""
+        
+        # Main container for navigation buttons
+        self.nav_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.nav_bar.set_margin_start(36)
+        self.nav_bar.set_margin_end(36)
+        self.nav_bar.set_margin_bottom(36)
+        self.nav_bar.set_margin_top(24) # Increased top margin
+        self.nav_bar.set_valign(Gtk.Align.END)
+        self.nav_bar.add_css_class("navigation-bar")
+
+        # Previous Button (Left aligned - Text only)
+        self.prev_button = Gtk.Button(label=_("Previous"))
+        self.prev_button.add_css_class("flat")
+        self.prev_button.add_css_class("accent-color")
+        self.prev_button.set_valign(Gtk.Align.CENTER)
+        self.prev_button.connect("clicked", self._on_prev_clicked)
+        self.nav_bar.append(self.prev_button)
+
+        # Spacer to push Next button to the right
+        spacer = Gtk.Box()
+        spacer.set_hexpand(True)
+        self.nav_bar.append(spacer)
+
+        # Next Button (Right aligned - Filled)
+        self.next_button = Gtk.Button()
+        self.next_button.add_css_class("suggested-action")
+        self.next_button.set_size_request(130, 46)
+        self.next_button.set_valign(Gtk.Align.CENTER)
+        self.next_button.connect("clicked", self._on_next_clicked)
+        
+        # Create custom content for Next button
+        next_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        self.next_button_label = Gtk.Label(label=_("Next"))
+        # self.next_button_icon = Gtk.Image.new_from_icon_name("go-next-symbolic") # Icon optional based on image
+        
+        next_box.append(self.next_button_label)
+        # next_box.append(self.next_button_icon) 
+        next_box.set_halign(Gtk.Align.CENTER)
+        self.next_button.set_child(next_box)
+        
+        self.nav_bar.append(self.next_button)
+
+        # Add nav bar to content box
+        content_box.append(self.nav_bar)
+
+    def _update_navigation_buttons(self):
+        """Updates the state of navigation buttons based on current page"""
+        selected_row = self.pages_listbox.get_selected_row()
+        if not selected_row:
+            return
+
+        index = selected_row.get_index()
+        
+        # Count visible rows manually
+        total_pages = 0
+        i = 0
+        while self.pages_listbox.get_row_at_index(i):
+            i += 1
+        total_pages = i
+
+        # Update Previous Button
+        self.prev_button.set_visible(index > 0)
+        self.prev_button.set_sensitive(index > 0)
+
+        # Update Next Button
+        if index == 0:
+            # Welcome page: Hide Next button (has its own start button)
+            self.next_button.set_visible(False)
+        elif index == total_pages - 1:
+            # Last page (Outro): Hide Next/Finish button (has its own finish button)
+            self.next_button.set_visible(False)
+        else:
+            # Normal pages: Show Next button
+            self.next_button.set_visible(True)
+            self.next_button_label.set_label(_("Next"))
+            # self.next_button_icon.set_from_icon_name("go-next-symbolic")
+
+    def _on_prev_clicked(self, button):
+        selected_row = self.pages_listbox.get_selected_row()
+        if selected_row:
+            current_index = selected_row.get_index()
+            if current_index > 0:
+                prev_row = self.pages_listbox.get_row_at_index(current_index - 1)
+                if prev_row:
+                    self.pages_listbox.select_row(prev_row)
+                    self._on_row_activated(self.pages_listbox, prev_row)
+
+    def _on_next_clicked(self, button):
+        selected_row = self.pages_listbox.get_selected_row()
+        if selected_row:
+            current_index = selected_row.get_index()
+            # Check if it's the last page
+            next_row = self.pages_listbox.get_row_at_index(current_index + 1)
+            if next_row:
+                self.pages_listbox.select_row(next_row)
+                self._on_row_activated(self.pages_listbox, next_row)
+            else:
+                # It's the last page (Finish action)
+                self.close()
 
     def _on_navigate_request(self, widget, page_name):
         # Find the row corresponding to the page name and activate it
@@ -156,6 +264,8 @@ class MainWindow(Adw.ApplicationWindow):
 
         if self.split_view.get_collapsed():
             self.split_view.set_show_sidebar(False)
+            
+        self._update_navigation_buttons()
 
 
     

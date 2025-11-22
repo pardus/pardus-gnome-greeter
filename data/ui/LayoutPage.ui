@@ -15,7 +15,6 @@
             <property name="margin-bottom">16</property>
             <property name="margin-start">12</property>
             <property name="margin-end">12</property>
-            <property name="hexpand">true</property>
             
             <!-- Title and description -->
             <child>
@@ -46,38 +45,17 @@
               </object>
             </child>
             
-            <!-- Layouts container with scroll -->
+            <!-- Simple 2x3 Grid Layout -->
             <child>
-              <object class="GtkScrolledWindow" id="layouts_scroll">
-                <property name="vexpand">true</property>
-                <property name="hexpand">true</property>
-                <property name="hscrollbar-policy">never</property>
-                <property name="vscrollbar-policy">automatic</property>
-                <property name="min-content-height">350</property>
-                <property name="max-content-height">500</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">8</property>
-                    <property name="margin-top">8</property>
-                    <property name="margin-bottom">8</property>
-                    <property name="margin-start">8</property>
-                    <property name="margin-end">8</property>
-                    <property name="hexpand">true</property>
-                    
-                    <!-- Simple 2x3 Grid Layout -->
-                    <child>
-                      <object class="GtkGrid" id="layouts_grid">
-                        <property name="valign">center</property>
-                        <property name="halign">center</property>
-                        <property name="row-spacing">20</property>
-                        <property name="column-spacing">20</property>
-                        <property name="row-homogeneous">true</property>
-                        <property name="column-homogeneous">true</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+              <object class="GtkGrid" id="layouts_grid">
+                <property name="valign">start</property>
+                <property name="halign">center</property>
+                <property name="row-spacing">20</property>
+                <property name="column-spacing">20</property>
+                <property name="row-homogeneous">true</property>
+                <property name="column-homogeneous">true</property>
+                <property name="margin-top">24</property>
+                <property name="margin-bottom">24</property>
               </object>
             </child>
           </object>
@@ -85,4 +63,4 @@
       </object>
     </child>
   </template>
-</interface> 
+</interface>
