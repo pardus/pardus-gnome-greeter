@@ -84,6 +84,11 @@ install_data(
     rename: application_id + '.svg'
 )
 
+install_data(
+    'data/icons/pardus-gnome-greeter.svg',
+    install_dir: join_paths(datadir, 'icons', 'hicolor', 'scalable', 'apps')
+)
+
 # Symbolic Icons
 symbolic_icons = [
   'data/icons/github-symbolic.svg',
