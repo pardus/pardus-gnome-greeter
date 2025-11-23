@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 16:06+0300\n"
+"POT-Creation-Date: 2025-11-23 14:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,21 +29,27 @@ msgstr ""
 msgid "Accent Color"
 msgstr ""
 
-#: data/ui/TimePage.ui:143
-msgid "Adjust the size of the clock text"
+#: data/ui/ApplicationsPage.ui:48
+msgid "Access hundreds of applications with the renewed interface."
 msgstr ""
 
-#: data/ui/ApplicationsPage.ui:36
-msgid ""
-"All the applications you need are here! Download safely from the Pardus "
-"store and customize your system."
+#: src/pardus_gnome_greeter/pages/extension.py:27
+msgid "Add a status menu for accessing and unmounting removable devices."
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/extension.py:30
+msgid "Adds clipboard indicator to top panel, caches history."
+msgstr ""
+
+#: data/ui/TimePage.ui:143
+msgid "Adjust the size of the clock text"
 msgstr ""
 
 #: data/ui/ThemePage.ui:18
 msgid "Appearance"
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:171 data/ui/ApplicationsPage.ui:4
+#: src/pardus_gnome_greeter/main_window.py:281 data/ui/ApplicationsPage.ui:4
 msgid "Applications"
 msgstr ""
 
@@ -55,11 +61,23 @@ msgstr ""
 msgid "Available Extensions"
 msgstr ""
 
+#: src/pardus_gnome_greeter/pages/extension.py:29
+msgid "Block 'Application is ready' notifications."
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/extension.py:23
+msgid "Bluetooth Battery Meter"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/extension.py:20
+msgid "Caffeine"
+msgstr ""
+
 #: data/ui/WallpaperPage.ui:32
 msgid "Choose Wallpaper"
 msgstr ""
 
-#: data/ui/LayoutPage.ui:27
+#: data/ui/LayoutPage.ui:26
 msgid "Choose Your Desktop Layout"
 msgstr ""
 
@@ -75,16 +93,16 @@ msgstr ""
 msgid "Classic Windows XP experience"
 msgstr ""
 
+#: src/pardus_gnome_greeter/pages/extension.py:22
+msgid "Clipboard Indicator"
+msgstr ""
+
 #: data/ui/TimePage.ui:12
 msgid "Clock Formatting"
 msgstr ""
 
-#: data/ui/OutroPage.ui:359
+#: data/ui/OutroPage.ui:178
 msgid "Community"
-msgstr ""
-
-#: data/ui/OutroPage.ui:41
-msgid "Congratulations! Setup Completed"
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/display.py:111
@@ -119,7 +137,7 @@ msgstr ""
 msgid "Desktop Icon Size"
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:169 data/ui/DisplayPage.ui:4
+#: src/pardus_gnome_greeter/main_window.py:279 data/ui/DisplayPage.ui:4
 msgid "Display"
 msgstr ""
 
@@ -131,7 +149,13 @@ msgstr ""
 msgid "Display seconds in the time format"
 msgstr ""
 
-#: data/ui/OutroPage.ui:328
+#: src/pardus_gnome_greeter/pages/extension.py:32
+msgid ""
+"Display system information in gnome shell status bar, such as memory usage, "
+"cpu usage, network rates..."
+msgstr ""
+
+#: data/ui/OutroPage.ui:147
 msgid "Documentation"
 msgstr ""
 
@@ -143,16 +167,12 @@ msgstr ""
 msgid "Extension Not Found"
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:170 data/ui/ExtensionPage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:280 data/ui/ExtensionPage.ui:6
 msgid "Extensions"
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/display.py:133
 msgid "Extra Large"
-msgstr ""
-
-#: data/ui/OutroPage.ui:239
-msgid "Facebook"
 msgstr ""
 
 #: src/pardus_gnome_greeter/components/AboutDialog.py:23
@@ -163,12 +183,8 @@ msgstr ""
 msgid "File Manager Icon Size"
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:173 data/ui/OutroPage.ui:7
+#: src/pardus_gnome_greeter/main_window.py:283 data/ui/OutroPage.ui:7
 msgid "Finish"
-msgstr ""
-
-#: data/ui/OutroPage.ui:77
-msgid "Follow Us"
 msgstr ""
 
 #: data/ui/TimePage.ui:139 data/ui/TimePage.ui:142
@@ -179,7 +195,7 @@ msgstr ""
 msgid "Format Style"
 msgstr ""
 
-#: data/ui/OutroPage.ui:390
+#: data/ui/OutroPage.ui:209
 msgid "Forum"
 msgstr ""
 
@@ -187,16 +203,12 @@ msgstr ""
 msgid "GResource loaded from"
 msgstr ""
 
-#: data/ui/OutroPage.ui:115
-msgid "GitHub"
-msgstr ""
-
 #: src/pardus_gnome_greeter/pages/theme.py:55
 msgid "Gnome Default"
 msgstr ""
 
-#: data/ui/OutroPage.ui:297
-msgid "Home Page"
+#: data/ui/ApplicationsPage.ui:88
+msgid "Go to Store"
 msgstr ""
 
 #: data/ui/ThemePage.ui:146
@@ -213,7 +225,7 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:166 data/ui/LayoutPage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:276 data/ui/LayoutPage.ui:6
 msgid "Layout"
 msgstr ""
 
@@ -223,10 +235,6 @@ msgstr ""
 
 #: data/ui/ThemePage.ui:50
 msgid "Light"
-msgstr ""
-
-#: data/ui/OutroPage.ui:146
-msgid "LinkedIn"
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/layout.py:97
@@ -242,12 +250,17 @@ msgstr ""
 msgid "Monitors"
 msgstr ""
 
-#: src/pardus_gnome_greeter/pages/wallpaper.py:225
-msgid "OK"
+#: src/pardus_gnome_greeter/main_window.py:167
+#: src/pardus_gnome_greeter/main_window.py:209
+msgid "Next"
 msgstr ""
 
-#: data/ui/ApplicationsPage.ui:71
-msgid "Open Store"
+#: src/pardus_gnome_greeter/pages/extension.py:21
+msgid "NoAnnoyance v2"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/wallpaper.py:225
+msgid "OK"
 msgstr ""
 
 #: src/pardus_gnome_greeter/components/AboutDialog.py:21
@@ -281,8 +294,20 @@ msgid ""
 "GNOME Extensions."
 msgstr ""
 
+#: data/ui/ApplicationsPage.ui:36
+msgid "Pardus Software Center Renewed"
+msgstr ""
+
 #: src/pardus_gnome_greeter/pages/layout.py:101
 msgid "Pardus Style"
+msgstr ""
+
+#: src/pardus_gnome_greeter/main_window.py:146
+msgid "Previous"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/extension.py:19
+msgid "Removable Drive Menu"
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/display.py:61
@@ -293,7 +318,7 @@ msgstr ""
 msgid "Scale"
 msgstr ""
 
-#: data/ui/LayoutPage.ui:36
+#: data/ui/LayoutPage.ui:35
 msgid ""
 "Select a desktop layout that suits your workflow. You can change this "
 "anytime later."
@@ -309,6 +334,10 @@ msgstr ""
 
 #: src/pardus_gnome_greeter/main_window.py:48
 msgid "Settings"
+msgstr ""
+
+#: data/ui/OutroPage.ui:41
+msgid "Setup Completed"
 msgstr ""
 
 #: data/ui/TimePage.ui:170
@@ -329,19 +358,27 @@ msgstr ""
 msgid "Standard"
 msgstr ""
 
+#: data/ui/OutroPage.ui:68
+msgid "Start Exploring"
+msgstr ""
+
 #: data/ui/ThemePage.ui:12
 msgid "Style"
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:167 data/ui/ThemePage.ui:6
+#: src/pardus_gnome_greeter/pages/extension.py:24
+msgid "System Monitor"
+msgstr ""
+
+#: src/pardus_gnome_greeter/pages/extension.py:28
+msgid "Temporarily disable screensaver and auto-suspend."
+msgstr ""
+
+#: src/pardus_gnome_greeter/main_window.py:277 data/ui/ThemePage.ui:6
 msgid "Theme"
 msgstr ""
 
-#: src/pardus_gnome_greeter/pages/welcome.py:26
-msgid "This application will help you configure your Pardus GNOME experience."
-msgstr ""
-
-#: src/pardus_gnome_greeter/main_window.py:172 data/ui/TimePage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:282 data/ui/TimePage.ui:6
 msgid "Time"
 msgstr ""
 
@@ -365,47 +402,41 @@ msgstr ""
 msgid "Ubuntu Unity-like experience"
 msgstr ""
 
-#: data/ui/OutroPage.ui:259
-msgid "Useful Links"
+#: src/pardus_gnome_greeter/pages/extension.py:31
+msgid "View detailed Bluetooth device information."
 msgstr ""
 
-#: src/pardus_gnome_greeter/main_window.py:168 data/ui/WallpaperPage.ui:6
+#: src/pardus_gnome_greeter/main_window.py:278 data/ui/WallpaperPage.ui:6
 msgid "Wallpaper"
 msgstr ""
 
+#: data/ui/OutroPage.ui:116
+msgid "Web Site"
+msgstr ""
+
 #: src/pardus_gnome_greeter/main_window.py:86
-#: src/pardus_gnome_greeter/main_window.py:165 data/ui/WelcomePage.ui:4
+#: src/pardus_gnome_greeter/main_window.py:275 data/ui/WelcomePage.ui:4
 msgid "Welcome"
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/welcome.py:25
-msgid "Welcome to Pardus GNOME Greeter!"
+msgid "Welcome to Pardus GNOME!"
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/layout.py:99
 msgid "Windows 10 taskbar layout"
 msgstr ""
 
-#: data/ui/OutroPage.ui:177
-msgid "X"
-msgstr ""
-
 #: src/pardus_gnome_greeter/pages/layout.py:100
 msgid "XP"
 msgstr ""
 
-#: data/ui/OutroPage.ui:403
-msgid "You can visit our community forums for your questions. Happy usage!"
-msgstr ""
-
-#: data/ui/OutroPage.ui:208
-msgid "YouTube"
+#: src/pardus_gnome_greeter/pages/welcome.py:26
+msgid "You can easily configure your system with the Greeter application."
 msgstr ""
 
 #: data/ui/OutroPage.ui:53
-msgid ""
-"Your Pardus GNOME system has been successfully configured. Now you can enjoy "
-"a modern and user-friendly desktop experience!"
+msgid "You can now start exploring the modern and user-friendly experience."
 msgstr ""
 
 #: src/pardus_gnome_greeter/pages/layout.py:97

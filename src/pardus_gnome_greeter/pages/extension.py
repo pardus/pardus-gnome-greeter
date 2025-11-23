@@ -13,6 +13,25 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'managers'))
 from ..managers.ExtensionManager import ExtensionManager
 from ..managers.ThemeManager import ThemeManager
 
+# This dictionary is used to mark strings for translation AND for runtime lookup
+EXTENSION_TRANSLATIONS = {
+    # Names
+    "Removable Drive Menu": _("Removable Drive Menu"),
+    "Caffeine": _("Caffeine"),
+    "NoAnnoyance v2": _("NoAnnoyance v2"),
+    "Clipboard Indicator": _("Clipboard Indicator"),
+    "Bluetooth Battery Meter": _("Bluetooth Battery Meter"),
+    "System Monitor": _("System Monitor"),
+    
+    # Descriptions
+    "Add a status menu for accessing and unmounting removable devices.": _("Add a status menu for accessing and unmounting removable devices."),
+    "Temporarily disable screensaver and auto-suspend.": _("Temporarily disable screensaver and auto-suspend."),
+    "Block 'Application is ready' notifications.": _("Block 'Application is ready' notifications."),
+    "Adds clipboard indicator to top panel, caches history.": _("Adds clipboard indicator to top panel, caches history."),
+    "View detailed Bluetooth device information.": _("View detailed Bluetooth device information."),
+    "Display system information in gnome shell status bar, such as memory usage, cpu usage, network rates...": _("Display system information in gnome shell status bar, such as memory usage, cpu usage, network rates...")
+}
+
 # ExtensionCard template class
 @Gtk.Template(resource_path='/tr/org/pardus/pardus-gnome-greeter/ui/components/ExtensionCard.ui')
 class ExtensionCard(Gtk.Box):
@@ -42,12 +61,15 @@ class ExtensionCard(Gtk.Box):
         
         # Set name and description
         if hasattr(self, 'name_label') and self.name_label:
-            name = extension_data.get('name', '')
+            raw_name = extension_data.get('name', '')
+            # Try to get translation from our dictionary, fallback to gettext directly (which might work if string is in .mo but not in dict)
+            name = EXTENSION_TRANSLATIONS.get(raw_name, _(raw_name))
             self.name_label.set_text(name)
         
         if hasattr(self, 'desc_label') and self.desc_label:
-            # Get description from our translations dictionary
-            description = _(extension_data.get('description', ''))
+            raw_desc = extension_data.get('description', '')
+            # Try to get translation from our dictionary, fallback to gettext directly
+            description = EXTENSION_TRANSLATIONS.get(raw_desc, _(raw_desc))
             self.desc_label.set_text(description)
         
         # Set image size if template child is available
