@@ -1,3 +1,25 @@
+pardus-gnome-greeter (0.1.1) unstable; urgency=medium
+
+  [ Osman Coskun ]
+  * feat(theme): icon theme translations
+  * refactor(layout): user extensions management
+  * chore(assets): update assets.
+  * feat(extensions): update descriptions
+  * style(css): update card and button styles
+  * feat(welcome): update design and texts
+  * feat(outro): redesign outro page
+  * feat(applications): update button design
+  * feat(extensions): added extension state management
+  * feat(extensions): added date format to pardus and 10 layouts.
+  * feat(navigation): implement navigation bar with previous and next buttons
+  * feat(i18n): updated new translations
+
+  [ Fatih Altun ]
+  * Update app icon
+  * Add install app icon as package name too
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Sun, 23 Nov 2025 15:54:12 +0300
+
 pardus-gnome-greeter (0.1.0) unstable; urgency=medium
 
   [ Osman Coskun ]
