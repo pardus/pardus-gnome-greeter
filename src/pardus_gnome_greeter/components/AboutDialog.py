@@ -1,7 +1,7 @@
 import gi
 import os
 import re
-
+import apt
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
@@ -26,17 +26,11 @@ def create_about_dialog(parent=None):
 def _get_version():
     """Get version from meson.build or fallback to default"""
     try:
-        # Try to read from meson.build
-        meson_build_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'meson.build')
-        if os.path.exists(meson_build_path):
-            with open(meson_build_path, 'r') as f:
-                content = f.read()
-                # Look for version: '0.0.13'
-                match = re.search(r"version:\s*'([^']+)'", content)
-                if match:
-                    return match.group(1)
+        cache = apt.Cache()
+        pkg = cache.get('pardus-gnome-greeter')
+        if pkg and pkg.installed:
+            return pkg.installed.version    
+        return "0.0.13"
     except Exception as e:
         print(f"Error reading version: {e}")
-    
-    # Fallback version
-    return "0.0.13"
+        return "0.0.13"
