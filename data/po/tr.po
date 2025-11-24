@@ -2,20 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pardus-gnome-greeter package.
 # FIRST AUTHOR <osman.coskun@pardus.org.tr>, 2023.
+# Fatih Altun <fatih.altun@pardus.org.tr>, 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-23 14:05+0300\n"
-"PO-Revision-Date: 2025-11-23 14:07+0300\n"
-"Last-Translator: Osman Coskun <osman.coskun@pardus.org.tr>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2025-11-24 17:33+0300\n"
+"Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
+"Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Gtranslator 42.0\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 #: src/pardus_gnome_greeter/pages/layout.py:99
 msgid "10"
@@ -67,11 +69,11 @@ msgstr "Uygulama hazır bildirimlerini engelleyin."
 
 #: src/pardus_gnome_greeter/pages/extension.py:23
 msgid "Bluetooth Battery Meter"
-msgstr ""
+msgstr "Bluetooth Pil Ölçer"
 
 #: src/pardus_gnome_greeter/pages/extension.py:20
 msgid "Caffeine"
-msgstr ""
+msgstr "Kafein"
 
 #: data/ui/WallpaperPage.ui:32
 msgid "Choose Wallpaper"
@@ -96,7 +98,7 @@ msgstr "Klasik Windows XP deneyimi"
 
 #: src/pardus_gnome_greeter/pages/extension.py:22
 msgid "Clipboard Indicator"
-msgstr ""
+msgstr "Pano Göstergesi"
 
 #: data/ui/TimePage.ui:12
 msgid "Clock Formatting"
@@ -262,7 +264,7 @@ msgstr "Sonraki"
 
 #: src/pardus_gnome_greeter/pages/extension.py:21
 msgid "NoAnnoyance v2"
-msgstr ""
+msgstr "Rahatsız Etme v2"
 
 #: src/pardus_gnome_greeter/pages/wallpaper.py:225
 msgid "OK"
@@ -315,7 +317,7 @@ msgstr "Önceki"
 
 #: src/pardus_gnome_greeter/pages/extension.py:19
 msgid "Removable Drive Menu"
-msgstr ""
+msgstr "Çıkarılabilir Sürücü Menüsü"
 
 #: src/pardus_gnome_greeter/pages/display.py:61
 msgid "Resolution"
@@ -376,9 +378,8 @@ msgid "Style"
 msgstr "Stil"
 
 #: src/pardus_gnome_greeter/pages/extension.py:24
-#, fuzzy
 msgid "System Monitor"
-msgstr "Monitörler"
+msgstr "Sistem İzleyici"
 
 #: src/pardus_gnome_greeter/pages/extension.py:28
 msgid "Temporarily disable screensaver and auto-suspend."
@@ -431,7 +432,7 @@ msgstr "Hoş Geldiniz"
 
 #: src/pardus_gnome_greeter/pages/welcome.py:25
 msgid "Welcome to Pardus GNOME!"
-msgstr "Pardus GNOME'a Hoşgeldiniz!"
+msgstr "Pardus GNOME'a Hoş Geldiniz!"
 
 #: src/pardus_gnome_greeter/pages/layout.py:99
 msgid "Windows 10 taskbar layout"
