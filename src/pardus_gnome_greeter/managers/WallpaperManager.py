@@ -10,8 +10,7 @@ class WallpaperManager:
     def __init__(self):
         # Common wallpaper directories
         self.wallpaper_dirs = [
-            "/usr/share/backgrounds",
-            "/usr/share/wallpapers",
+            "/usr/share/backgrounds"
         ]
         
         # Supported image formats
