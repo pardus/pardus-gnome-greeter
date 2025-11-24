@@ -50,10 +50,10 @@ class TimePage(Adw.PreferencesPage):
         
         # Format types (Luxon format for the extension)
         self.format_types = {
-            "time": "H:mm",
-            "time-sec": "H:mm:ss",
-            "date": "H:mm\ndd.MM.yyyy",
-            "date-sec": "H:mm:ss\ndd.MM.yyyy",
+            "time": "kk:mm",
+            "time-sec": "kk:mm:ss",
+            "date": "kk:mm\ndd.MM.yyyy",
+            "date-sec": "kk:mm:ss\ndd.MM.yyyy",
         }
         
         # Connect signals
