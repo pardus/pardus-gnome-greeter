@@ -7,7 +7,7 @@ application_id = 'tr.org.pardus.pardus-gnome-greeter'
 project_name = meson.project_name()
 prefix = get_option('prefix')
 datadir = join_paths(prefix, get_option('datadir'))
-pkgdatadir = join_paths(datadir, project_name)
+pkgdatadir = join_paths(datadir,'pardus', project_name)
 
 # GResource
 gnome = import('gnome')
@@ -112,6 +112,8 @@ subdir('data/po')
 
 # GSettings Schemas
 subdir('data/schemas')
+
+subdir('debian')
 
 install_data(
     'data/autostart/tr.org.pardus.pardus-gnome-greeter-autostart.desktop',

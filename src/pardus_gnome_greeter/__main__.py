@@ -27,7 +27,7 @@ def load_gresource():
         pass
     else:
         # Installed environment
-        resource_path = "/usr/share/pardus-gnome-greeter/pardus-gnome-greeter.gresource"
+        resource_path = "/usr/share/pardus/pardus-gnome-greeter/pardus-gnome-greeter.gresource"
 
     try:
         resource = Gio.resource_load(resource_path)
