@@ -7,7 +7,7 @@
     <property name="icon-name">image-x-generic-symbolic</property>
 
     <!-- Pardus Live Wallpaper Button -->
-    <child>
+    <!--child>
       <object class="AdwPreferencesGroup">
         <child>
           <object class="AdwActionRow" id="live_wallpaper_row">
@@ -24,7 +24,7 @@
           </object>
         </child>
       </object>
-    </child>
+    </child-->
 
     <!-- Wallpaper Grid -->
     <child>
