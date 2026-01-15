@@ -28,8 +28,8 @@ class MainWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         
         # Set minimum window size (but still resizable)
-        #self.set_size_request(970, 750)
-        
+        self.set_size_request(765, 750)
+
         # Load custom CSS
         css_provider = Gtk.CssProvider()
         css_provider.load_from_resource('/tr/org/pardus/pardus-gnome-greeter/css/style.css')

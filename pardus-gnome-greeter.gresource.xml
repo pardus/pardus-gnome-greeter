@@ -85,11 +85,15 @@
     <file>assets/themes/theme-light.png</file>
     
     <!-- Screenshot Assets -->
-    <file>assets/screenshots/screenshot-1.png</file>
-    <file>assets/screenshots/screenshot-2.png</file>
-    <file>assets/screenshots/screenshot-3.png</file>
-    <file>assets/screenshots/screenshot-4.png</file>
-    
+    <file>assets/screenshots/ss1.png</file>
+    <file>assets/screenshots/ss2.png</file>
+    <file>assets/screenshots/ss3.png</file>
+    <file>assets/screenshots/ss4.png</file>
+    <file>assets/screenshots/ss5.png</file>
+    <file>assets/screenshots/ss6.png</file>
+    <file>assets/screenshots/ss7.png</file>
+    <file>assets/screenshots/ss8.png</file>
+
     <!-- Icon Assets -->
     <file>icons/github-symbolic.svg</file>
     <file>icons/linkedin-symbolic.svg</file>
