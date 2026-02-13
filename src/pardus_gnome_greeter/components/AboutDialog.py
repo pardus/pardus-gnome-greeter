@@ -16,7 +16,7 @@ def create_about_dialog(parent=None):
     )
     dialog.set_website('https://github.com/pardus/pardus-gnome-greeter')
     dialog.set_issue_url('https://github.com/pardus/pardus-gnome-greeter/issues')
-    dialog.set_translator_credits(_('Hugo Carvalho <hugokarvalho@hotmail.com>'))
+    dialog.set_translator_credits(_('Osman Coskun <osman.coskun@pardus.org.tr>'))
     dialog.set_copyright(_('© 2025 Pardus Team'))
     dialog.set_developers([_('Osman Coskun <osman.coskun@pardus.org.tr>'), ('Fatih Altun <fatih.altun@pardus.org.tr>')])
     return dialog
