@@ -276,7 +276,7 @@ msgstr "OK"
 #: src/pardus_gnome_greeter/components/AboutDialog.py:21
 #: src/pardus_gnome_greeter/components/AboutDialog.py:23
 msgid "Osman Coskun <osman.coskun@pardus.org.tr>"
-msgstr "Osman Coskun <osman.coskun@pardus.org.tr>"
+msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
 #: src/pardus_gnome_greeter/pages/theme.py:65
 msgid "Pardus Brown"
