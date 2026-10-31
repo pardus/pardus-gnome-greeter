@@ -3,6 +3,7 @@ import gi
 import threading
 import os
 import sys
+from concurrent.futures import ThreadPoolExecutor
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -111,38 +112,25 @@ class WallpaperPage(Adw.PreferencesPage):
             # Get current wallpaper for selection
             current_wallpaper = self.wallpaper_manager.get_current_wallpaper()
             
-            # Create wallpaper thumbnails in batches
-            batch_size = 5
-            total_wallpapers = len(self.wallpapers)
-            
-            for i in range(0, total_wallpapers, batch_size):
-                batch = self.wallpapers[i:i + batch_size]
-                GLib.idle_add(self.create_wallpaper_batch, batch, current_wallpaper)
+            thread = threading.Thread(
+                target=self.create_wallpaper_thumbnails,
+                args=(current_wallpaper,)
+            )
+            thread.daemon = True
+            thread.start()
                 
         except Exception as e:
             print(f"Error populating wallpapers UI: {e}")
             
-    def create_wallpaper_batch(self, wallpaper_batch, current_wallpaper):
-        """Create a batch of wallpaper thumbnails"""
-        for wallpaper_path in wallpaper_batch:
-            try:
-                thread = threading.Thread(
-                    target=self.create_wallpaper_thumbnail,
-                    args=(wallpaper_path, current_wallpaper)
-                )
-                thread.daemon = True
-                thread.start()
-            except Exception as e:
-                print(f"Error creating thumbnail thread for {wallpaper_path}: {e}")
-                
-    def create_wallpaper_thumbnail(self, wallpaper_path, current_wallpaper):
-        """Create thumbnail for a single wallpaper"""
-        try:
-            pixbuf = self.wallpaper_manager.create_thumbnail(wallpaper_path, 160, 120)
-            if pixbuf:
-                GLib.idle_add(self.add_wallpaper_to_flowbox, wallpaper_path, pixbuf, current_wallpaper)
-        except Exception as e:
-            print(f"Error creating thumbnail for {wallpaper_path}: {e}")
+    def create_wallpaper_thumbnails(self, current_wallpaper):
+        """Create thumbnails a few at a time and add them in list order"""
+        def create(wallpaper_path):
+            return self.wallpaper_manager.create_thumbnail(wallpaper_path, 160, 120)
+
+        with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+            for wallpaper_path, pixbuf in zip(self.wallpapers, executor.map(create, self.wallpapers)):
+                if pixbuf:
+                    GLib.idle_add(self.add_wallpaper_to_flowbox, wallpaper_path, pixbuf, current_wallpaper)
             
     def add_wallpaper_to_flowbox(self, wallpaper_path, pixbuf, current_wallpaper):
         """Add wallpaper thumbnail to the flowbox"""
