@@ -80,16 +80,11 @@ class WallpaperManager:
     def create_thumbnail(self, file_path, width=160, height=120):
         """Create thumbnail for wallpaper preview"""
         try:
-            # Load the original image
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(file_path)
-            
-            # Scale to exact dimensions (stretch to fit)
-            scaled_pixbuf = pixbuf.scale_simple(
-                width, height, 
-                GdkPixbuf.InterpType.BILINEAR
+            # Load at the exact dimensions (stretch to fit), a jpeg is decoded
+            # at reduced size instead of keeping the whole image in memory
+            return GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                file_path, width, height, False
             )
-            
-            return scaled_pixbuf
         except Exception as e:
             print(f"Error creating thumbnail for {file_path}: {e}")
             return None
