@@ -40,6 +40,9 @@ class GifPaintable(GObject.Object, Gdk.Paintable):
 
         return GLib.SOURCE_REMOVE
 
+    def stop(self):
+        GLib.source_remove(self.timeout)
+
     def do_get_intrinsic_height(self):
         return self.animation.get_height()
 
@@ -206,6 +209,7 @@ class LayoutPage(Adw.PreferencesPage):
         card.layout_id = layout_id
         card.static_path = static_path
         card.gif_path = f"/tr/org/pardus/pardus-gnome-greeter/assets/layouts/layout-{layout_id}.gif"
+        card.gif_paintable = None
         
         # Connect signals
         card.connect("clicked", self._on_layout_selected)
@@ -229,8 +233,9 @@ class LayoutPage(Adw.PreferencesPage):
             pixbuf_animation = GdkPixbuf.PixbufAnimation.new_from_resource(card.gif_path)
             if pixbuf_animation:
                 # Create a simple paintable from the animation
-                gif_paintable = GifPaintable.from_animation(pixbuf_animation)
-                card.picture.set_paintable(gif_paintable)
+                self._stop_gif(card)
+                card.gif_paintable = GifPaintable.from_animation(pixbuf_animation)
+                card.picture.set_paintable(card.gif_paintable)
         except Exception as e:
             print(f"Error loading GIF: {e}")
         
@@ -240,6 +245,7 @@ class LayoutPage(Adw.PreferencesPage):
     def _on_card_leave(self, controller):
         """Handle mouse leave from card"""
         card = controller.get_widget()
+        self._stop_gif(card)
         
         # Switch back to static image from gresource
         try:
@@ -252,6 +258,12 @@ class LayoutPage(Adw.PreferencesPage):
         # Remove hover style
         card.remove_css_class("card-hover")
     
+    def _stop_gif(self, card):
+        """The timer keeps the paintable alive, so it has to be stopped by hand"""
+        if card.gif_paintable:
+            card.gif_paintable.stop()
+            card.gif_paintable = None
+
     def _on_layout_selected(self, button):
         """Handle layout selection"""
         layout_id = button.layout_id
